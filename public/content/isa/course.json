@@ -1,0 +1,2012 @@
+{
+ "built": "2026-11-22",
+ "lectures": {
+  "1": {
+   "summary": "Where modelling fits in the life of an information system, the kinds of models and what \"expressive\" and \"decision\" power mean, and the first Petri net models: mutual exclusion with semaphores, a deadlock between two processes, and a communication protocol with and without message loss.",
+   "facts": [
+    {
+     "t": "Where models are used",
+     "d": "Specification, design, verification, testing, implementation, performance evaluation and engineering, reliability analysis and engineering, and safety analysis and engineering.",
+     "slide": 8,
+     "weight": "medium"
+    },
+    {
+     "t": "Kinds of models",
+     "d": "Analytic or simulation models; deterministic, non-deterministic or probabilistic models.",
+     "slide": 9,
+     "weight": "high"
+    },
+    {
+     "t": "Expressive vs decision power",
+     "d": "Expressive power: which classes of systems and which properties a technique can describe. Decision power: for which classes of systems and properties it can actually find solutions, limited by computational complexity.",
+     "slide": 10,
+     "weight": "high"
+    },
+    {
+     "t": "Mutual exclusion",
+     "d": "Two cyclic sequential processes, each with a critical section (CS) and the remainder of the process (RP), guarded by the semaphore operations P(s) and V(s): at most one process is in its critical section.",
+     "slide": 12,
+     "weight": "high"
+    },
+    {
+     "t": "Deadlock example",
+     "d": "Process 1 holds R1 and requests R2 while process 2 holds R2 and requests R1: neither can continue, and the Petri net reaches a marking with no enabled transition.",
+     "slide": 19,
+     "weight": "high"
+    },
+    {
+     "t": "Simple communication protocol",
+     "d": "The sender produces a message (PM, CPM), sends it (SM) and waits for an acknowledgement (WA); the message is transmitted (TM) and received (RM); the receiver sends an acknowledgement (SA) and consumes the message (CM, MCC); the acknowledgement is transmitted (TA) and received (RA).",
+     "slide": 23,
+     "weight": "medium"
+    },
+    {
+     "t": "Protocol with message loss",
+     "d": "Adding a transition ML (message loss) shows what happens when a message disappears: the sender keeps waiting for an acknowledgement that never comes.",
+     "slide": 30,
+     "weight": "medium"
+    }
+   ],
+   "formulas": [],
+   "traps": [
+    "Expressive power is about what can be described; decision power is about what can be computed about it.",
+    "A deadlock is a marking in which no transition is enabled, not merely a slow state."
+   ]
+  },
+  "2": {
+   "summary": "The formal definition of a Petri net, enabling and firing, reachability graphs and sets, and the behavioural properties used in verification: reachability and its decidability, boundedness and safety, liveness, reversibility and home markings, coverability and persistence.",
+   "facts": [
+    {
+     "t": "Definition",
+     "d": "A Petri net is a 6-tuple N = (P, T, F, W, K, M0): places, transitions, arcs F ⊆ (P × T) ∪ (T × P), an arc weight function W, a place capacity function K (values may be ∞) and an initial marking M0.",
+     "slide": 33,
+     "weight": "high"
+    },
+    {
+     "t": "Enabling and firing",
+     "d": "Transition t is enabled in marking M if each input place p holds at least W(p, t) tokens. Firing removes W(p, t) tokens from each input place and adds W(t, p) tokens to each output place.",
+     "slide": 35,
+     "weight": "high"
+    },
+    {
+     "t": "Reachability graph",
+     "d": "Vertices are reachable markings, arcs are labelled with the fired transitions. The slide example starts at 1011 and reaches 2001, 0021, 0120, 1110 and 2100: six markings.",
+     "slide": 38,
+     "weight": "high"
+    },
+    {
+     "t": "Strong connectivity",
+     "d": "A directed graph is strongly connected if every ordered pair of vertices is joined by a directed path.",
+     "slide": 39,
+     "weight": "medium"
+    },
+    {
+     "t": "Firing sequences and R(M)",
+     "d": "σ = t1 t2 … is a firing sequence for M if each transition is enabled in turn; R(M) is the set of all markings reachable from M.",
+     "slide": 40,
+     "weight": "medium"
+    },
+    {
+     "t": "Decidable problems",
+     "d": "A decidable problem is a yes-or-no question a computer can always answer correctly in a finite number of steps for every input.",
+     "slide": 42,
+     "weight": "medium"
+    },
+    {
+     "t": "Reachability problem",
+     "d": "Given N and a marking M, is M ∈ R(M0)? Decidable (proved in 1981), with exponential complexity. Petri nets come from C. A. Petri's work of 1962. The submarking reachability problem asks the same for a subset of places.",
+     "slide": 43,
+     "weight": "high"
+    },
+    {
+     "t": "Boundedness and safety",
+     "d": "A net is k-bounded if no reachable marking puts more than k tokens in any place, bounded if some such k exists, and safe if it is 1-bounded. Safety answers \"can a buffer of capacity 1 overflow?\".",
+     "slide": 45,
+     "weight": "high"
+    },
+    {
+     "t": "Example of boundedness",
+     "d": "The slide's net is bounded, 2-bounded and therefore also 4-bounded, but not safe, since a place reaches 2 tokens.",
+     "slide": 46,
+     "weight": "medium"
+    },
+    {
+     "t": "Liveness",
+     "d": "Transition t is live if from every reachable marking some marking can be reached in which t is enabled. A net is live if all its transitions are; liveness means there are no deadlocks.",
+     "slide": 48,
+     "weight": "high"
+    },
+    {
+     "t": "Liveness problem",
+     "d": "Equivalent to the reachability problem (1975); since reachability is decidable (1981), liveness is decidable too.",
+     "slide": 53,
+     "weight": "high"
+    },
+    {
+     "t": "Reversibility and home markings",
+     "d": "A net is reversible if M0 can be reached again from every reachable marking. A weaker property: M′ is a home marking if it can be reached from every reachable marking.",
+     "slide": 54,
+     "weight": "high"
+    },
+    {
+     "t": "Coverability",
+     "d": "Marking M is coverable if some reachable marking M′ has M′(p) ≥ M(p) for every place. Without capacities, a transition enabled in M is also enabled in any M′ ≥ M.",
+     "slide": 59,
+     "weight": "medium"
+    },
+    {
+     "t": "Persistence",
+     "d": "A net is persistent if, for any two enabled transitions, firing one does not disable the other: an enabled transition can become disabled only by its own firing.",
+     "slide": 61,
+     "weight": "high"
+    }
+   ],
+   "formulas": [
+    {
+     "name": "Enabling",
+     "expr": "t enabled in M  ⇔  ∀p ∈ •t: M(p) ≥ W(p, t)",
+     "slide": 35
+    },
+    {
+     "name": "Firing rule",
+     "expr": "M′(p) = M(p) − W(p, t) + W(t, p)",
+     "slide": 35
+    },
+    {
+     "name": "k-boundedness",
+     "expr": "∀M ∈ R(M0) ∀p ∈ P: M(p) ≤ k;  safe = 1-bounded",
+     "slide": 45
+    },
+    {
+     "name": "Reversibility",
+     "expr": "∀M ∈ R(M0): M0 ∈ R(M)",
+     "slide": 54
+    }
+   ],
+   "traps": [
+    "A 2-bounded net is also 4-bounded; safe means 1-bounded.",
+    "Liveness of every transition means no deadlock; a net can be deadlock-free and still have dead transitions only if it is not live.",
+    "Reversible: back to M0 from everywhere. Home marking: some M′ reachable from everywhere.",
+    "Reachability was proved decidable in 1981; liveness was shown equivalent to it in 1975."
+   ]
+  },
+  "3": {
+   "summary": "Two quantitative relations between transitions: the synchronisation distance (how far apart two transitions can drift in number of firings) and the bounded fairness relation (whether one can fire unboundedly often while the other does not).",
+   "facts": [
+    {
+     "t": "Synchronisation distance",
+     "d": "d12 is the maximum, over all firing sequences of all reachable markings, of the difference between the numbers of firings of t1 and of t2.",
+     "slide": 67,
+     "weight": "high"
+    },
+    {
+     "t": "Examples of distances",
+     "d": "The slides compute the distance for pairs of transitions of small nets, e.g. d12 and d34 for the running example.",
+     "slide": 68,
+     "weight": "medium"
+    },
+    {
+     "t": "Bounded fairness",
+     "d": "Transitions t1, t2 are in a bounded fairness relation if the maximal number of times either can fire while the other is not firing is bounded. A net is bounded fair if every pair of transitions is.",
+     "slide": 73,
+     "weight": "high"
+    },
+    {
+     "t": "Fairness example",
+     "d": "In the running example t1, t2 are not in a bounded fairness relation, because σ = (t1 t3 t1 t4)* fires t1 repeatedly without t2; t3, t4 are.",
+     "slide": 74,
+     "weight": "medium"
+    }
+   ],
+   "formulas": [
+    {
+     "name": "Synchronisation distance",
+     "expr": "d12 = max over σ ∈ Σ(N) of |σ(t1) − σ(t2)|",
+     "slide": 67
+    }
+   ],
+   "traps": [
+    "A finite synchronisation distance keeps two transitions within a fixed number of firings of each other; unbounded fairness means one can run away from the other."
+   ]
+  },
+  "4": {
+   "summary": "Adding time to Petri nets: how time can be specified and attached, time Petri nets with firing intervals on transitions (or enabling intervals on arcs) for verifying timed requirements, state classes, and the TINA tool.",
+   "facts": [
+    {
+     "t": "Ways to add time",
+     "d": "Time can be deterministic, non-deterministic or probabilistic, and it can be attached to places, transitions or arcs.",
+     "slide": 77,
+     "weight": "high"
+    },
+    {
+     "t": "Which model for which job",
+     "d": "Time Petri nets verify whether a design meets functional requirements with quantitative time; stochastic and generalised stochastic Petri nets serve performance and reliability evaluation.",
+     "slide": 78,
+     "weight": "high"
+    },
+    {
+     "t": "Time Petri net (intervals on transitions)",
+     "d": "A 6-tuple (P, T, F, I, M0, SI) with inhibitor arcs I ⊆ P × T and a static firing interval [αˢ, βˢ] per transition: the earliest and latest firing times, βˢ possibly ∞.",
+     "slide": 79,
+     "weight": "high"
+    },
+    {
+     "t": "Firing window",
+     "d": "If t became enabled at instant τ and stays enabled, it can fire no earlier than τ + αˢ and no later than τ + βˢ.",
+     "slide": 80,
+     "weight": "high"
+    },
+    {
+     "t": "States and state classes",
+     "d": "A state is S = ⟨M, I⟩: the marking plus a dynamic firing interval for each enabled transition. A state class can represent an infinite number of states.",
+     "slide": 81,
+     "weight": "medium"
+    },
+    {
+     "t": "Tools",
+     "d": "Analysis uses systems of linear inequalities with at most two variables per inequality; the software tool is TINA (Time Petri Net Analyzer, LAAS-CNRS).",
+     "slide": 82,
+     "weight": "medium"
+    },
+    {
+     "t": "Intervals on arcs",
+     "d": "In the other variant, each arc from an input place to a transition carries an interval: the earliest and latest instants at which a token in that place can enable the transition.",
+     "slide": 83,
+     "weight": "medium"
+    }
+   ],
+   "formulas": [
+    {
+     "name": "Firing window",
+     "expr": "τ + αˢ ≤ firing instant ≤ τ + βˢ  (τ: instant t became enabled)",
+     "slide": 80
+    }
+   ],
+   "traps": [
+    "Time Petri nets are for verifying timed functional requirements; stochastic nets are for performance and reliability.",
+    "Without time a state is a marking; with time a state also needs the firing intervals, and a state class can stand for infinitely many states."
+   ]
+  },
+  "5": {
+   "summary": "The coverability tree: how it is built with the ω symbol, which properties it decides (boundedness, safety, dead transitions, reachability for bounded nets) and where it fails, and how reachability graphs decide liveness.",
+   "facts": [
+    {
+     "t": "Building the coverability tree",
+     "d": "Label the root with M0 as \"new\". Repeatedly take a new marking: label it \"old\" if it already appears on its path from the root, \"dead\" if nothing is enabled; otherwise add a child for each enabled transition, replacing by ω every place that grew compared with an ancestor it covers.",
+     "slide": 88,
+     "weight": "high"
+    },
+    {
+     "t": "What the tree decides",
+     "d": "N is bounded iff ω never appears; then reachability can be solved because every reachable marking occurs in the tree. N is safe iff only 0 and 1 appear. A transition can never fire iff it labels no arc.",
+     "slide": 90,
+     "weight": "high"
+    },
+    {
+     "t": "Limits of the tree",
+     "d": "For an unbounded net (with ω) the coverability tree is not enough to solve either the reachability or the liveness problem.",
+     "slide": 91,
+     "weight": "high"
+    },
+    {
+     "t": "Graph vs tree",
+     "d": "The running example has a reachability graph with 6 vertices but a coverability tree with 12 vertices, since the tree repeats markings on different branches.",
+     "slide": 93,
+     "weight": "low"
+    },
+    {
+     "t": "Liveness from the reachability graph",
+     "d": "If from every vertex of a finite reachability graph some path contains an arc labelled t, t is live. If the graph is strongly connected, t is live iff some arc is labelled t.",
+     "slide": 98,
+     "weight": "high"
+    }
+   ],
+   "formulas": [],
+   "traps": [
+    "No ω in the coverability tree ⇔ bounded; seeing only 0 and 1 ⇔ safe.",
+    "For unbounded nets the coverability tree loses information: it cannot settle reachability or liveness."
+   ]
+  },
+  "6": {
+   "summary": "Algebraic and structural analysis: the incidence matrix of a pure Petri net and the state equation, why it gives only a necessary condition for reachability, the cost of enumeration versus linear algebra, and reduction rules that shrink a net while preserving liveness, boundedness and safety.",
+   "facts": [
+    {
+     "t": "Pure nets",
+     "d": "A net is pure if no place is both an input and an output of the same transition: its graph has no self-loops. Only pure nets can be represented exactly by an incidence matrix.",
+     "slide": 102,
+     "weight": "high"
+    },
+    {
+     "t": "Incidence matrix",
+     "d": "For n places and m transitions, C is n × m; column j shows how firing tj changes each place: it removes W(pi, tj) and adds W(tj, pi), so cij = W(tj, pi) − W(pi, tj).",
+     "slide": 106,
+     "weight": "high"
+    },
+    {
+     "t": "Firing vector",
+     "d": "For a firing sequence σ from M0, the firing vector has m entries; entry i is the number of occurrences of ti in σ.",
+     "slide": 107,
+     "weight": "medium"
+    },
+    {
+     "t": "State equation",
+     "d": "If M is reachable from M0 by σ, then M = M0 + C·σ⃗. Linear algebra is far cheaper than enumerating reachability graphs.",
+     "slide": 109,
+     "weight": "high"
+    },
+    {
+     "t": "Cost of the two approaches",
+     "d": "Gaussian elimination solves n linear equations over rationals in O(n³), whereas the number of reachable markings can grow exponentially with the size of the net.",
+     "slide": 111,
+     "weight": "medium"
+    },
+    {
+     "t": "Necessary, not sufficient",
+     "d": "A solution σ⃗ ≥ 0 of M = M0 + C·σ⃗ is necessary for M to be reachable but not sufficient: the counts may not correspond to any fireable sequence.",
+     "slide": 112,
+     "weight": "high"
+    },
+    {
+     "t": "Reductions",
+     "d": "Reductions cut the cost of analysis. Net N′ after reduction is live, bounded and safe iff N was: the properties are preserved.",
+     "slide": 116,
+     "weight": "high"
+    },
+    {
+     "t": "Six reduction rules",
+     "d": "Fusion of sequential places, fusion of sequential transitions, fusion of parallel places, fusion of parallel transitions, elimination of loop places and elimination of loop transitions.",
+     "slide": 118,
+     "weight": "high"
+    }
+   ],
+   "formulas": [
+    {
+     "name": "Incidence matrix entry",
+     "expr": "cij = W(tj, pi) − W(pi, tj)",
+     "slide": 106
+    },
+    {
+     "name": "State equation",
+     "expr": "M = M0 + C · σ⃗  (σ⃗: firing count vector)",
+     "slide": 109
+    },
+    {
+     "name": "Gaussian elimination",
+     "expr": "O(n³) for n linear equations over rationals",
+     "slide": 110
+    }
+   ],
+   "traps": [
+    "The state equation gives a necessary condition for reachability; a solution does not prove that M is reachable.",
+    "Self-loops cancel out in cij, so the incidence matrix describes only pure nets exactly.",
+    "Reductions preserve liveness, boundedness and safety in both directions (iff)."
+   ]
+  },
+  "7": {
+   "summary": "Performance evaluation in general: the levels at which it is done and their measures, the approaches (intuition, experiments, modelling), the kinds of measurement setups, and how simulation and analytic models compare.",
+   "facts": [
+    {
+     "t": "Levels and measures",
+     "d": "Hardware level: memory cycle time, disc access time, instruction execution time, channel throughput. Program level: mean execution time, time between two points, maximal number of loop executions in real-time programs. System level: mean response time, data access time, packet transmission time.",
+     "slide": 125,
+     "weight": "high"
+    },
+    {
+     "t": "Approaches",
+     "d": "Intuition and trend extrapolation, experimental evaluation of alternative solutions (measured with hardware and software monitors), and modelling, solved by simulation or by analysis.",
+     "slide": 126,
+     "weight": "high"
+    },
+    {
+     "t": "Measurement setups",
+     "d": "A real or prototype system under a real or artificial workload: four combinations.",
+     "slide": 127,
+     "weight": "medium"
+    },
+    {
+     "t": "Simulation vs analytic models",
+     "d": "Simulation models are usually more detailed, more adequate and simpler to solve; analytic models usually compute much faster.",
+     "slide": 128,
+     "weight": "high"
+    }
+   ],
+   "formulas": [],
+   "traps": [
+    "Simulation models: more detail and adequacy. Analytic models: shorter computation time."
+   ]
+  },
+  "8": {
+   "summary": "Execution time of programs with sequential control structures: linear programs, decisions with probabilities, four estimation methods for different kinds of systems, rules for composing means and variances of sequences, alternatives, loops and switches, and Markov models for non-structured programs.",
+   "facts": [
+    {
+     "t": "Linear programs",
+     "d": "With execution times given as numbers, the time of a linear program A; B; C; D is the sum of the times of its parts.",
+     "slide": 130,
+     "weight": "medium"
+    },
+    {
+     "t": "Programs with decisions",
+     "d": "After decision D, branch B is taken with probability P and the other with 1 − P, so the execution time depends on the decision.",
+     "slide": 131,
+     "weight": "medium"
+    },
+    {
+     "t": "Worst-case method",
+     "d": "Take the longer branch: τw(Pr) uses max of the alternatives. Used for real-time systems.",
+     "slide": 132,
+     "weight": "high"
+    },
+    {
+     "t": "Most probable path method",
+     "d": "Follow the branch with the larger probability: the branch taken with P if P > 1 − P, otherwise the other one.",
+     "slide": 133,
+     "weight": "medium"
+    },
+    {
+     "t": "Mean-value methods",
+     "d": "The arithmetic mean method and the random variable mean method (weighting each branch by its probability) are used for general-purpose systems.",
+     "slide": 134,
+     "weight": "high"
+    },
+    {
+     "t": "Assumptions for control structures",
+     "d": "The execution times of the components are independent random variables, and decisions take zero time.",
+     "slide": 135,
+     "weight": "medium"
+    },
+    {
+     "t": "Sequential composition and alternative",
+     "d": "For S1; S2 the mean is m1 + m2 (and with independence the variances add). For if (B) S1 else S2 with probability P the mean is P·m1 + (1 − P)·m2.",
+     "slide": 137,
+     "weight": "high"
+    },
+    {
+     "t": "Loops and choice",
+     "d": "The slides give mean and variance rules for for-loops with n iterations, while and do-while loops (repetition with probability P) and switch statements.",
+     "slide": 139,
+     "weight": "medium"
+    },
+    {
+     "t": "Non-structured programs",
+     "d": "Programs without loops but with arbitrary jumps are modelled with exponential operation times and decision times of zero, then analysed as Markov chains.",
+     "slide": 143,
+     "weight": "medium"
+    },
+    {
+     "t": "Exponential distribution",
+     "d": "Density f(x) = λe^(−λx); mean 1/λ; variance 1/λ².",
+     "slide": 144,
+     "weight": "high"
+    }
+   ],
+   "formulas": [
+    {
+     "name": "Sequence",
+     "expr": "m(S1; S2) = m1 + m2",
+     "slide": 136
+    },
+    {
+     "name": "Alternative",
+     "expr": "m(if B S1 else S2) = P·m1 + (1 − P)·m2",
+     "slide": 137
+    },
+    {
+     "name": "Exponential variable",
+     "expr": "f(x) = λ e^(−λx),  mean 1/λ,  variance 1/λ²",
+     "slide": 144
+    }
+   ],
+   "traps": [
+    "Real-time systems use the worst-case estimate; general-purpose systems use mean-value estimates.",
+    "The mean of an exponential variable is 1/λ, its variance 1/λ², not 1/λ."
+   ]
+  },
+  "9": {
+   "summary": "Markov chains as performance models: continuous- and discrete-time chains, their expressive and decision power, the stationary solution, the M/M/1 queue, queueing networks and what they cannot express compared with Petri nets.",
+   "facts": [
+    {
+     "t": "Uses of Markov chains",
+     "d": "Reliability evaluation and engineering, and performance evaluation and engineering; with continuous or discrete time.",
+     "slide": 156,
+     "weight": "medium"
+    },
+    {
+     "t": "Continuous-time chains",
+     "d": "States are linked by transition intensities, the parameters of exponentially distributed transition times; they are collected in a transition intensity matrix.",
+     "slide": 159,
+     "weight": "high"
+    },
+    {
+     "t": "Discrete-time chains",
+     "d": "Arcs carry one-step transition probabilities pij, e.g. p23 = 0.4 is the probability of moving from state 2 to state 3 in one step.",
+     "slide": 160,
+     "weight": "medium"
+    },
+    {
+     "t": "Expressive and decision power",
+     "d": "Continuous-time chains express exponential distributions and their compositions (Erlang, hypoexponential, hyperexponential, Cox). The stationary state is found with polynomial linear-algebra methods.",
+     "slide": 161,
+     "weight": "high"
+    },
+    {
+     "t": "Stationary solution",
+     "d": "The ergodic solution solves a linear system built from the transition intensities, together with the condition that state probabilities sum to 1 (cf. Chapman–Kolmogorov equations).",
+     "slide": 167,
+     "weight": "medium"
+    },
+    {
+     "t": "M/M/1 queue",
+     "d": "Poisson arrivals with rate λ (exponential inter-arrival times), exponential service with rate μ, one server.",
+     "slide": 170,
+     "weight": "high"
+    },
+    {
+     "t": "M/M/1 stationary state",
+     "d": "Exists iff λ < μ, otherwise the queue can grow without limit. Then πi = (1 − ρ)ρⁱ with ρ = λ/μ the utilisation; π0 = 1 − ρ and the probability of a busy station is ρ.",
+     "slide": 173,
+     "weight": "high"
+    },
+    {
+     "t": "Weaknesses of queueing models",
+     "d": "Many synchronisation modes (e.g. handshaking) and impasses cannot be represented; Petri nets can, and adding time to them enables performance evaluation.",
+     "slide": 175,
+     "weight": "high"
+    },
+    {
+     "t": "Queueing network features",
+     "d": "Requests move between service centres: FIFO centres (e.g. a CPU), Round-Robin centres and delay centres (e.g. a transmission medium); the next centre is chosen probabilistically.",
+     "slide": 182,
+     "weight": "medium"
+    },
+    {
+     "t": "Elementary queueing networks",
+     "d": "Requests compete but do not cooperate, are atomic, and cannot synchronise or communicate; a centre is released after service, so deadlocks cannot be modelled. Their expressive power is smaller than that of Petri nets.",
+     "slide": 183,
+     "weight": "high"
+    },
+    {
+     "t": "System characteristics",
+     "d": "Utilisation (fraction of time a centre is busy), mean residence time (arrival to departure), mean number of clients in the system, and throughput (clients completed per time unit).",
+     "slide": 184,
+     "weight": "high"
+    },
+    {
+     "t": "Markov vs operational analysis",
+     "d": "Markov chains need Chapman–Kolmogorov equations with as many equations as states: non-intuitive and complex. Operational analysis works with mean values and is more intuitive.",
+     "slide": 185,
+     "weight": "medium"
+    }
+   ],
+   "formulas": [
+    {
+     "name": "M/M/1 stationary probabilities",
+     "expr": "πi = (1 − ρ) ρⁱ,  ρ = λ/μ,  π0 = 1 − ρ,  P(busy) = ρ",
+     "slide": 173
+    },
+    {
+     "name": "Stability",
+     "expr": "λ < μ",
+     "slide": 173
+    }
+   ],
+   "traps": [
+    "Continuous-time chains have intensities (rates); discrete-time chains have one-step probabilities.",
+    "M/M/1 needs λ < μ; with ρ = λ/μ, the server is idle with probability 1 − ρ.",
+    "Queueing networks cannot express synchronisation or deadlock; Petri nets can."
+   ]
+  },
+  "10": {
+   "summary": "Operational analysis with mean values: arrival rate and throughput, the utilisation law, Little's law and its uses at different levels, the response time law for interactive systems, the forced flow law, service demands, bottlenecks and the residence time in open systems.",
+   "facts": [
+    {
+     "t": "Basic quantities",
+     "d": "In an observation interval of length T there are A arrivals and C completions: arrival rate λ = A/T and throughput X = C/T.",
+     "slide": 188,
+     "weight": "high"
+    },
+    {
+     "t": "Utilisation law",
+     "d": "With busy time B: utilisation U = B/T and mean service time S = B/C, so U = (C/T)(B/C) = X·S.",
+     "slide": 189,
+     "weight": "high"
+    },
+    {
+     "t": "Little's law",
+     "d": "The mean number of clients in the system equals throughput times mean residence time: N = X·R.",
+     "slide": 191,
+     "weight": "high"
+    },
+    {
+     "t": "Why Little's law matters",
+     "d": "Knowing any two of N, X and R gives the third. Its assumptions are weak: unlike much queueing analysis it does not need the memoryless (Markov) property.",
+     "slide": 193,
+     "weight": "high"
+    },
+    {
+     "t": "Utilisation law from Little",
+     "d": "Applied to a single disc without its queue (0 or 1 client inside), Little's law becomes the utilisation law: the utilisation law is a particular case of Little's law.",
+     "slide": 195,
+     "weight": "medium"
+    },
+    {
+     "t": "Clients waiting in the queue",
+     "d": "For a disc with its queue: NQ = N − U, where NQ is the mean number of clients in the queue and U the utilisation.",
+     "slide": 196,
+     "weight": "medium"
+    },
+    {
+     "t": "Response time law",
+     "d": "For an interactive system with N terminals and think time Z: N = X(R + Z), hence R = N/X − Z.",
+     "slide": 198,
+     "weight": "high"
+    },
+    {
+     "t": "Forced flow law",
+     "d": "If each request visits centre k on average Vk times, the centre's throughput is Xk = Vk·X.",
+     "slide": 200,
+     "weight": "high"
+    },
+    {
+     "t": "Service demand and utilisation",
+     "d": "Dk = Vk·Sk is the total service time of one request at centre k; its utilisation is uk = X·Dk.",
+     "slide": 201,
+     "weight": "high"
+    },
+    {
+     "t": "Bottleneck",
+     "d": "The centre with the largest demand Dmax limits throughput: X ≤ UB(X) = 1/Dmax; at that bound the bottleneck's utilisation reaches 1.",
+     "slide": 202,
+     "weight": "high"
+    },
+    {
+     "t": "Open systems",
+     "d": "Stable only for λ < λsat = 1/Dmax. The residence time at centre k is Rk(λ) = Dk / (1 − λ·Dk) = Dk / (1 − uk).",
+     "slide": 204,
+     "weight": "high"
+    }
+   ],
+   "formulas": [
+    {
+     "name": "Throughput and arrival rate",
+     "expr": "X = C/T,  λ = A/T",
+     "slide": 188
+    },
+    {
+     "name": "Utilisation law",
+     "expr": "U = B/T = X · S",
+     "slide": 189
+    },
+    {
+     "name": "Little's law",
+     "expr": "N = X · R",
+     "slide": 191
+    },
+    {
+     "name": "Response time law",
+     "expr": "R = N/X − Z",
+     "slide": 198
+    },
+    {
+     "name": "Forced flow law",
+     "expr": "Xk = Vk · X;  Dk = Vk · Sk;  uk = X · Dk",
+     "slide": 202
+    },
+    {
+     "name": "Bottleneck bound",
+     "expr": "X ≤ 1 / Dmax",
+     "slide": 202
+    },
+    {
+     "name": "Open-system residence time",
+     "expr": "Rk(λ) = Dk / (1 − λ Dk)",
+     "slide": 204
+    }
+   ],
+   "traps": [
+    "Utilisation law: U = X·S per visit; with visits, uk = X·Dk where Dk = Vk·Sk.",
+    "Little's law needs no Markov assumption.",
+    "The response time law subtracts the think time Z: R = N/X − Z.",
+    "The bottleneck is the centre with the largest total demand Dk, not the slowest single visit."
+   ]
+  },
+  "11": {
+   "summary": "Stochastic Petri nets (exponentially timed transitions, their Markov chain, sojourn times and firing probabilities) and generalised stochastic Petri nets with immediate transitions, inhibitor arcs, priorities and weights, tangible and vanishing markings, and transient and cyclic analysis.",
+   "facts": [
+    {
+     "t": "Firing semantics",
+     "d": "Firing can be atomic (tokens removed and added in one indivisible step) or in three phases (initialisation, time passing, completion); a transition may serve one firing at a time (single server) or several (multiple server).",
+     "slide": 209,
+     "weight": "medium"
+    },
+    {
+     "t": "Stochastic Petri net",
+     "d": "The basic model is a 5-tuple (P, T, F, M0, Λ), where Λ holds the firing intensities: the parameters of the exponential firing times. Arc weights and capacities are left out of the basic model.",
+     "slide": 210,
+     "weight": "high"
+    },
+    {
+     "t": "Firing behaviour",
+     "d": "Intensities may depend on the marking. Firing is atomic, and at any instant at most one transition fires, because the firing process is a Markov process. The firing time runs from enabling to firing.",
+     "slide": 213,
+     "weight": "high"
+    },
+    {
+     "t": "SPN and Markov chains",
+     "d": "The states of the Markov chain are the markings of the SPN's reachability graph (e.g. busy computers and computers in repair).",
+     "slide": 219,
+     "weight": "high"
+    },
+    {
+     "t": "Sojourn time",
+     "d": "The mean sojourn time in a marking is 1 / (sum of the intensities of the transitions enabled in it).",
+     "slide": 221,
+     "weight": "high"
+    },
+    {
+     "t": "Firing probability",
+     "d": "The probability that ti fires first in a marking is its intensity divided by the sum of the intensities of all enabled transitions.",
+     "slide": 223,
+     "weight": "high"
+    },
+    {
+     "t": "Reachability sets",
+     "d": "Because exponential times can take any positive value, an SPN reaches exactly the markings of the underlying untimed Petri net.",
+     "slide": 227,
+     "weight": "medium"
+    },
+    {
+     "t": "Disadvantages of SPNs",
+     "d": "The stationary solution needs as many linear equations as reachable markings, and real systems mix two time scales: long activities (transmissions, transactions) and very short ones.",
+     "slide": 228,
+     "weight": "high"
+    },
+    {
+     "t": "Generalised SPNs",
+     "d": "Two kinds of transitions: timed ones with exponential firing times and immediate ones with zero firing time.",
+     "slide": 230,
+     "weight": "high"
+    },
+    {
+     "t": "Inhibitor arcs",
+     "d": "Petri nets are less expressive than Turing machines; an inhibitor arc lets t fire only when its place is empty (\"testing for zero\"), which raises the expressive power.",
+     "slide": 231,
+     "weight": "high"
+    },
+    {
+     "t": "GSPN definition",
+     "d": "An 8-tuple with inhibitor arcs, a priority function (timed transitions get the lowest priority), timed firing intensities and immediate transition weights.",
+     "slide": 232,
+     "weight": "medium"
+    },
+    {
+     "t": "Priorities and weights",
+     "d": "Immediate transitions always fire before timed ones, by priority. Among the enabled immediate transitions of the highest priority, ti fires with probability wi / Σ w.",
+     "slide": 234,
+     "weight": "high"
+    },
+    {
+     "t": "Tangible and vanishing markings",
+     "d": "Tangible markings enable only timed transitions; vanishing markings enable at least one immediate transition and have zero sojourn time.",
+     "slide": 241,
+     "weight": "high"
+    },
+    {
+     "t": "Eliminating vanishing markings",
+     "d": "To cut complexity, a transition probability matrix between tangible markings only is built, accounting for paths through vanishing markings (assuming no loops among them).",
+     "slide": 246,
+     "weight": "medium"
+    },
+    {
+     "t": "Transient and cyclic behaviour",
+     "d": "Transient analysis studies runs that end in a final marking; cyclic behaviour is analysed through a stationary solution of a linear system over tangible markings.",
+     "slide": 252,
+     "weight": "medium"
+    },
+    {
+     "t": "Performance metrics",
+     "d": "State probabilities are aggregated into metrics such as \"no tokens in a set of places\", \"at least one token in a place\" or \"exactly k tokens in a place\".",
+     "slide": 255,
+     "weight": "medium"
+    }
+   ],
+   "formulas": [
+    {
+     "name": "Mean sojourn time",
+     "expr": "1 / Σ λk over transitions enabled in M",
+     "slide": 221
+    },
+    {
+     "name": "Firing probability (timed)",
+     "expr": "P(ti) = λi / Σ λk",
+     "slide": 223
+    },
+    {
+     "name": "Firing probability (immediate)",
+     "expr": "P(ti) = wi / Σ wk  (highest-priority enabled immediate transitions)",
+     "slide": 234
+    }
+   ],
+   "traps": [
+    "Vanishing markings have zero sojourn time because immediate transitions fire at once.",
+    "In an SPN at most one transition fires at a time; probabilities of who fires first come from the intensities.",
+    "Inhibitor arcs test a place for zero and make the model more expressive."
+   ]
+  }
+ },
+ "questions": [
+  {
+   "id": "L1-01",
+   "l": 1,
+   "topic": "Model power",
+   "q": "What does the decision power of a modelling technique describe?",
+   "o": [
+    "Which systems and properties it can solve",
+    "Which classes of systems the technique can describe",
+    "How many people can use the technique at once",
+    "Whether the model is analytic or a simulation"
+   ],
+   "c": 0,
+   "hint": "Describing is not the same as solving.",
+   "r": "Slide 10: expressive power covers what can be expressed; decision power covers the classes of systems and properties for which solutions can be found, limited by computational complexity.",
+   "slide": 10,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L1-02",
+   "l": 1,
+   "topic": "Kinds of models",
+   "q": "Which division of information systems models matches the lecture?",
+   "o": [
+    "Deterministic, non-deterministic, probabilistic",
+    "Linear, quadratic and exponential growth models",
+    "Static, dynamic and hybrid simulation models",
+    "Formal, semi-formal and informal specification models"
+   ],
+   "c": 0,
+   "hint": "Also analytic vs simulation.",
+   "r": "Slide 9: models are analytic or simulation, and deterministic, non-deterministic or probabilistic.",
+   "slide": 9,
+   "pattern": "classify",
+   "lk": "medium"
+  },
+  {
+   "id": "L1-03",
+   "l": 1,
+   "topic": "Deadlock",
+   "q": "In the two-process example, when does the deadlock occur?",
+   "o": [
+    "Each process holds one resource and waits for the other",
+    "Both processes request the same resource at once",
+    "One process releases both of its resources far too early",
+    "The semaphore is initialised with too many tokens"
+   ],
+   "c": 0,
+   "hint": "R1 to process 1, R2 to process 2.",
+   "r": "Slide 19: R1 is allocated to process 1 and R2 to process 2; each then requests the other resource and neither can continue.",
+   "slide": 19,
+   "pattern": "explain",
+   "lk": "high"
+  },
+  {
+   "id": "L1-04",
+   "l": 1,
+   "topic": "Mutual exclusion",
+   "q": "In the mutual exclusion model, what do P(s) and V(s) stand for?",
+   "o": [
+    "Semaphore operations on s",
+    "Process priority levels",
+    "Places of the net",
+    "Variable updates"
+   ],
+   "c": 0,
+   "hint": "Dijkstra's operations around a critical section.",
+   "r": "Slide 12: CS is the critical section, RP the remainder of the process, and P(s), V(s) the semaphore operations guarding the critical section.",
+   "slide": 12,
+   "pattern": "definition",
+   "lk": "medium"
+  },
+  {
+   "id": "L1-05",
+   "l": 1,
+   "topic": "Protocol",
+   "q": "What does the extra transition ML add to the communication protocol model?",
+   "o": [
+    "Message loss",
+    "Message logging",
+    "Multiple listeners",
+    "Mail lookup"
+   ],
+   "c": 0,
+   "hint": "The sender may then wait forever for an acknowledgement.",
+   "r": "Slide 30: ML stands for message loss; the sender keeps waiting for an acknowledgement that never arrives.",
+   "slide": 30,
+   "pattern": "acronym",
+   "lk": "medium"
+  },
+  {
+   "id": "L2-01",
+   "l": 2,
+   "topic": "Definition",
+   "q": "Which six components define a Petri net in the lecture?",
+   "o": [
+    "Places, transitions, arcs, arc weights, capacities, initial marking",
+    "Places, transitions, tokens, clocks, priorities, final marking",
+    "States, inputs, outputs, transitions, start state, end states",
+    "Places, transitions, arcs, firing intensities, arc weights, priorities"
+   ],
+   "c": 0,
+   "hint": "N = (P, T, F, W, K, M0).",
+   "r": "Slide 33: a Petri net is a 6-tuple (P, T, F, W, K, M0): places, transitions, arcs, arc weight function, place capacity function and initial marking.",
+   "slide": 33,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L2-02",
+   "l": 2,
+   "topic": "Firing",
+   "q": "When is a transition t enabled in marking M?",
+   "o": [
+    "Each input place p holds at least W(p, t) tokens",
+    "Each output place holds at least W(t, p) tokens",
+    "At least one input place holds a single token",
+    "The total number of tokens in the net is even"
+   ],
+   "c": 0,
+   "hint": "Look at the input places and the arc weights.",
+   "r": "Slide 35: t is enabled if every input place p is marked with at least W(p, t) tokens; firing removes W(p, t) from inputs and adds W(t, p) to outputs.",
+   "slide": 35,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L2-03",
+   "l": 2,
+   "topic": "Firing",
+   "q": "A transition t with input arc weight W(p1, t) = 2 and output arc weight W(t, p2) = 1 fires in M = (p1: 3, p2: 0). What is the new marking?",
+   "o": [
+    "p1: 1, p2: 1",
+    "p1: 2, p2: 1",
+    "p1: 1, p2: 2",
+    "p1: 3, p2: 1"
+   ],
+   "c": 0,
+   "hint": "M′(p) = M(p) − W(p, t) + W(t, p).",
+   "r": "Slide 35: p1 loses W(p1, t) = 2 tokens (3 − 2 = 1) and p2 gains W(t, p2) = 1 token (0 + 1 = 1).",
+   "slide": 35,
+   "pattern": "calculation",
+   "lk": "medium"
+  },
+  {
+   "id": "L2-04",
+   "l": 2,
+   "topic": "Decidability",
+   "q": "What does the lecture state about the reachability problem for Petri nets?",
+   "o": [
+    "It is decidable (1981), with exponential complexity",
+    "It is undecidable for all nets with more than two places",
+    "It is decidable in polynomial time by linear algebra",
+    "It was solved by Petri himself in his work of 1962"
+   ],
+   "c": 0,
+   "hint": "Petri's work dates from 1962; the decidability proof came later.",
+   "r": "Slide 43: the reachability problem is decidable (theorem of 1981) and its complexity is exponential; Petri nets come from C. A. Petri's work of 1962.",
+   "slide": 43,
+   "pattern": "fact",
+   "lk": "high"
+  },
+  {
+   "id": "L2-05",
+   "l": 2,
+   "topic": "Safety",
+   "q": "A Petri net is called safe when it is:",
+   "o": [
+    "1-bounded (k = 1)",
+    "live",
+    "reversible",
+    "persistent"
+   ],
+   "c": 0,
+   "hint": "Think of a buffer that holds only one item.",
+   "r": "Slide 45: a net is safe if it is 1-bounded; safety answers whether a buffer of capacity 1 can overflow.",
+   "slide": 45,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L2-06",
+   "l": 2,
+   "topic": "Boundedness",
+   "q": "A net is 2-bounded but not 1-bounded. Which statement is true?",
+   "o": [
+    "It is 4-bounded as well, but it is not safe",
+    "It is safe but it is not 4-bounded",
+    "It is unbounded because it exceeds one token",
+    "It must also be live and reversible"
+   ],
+   "c": 0,
+   "hint": "k-bounded means at most k tokens per place.",
+   "r": "Slide 46: if no place ever holds more than 2 tokens, it never holds more than 4 either; since a place reaches 2, the net is not safe.",
+   "slide": 46,
+   "pattern": "true-statement",
+   "lk": "medium"
+  },
+  {
+   "id": "L2-07",
+   "l": 2,
+   "topic": "Liveness",
+   "q": "What does liveness of a Petri net guarantee?",
+   "o": [
+    "No deadlocks",
+    "No unbounded places",
+    "A unique marking",
+    "Fair scheduling"
+   ],
+   "c": 0,
+   "hint": "Every transition can always fire again eventually.",
+   "r": "Slide 48: t is live if from every reachable marking a marking enabling t can be reached; a net is live if all transitions are, which means there are no deadlocks.",
+   "slide": 48,
+   "pattern": "fact",
+   "lk": "high"
+  },
+  {
+   "id": "L2-08",
+   "l": 2,
+   "topic": "Liveness problem",
+   "q": "Why is the liveness problem decidable?",
+   "o": [
+    "It is equivalent to reachability, which is decidable",
+    "It can be read off the incidence matrix directly",
+    "The coverability tree always decides it, bounded or not",
+    "Every live net is also bounded and therefore finite"
+   ],
+   "c": 0,
+   "hint": "1975 and 1981.",
+   "r": "Slide 53: the liveness problem is equivalent to the reachability problem (1975), and reachability is decidable (1981), so liveness is decidable.",
+   "slide": 53,
+   "pattern": "explain",
+   "lk": "high"
+  },
+  {
+   "id": "L2-09",
+   "l": 2,
+   "topic": "Reversibility",
+   "q": "What is a home marking?",
+   "o": [
+    "A marking reachable from every reachable marking",
+    "The initial marking of any reversible net",
+    "A marking in which no transition at all is enabled",
+    "A marking with exactly one token per place"
+   ],
+   "c": 0,
+   "hint": "A weaker version of reversibility.",
+   "r": "Slide 54: reversibility requires that M0 is reachable from every reachable marking; M′ is a home marking if it can be reached from every reachable marking.",
+   "slide": 54,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L2-10",
+   "l": 2,
+   "topic": "Persistence",
+   "q": "In a persistent Petri net, how can an enabled transition become disabled?",
+   "o": [
+    "Only by its own firing",
+    "By any other firing",
+    "By the place capacity",
+    "By a timeout that expires"
+   ],
+   "c": 0,
+   "hint": "Firing one enabled transition never disables another.",
+   "r": "Slide 61: a net is persistent if for any two enabled transitions the firing of one does not disable the other, so an enabled transition can be disabled only by its own firing.",
+   "slide": 61,
+   "pattern": "definition",
+   "lk": "medium"
+  },
+  {
+   "id": "L2-11",
+   "l": 2,
+   "type": "open",
+   "topic": "Behavioural properties",
+   "q": "Define reachability, boundedness, safety, liveness and reversibility of a Petri net.",
+   "a": "- Reachability: marking M is reachable if some firing sequence leads from M0 to M (M ∈ R(M0)).\n- Boundedness: there is k such that no reachable marking puts more than k tokens in any place (k-bounded).\n- Safety: the net is 1-bounded.\n- Liveness: from every reachable marking, every transition can eventually be enabled again; a live net has no deadlocks.\n- Reversibility: M0 can be reached again from every reachable marking.",
+   "slide": 45,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L3-01",
+   "l": 3,
+   "topic": "Synchronisation distance",
+   "q": "How is the synchronisation distance between t1 and t2 defined?",
+   "o": [
+    "The largest gap between the firing counts of t1 and t2",
+    "The minimum number of places on a path from t1 to t2",
+    "The time between the firing of t1 and the firing of t2",
+    "The number of tokens that t1 and t2 consume together"
+   ],
+   "c": 0,
+   "hint": "Count firings, then take the worst case.",
+   "r": "Slide 67: d12 = max over all firing sequences of all reachable markings of |σ(t1) − σ(t2)|.",
+   "slide": 67,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L3-02",
+   "l": 3,
+   "topic": "Bounded fairness",
+   "q": "When are two transitions in a bounded fairness relation?",
+   "o": [
+    "When neither can fire unboundedly often while the other waits",
+    "When both are always enabled in exactly the same markings",
+    "When they never fire in the same firing sequence at all",
+    "When their synchronisation distance is exactly zero"
+   ],
+   "c": 0,
+   "hint": "Think of σ = (t1 t3 t1 t4)*.",
+   "r": "Slide 73: t1, t2 are in a bounded fairness relation if the maximal number of times either can fire while the other is not firing is bounded; a bounded fair net has this for every pair.",
+   "slide": 73,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L3-03",
+   "l": 3,
+   "topic": "Fairness example",
+   "q": "In the running example, why are t1 and t2 not in a bounded fairness relation?",
+   "o": [
+    "(t1 t3 t1 t4)* fires t1 forever without t2",
+    "t1 and t2 can never be enabled in the same marking",
+    "t2 needs more tokens than the net can ever hold",
+    "t1 is dead in the initial marking of the net"
+   ],
+   "c": 0,
+   "hint": "Look for a cycle that avoids one of them.",
+   "r": "Slide 74: the repeated sequence (t1 t3 t1 t4)* fires t1 unboundedly often while t2 does not fire; the pair t3, t4 is in a bounded fairness relation.",
+   "slide": 74,
+   "pattern": "explain",
+   "lk": "medium"
+  },
+  {
+   "id": "L4-01",
+   "l": 4,
+   "topic": "Time in Petri nets",
+   "q": "To which Petri net elements can a time factor be assigned?",
+   "o": [
+    "Places, transitions or arcs",
+    "Only to transitions of the net",
+    "Only to places holding tokens",
+    "Only to the tokens themselves"
+   ],
+   "c": 0,
+   "hint": "Three options are listed.",
+   "r": "Slide 77: time can be deterministic, non-deterministic or probabilistic, and assigned to places, transitions or arcs.",
+   "slide": 77,
+   "pattern": "fact",
+   "lk": "medium"
+  },
+  {
+   "id": "L4-02",
+   "l": 4,
+   "topic": "Choosing a model",
+   "q": "Which models does the lecture recommend for performance and reliability evaluation?",
+   "o": [
+    "Stochastic and generalised stochastic Petri nets",
+    "Time Petri nets with firing intervals on transitions",
+    "Untimed place/transition Petri nets",
+    "Finite automata without any time"
+   ],
+   "c": 0,
+   "hint": "Time Petri nets are for timed functional requirements.",
+   "r": "Slide 78: time Petri nets verify whether functional requirements with quantitative time are met; SPNs and GSPNs are for performance and reliability evaluation.",
+   "slide": 78,
+   "pattern": "classify",
+   "lk": "high"
+  },
+  {
+   "id": "L4-03",
+   "l": 4,
+   "topic": "Firing window",
+   "q": "Transition t has static interval [2, 5] and became enabled at τ = 10. When may it fire, if it stays enabled?",
+   "o": [
+    "Between instants 12 and 15",
+    "Exactly at instant 12",
+    "Between instants 2 and 5",
+    "At any instant after 15"
+   ],
+   "c": 0,
+   "hint": "Add the interval to the enabling instant.",
+   "r": "Slide 80: t can fire no earlier than τ + α = 12 and no later than τ + β = 15.",
+   "slide": 80,
+   "pattern": "calculation",
+   "lk": "high"
+  },
+  {
+   "id": "L4-04",
+   "l": 4,
+   "topic": "State classes",
+   "q": "Why are state classes used for time Petri nets?",
+   "o": [
+    "A class covers infinitely many states",
+    "They remove the need for any time intervals",
+    "They make every time Petri net bounded",
+    "They turn the net into an ordinary Markov chain"
+   ],
+   "c": 0,
+   "hint": "Time values are dense.",
+   "r": "Slide 81: a state is ⟨M, I⟩ with dynamic firing intervals; a state class can represent an infinite number of states, which makes analysis possible.",
+   "slide": 81,
+   "pattern": "explain",
+   "lk": "medium"
+  },
+  {
+   "id": "L4-05",
+   "l": 4,
+   "topic": "Tools",
+   "q": "Which software tool is named for analysing time Petri nets?",
+   "o": [
+    "TINA",
+    "GoldSim",
+    "NuSMV",
+    "UPPAAL"
+   ],
+   "c": 0,
+   "hint": "Time Petri Net Analyzer.",
+   "r": "Slide 82: TINA (Time Petri Net Analyzer, LAAS-CNRS); the analysis uses linear inequalities with at most two variables each.",
+   "slide": 82,
+   "pattern": "fact",
+   "lk": "medium"
+  },
+  {
+   "id": "L5-01",
+   "l": 5,
+   "topic": "Coverability tree",
+   "q": "What does it mean when the symbol ω never appears in a coverability tree?",
+   "o": [
+    "The net is bounded",
+    "The net is live and reversible",
+    "The net is safe (1-bounded)",
+    "The net is pure"
+   ],
+   "c": 0,
+   "hint": "ω stands for an unboundedly growing place.",
+   "r": "Slide 90: N is bounded iff there is no ω in the tree; it is safe iff only 0 and 1 appear.",
+   "slide": 90,
+   "pattern": "fact",
+   "lk": "high"
+  },
+  {
+   "id": "L5-02",
+   "l": 5,
+   "topic": "Coverability tree",
+   "q": "How can a coverability tree show that a transition can never fire?",
+   "o": [
+    "The transition labels no arc of the tree",
+    "The transition appears with symbol ω",
+    "The transition labels the root of the tree",
+    "The transition leads to an old marking"
+   ],
+   "c": 0,
+   "hint": "Arcs of the tree are labelled with fired transitions.",
+   "r": "Slide 90: a transition can never be fired iff it does not occur as the label of any arc in the tree.",
+   "slide": 90,
+   "pattern": "fact",
+   "lk": "medium"
+  },
+  {
+   "id": "L5-03",
+   "l": 5,
+   "topic": "Limits",
+   "q": "What can a coverability tree not decide for an unbounded net?",
+   "o": [
+    "Reachability and liveness",
+    "Boundedness and safety",
+    "Which transitions are dead",
+    "Whether ω is present"
+   ],
+   "c": 0,
+   "hint": "ω hides exact token counts.",
+   "r": "Slide 91: if the net is not bounded, the coverability tree with ω is not sufficient to solve either the reachability or the liveness problem.",
+   "slide": 91,
+   "pattern": "fact",
+   "lk": "high"
+  },
+  {
+   "id": "L5-04",
+   "l": 5,
+   "topic": "Liveness from graphs",
+   "q": "The finite reachability graph of a net is strongly connected. When is transition t live?",
+   "o": [
+    "When some arc of the graph is labelled t",
+    "When t labels an arc leaving the initial marking",
+    "When every arc of the graph is labelled t",
+    "When t appears in no cycle of the graph"
+   ],
+   "c": 0,
+   "hint": "Every vertex can reach every other one.",
+   "r": "Slide 98: for a strongly connected finite reachability graph, t is live iff there exists an arc labelled with t.",
+   "slide": 98,
+   "pattern": "fact",
+   "lk": "medium"
+  },
+  {
+   "id": "L5-05",
+   "l": 5,
+   "topic": "Building the tree",
+   "q": "While building a coverability tree, a new marking equals one already on its path from the root. How is it labelled?",
+   "o": [
+    "old",
+    "dead",
+    "new",
+    "ω"
+   ],
+   "c": 0,
+   "hint": "It need not be expanded again.",
+   "r": "Slide 88: a marking identical to one on its path from the root is labelled \"old\"; a marking with no enabled transitions is \"dead\".",
+   "slide": 88,
+   "pattern": "fact",
+   "lk": "medium"
+  },
+  {
+   "id": "L6-01",
+   "l": 6,
+   "topic": "Incidence matrix",
+   "q": "How is the entry cij of the incidence matrix defined?",
+   "o": [
+    "cij = W(tj, pi) − W(pi, tj)",
+    "cij = W(pi, tj) + W(tj, pi)",
+    "cij = W(pi, tj) · W(tj, pi)",
+    "cij = M0(pi) − W(pi, tj)"
+   ],
+   "c": 0,
+   "hint": "Tokens added minus tokens removed.",
+   "r": "Slide 106: column j shows the effect of firing tj: it removes W(pi, tj) and adds W(tj, pi) tokens, so cij = W(tj, pi) − W(pi, tj).",
+   "slide": 106,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L6-02",
+   "l": 6,
+   "topic": "Pure nets",
+   "q": "Why does the matrix method assume a pure Petri net?",
+   "o": [
+    "Self-loops cancel out in the matrix entries",
+    "Pure nets are always bounded and live",
+    "Impure nets cannot have any arc weights at all",
+    "The matrix only works for safe nets"
+   ],
+   "c": 0,
+   "hint": "What if a place is both input and output of t?",
+   "r": "Slides 102–104: in a self-loop the removed and added tokens cancel in cij, so the matrix cannot represent the net; a pure net has no such loops.",
+   "slide": 104,
+   "pattern": "explain",
+   "lk": "medium"
+  },
+  {
+   "id": "L6-03",
+   "l": 6,
+   "topic": "State equation",
+   "q": "What does a non-negative solution of M = M0 + C·σ⃗ tell you about marking M?",
+   "o": [
+    "Only a necessary condition holds",
+    "M is certainly reachable from M0",
+    "M is certainly not reachable from M0",
+    "The net is live and bounded"
+   ],
+   "c": 0,
+   "hint": "The counts may not form a fireable sequence.",
+   "r": "Slide 112: the state equation is a necessary but not sufficient condition for reachability.",
+   "slide": 112,
+   "pattern": "true-statement",
+   "lk": "high"
+  },
+  {
+   "id": "L6-04",
+   "l": 6,
+   "topic": "Complexity",
+   "q": "Why is linear algebra attractive compared with enumerating the reachability graph?",
+   "o": [
+    "O(n³) equations vs exponentially many markings",
+    "Linear algebra always proves reachability exactly",
+    "Reachability graphs cannot be drawn for safe nets",
+    "Gaussian elimination needs no arithmetic at all"
+   ],
+   "c": 0,
+   "hint": "Compare the growth of the two costs.",
+   "r": "Slides 110–111: Gaussian elimination solves n equations in O(n³), whereas the number of reachable markings can be exponential in the size of the net.",
+   "slide": 111,
+   "pattern": "explain",
+   "lk": "medium"
+  },
+  {
+   "id": "L6-05",
+   "l": 6,
+   "topic": "Reductions",
+   "q": "Which properties are preserved by the reduction rules of the lecture?",
+   "o": [
+    "Liveness, boundedness and safety",
+    "Reachability of every marking too",
+    "The exact incidence matrix",
+    "The number of transitions"
+   ],
+   "c": 0,
+   "hint": "N′ has them iff N has them.",
+   "r": "Slide 116: net N′ after reduction is live, bounded and safe iff the original net N is.",
+   "slide": 116,
+   "pattern": "fact",
+   "lk": "high"
+  },
+  {
+   "id": "L6-06",
+   "l": 6,
+   "topic": "Reductions",
+   "q": "Which of these is not one of the six reduction rules?",
+   "o": [
+    "Splitting a place into two copies",
+    "Fusion of sequential places",
+    "Elimination of loop transitions from the net",
+    "Fusion of parallel transitions"
+   ],
+   "c": 0,
+   "hint": "Reductions make the net smaller.",
+   "r": "Slides 117–122: fusion of sequential places, sequential transitions, parallel places and parallel transitions, and elimination of loop places and loop transitions.",
+   "slide": 118,
+   "pattern": "not-statement",
+   "lk": "medium"
+  },
+  {
+   "id": "L7-01",
+   "l": 7,
+   "topic": "Simulation vs analysis",
+   "q": "How do simulation models usually compare with analytic models?",
+   "o": [
+    "More detailed, but slower to compute",
+    "Less detailed, but faster to compute",
+    "Always exact, but harder to build",
+    "Only usable for real-time systems"
+   ],
+   "c": 0,
+   "hint": "Analytic models usually run much faster.",
+   "r": "Slide 128: simulation models are usually more detailed and adequate and simpler to solve; the computation time of analytic models is usually shorter.",
+   "slide": 128,
+   "pattern": "compare",
+   "lk": "high"
+  },
+  {
+   "id": "L7-02",
+   "l": 7,
+   "topic": "Levels",
+   "q": "Which measure belongs to the program level of performance evaluation?",
+   "o": [
+    "Mean program execution time",
+    "Memory cycle time",
+    "Disc access time",
+    "Mean data base access time"
+   ],
+   "c": 0,
+   "hint": "The other measures are hardware or system level.",
+   "r": "Slides 124–125: hardware level covers memory cycle and disc access time; program level mean execution time and loop counts; system level response and data access times.",
+   "slide": 125,
+   "pattern": "classify",
+   "lk": "medium"
+  },
+  {
+   "id": "L7-03",
+   "l": 7,
+   "topic": "Approaches",
+   "q": "Which approach to performance evaluation uses hardware and software monitors?",
+   "o": [
+    "Experimental evaluation",
+    "Trend extrapolation",
+    "Analytic modelling",
+    "Simulation modelling work"
+   ],
+   "c": 0,
+   "hint": "Measuring a running system.",
+   "r": "Slide 126: in experimental evaluation, measurements are taken with hardware and software monitors; models are solved by simulation or analysis.",
+   "slide": 126,
+   "pattern": "classify",
+   "lk": "medium"
+  },
+  {
+   "id": "L8-01",
+   "l": 8,
+   "topic": "Estimation methods",
+   "q": "Which execution time estimation method is used for real-time systems?",
+   "o": [
+    "The worst-case method",
+    "The arithmetic mean method",
+    "The most probable path method",
+    "The random variable mean method"
+   ],
+   "c": 0,
+   "hint": "Deadlines must hold even in the slowest case.",
+   "r": "Slide 132: the worst-case method (taking the longer branch) is used for real-time systems; mean-value methods for general-purpose systems.",
+   "slide": 132,
+   "pattern": "classify",
+   "lk": "high"
+  },
+  {
+   "id": "L8-02",
+   "l": 8,
+   "topic": "Alternative",
+   "q": "Branch S1 (mean 4 ms) is taken with probability 0.25 and S2 (mean 8 ms) otherwise. What is the mean execution time of the alternative?",
+   "o": [
+    "7 ms",
+    "6 ms",
+    "8 ms",
+    "5 ms"
+   ],
+   "c": 0,
+   "hint": "P·m1 + (1 − P)·m2.",
+   "r": "Slide 137: 0.25 · 4 + 0.75 · 8 = 1 + 6 = 7 ms (decisions take zero time).",
+   "slide": 137,
+   "pattern": "calculation",
+   "lk": "high"
+  },
+  {
+   "id": "L8-03",
+   "l": 8,
+   "topic": "Exponential distribution",
+   "q": "An operation time is exponential with parameter λ = 0.5 per ms. What are its mean and variance?",
+   "o": [
+    "Mean 2 ms, variance 4 ms²",
+    "Mean 0.5 ms, variance 0.25 ms²",
+    "Mean 2 ms, variance 2 ms²",
+    "Mean 0.5 ms, variance 2 ms²"
+   ],
+   "c": 0,
+   "hint": "Mean 1/λ, variance 1/λ².",
+   "r": "Slide 144: mean 1/λ = 2 ms and variance 1/λ² = 4 ms².",
+   "slide": 144,
+   "pattern": "calculation",
+   "lk": "high"
+  },
+  {
+   "id": "L8-04",
+   "l": 8,
+   "topic": "Assumptions",
+   "q": "Which assumptions does the lecture make when composing execution times of control structures?",
+   "o": [
+    "Independent times and zero-time decisions",
+    "Equal times for all statements and no decisions",
+    "Deterministic times and a single loop iteration",
+    "Exponential times only for the decision steps"
+   ],
+   "c": 0,
+   "hint": "Two assumptions are listed.",
+   "r": "Slide 135: the random variables of the components' execution times are independent, and execution times of decisions are zero.",
+   "slide": 135,
+   "pattern": "fact",
+   "lk": "medium"
+  },
+  {
+   "id": "L8-05",
+   "l": 8,
+   "topic": "Sequential composition",
+   "q": "S1 has mean 3 ms and S2 mean 5 ms, independent. What is the mean time of S1; S2?",
+   "o": [
+    "8 ms",
+    "4 ms",
+    "15 ms",
+    "5 ms"
+   ],
+   "c": 0,
+   "hint": "Times of a sequence add up.",
+   "r": "Slide 136: for a sequential composition the mean execution times add: 3 + 5 = 8 ms.",
+   "slide": 136,
+   "pattern": "calculation",
+   "lk": "medium"
+  },
+  {
+   "id": "L9-01",
+   "l": 9,
+   "topic": "Markov chains",
+   "q": "What labels the arcs of a continuous-time Markov chain?",
+   "o": [
+    "Transition intensities",
+    "One-step probabilities",
+    "Token counts",
+    "Time intervals"
+   ],
+   "c": 0,
+   "hint": "Parameters of exponential distributions.",
+   "r": "Slides 159–160: continuous-time chains carry transition intensities (exponential rates); discrete-time chains carry one-step transition probabilities pij.",
+   "slide": 159,
+   "pattern": "classify",
+   "lk": "high"
+  },
+  {
+   "id": "L9-02",
+   "l": 9,
+   "topic": "M/M/1",
+   "q": "In the notation M/M/1, what does the first M stand for?",
+   "o": [
+    "Poisson arrivals (exponential gaps between them)",
+    "A memory limit for the clients waiting in the queue",
+    "Multiple servers working at the service station",
+    "A Markov chain with a single absorbing state"
+   ],
+   "c": 0,
+   "hint": "The second M describes the service time.",
+   "r": "Slide 170: the first M is a Poisson arrival process with rate λ (exponential inter-arrival times), the second M exponential service with rate μ, and 1 a single server.",
+   "slide": 170,
+   "pattern": "acronym",
+   "lk": "high"
+  },
+  {
+   "id": "L9-03",
+   "l": 9,
+   "topic": "M/M/1",
+   "q": "An M/M/1 station has λ = 2 and μ = 5 clients per second. What is the probability that it is idle?",
+   "o": [
+    "0.6",
+    "0.4",
+    "0.2",
+    "2.5"
+   ],
+   "c": 0,
+   "hint": "π0 = 1 − ρ with ρ = λ/μ.",
+   "r": "Slide 173: ρ = 2/5 = 0.4 is the utilisation, so π0 = 1 − ρ = 0.6 and the station is busy with probability 0.4.",
+   "slide": 173,
+   "pattern": "calculation",
+   "lk": "high"
+  },
+  {
+   "id": "L9-04",
+   "l": 9,
+   "topic": "M/M/1",
+   "q": "When does an M/M/1 queue have a stationary state?",
+   "o": [
+    "When λ < μ",
+    "When λ > μ",
+    "When λ = 2μ",
+    "Always"
+   ],
+   "c": 0,
+   "hint": "Otherwise the queue can grow without limit.",
+   "r": "Slide 173: the stationary state condition is λ < μ; otherwise the queue length can become infinite.",
+   "slide": 173,
+   "pattern": "fact",
+   "lk": "high"
+  },
+  {
+   "id": "L9-05",
+   "l": 9,
+   "topic": "Queueing networks",
+   "q": "Which statement about elementary queueing networks is true?",
+   "o": [
+    "They cannot model synchronisation or deadlocks",
+    "They are more expressive than Petri nets ever are",
+    "Requests in them cooperate and communicate",
+    "They always need a Markov chain to solve"
+   ],
+   "c": 0,
+   "hint": "Requests compete but do not cooperate.",
+   "r": "Slides 175 and 183: requests are atomic, compete but do not cooperate, cannot synchronise or communicate, and deadlocks cannot be modelled; Petri nets are more expressive.",
+   "slide": 183,
+   "pattern": "true-statement",
+   "lk": "high"
+  },
+  {
+   "id": "L9-06",
+   "l": 9,
+   "topic": "Characteristics",
+   "q": "What is the throughput of a system in queueing terms?",
+   "o": [
+    "Mean number of clients completed per time unit",
+    "Fraction of the time a service centre is busy",
+    "Mean time from a client's arrival to departure",
+    "Mean number of clients waiting in all queues"
+   ],
+   "c": 0,
+   "hint": "Clients leaving the system per second.",
+   "r": "Slide 184: utilisation is the busy fraction, mean residence time runs from arrival to departure, and throughput is the mean number of clients leaving the system per time unit.",
+   "slide": 184,
+   "pattern": "definition",
+   "lk": "medium"
+  },
+  {
+   "id": "L9-07",
+   "l": 9,
+   "topic": "Expressive power",
+   "q": "Which distributions can continuous-time Markov chains express, according to the lecture?",
+   "o": [
+    "Exponential ones and compositions like Erlang",
+    "Any distribution, including deterministic times",
+    "Only uniform distributions on bounded intervals",
+    "Only normal distributions with known variance"
+   ],
+   "c": 0,
+   "hint": "Built from exponential phases.",
+   "r": "Slide 161: exponential distributions and compositions of them (Erlang, hypoexponential, hyperexponential, Cox); stationary solutions are polynomial.",
+   "slide": 161,
+   "pattern": "fact",
+   "lk": "medium"
+  },
+  {
+   "id": "L10-01",
+   "l": 10,
+   "topic": "Little's law",
+   "q": "A server completes 5 requests per second and a request stays on average 2 seconds. How many requests are in the system on average?",
+   "o": [
+    "10.0",
+    "2.50",
+    "7.00",
+    "0.40"
+   ],
+   "c": 0,
+   "hint": "N = X·R.",
+   "r": "Slide 191: Little's law gives N = X·R = 5 · 2 = 10.",
+   "slide": 191,
+   "pattern": "calculation",
+   "lk": "high"
+  },
+  {
+   "id": "L10-02",
+   "l": 10,
+   "topic": "Utilisation law",
+   "q": "A disc serves 20 requests per second with mean service time 0.03 s. What is its utilisation?",
+   "o": [
+    "0.60",
+    "0.06",
+    "6.00",
+    "0.15"
+   ],
+   "c": 0,
+   "hint": "U = X·S.",
+   "r": "Slide 189: U = X·S = 20 · 0.03 = 0.6, i.e. the disc is busy 60 % of the time.",
+   "slide": 189,
+   "pattern": "calculation",
+   "lk": "high"
+  },
+  {
+   "id": "L10-03",
+   "l": 10,
+   "topic": "Response time law",
+   "q": "An interactive system has 30 users, think time Z = 10 s and throughput X = 2 interactions per second. What is the response time R?",
+   "o": [
+    "5.00 s",
+    "15.0 s",
+    "25.0 s",
+    "20.0 s"
+   ],
+   "c": 0,
+   "hint": "R = N/X − Z.",
+   "r": "Slide 198: N = X(R + Z), so R = 30/2 − 10 = 15 − 10 = 5 s.",
+   "slide": 198,
+   "pattern": "calculation",
+   "lk": "high"
+  },
+  {
+   "id": "L10-04",
+   "l": 10,
+   "topic": "Forced flow law",
+   "q": "Each request visits the disc 4 times on average and the system throughput is 3 requests per second. What is the disc throughput?",
+   "o": [
+    "12.0 requests per second",
+    "0.75 requests per second",
+    "7 requests per second",
+    "1.33 requests per second"
+   ],
+   "c": 0,
+   "hint": "Xk = Vk·X.",
+   "r": "Slide 200: by the forced flow law Xk = Vk·X = 4 · 3 = 12 requests per second.",
+   "slide": 200,
+   "pattern": "calculation",
+   "lk": "high"
+  },
+  {
+   "id": "L10-05",
+   "l": 10,
+   "topic": "Bottleneck",
+   "q": "Service demands are DCPU = 0.2 s and Ddisc = 0.25 s per request. What is the upper bound on system throughput?",
+   "o": [
+    "4 requests per second",
+    "5 requests per second",
+    "2.2 requests per second",
+    "9 requests per second"
+   ],
+   "c": 0,
+   "hint": "1 / Dmax.",
+   "r": "Slide 202: the disc has the largest demand, so X ≤ 1/Dmax = 1/0.25 = 4 requests per second, at which point the disc's utilisation reaches 1.",
+   "slide": 202,
+   "pattern": "calculation",
+   "lk": "high"
+  },
+  {
+   "id": "L10-06",
+   "l": 10,
+   "topic": "Open systems",
+   "q": "In an open system a centre has demand Dk = 0.1 s and requests arrive at λ = 5 per second. What is its residence time Rk?",
+   "o": [
+    "0.2 s",
+    "0.1 s",
+    "0.5 s",
+    "0.05 s"
+   ],
+   "c": 0,
+   "hint": "Rk = Dk / (1 − λ·Dk).",
+   "r": "Slide 204: uk = λDk = 0.5, so Rk = 0.1 / (1 − 0.5) = 0.2 s.",
+   "slide": 204,
+   "pattern": "calculation",
+   "lk": "medium"
+  },
+  {
+   "id": "L10-07",
+   "l": 10,
+   "topic": "Little's law",
+   "q": "Which statement about the assumptions of Little's law is true?",
+   "o": [
+    "They are weak: no Markov property needed",
+    "The arrival process must be Poisson",
+    "The service times must be exponential",
+    "It holds only for single-server stations"
+   ],
+   "c": 0,
+   "hint": "That is why it is so widely used.",
+   "r": "Slide 193: Little's law has rather weak assumptions; unlike much queueing analysis it does not require the memoryless (Markov) property.",
+   "slide": 193,
+   "pattern": "true-statement",
+   "lk": "medium"
+  },
+  {
+   "id": "L10-08",
+   "l": 10,
+   "type": "open",
+   "topic": "Operational laws",
+   "q": "State the utilisation law, Little's law, the response time law and the forced flow law, defining each symbol.",
+   "a": "- Utilisation law: U = X·S, where U is utilisation (busy time B / observation time T), X throughput (completions C / T) and S mean service time (B / C).\n- Little's law: N = X·R, with N the mean number of clients in the system and R the mean residence time.\n- Response time law: R = N/X − Z, for an interactive system with N terminals and mean think time Z.\n- Forced flow law: Xk = Vk·X, where Xk is the throughput of centre k and Vk the mean number of visits per request; also Dk = Vk·Sk and uk = X·Dk.",
+   "slide": 189,
+   "pattern": "explain",
+   "lk": "high"
+  },
+  {
+   "id": "L11-01",
+   "l": 11,
+   "topic": "SPN firing",
+   "q": "Two transitions with intensities λ1 = 2 and λ2 = 3 are enabled in a marking of an SPN. What is the probability that t1 fires first?",
+   "o": [
+    "0.4",
+    "0.6",
+    "0.5",
+    "0.67"
+   ],
+   "c": 0,
+   "hint": "λ1 / (λ1 + λ2).",
+   "r": "Slide 223: the firing probability is the transition's intensity over the sum of enabled intensities: 2 / 5 = 0.4.",
+   "slide": 223,
+   "pattern": "calculation",
+   "lk": "high"
+  },
+  {
+   "id": "L11-02",
+   "l": 11,
+   "topic": "Sojourn time",
+   "q": "In that marking (λ1 = 2, λ2 = 3), what is the mean sojourn time?",
+   "o": [
+    "0.2",
+    "5",
+    "0.5",
+    "1.2"
+   ],
+   "c": 0,
+   "hint": "1 / sum of the enabled intensities.",
+   "r": "Slide 221: the mean sojourn time is 1 / (λ1 + λ2) = 1/5 = 0.2 time units.",
+   "slide": 221,
+   "pattern": "calculation",
+   "lk": "high"
+  },
+  {
+   "id": "L11-03",
+   "l": 11,
+   "topic": "GSPN",
+   "q": "Which two kinds of transitions does a generalised stochastic Petri net have?",
+   "o": [
+    "Timed (exponential) and immediate (zero time)",
+    "Deterministic transitions and transitions with intervals",
+    "Input transitions and output transitions of each place",
+    "Live transitions and dead transitions of the net"
+   ],
+   "c": 0,
+   "hint": "One kind takes no time at all.",
+   "r": "Slide 230: timed transitions have exponentially distributed firing times; immediate transitions fire in zero time.",
+   "slide": 230,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L11-04",
+   "l": 11,
+   "topic": "Vanishing markings",
+   "q": "What is a vanishing marking of a GSPN?",
+   "o": [
+    "One that enables at least one immediate transition",
+    "A marking from which no transition can ever fire again",
+    "A marking that enables only timed transitions",
+    "A marking reached only through inhibitor arcs"
+   ],
+   "c": 0,
+   "hint": "Its sojourn time is zero.",
+   "r": "Slide 241: tangible markings enable only timed transitions; vanishing markings enable at least one immediate transition and are left at once.",
+   "slide": 241,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L11-05",
+   "l": 11,
+   "topic": "Inhibitor arcs",
+   "q": "What does an inhibitor arc from place p to transition t express?",
+   "o": [
+    "t can fire only when p is empty",
+    "t removes all tokens from p",
+    "t is disabled for a fixed time",
+    "t adds a token to p when firing"
+   ],
+   "c": 0,
+   "hint": "\"Testing for zero\".",
+   "r": "Slide 231: an inhibitor arc lets t fire only if there is no token in its place, which increases the expressive power of Petri nets.",
+   "slide": 231,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L11-06",
+   "l": 11,
+   "topic": "Immediate transitions",
+   "q": "Two immediate transitions of the highest priority with weights 1 and 3 are enabled. With what probability does the second fire?",
+   "o": [
+    "0.75",
+    "0.25",
+    "0.33",
+    "0.5"
+   ],
+   "c": 0,
+   "hint": "wi / Σ w.",
+   "r": "Slide 234: among the enabled immediate transitions of the highest priority, ti fires with probability wi / Σ w = 3 / 4 = 0.75.",
+   "slide": 234,
+   "pattern": "calculation",
+   "lk": "medium"
+  },
+  {
+   "id": "L11-07",
+   "l": 11,
+   "topic": "SPN drawbacks",
+   "q": "Which disadvantage of stochastic Petri nets led to generalised SPNs?",
+   "o": [
+    "Systems mixing long activities with very short ones",
+    "SPNs cannot represent any exponential firing times at all",
+    "SPNs reach fewer markings than the untimed net does",
+    "SPN transitions always fire in several phases"
+   ],
+   "c": 0,
+   "hint": "Two time scales.",
+   "r": "Slide 228: the state space is large and real systems have two time scales (long activities like transmissions and very short ones); GSPNs add immediate zero-time transitions.",
+   "slide": 228,
+   "pattern": "explain",
+   "lk": "medium"
+  },
+  {
+   "id": "L11-08",
+   "l": 11,
+   "topic": "SPN firing",
+   "q": "Why does at most one transition fire at a time in a stochastic Petri net?",
+   "o": [
+    "Its firing process is a Markov process",
+    "Every transition has the same intensity",
+    "The net is required to be safe",
+    "Inhibitor arcs block parallel firing"
+   ],
+   "c": 0,
+   "hint": "Two exponential times are almost surely never equal.",
+   "r": "Slide 213: firing is atomic and at a given instant at most one transition fires, a consequence of the transition firing process being a Markov process.",
+   "slide": 213,
+   "pattern": "explain",
+   "lk": "medium"
+  }
+ ]
+}

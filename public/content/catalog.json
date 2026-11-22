@@ -1,0 +1,767 @@
+{
+  "site": {
+    "name": "TestClub",
+    "semester": "Winter 2026/27",
+    "updated": "2026-11-22",
+    "repoUrl": "https://github.com/abhuiyan00/TestClub"
+  },
+  "courses": [
+    {
+      "slug": "adb",
+      "code": "ADB",
+      "title": "Advanced Databases",
+      "type": "W",
+      "hue": 200,
+      "motif": "database",
+      "summary": "Relational model and algebra, functional dependencies, decomposition and normal forms, then integrity, storage, query processing and transactions.",
+      "schedule": "Tuesdays",
+      "assessment": [
+        "Written test with open questions on the lectures and the laboratories, held at the last-but-one lecture.",
+        "One retake at the last lecture.",
+        "Final grade is the average of the test and the lab grade; both must be positive (above 2.0).",
+        "Attendance is not mandatory; questions during the lecture are welcome."
+      ],
+      "events": [
+        {
+          "date": "2027-01-26",
+          "title": "Final test",
+          "kind": "test",
+          "note": "Open questions on lectures and labs."
+        },
+        {
+          "date": "2027-02-02",
+          "title": "Retake",
+          "kind": "retake"
+        }
+      ],
+      "lectures": [
+        {
+          "n": 1,
+          "title": "Introduction: database vs DBMS, data vs information",
+          "short": "Introduction",
+          "date": "2026-10-13",
+          "slides": 20,
+          "status": "available"
+        },
+        {
+          "n": 2,
+          "title": "Relational model and relational algebra",
+          "short": "Relational algebra",
+          "date": "2026-10-20",
+          "slides": 19,
+          "status": "available"
+        },
+        {
+          "n": 3,
+          "title": "Decomposition and functional dependencies",
+          "short": "Functional dependencies",
+          "date": "2026-11-03",
+          "slides": 17,
+          "status": "available"
+        },
+        {
+          "n": 4,
+          "title": "Normalization and normal forms",
+          "short": "Normal forms",
+          "date": "2026-11-10",
+          "slides": 25,
+          "status": "available"
+        },
+        {
+          "n": 5,
+          "title": "Normalisation examples",
+          "short": "Normalisation examples",
+          "date": "2026-11-10",
+          "slides": 8,
+          "status": "available"
+        },
+        {
+          "n": 6,
+          "title": "Data integrity and correctness of information",
+          "short": "Data integrity",
+          "date": "2026-11-24",
+          "status": "upcoming"
+        },
+        {
+          "n": 7,
+          "title": "Data integrity: triggers and access control",
+          "short": "Triggers and access",
+          "date": "2026-12-01",
+          "status": "upcoming"
+        },
+        {
+          "n": 8,
+          "title": "Physical storage and indexes",
+          "short": "Storage and indexes",
+          "date": "2026-12-08",
+          "status": "upcoming"
+        },
+        {
+          "n": 9,
+          "title": "Query processing, query analysis and performance",
+          "short": "Query processing",
+          "date": "2026-12-15",
+          "status": "upcoming"
+        },
+        {
+          "n": 10,
+          "title": "Transactions",
+          "short": "Transactions",
+          "date": "2027-01-05",
+          "status": "upcoming"
+        },
+        {
+          "n": 11,
+          "title": "Transaction concurrency",
+          "short": "Concurrency",
+          "date": "2027-01-12",
+          "status": "upcoming"
+        },
+        {
+          "n": 12,
+          "title": "Database partitioning and advanced SQL queries",
+          "short": "Partitioning and SQL",
+          "date": "2027-01-19",
+          "status": "upcoming"
+        }
+      ],
+      "examGuide": {
+        "style": "open",
+        "format": "Written test with open questions. Practice here works the same way: write or say your answer, reveal the model answer, then grade yourself honestly.",
+        "insights": [
+          {
+            "title": "Definitions must be exact.",
+            "text": "Superkey, candidate key, closure, lossless join, dependency preservation, 2NF, 3NF, BCNF: say what each one requires, not just its name."
+          },
+          {
+            "title": "Expect to compute, not only to recall.",
+            "text": "Closures of attribute sets, candidate keys, minimal covers and decompositions come up as small worked tasks. Show the steps."
+          },
+          {
+            "title": "Algebra questions read both ways.",
+            "text": "Translate a relational algebra expression into words, and a question in words into algebra."
+          },
+          {
+            "title": "Labs are examinable too.",
+            "text": "The test covers the laboratories as well as the lectures, so keep the SQL from the labs in mind."
+          }
+        ]
+      }
+    },
+    {
+      "slug": "isa",
+      "code": "ISA",
+      "title": "Information Systems Analysis",
+      "type": "W",
+      "hue": 20,
+      "motif": "petri",
+      "unit": "Topic",
+      "summary": "Modelling, simulation and verification of systems with Petri nets, queueing networks, temporal logic and timed automata.",
+      "assessment": [
+        "The final grade is the mean of three partial grades: Petri nets (lectures 1–5), queueing models (lectures 6–10), temporal logic and timed automata (lectures 11–15).",
+        "For each part you may use the exam grade, or the lab grade of the same part if it is higher than 4.0.",
+        "A 2.0 in any part means a 2.0 for the course."
+      ],
+      "objectives": [
+        "Model and analyse information systems with Petri nets without time.",
+        "Model and analyse information systems with Petri nets with time.",
+        "Model information systems with finite automata.",
+        "Verify systems with finite automata and temporal logic, including automatic model checking.",
+        "Assess the execution time of sequential programs.",
+        "Evaluate system performance with queueing networks."
+      ],
+      "events": [],
+      "lectures": [
+        {
+          "n": 1,
+          "title": "Introduction to modelling concurrent systems with Petri nets",
+          "short": "Introduction",
+          "status": "available",
+          "part": "Part 1 · Petri nets",
+          "pages": [
+            8,
+            31
+          ]
+        },
+        {
+          "n": 2,
+          "title": "Behavioural properties of Petri nets",
+          "short": "Behavioural properties",
+          "status": "available",
+          "part": "Part 1 · Petri nets",
+          "pages": [
+            32,
+            66
+          ]
+        },
+        {
+          "n": 3,
+          "title": "Synchronisation distance and bounded fairness",
+          "short": "Synchronisation distance",
+          "status": "available",
+          "part": "Part 1 · Petri nets",
+          "pages": [
+            67,
+            75
+          ]
+        },
+        {
+          "n": 4,
+          "title": "Time Petri nets",
+          "short": "Time Petri nets",
+          "status": "available",
+          "part": "Part 1 · Petri nets",
+          "pages": [
+            76,
+            84
+          ]
+        },
+        {
+          "n": 5,
+          "title": "Coverability tree",
+          "short": "Coverability tree",
+          "status": "available",
+          "part": "Part 1 · Petri nets",
+          "pages": [
+            85,
+            100
+          ]
+        },
+        {
+          "n": 6,
+          "title": "Matrices and net reductions",
+          "short": "Matrices and reductions",
+          "status": "available",
+          "part": "Part 1 · Petri nets",
+          "pages": [
+            101,
+            122
+          ]
+        },
+        {
+          "n": 7,
+          "title": "Introduction to performance evaluation of information systems",
+          "short": "Performance evaluation",
+          "status": "available",
+          "part": "Part 2 · Performance and queueing",
+          "pages": [
+            123,
+            128
+          ]
+        },
+        {
+          "n": 8,
+          "title": "Performance evaluation of sequential programs",
+          "short": "Sequential programs",
+          "status": "available",
+          "part": "Part 2 · Performance and queueing",
+          "pages": [
+            129,
+            154
+          ]
+        },
+        {
+          "n": 9,
+          "title": "Markov chains and queueing models",
+          "short": "Markov chains, queueing",
+          "status": "available",
+          "part": "Part 2 · Performance and queueing",
+          "pages": [
+            155,
+            185
+          ]
+        },
+        {
+          "n": 10,
+          "title": "Fundamental laws of operational analysis",
+          "short": "Operational laws",
+          "status": "available",
+          "part": "Part 2 · Performance and queueing",
+          "pages": [
+            186,
+            206
+          ]
+        },
+        {
+          "n": 11,
+          "title": "Stochastic and generalised stochastic Petri nets",
+          "short": "SPN and GSPN",
+          "status": "available",
+          "part": "Part 2 · Performance and queueing",
+          "pages": [
+            207,
+            257
+          ]
+        },
+        {
+          "n": 12,
+          "title": "Linear temporal logic (LTL)",
+          "short": "LTL",
+          "status": "upcoming",
+          "part": "Part 3 · Temporal logic and timed automata"
+        },
+        {
+          "n": 13,
+          "title": "Computation tree logic (CTL)",
+          "short": "CTL",
+          "status": "upcoming",
+          "part": "Part 3 · Temporal logic and timed automata"
+        },
+        {
+          "n": 14,
+          "title": "Model verification of systems",
+          "short": "Model verification",
+          "status": "upcoming",
+          "part": "Part 3 · Temporal logic and timed automata"
+        },
+        {
+          "n": 15,
+          "title": "Verification with UPPAAL timed automata",
+          "short": "UPPAAL",
+          "status": "upcoming",
+          "part": "Part 3 · Temporal logic and timed automata"
+        },
+        {
+          "n": 16,
+          "title": "Verification with NuSMV",
+          "short": "NuSMV",
+          "status": "upcoming",
+          "part": "Part 3 · Temporal logic and timed automata"
+        },
+        {
+          "n": 17,
+          "title": "Other temporal logics and temporal databases",
+          "short": "Other logics",
+          "status": "upcoming",
+          "part": "Part 3 · Temporal logic and timed automata"
+        }
+      ]
+    },
+    {
+      "slug": "mmcv",
+      "code": "MMCV",
+      "title": "Multimedia and Computer Visualization",
+      "type": "W",
+      "hue": 340,
+      "motif": "rgb-cube",
+      "summary": "Colour, the digital image, analog and digital television, still-image compression (JPEG and its successors) and video compression.",
+      "schedule": "Thursdays 17:05–18:35",
+      "assessment": [
+        "Knowledge test 60 % and project 40 % of the final grade; the project must have a passing grade.",
+        "Lectures 1–7 are examinable in the first test."
+      ],
+      "events": [
+        {
+          "date": "2026-11-27T15:00:00+01:00",
+          "end": "2026-11-27T17:00:00+01:00",
+          "title": "Knowledge test",
+          "kind": "test",
+          "where": "C-3, room 21",
+          "note": "Lectures 1–7 are examinable."
+        },
+        {
+          "date": "2026-12-17",
+          "title": "Test #2",
+          "kind": "test"
+        }
+      ],
+      "lectures": [
+        {
+          "n": 1,
+          "title": "Fundamentals of colour",
+          "short": "Colour",
+          "date": "2026-10-08",
+          "slides": 58,
+          "status": "available"
+        },
+        {
+          "n": 2,
+          "title": "Digital image",
+          "short": "Image",
+          "date": "2026-10-15",
+          "slides": 45,
+          "status": "available"
+        },
+        {
+          "n": 3,
+          "title": "Digital television, part 1 (analog TV)",
+          "short": "Analog TV",
+          "date": "2026-10-22",
+          "slides": 44,
+          "status": "available"
+        },
+        {
+          "n": 4,
+          "title": "Digital television, part 2 (DTV and DVB)",
+          "short": "Digital TV",
+          "date": "2026-10-29",
+          "slides": 52,
+          "status": "available"
+        },
+        {
+          "n": 5,
+          "title": "Compression of static images 1 (JPEG)",
+          "short": "JPEG",
+          "date": "2026-11-05",
+          "slides": 54,
+          "status": "available"
+        },
+        {
+          "n": 6,
+          "title": "Compression of static images 2 (coding and formats)",
+          "short": "Coding & formats",
+          "date": "2026-11-12",
+          "slides": 63,
+          "status": "available"
+        },
+        {
+          "n": 7,
+          "title": "Video compression",
+          "short": "Video",
+          "date": "2026-11-19",
+          "slides": 63,
+          "status": "available"
+        }
+      ],
+      "examGuide": {
+        "style": "choice",
+        "format": "Knowledge test on Lectures 1–7. Past tests used single-answer questions with four options.",
+        "insights": [
+          {
+            "title": "Half the test is “X is:”.",
+            "text": "For every acronym on the slides (YUV, DCT, DPCM, RLE, GOP, DVB-T, HEVC…) know what it stands for and what it does."
+          },
+          {
+            "title": "Distractors are sibling terms",
+            "text": "from the same lecture: YUV vs YIQ vs YCbCr, NTSC vs PAL vs SECAM, I vs P vs B frames, Huffman vs arithmetic vs LZW, GIF vs PNG vs TIFF."
+          },
+          {
+            "title": "TRUE / NOT stems",
+            "text": "change one property per option. Find the single wrong attribute and eliminate."
+          },
+          {
+            "title": "Numbers come from tables and boxed formulas:",
+            "text": "line counts, frame rates, sampling ratios, block sizes, bit depths, coefficients."
+          },
+          {
+            "title": "Attribution trivia",
+            "text": "(who invented it, which company, which year) was 5 % last time. Lecture 3's history slides and Lecture 5's modern-format slides are the likely sources."
+          },
+          {
+            "title": "Learn the concept, not the sentence.",
+            "text": "The same fact returns reversed, negated or as a number."
+          }
+        ],
+        "pastShapes": [
+          [
+            "Definition: “X is:”",
+            48
+          ],
+          [
+            "Which / identify",
+            25
+          ],
+          [
+            "Which statement is true",
+            8
+          ],
+          [
+            "Attribution: who made it",
+            5
+          ],
+          [
+            "Acronym: “X stands for”",
+            4
+          ],
+          [
+            "Which is not",
+            3
+          ],
+          [
+            "Numeric reading",
+            1
+          ],
+          [
+            "Other",
+            3
+          ]
+        ],
+        "pastNote": "97 de-duplicated past test questions. The raw set repeated the same concept up to six times in different wording, so expect a fixed pool of concepts."
+      }
+    },
+    {
+      "slug": "nlp",
+      "code": "NLP",
+      "title": "Natural Language Processing",
+      "type": "W",
+      "hue": 285,
+      "motif": "embedding",
+      "summary": "From raw text to linguistic annotation, classical methods and classifiers, embeddings, LSTMs and Transformers, large language models and RAG.",
+      "assessment": [
+        "Final grade P = 0.8 × F1 (project) + 0.2 × F2 (final test).",
+        "The final test covers the lecture learning outcomes and is held in the final lecture slot."
+      ],
+      "events": [],
+      "lectures": [
+        {
+          "n": 1,
+          "title": "Course organisation and NLP introduction",
+          "short": "Introduction",
+          "slides": 26,
+          "status": "available"
+        },
+        {
+          "n": 2,
+          "title": "From raw text to linguistic annotation",
+          "short": "Annotation",
+          "slides": 31,
+          "status": "available"
+        },
+        {
+          "n": 3,
+          "title": "Classifiers for NLP",
+          "short": "Classifiers",
+          "slides": 30,
+          "status": "available"
+        },
+        {
+          "n": 4,
+          "title": "Word embedding methods",
+          "short": "Word embeddings",
+          "status": "upcoming"
+        },
+        {
+          "n": 5,
+          "title": "LSTM networks",
+          "short": "LSTM",
+          "status": "upcoming"
+        },
+        {
+          "n": 6,
+          "title": "Transformer architecture",
+          "short": "Transformer",
+          "status": "upcoming"
+        },
+        {
+          "n": 7,
+          "title": "Large language models",
+          "short": "LLMs",
+          "status": "upcoming"
+        },
+        {
+          "n": 8,
+          "title": "Text embedding",
+          "short": "Text embedding",
+          "status": "upcoming"
+        },
+        {
+          "n": 9,
+          "title": "RAG systems",
+          "short": "RAG",
+          "status": "upcoming"
+        },
+        {
+          "n": 10,
+          "title": "Deploying LLMs",
+          "short": "Deployment",
+          "status": "upcoming"
+        },
+        {
+          "n": 11,
+          "title": "Visualisation of text similarities",
+          "short": "Similarity maps",
+          "status": "upcoming"
+        },
+        {
+          "n": 12,
+          "title": "Explainable AI in NLP",
+          "short": "Explainability",
+          "status": "upcoming"
+        },
+        {
+          "n": 13,
+          "title": "Speech analysis",
+          "short": "Speech",
+          "status": "upcoming"
+        }
+      ]
+    },
+    {
+      "slug": "ssn",
+      "code": "SSN",
+      "title": "Secure Systems and Networks",
+      "type": "W",
+      "hue": 150,
+      "motif": "shield",
+      "summary": "Unix permissions and access rights, passwords and authentication, sniffing and spoofing on local networks.",
+      "assessment": [
+        "Exam at the last lecture, Monday 1 February 2027.",
+        "The labs are assessed separately, by written reports after each lab."
+      ],
+      "events": [
+        {
+          "date": "2027-02-01",
+          "title": "Final test",
+          "kind": "test"
+        }
+      ],
+      "lectures": [
+        {
+          "n": 0,
+          "title": "Introduction",
+          "short": "Introduction",
+          "slides": 6,
+          "status": "available"
+        },
+        {
+          "n": 1,
+          "title": "Permissions and access rights",
+          "short": "Permissions",
+          "slides": 15,
+          "status": "available"
+        },
+        {
+          "n": 2,
+          "title": "Passwords: authentication and authorisation",
+          "short": "Passwords",
+          "slides": 24,
+          "status": "available"
+        },
+        {
+          "n": 3,
+          "title": "Sniffing",
+          "short": "Sniffing",
+          "slides": 8,
+          "status": "available"
+        },
+        {
+          "n": 4,
+          "title": "Spoofing",
+          "short": "Spoofing",
+          "slides": 13,
+          "status": "available"
+        }
+      ],
+      "schedule": "Mondays 15:15"
+    },
+    {
+      "slug": "sc",
+      "code": "SC",
+      "title": "Softcomputing",
+      "type": "W",
+      "hue": 60,
+      "motif": "network",
+      "summary": "Artificial neural networks (perceptrons, MLP, Kohonen, RBF, Hopfield), their SIMD realisation, fuzzy logic and genetic algorithms.",
+      "schedule": "Mondays",
+      "assessment": [
+        "Final test during lecture time on Monday 1 February 2027.",
+        "Final test 65 % and project 35 % of the final lecture mark."
+      ],
+      "objectives": [
+        "Use artificial neural networks for pattern recognition, digital signals and data processing: network topologies and the influence of parameters on network behaviour.",
+        "Use genetic algorithms for data pre- and post-processing.",
+        "Build expert systems: reasoning rules and knowledge bases for different tasks."
+      ],
+      "events": [
+        {
+          "date": "2027-02-01",
+          "title": "Final test",
+          "kind": "test",
+          "note": "During lecture time."
+        }
+      ],
+      "lectures": [
+        {
+          "n": 1,
+          "title": "Introduction, elementary ANNs",
+          "short": "Elementary ANNs",
+          "date": "2026-10-05",
+          "slides": 39,
+          "status": "available"
+        },
+        {
+          "n": 2,
+          "title": "MLP, recurrent and self-organising ANNs",
+          "short": "MLP and recurrent",
+          "date": "2026-10-12",
+          "slides": 34,
+          "status": "available"
+        },
+        {
+          "n": 3,
+          "title": "Kohonen and RBF neural networks",
+          "short": "Kohonen and RBF",
+          "date": "2026-10-19",
+          "slides": 64,
+          "status": "available"
+        },
+        {
+          "n": 4,
+          "title": "SIMD approach to ANN realisation",
+          "short": "SIMD realisation",
+          "date": "2026-10-26",
+          "slides": 54,
+          "status": "available"
+        },
+        {
+          "n": 5,
+          "title": "Fuzzy logic",
+          "short": "Fuzzy logic",
+          "date": "2026-11-09",
+          "slides": 49,
+          "status": "available"
+        },
+        {
+          "n": 6,
+          "title": "Genetic algorithms, softcomputing-based systems",
+          "short": "Genetic algorithms",
+          "date": "2026-11-17",
+          "slides": 84,
+          "status": "available"
+        },
+        {
+          "n": 7,
+          "title": "Genetic algorithms",
+          "short": "Genetic algorithms II",
+          "status": "upcoming"
+        },
+        {
+          "n": 8,
+          "title": "Expert systems",
+          "short": "Expert systems",
+          "status": "upcoming"
+        },
+        {
+          "n": 9,
+          "title": "SIMD approach to artificial neural network realisation",
+          "short": "SIMD II",
+          "status": "upcoming"
+        },
+        {
+          "n": 10,
+          "title": "Various applications of softcomputing",
+          "short": "Applications",
+          "status": "upcoming"
+        },
+        {
+          "n": 11,
+          "title": "Softcomputing for big data problems and automotive",
+          "short": "Big data",
+          "status": "upcoming"
+        },
+        {
+          "n": 12,
+          "title": "Ant algorithms",
+          "short": "Ant algorithms",
+          "status": "upcoming"
+        },
+        {
+          "n": 13,
+          "title": "Final test: repetition and information",
+          "short": "Repetition",
+          "status": "upcoming"
+        }
+      ]
+    }
+  ]
+}

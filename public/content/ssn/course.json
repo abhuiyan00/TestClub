@@ -1,0 +1,1254 @@
+{
+ "built": "2026-11-22",
+ "lectures": {
+  "0": {
+   "summary": "What security covers in computer systems and networks, and the plan of the course: Unix permissions, authentication and one-time passwords, sniffing and spoofing, cryptography, network threats, malware and secure programming.",
+   "facts": [
+    {
+     "t": "What security means here",
+     "d": "Security of individual computers, server systems and routers; of physical connections and of the protocols used for data exchange; physical security of the equipment and the backed-up data; security of data in a computer system; access control to the data and to the system.",
+     "slide": 5,
+     "weight": "high"
+    },
+    {
+     "t": "Course agenda",
+     "d": "Permissions and access rights in POSIX/Unix systems; authentication, authorisation, passwords and one-time passwords; sniffing and spoofing; cryptography basics (symmetric and public-key systems, GPG, SSH, VPNs, SSL/TLS); network threats (WWW, DNS, e-mail, FTP, NFS) and firewalls; malware, bug reporting, OWASP and CVEs; secure programming.",
+     "slide": 6,
+     "weight": "medium"
+    }
+   ],
+   "formulas": [],
+   "traps": [
+    "Security is not only software: physical connections, equipment and backups are part of it too."
+   ]
+  },
+  "1": {
+   "summary": "How a multiuser Unix system protects users and processes from each other: user and group IDs, process IDs and the effective UID, file permission bits and the access rules, the special set-user-id, set-group-id and sticky bits, and how the filesystem stores files, links and i-nodes.",
+   "facts": [
+    {
+     "t": "What the system really checks",
+     "d": "Only the process uid and gid, the file owner and access rights (permissions) and special privileges (uid == 0) matter. Restrictions depend on the uid and gid of the user running a process, not on user or group names.",
+     "slide": 4,
+     "weight": "high"
+    },
+    {
+     "t": "Process protection",
+     "d": "Processes of different users are protected against removal or modification of their data, processes of one user against data modification; access to private data and shared resources is controlled, and resource arbitration stops one process from starving the others.",
+     "slide": 4,
+     "weight": "medium"
+    },
+    {
+     "t": "Processes",
+     "d": "Created with the fork() system call; each has a unique PID, a parent, a process group and session leader, a priority and a nice value. Access rights come from the user ID (uid), the effective user ID (euid) and the saved user ID (suid).",
+     "slide": 5,
+     "weight": "high"
+    },
+    {
+     "t": "Permission bits",
+     "d": "Every file has an owner and a group owner, and read, write and execute bits for three categories: user, group and others. drwxr-x--x is a directory with permissions 751.",
+     "slide": 6,
+     "weight": "high"
+    },
+    {
+     "t": "File access rules",
+     "d": "Access is granted if the effective uid is 0; or it equals the file owner and the user bits allow it; or the effective gid (or one of the user's extra groups) equals the group owner and the group bits allow it; otherwise the others bits decide.",
+     "slide": 7,
+     "weight": "high"
+    },
+    {
+     "t": "Special bits in ls output",
+     "d": "-rwsr-xr-x set-user-id; -rwxr-sr-x set-group-id; t or T in the last place sticky bit; on a directory drwxr-lr-x means obligatory locking. The first letter gives the type: p named pipe, s Unix-domain socket, b block device, c character device, l symbolic link.",
+     "slide": 9,
+     "weight": "high"
+    },
+    {
+     "t": "Set-user-id (04000)",
+     "d": "Runs the program with the file owner's user ID for its duration; one of the weakest points of Unix security.",
+     "slide": 10,
+     "weight": "high"
+    },
+    {
+     "t": "Set-group-id (02000)",
+     "d": "Runs the program with the file's group ID. On a directory, new files and subdirectories inherit its group owner (BSD behaviour). Also selects obligatory (blocking) file locking instead of the usual advisory locking.",
+     "slide": 10,
+     "weight": "high"
+    },
+    {
+     "t": "Sticky bit (01000)",
+     "d": "In directories writable by group or others, such as /tmp, users cannot remove or modify other users' files. On executables it historically kept the program in memory after it ended, ready for the next run (e.g. /bin/sh).",
+     "slide": 10,
+     "weight": "high"
+    },
+    {
+     "t": "Changing euid safely",
+     "d": "Set-user-id programs must check access to files and devices with extra care: use the extra privileges only when needed and return to normal access as soon as possible. A mail server switches its euid to nobody to read its configuration and to 0 only to bind port 25.",
+     "slide": 11,
+     "weight": "high"
+    },
+    {
+     "t": "Three user IDs",
+     "d": "euid: effective, used for access checks; ruid: real, who started the process; suid: saved, kept so the process can switch back.",
+     "slide": 11,
+     "weight": "high"
+    },
+    {
+     "t": "Functions that change IDs",
+     "d": "getuid, setuid, geteuid, seteuid, setreuid and the gid versions. While the real uid stays the same, a process can switch its euid between the real and saved uid many times; changing the real uid copies the new euid into the saved uid and makes the change irreversible.",
+     "slide": 12,
+     "weight": "high"
+    },
+    {
+     "t": "Commands for access rights",
+     "d": "chown, chmod, chgrp, ls and umask for files; newgrp, su and id for the current session; extended attributes with lsattr and chattr on Linux, ACLs with getfacl and setfacl on Solaris.",
+     "slide": 13,
+     "weight": "medium"
+    },
+    {
+     "t": "I-nodes",
+     "d": "The UFS filesystem divides the disk into i-nodes and data blocks. An i-node holds the permissions, the number of links, the timestamps (mtime, ctime, atime) and the link to the first data block. A directory is a special file listing names and their i-node numbers; a file disappears only when its link count drops to 0.",
+     "slide": 14,
+     "weight": "high"
+    },
+    {
+     "t": "Symbolic vs hard links",
+     "d": "A symbolic link points to another path, possibly on another filesystem, and breaks when that file is removed; open() can be tricked into opening a different file. A hard link (ln without -s) is another name for the same i-node, and can place a file owned by another user in your directory.",
+     "slide": 15,
+     "weight": "high"
+    }
+   ],
+   "formulas": [
+    {
+     "name": "Special bits (octal)",
+     "expr": "set-user-id 04000, set-group-id 02000, sticky 01000",
+     "slide": 10
+    },
+    {
+     "name": "Example permissions",
+     "expr": "drwxr-x--x = 751 (user rwx, group r-x, others --x)",
+     "slide": 6
+    }
+   ],
+   "traps": [
+    "Access checks use the effective uid, not the real one; uid 0 bypasses the permission bits.",
+    "Set-group-id on a directory makes new entries inherit the directory's group; it does not run anything.",
+    "The sticky bit on /tmp stops users removing each other's files; it does not stop them reading files the permissions allow.",
+    "A hard link shares the i-node; a symbolic link only stores a path and can point to nothing."
+   ]
+  },
+  "2": {
+   "summary": "Authentication and its weak link, the password: how Unix stores and checks passwords, how crackers guess them and how long that takes, what makes a good password, and stronger methods from one-time passwords (S/Key, tokens, lists, SMS) to U2F keys and Pluggable Authentication Modules.",
+   "facts": [
+    {
+     "t": "Strong authentication",
+     "d": "Use at least two of: something you know (password, PIN), something you have (token, card) and something you are (biometrics). Two-factor authentication also supports users' responsibility for their actions and non-repudiation.",
+     "slide": 2,
+     "weight": "high"
+    },
+    {
+     "t": "Weak traditional passwords",
+     "d": "Easy to guess or break, to read over a shoulder, to overhear or to steal: not a good way to authenticate and even worse for authorisation, and costly to maintain. Unix keeps them in /etc/passwd or /etc/shadow, hashed with crypt() (8 characters) or, on newer systems, MD5 with unlimited length.",
+     "slide": 2,
+     "weight": "high"
+    },
+    {
+     "t": "One-way hash functions",
+     "d": "H(M) maps a message of any length to a fixed-length value that is easy to compute; recovering M from h is practically impossible, and finding another M′ with H(M′) = H(M) is hard enough. MD5 gives a 128-bit result, stored BASE64-encoded.",
+     "slide": 4,
+     "weight": "high"
+    },
+    {
+     "t": "Checking and cracking",
+     "d": "The typed password is hashed and compared with the stored hash. Crackers cannot decrypt it, but they guess: a brute-force dictionary attack hashes many candidates (crack, John the Ripper, hashcat, Hydra), often spread over many computers.",
+     "slide": 5,
+     "weight": "high"
+    },
+    {
+     "t": "How long cracking takes",
+     "d": "At 8000 guesses per second: a 4-digit PIN 1.2 s, a 4-letter word 1 minute, 8 lower-case letters 302 days, 8 lower-case letters and digits 11 years, 8 mixed-case letters 212 years, 8 printable ASCII characters 28594 years. Ten computers cut the time tenfold.",
+     "slide": 6,
+     "weight": "high"
+    },
+    {
+     "t": "Bad passwords",
+     "d": "Names, fantasy characters, hostnames, phone or plate numbers, birth dates, dictionary words in any language, keyboard patterns (qwerty, 3edc), reused passwords, words spelled backwards, capitalised or padded with a digit, and l33t spellings.",
+     "slide": 7,
+     "weight": "medium"
+    },
+    {
+     "t": "Good passwords",
+     "d": "Upper and lower case, digits or punctuation (also in the middle), seven or more characters, quick to type, no problematic characters such as @ or Ctrl-H, and easy to remember, e.g. the first letters of a rhyme.",
+     "slide": 8,
+     "weight": "high"
+    },
+    {
+     "t": "One-time passwords",
+     "d": "S/Key, token cards (SecurID, Vasco) and password lists defeat sniffing of the login phase, but the session itself can still be sniffed, an active attacker can guess the last 1–2 characters while they are typed, and most systems need special equipment.",
+     "slide": 10,
+     "weight": "high"
+    },
+    {
+     "t": "Time-restricted tokens",
+     "d": "The password changes every 60 seconds and is prefixed with a PIN; it is invalidated right after a login and cannot be reused, even on another system within the same minute. A central authentication server checks it.",
+     "slide": 11,
+     "weight": "high"
+    },
+    {
+     "t": "SecurID and VASCO",
+     "d": "SecurID shows a new number every minute; you enter your PIN plus that number. VASCO tokens need a PIN on their keypad and work in standard (time-expiring) or challenge-response mode, where the token computes a response to a code from the web page.",
+     "slide": 12,
+     "weight": "medium"
+    },
+    {
+     "t": "Token time synchronisation",
+     "d": "The token's clock cannot be changed, so the server also accepts the previous and next password, measures the drift, stores a correction per token, and may ask for the next password if the number does not match.",
+     "slide": 13,
+     "weight": "medium"
+    },
+    {
+     "t": "S/Key",
+     "d": "Passwords come from MD4, MD5 or SHA: password n is the hash of password n − 1, and the secret is password 0. Logins start with password 99 and count down to 0, so a captured password does not reveal the next one. Described in RFC 1760.",
+     "slide": 15,
+     "weight": "high"
+    },
+    {
+     "t": "Using S/Key",
+     "d": "You need a printed password list, or a key program on a laptop or other device given the sequence number, the target system identifier and your secret password 0.",
+     "slide": 16,
+     "weight": "medium"
+    },
+    {
+     "t": "U2F",
+     "d": "Started as U2F 1.0 and 1.2 (Google and Yubico, then the FIDO Alliance, 2014 and 2017), now the W3C WebAuthn standard (2019). Its main purpose is to stop password theft by phishing and malicious sites. Typical hardware: YubiKey tokens (USB, or NFC and Lightning).",
+     "slide": 20,
+     "weight": "high"
+    },
+    {
+     "t": "How U2F works",
+     "d": "Registering creates a key pair tied to the server's domain; the public key goes to the server. At each login the token checks the domain and signs with a private key that never leaves it, and only after the user touches it.",
+     "slide": 21,
+     "weight": "high"
+    },
+    {
+     "t": "Methods compared",
+     "d": "Passwords are weak but easiest; S/Key needs no special hardware but is troublesome; better methods need special devices. All require changes to the servers that authenticate (login, in.ftpd, pop3d, xdm, su, passwd).",
+     "slide": 22,
+     "weight": "medium"
+    },
+    {
+     "t": "PAM",
+     "d": "Pluggable Authentication Modules (Solaris, Linux): a modular approach using shared libraries, configured by text files in /etc/pam.d/. A new service needs only a configuration file; a new method needs a new module and a configuration entry, e.g. pam_skey.so for S/Key logins.",
+     "slide": 24,
+     "weight": "high"
+    }
+   ],
+   "formulas": [
+    {
+     "name": "S/Key chain",
+     "expr": "pass(n) = H(pass(n − 1)),  pass(0) = secret,  use 99, 98, …, 0",
+     "slide": 15
+    },
+    {
+     "name": "Cracking time",
+     "expr": "time = number of candidates / guesses per second (8000/s in the table)",
+     "slide": 6
+    }
+   ],
+   "traps": [
+    "Two factors must be of different kinds: a password plus a PIN is still only \"something you know\".",
+    "Passwords are not decrypted when you log in: the typed one is hashed and the hashes are compared.",
+    "One-time passwords protect the login, not the rest of the session.",
+    "S/Key counts down: the password used next is the one whose hash equals the one used last."
+   ]
+  },
+  "3": {
+   "summary": "Sniffing: why lower network layers expose traffic, where an eavesdropper can sit, the tools used, how a promiscuous network card might be detected, and why that is so hard.",
+   "facts": [
+    {
+     "t": "Why sniffing works",
+     "d": "TCP/IP layers 1–4 send data in clear text over broadcast media, so anyone with physical access to the medium (cable, hub, host) can eavesdrop on all traffic passing through.",
+     "slide": 2,
+     "weight": "high"
+    },
+    {
+     "t": "Where sniffing happens",
+     "d": "Network cables, hubs and LAN routers; any equipment between two hosts; especially WiFi, whatever the protection (WEP, WPA, WPA2); equipment able to redirect traffic; local workstations; terminals (/dev/ttyXX, /dev/ptyXX); and temporary files in /tmp with weak permissions.",
+     "slide": 3,
+     "weight": "high"
+    },
+    {
+     "t": "Sniffing points in layers 5–7",
+     "d": "SMTP mail relays (MX hosts in DNS), WWW and FTP proxy servers, the local firewall (an ideal break-in and sniffing centre), multicast routers for radio broadcasts, and servers for IRC, chats and social media.",
+     "slide": 4,
+     "weight": "medium"
+    },
+    {
+     "t": "Detecting sniffers",
+     "d": "Detection relies on spotting a card in promiscuous mode, which reacts slightly differently to IP packets with a wrong MAC address, ICMP packets and ARP traffic. Extra load slows its replies, but busy hosts slow down too: very hard, if not impossible, to detect.",
+     "slide": 6,
+     "weight": "high"
+    },
+    {
+     "t": "ICMP method",
+     "d": "Send an ICMP ECHO with the right IP but a non-existent MAC address. A normal card drops it at layer 2; a promiscuous card passes it to layer 3 and the host answers with an ICMP REPLY.",
+     "slide": 7,
+     "weight": "high"
+    },
+    {
+     "t": "ARP cache method",
+     "d": "Feed the suspect a PING from a fake MAC/IP pair and then an ARP REPLY carrying a false mapping. A host that is eavesdropping has learnt the mapping and replies straight to the fake address; a normal host has to ask with an ARP REQUEST first.",
+     "slide": 7,
+     "weight": "medium"
+    },
+    {
+     "t": "Summary",
+     "d": "Sniffers can be installed almost anywhere and large flat networks make it easier. Switches and routers reduce exposure but can be fooled by dynamic ARP or routing. The card must be in promiscuous mode; sniffing can also be used legitimately for statistics.",
+     "slide": 8,
+     "weight": "high"
+    }
+   ],
+   "formulas": [],
+   "traps": [
+    "WiFi encryption (WEP, WPA, WPA2) does not stop someone on the same network from sniffing.",
+    "Switches reduce sniffing but do not prevent it: ARP tricks can redirect traffic.",
+    "A normal card discards frames for other MAC addresses at layer 2; promiscuous mode passes them up."
+   ]
+  },
+  "4": {
+   "summary": "Spoofing: false identities in DNS, SMTP and ARP, other spoofing attacks from phishing to man in the middle, and the defences around network daemons: inetd, tcp_wrappers and the IDENT protocol, with what each can and cannot prove.",
+   "facts": [
+    {
+     "t": "DNS spoofing",
+     "d": "Hosts inside a local network are trusted more, and access is often based on domain names. Reverse maps belong to whoever owns the IP addresses, so anyone can publish a false name. Check by looking the name up again in the forward map: if the original address is missing, someone is spoofing DNS.",
+     "slide": 2,
+     "weight": "high"
+    },
+    {
+     "t": "SMTP spoofing",
+     "d": "Clients submitting mail and servers relaying it use the same SMTP protocol, with no distinction between server and client, so the sender is easy to fake. Possible defences: the IDENT protocol and Received: headers.",
+     "slide": 3,
+     "weight": "high"
+    },
+    {
+     "t": "Other types of spoofing",
+     "d": "Authentication spoofing (NIS server, NFS client access, PAP/CHAP/RADIUS, servers), web server spoofing (shops, certificates), DNS service spoofing, phishing (e-mail plus web server spoofing), man-in-the-middle attacks and ARP spoofing.",
+     "slide": 4,
+     "weight": "high"
+    },
+    {
+     "t": "Addresses in each layer",
+     "d": "Applications use their own addresses (e-mail), the transport layer port numbers, the network layer IP addresses, and the link layer Ethernet addresses. Cards send and receive by the 6-byte Ethernet address, not the IP address.",
+     "slide": 5,
+     "weight": "medium"
+    },
+    {
+     "t": "ARP",
+     "d": "ARP and RARP translate between Ethernet and IP addresses. Entries are created dynamically or set by hand; dynamic ones are cached, usually for 15 minutes from their last use, and describe only the local segment. Faking them is ARP spoofing.",
+     "slide": 6,
+     "weight": "high"
+    },
+    {
+     "t": "ARP in a firewall's DMZ",
+     "d": "A real break-in into a security company: allowing dynamic ARP in the demilitarised zone of a firewall system can lead to disaster.",
+     "slide": 7,
+     "weight": "medium"
+    },
+    {
+     "t": "inetd",
+     "d": "The Internet super-daemon starts other daemons on demand (in.telnetd, in.ftpd, in.fingerd, pop3d…), which talk to the client through file descriptors 0, 1 and 2. For each service in /etc/inetd.conf it opens a socket, bind()s, listen()s and waits in select() to accept(). Spoofing must be caught before the daemon starts.",
+     "slide": 8,
+     "weight": "high"
+    },
+    {
+     "t": "tcpd checks",
+     "d": "Started by inetd instead of the real daemon, tcpd verifies the address-to-name translation (IP spoofing check), gathers identd information from the client machine, and consults hosts.allow and hosts.deny before starting the server.",
+     "slide": 9,
+     "weight": "high"
+    },
+    {
+     "t": "tcp_wrappers",
+     "d": "Written by Wietse Venema: limits access to services started by inetd and some standalone ones (sshd, sendmail), logs every connection attempt even without a login, protects against DNS spoofing automatically, and is configured in /etc/hosts.allow and /etc/hosts.deny.",
+     "slide": 10,
+     "weight": "high"
+    },
+    {
+     "t": "IDENT protocol",
+     "d": "Identifies users who open connections and helps stop misuse of services such as Usenet News or IRC. The server connects back to the IDENT server on the client machine and asks about the connection, identified by a 5-tuple: TCP, two addresses and two port numbers.",
+     "slide": 12,
+     "weight": "high"
+    },
+    {
+     "t": "Limits of IDENT",
+     "d": "It is not an authorisation protocol: the IDENT server runs on the client side, beyond your control, and can answer anything. Its sensible use is identifying an attacker after an incident; replies can be logged (also remotely via syslogd) and encrypted with DES.",
+     "slide": 13,
+     "weight": "high"
+    }
+   ],
+   "formulas": [],
+   "traps": [
+    "Reverse DNS can be faked by the owner of the IP range; always confirm with a forward lookup.",
+    "IDENT answers come from the client's own machine, so they identify, never authorise.",
+    "tcpd runs before the real daemon; once a daemon started by inetd is running it knows nothing about the network.",
+    "Dynamic ARP entries expire after about 15 minutes of disuse and cover only the local segment."
+   ]
+  }
+ },
+ "questions": [
+  {
+   "id": "L0-01",
+   "l": 0,
+   "topic": "Scope of security",
+   "q": "Which item does the lecture list as part of computer system and network security?",
+   "o": [
+    "Physical security of equipment and backups",
+    "Choosing the cheapest network provider for the campus",
+    "Speeding up database queries on all the servers",
+    "Keeping the user interface consistent"
+   ],
+   "c": 0,
+   "hint": "Security is not only about software.",
+   "r": "Slide 5 lists security of computers, servers, routers, physical connections, protocols, physical security of equipment and backed-up data, data in the system, and access control.",
+   "slide": 5,
+   "pattern": "fact",
+   "lk": "medium"
+  },
+  {
+   "id": "L1-01",
+   "l": 1,
+   "topic": "Access checks",
+   "q": "Which attributes does a Unix system use to restrict what a running program may do?",
+   "o": [
+    "The uid and gid of the user running the process",
+    "The user name and group name typed at login",
+    "The name of the program and the size of its file",
+    "The hostname of the machine it was started from"
+   ],
+   "c": 0,
+   "hint": "Names are for people; the kernel uses numbers.",
+   "r": "Slide 4: all restrictions are based on the uid and gid of the user running a process, not on user or group names.",
+   "slide": 4,
+   "pattern": "true-statement",
+   "lk": "high"
+  },
+  {
+   "id": "L1-02",
+   "l": 1,
+   "topic": "Permissions",
+   "q": "What are the octal permissions of a directory listed as drwxr-x--x?",
+   "o": [
+    "751",
+    "755",
+    "711",
+    "750"
+   ],
+   "c": 0,
+   "hint": "rwx = 7, r-x = 5, --x = 1.",
+   "r": "Slide 6: user rwx = 7, group r-x = 5, others --x = 1, so 751.",
+   "slide": 6,
+   "pattern": "calculation",
+   "lk": "high"
+  },
+  {
+   "id": "L1-03",
+   "l": 1,
+   "topic": "Access rules",
+   "q": "A process's effective uid is not the file owner's, but its effective gid matches the file's group. Which permission bits decide access?",
+   "o": [
+    "The group bits",
+    "The user bits",
+    "The others bits",
+    "All nine bits together"
+   ],
+   "c": 0,
+   "hint": "The rules are checked in order: root, owner, group, others.",
+   "r": "Slide 7: euid 0 always gets access; else the owner bits if euid is the owner; else the group bits if egid or an extra group matches; else the others bits.",
+   "slide": 7,
+   "pattern": "classify",
+   "lk": "high"
+  },
+  {
+   "id": "L1-04",
+   "l": 1,
+   "topic": "Access rules",
+   "q": "When is a process granted access to a file regardless of its permission bits?",
+   "o": [
+    "When the effective uid of the process is 0",
+    "When its real uid owns the directory of the file",
+    "When the file has the sticky bit set",
+    "When it belongs to the wheel group"
+   ],
+   "c": 0,
+   "hint": "Special privileges have one uid.",
+   "r": "Slide 7: the first rule grants access if the effective uid of the process is 0 (root); otherwise owner, group and others bits are checked.",
+   "slide": 7,
+   "pattern": "fact",
+   "lk": "high"
+  },
+  {
+   "id": "L1-05",
+   "l": 1,
+   "topic": "Special bits",
+   "q": "What does the sticky bit do on a directory such as /tmp that everyone can write to?",
+   "o": [
+    "Users cannot remove other users' files there",
+    "Files inherit the directory's group owner",
+    "Programs run with the directory owner's uid",
+    "Files are locked while another user opens them"
+   ],
+   "c": 0,
+   "hint": "Shared, but you may only delete your own.",
+   "r": "Slide 10: in directories with group or other write permission the sticky bit (01000) forbids removing files owned by other users or changing their attributes. Inheriting the group is set-group-id on directories.",
+   "slide": 10,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L1-06",
+   "l": 1,
+   "topic": "Special bits",
+   "q": "What is the octal value of the set-user-id bit?",
+   "o": [
+    "04000",
+    "02000",
+    "01000",
+    "00400"
+   ],
+   "c": 0,
+   "hint": "Set-group-id is half of it, sticky a quarter.",
+   "r": "Slide 10: set-user-id 04000, set-group-id 02000, sticky bit 01000. 00400 is the owner's read bit.",
+   "slide": 10,
+   "pattern": "numeric",
+   "lk": "high"
+  },
+  {
+   "id": "L1-07",
+   "l": 1,
+   "topic": "Special bits",
+   "q": "What does the set-group-id bit do on a directory?",
+   "o": [
+    "New files and folders inherit the directory's group",
+    "Only members of the group may list the directory",
+    "Programs inside run with root privileges",
+    "Files inside become read-only for others"
+   ],
+   "c": 0,
+   "hint": "BSD behaviour for shared project folders.",
+   "r": "Slide 10: on directories set-group-id (02000) makes all files and subdirectories created there inherit the directory's group owner (BSD behaviour).",
+   "slide": 10,
+   "pattern": "definition",
+   "lk": "medium"
+  },
+  {
+   "id": "L1-08",
+   "l": 1,
+   "topic": "File types",
+   "q": "In ls -l output, what does a leading s, as in srw-rw-rw-, mean?",
+   "o": [
+    "A Unix-domain socket",
+    "A set-user-id program",
+    "A symbolic link",
+    "A sticky directory"
+   ],
+   "c": 0,
+   "hint": "The first character is the file type, not a permission.",
+   "r": "Slide 9: the type letter p is a named pipe, s a Unix-domain socket, b a block device, c a character device and l a symbolic link. Set-user-id shows as s in the owner's execute position instead.",
+   "slide": 9,
+   "pattern": "classify",
+   "lk": "medium"
+  },
+  {
+   "id": "L1-09",
+   "l": 1,
+   "topic": "User IDs",
+   "q": "Which three user IDs does a Unix process have?",
+   "o": [
+    "Effective, real and saved",
+    "Login, group and session ID",
+    "Owner, group and others",
+    "Parent, child and leader"
+   ],
+   "c": 0,
+   "hint": "euid, ruid, suid.",
+   "r": "Slide 11: euid (effective uid), ruid (real uid) and suid (saved uid).",
+   "slide": 11,
+   "pattern": "fact",
+   "lk": "high"
+  },
+  {
+   "id": "L1-10",
+   "l": 1,
+   "topic": "Changing IDs",
+   "q": "When does a change of user ID become irreversible for a process?",
+   "o": [
+    "When the real uid is changed",
+    "When the effective uid is changed",
+    "When the process calls fork()",
+    "When the program reads a file"
+   ],
+   "c": 0,
+   "hint": "The new euid is then copied into the saved uid.",
+   "r": "Slide 12: while ruid stays the same, a process can switch its euid between ruid and the saved uid many times; changing ruid copies the new euid into the saved uid, which makes it irreversible.",
+   "slide": 12,
+   "pattern": "fact",
+   "lk": "high"
+  },
+  {
+   "id": "L1-11",
+   "l": 1,
+   "topic": "Set-user-id programs",
+   "q": "What is the best practice for a set-user-id program, according to the lecture?",
+   "o": [
+    "Use the extra privileges only when needed, then drop them",
+    "Keep root privileges for the whole run to avoid any errors",
+    "Avoid checking file permissions to keep the code simple",
+    "Run as the user nobody and never change the effective uid"
+   ],
+   "c": 0,
+   "hint": "The mail server example switches euid several times.",
+   "r": "Slide 11: use superpowers only when they are really needed and revert to normal access whenever possible; the mail server goes from nobody to 0 only to bind port 25 and back.",
+   "slide": 11,
+   "pattern": "true-statement",
+   "lk": "high"
+  },
+  {
+   "id": "L1-12",
+   "l": 1,
+   "topic": "Links",
+   "q": "When is a file's data really removed from a Unix filesystem?",
+   "o": [
+    "When its link count drops to zero",
+    "When its last symbolic link is removed",
+    "When its owner logs out of the system",
+    "When the directory holding it is listed"
+   ],
+   "c": 0,
+   "hint": "Hard links are names for the same i-node.",
+   "r": "Slide 14: the file is removed from the filesystem only when its number of links decreases to 0.",
+   "slide": 14,
+   "pattern": "fact",
+   "lk": "high"
+  },
+  {
+   "id": "L1-13",
+   "l": 1,
+   "topic": "Links",
+   "q": "Which statement about hard links is true?",
+   "o": [
+    "They give one i-node several names",
+    "They can point to another filesystem",
+    "They break when the target is removed",
+    "They are made with ln -s by default"
+   ],
+   "c": 0,
+   "hint": "The other three describe symbolic links.",
+   "r": "Slide 15: a hard link (link() or ln without -s) is an alternative name for the same i-node; symbolic links can cross filesystems and become invalid when the target is removed.",
+   "slide": 15,
+   "pattern": "true-statement",
+   "lk": "high"
+  },
+  {
+   "id": "L1-14",
+   "l": 1,
+   "type": "open",
+   "topic": "Special bits",
+   "q": "Explain the set-user-id, set-group-id and sticky bits, giving their octal values and what each does on files and on directories.",
+   "a": "- Set-user-id (04000): the program runs with the file owner's user ID for its duration; one of the weakest points of Unix security.\n- Set-group-id (02000): the program runs with the file's group ID; on a directory, new files and subdirectories inherit its group (BSD behaviour); it also selects obligatory instead of advisory file locking.\n- Sticky bit (01000): on a directory writable by group or others (e.g. /tmp), users cannot remove or modify other users' files; on executables it historically kept the program in memory after it ended.",
+   "slide": 10,
+   "pattern": "explain",
+   "lk": "high"
+  },
+  {
+   "id": "L2-01",
+   "l": 2,
+   "topic": "Factors",
+   "q": "Which combination is genuine two-factor authentication?",
+   "o": [
+    "A smart card and its PIN code",
+    "A password and a numeric PIN code",
+    "A username and a password",
+    "Two different passwords"
+   ],
+   "c": 0,
+   "hint": "The factors must be of different kinds.",
+   "r": "Slide 2: strong authentication uses at least two of something you know, something you have and something you are. A card (have) plus a PIN (know) qualifies; the others are all \"know\".",
+   "slide": 2,
+   "pattern": "classify",
+   "lk": "high"
+  },
+  {
+   "id": "L2-02",
+   "l": 2,
+   "topic": "Hash functions",
+   "q": "Which property is required of a one-way hash function?",
+   "o": [
+    "It is practically impossible to get M back from H(M)",
+    "Its output grows with the length of the input message M",
+    "Two different messages always give different results",
+    "It can be inverted quickly with the right secret key"
+   ],
+   "c": 0,
+   "hint": "Easy forward, hard backward.",
+   "r": "Slide 4: h = H(M) has a fixed length m and is easy to compute, while calculating M from h is practically impossible; finding another message with the same hash must be hard enough (not impossible, so outputs can collide).",
+   "slide": 4,
+   "pattern": "true-statement",
+   "lk": "high"
+  },
+  {
+   "id": "L2-03",
+   "l": 2,
+   "topic": "MD5",
+   "q": "How long is an MD5 hash?",
+   "o": [
+    "128 bits",
+    "64 bits",
+    "256 bits",
+    "8 characters"
+   ],
+   "c": 0,
+   "hint": "Stored BASE64-encoded in the password file.",
+   "r": "Slide 4: MD5 gives a 128-bit result from input of unlimited size and is used for one-way password encryption. Eight characters is the crypt() password limit.",
+   "slide": 4,
+   "pattern": "numeric",
+   "lk": "high"
+  },
+  {
+   "id": "L2-04",
+   "l": 2,
+   "topic": "Checking passwords",
+   "q": "How does a Unix system check the password you type at login?",
+   "o": [
+    "It hashes the typed text and compares the two hashes",
+    "It decrypts the stored password and compares the text",
+    "It sends the typed password to a central key server",
+    "It compares the length of the two passwords only"
+   ],
+   "c": 0,
+   "hint": "The stored form cannot be decrypted.",
+   "r": "Slide 5: passwords are stored in one-way encrypted form; the typed one is encrypted the same way and the two encrypted versions are compared.",
+   "slide": 5,
+   "pattern": "explain",
+   "lk": "high"
+  },
+  {
+   "id": "L2-05",
+   "l": 2,
+   "topic": "Cracking time",
+   "q": "At 8000 guesses per second, how long does it take to try every 8-letter lower-case password?",
+   "o": [
+    "About 302 days",
+    "About 11 hours",
+    "About 1 minute",
+    "About 212 years"
+   ],
+   "c": 0,
+   "hint": "26⁸ is about 2 × 10¹¹ candidates.",
+   "r": "Slide 6: 8 lower-case letters take about 302 days; 6 letters about 11 hours; 4 letters 1 minute; 8 mixed-case letters about 212 years.",
+   "slide": 6,
+   "pattern": "numeric",
+   "lk": "high"
+  },
+  {
+   "id": "L2-06",
+   "l": 2,
+   "topic": "Cracking",
+   "q": "What is a brute-force dictionary attack on a password file?",
+   "o": [
+    "Hashing many candidates and comparing them with the stored hash",
+    "Decrypting all stored hashes with a stolen master key file",
+    "Asking users for their passwords by fake e-mails",
+    "Reading the password from the screen of the user"
+   ],
+   "c": 0,
+   "hint": "The hash cannot be reversed, only matched.",
+   "r": "Slide 5: a stored password cannot be decrypted, but it can be guessed by encrypting a large number of possible passwords and comparing the results (crack, John the Ripper, hashcat, Hydra).",
+   "slide": 5,
+   "pattern": "definition",
+   "lk": "medium"
+  },
+  {
+   "id": "L2-07",
+   "l": 2,
+   "topic": "Good passwords",
+   "q": "Which password follows the lecture's advice best?",
+   "o": [
+    "TwaylfNwsasroat",
+    "qwerty123",
+    "SmithJanuary1990",
+    "f00tba11"
+   ],
+   "c": 0,
+   "hint": "Mnemonic first letters beat keyboard patterns, reversed words and l33t spellings.",
+   "r": "Slides 7–8: keyboard patterns, names with birth dates and l33t versions of words are bad choices; TwaylfNwsasroat comes from the first letters of a rhyme, mixes case and is easy to remember.",
+   "slide": 8,
+   "pattern": "classify",
+   "lk": "medium"
+  },
+  {
+   "id": "L2-08",
+   "l": 2,
+   "topic": "One-time passwords",
+   "q": "What weakness remains even when one-time passwords are used?",
+   "o": [
+    "The rest of the connection can still be sniffed",
+    "The login phase can be sniffed and replayed",
+    "Passwords must be written down on paper by the user",
+    "They only work on computers without a network"
+   ],
+   "c": 0,
+   "hint": "OTP protects the moment of login.",
+   "r": "Slide 10: OTPs work fine against sniffing of the authentication phase, but the connection itself can still be sniffed, active attacks can guess the last 1–2 characters, and most need special equipment.",
+   "slide": 10,
+   "pattern": "explain",
+   "lk": "high"
+  },
+  {
+   "id": "L2-09",
+   "l": 2,
+   "topic": "Time-restricted tokens",
+   "q": "How often does a time-restricted token such as SecurID produce a new password?",
+   "o": [
+    "Every 60 seconds",
+    "Every 10 seconds",
+    "Once per login",
+    "Once per day at midnight"
+   ],
+   "c": 0,
+   "hint": "It is prefixed with a PIN.",
+   "r": "Slide 11: the password changes automatically every 60 seconds and is invalidated right after a successful login.",
+   "slide": 11,
+   "pattern": "numeric",
+   "lk": "high"
+  },
+  {
+   "id": "L2-10",
+   "l": 2,
+   "topic": "Token synchronisation",
+   "q": "How does the authentication server cope with a SecurID token whose clock drifts?",
+   "o": [
+    "It accepts nearby passwords and stores a correction per token",
+    "It resets the token's clock remotely at every successful login",
+    "It asks the user to type the current time shown on the token",
+    "It disables the token until the clock drift has been repaired"
+   ],
+   "c": 0,
+   "hint": "The token's time cannot be modified.",
+   "r": "Slide 13: the server can compute the previous and next passwords, calculate the delay after detecting inconsistency and save a correction per token; if the number cannot be found it may ask for the next password.",
+   "slide": 13,
+   "pattern": "explain",
+   "lk": "medium"
+  },
+  {
+   "id": "L2-11",
+   "l": 2,
+   "topic": "S/Key",
+   "q": "In S/Key, how is password number n related to password number n − 1?",
+   "o": [
+    "It is the hash of password n − 1",
+    "It is password n − 1 spelled backwards",
+    "It is chosen at random by the server",
+    "It is password n − 1 with a digit added"
+   ],
+   "c": 0,
+   "hint": "MD4, MD5 or SHA.",
+   "r": "Slide 15: the nth password is the (n−1)th password hashed with MD4, MD5 or SHA; the secret is password 0, and logins start at 99 and count down.",
+   "slide": 15,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L2-12",
+   "l": 2,
+   "topic": "S/Key",
+   "q": "Why do S/Key logins use the passwords in decreasing order, from 99 down to 0?",
+   "o": [
+    "A captured password reveals only already-used ones",
+    "Larger numbers are easier for users to type and remember",
+    "The server stores only 100 hashes",
+    "Hash functions work faster on smaller numbers"
+   ],
+   "c": 0,
+   "hint": "Hashing goes one way only.",
+   "r": "Slide 15: since password n = H(password n − 1), an eavesdropper who captures password n can compute n + 1 and later (already used), but not n − 1, the next one needed.",
+   "slide": 15,
+   "pattern": "explain",
+   "lk": "medium"
+  },
+  {
+   "id": "L2-13",
+   "l": 2,
+   "topic": "SMS as OTP",
+   "q": "Which vulnerability of SMS one-time passwords does the lecture point out?",
+   "o": [
+    "The phone becomes the only channel for every authentication factor",
+    "SMS messages cannot carry account numbers or transaction details",
+    "Banks cannot send SMS to foreign phone numbers",
+    "SMS codes never expire once they are delivered"
+   ],
+   "c": 0,
+   "hint": "Think of a stolen phone, malware or SIM swapping.",
+   "r": "Slide 19: malware, overlays, lost phones and SIM swapping matter because the phone becomes the only channel for authentication, which goes against the idea of two independent factors.",
+   "slide": 19,
+   "pattern": "explain",
+   "lk": "medium"
+  },
+  {
+   "id": "L2-14",
+   "l": 2,
+   "topic": "U2F",
+   "q": "What is the main purpose of U2F security keys?",
+   "o": [
+    "Stopping password theft by phishing",
+    "Encrypting the whole disk of a laptop",
+    "Generating random passwords for users",
+    "Speeding up logins on slow mobile networks"
+   ],
+   "c": 0,
+   "hint": "The key checks which domain asks.",
+   "r": "Slide 20: the main purpose is preventing password stealing by phishing and malicious web pages; slide 21: the token signs only for the domain it registered with, after a physical touch.",
+   "slide": 20,
+   "pattern": "fact",
+   "lk": "high"
+  },
+  {
+   "id": "L2-15",
+   "l": 2,
+   "topic": "U2F",
+   "q": "When a U2F token logs you in, what does it do with its private key?",
+   "o": [
+    "Signs a challenge after a touch; the key stays inside",
+    "Sends the private key to the server so it can check it",
+    "Prints the private key on its little display",
+    "Shares the private key with every site you visit"
+   ],
+   "c": 0,
+   "hint": "Public key on the server, private key in the token.",
+   "r": "Slide 21: registration sends a domain-specific public key to the server; at login the token checks the domain and generates a signature with a private key that never leaves the token, only after the user touches it.",
+   "slide": 21,
+   "pattern": "true-statement",
+   "lk": "medium"
+  },
+  {
+   "id": "L2-16",
+   "l": 2,
+   "topic": "PAM",
+   "q": "With PAM, what is needed to add a new authentication method?",
+   "o": [
+    "A new module plus a configuration entry",
+    "Recompiling every server that authenticates users",
+    "A new kernel and a reboot of the whole system",
+    "Only a new user account added to /etc/passwd"
+   ],
+   "c": 0,
+   "hint": "PAM exists so servers need not be recompiled.",
+   "r": "Slide 24: a new service needs only a new configuration file; a new method needs a new libSOMETHING.so module and a configuration entry (e.g. pam_skey.so in /etc/pam.d/login).",
+   "slide": 24,
+   "pattern": "fact",
+   "lk": "high"
+  },
+  {
+   "id": "L3-01",
+   "l": 3,
+   "topic": "Why sniffing works",
+   "q": "Why can someone with physical access to a network medium read other people's traffic?",
+   "o": [
+    "Lower layers send clear text over broadcast media",
+    "Every packet is copied to the root of the network",
+    "Routers keep a public log of all transmitted data",
+    "Encryption keys are sent with every packet"
+   ],
+   "c": 0,
+   "hint": "Layers 1–4 and how Ethernet delivers frames.",
+   "r": "Slide 2: TCP/IP layers 1–4 send data in plain (clear-text) form and the medium broadcasts, so anyone with physical access can eavesdrop on all traffic passing through.",
+   "slide": 2,
+   "pattern": "explain",
+   "lk": "high"
+  },
+  {
+   "id": "L3-02",
+   "l": 3,
+   "topic": "Where sniffing happens",
+   "q": "What does the lecture say about sniffing WiFi networks protected with WEP, WPA or WPA2?",
+   "o": [
+    "They can be sniffed whatever the method",
+    "They are immune once WPA2 is switched on",
+    "They can be sniffed only by the router",
+    "They cannot carry any traffic in clear text"
+   ],
+   "c": 0,
+   "hint": "It is listed as an especially risky place.",
+   "r": "Slide 3: especially WiFi networks, including those protected with passwords, regardless of the method (WEP, WPA, WPA2).",
+   "slide": 3,
+   "pattern": "fact",
+   "lk": "high"
+  },
+  {
+   "id": "L3-03",
+   "l": 3,
+   "topic": "Tools",
+   "q": "Which tool is a Linux and BSD packet sniffer named in the lecture?",
+   "o": [
+    "tcpdump",
+    "ifconfig",
+    "inetd",
+    "passwd"
+   ],
+   "c": 0,
+   "hint": "Solaris has snoop; Linux and BSD have tcpdump and wireshark.",
+   "r": "Slide 5: Solaris snoop; Linux and *BSD tcpdump and wireshark; packets can be saved in PCAP format. ifconfig configures interfaces, inetd starts daemons, passwd changes passwords.",
+   "slide": 5,
+   "pattern": "classify",
+   "lk": "medium"
+  },
+  {
+   "id": "L3-04",
+   "l": 3,
+   "topic": "Promiscuous mode",
+   "q": "What does a network card in promiscuous mode do differently?",
+   "o": [
+    "Passes up frames meant for other cards",
+    "Encrypts every packet before it is sent",
+    "Refuses ARP replies from unknown hosts",
+    "Sends each packet twice for reliability"
+   ],
+   "c": 0,
+   "hint": "Normally such frames are dropped at layer 2.",
+   "r": "Slides 7–8: a normal card drops frames for other MAC addresses at layer 2; in promiscuous mode the card delivers all packets, which is what a sniffer needs.",
+   "slide": 8,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L3-05",
+   "l": 3,
+   "topic": "Detection",
+   "q": "In the ICMP method of sniffer detection, what packet is sent to the suspect host?",
+   "o": [
+    "An ICMP ECHO with the right IP and a non-existent MAC",
+    "An ARP REQUEST asking for the suspect's own MAC address",
+    "A TCP connection request to the telnet port 23",
+    "An ICMP ECHO with a wrong IP and the correct MAC"
+   ],
+   "c": 0,
+   "hint": "A normal card would never pass it to the IP layer.",
+   "r": "Slide 7: send an ICMP ECHO with the proper IP address but a non-existing or foreign MAC; normally it does not leave layer 2, but a promiscuous card delivers it and the host replies.",
+   "slide": 7,
+   "pattern": "fact",
+   "lk": "high"
+  },
+  {
+   "id": "L3-06",
+   "l": 3,
+   "topic": "Detection",
+   "q": "How hard does the lecture say it is to detect a sniffer?",
+   "o": [
+    "Nearly impossible",
+    "Easy with any port scanner",
+    "Trivial with a ping sweep",
+    "Only possible with root access"
+   ],
+   "c": 0,
+   "hint": "Promiscuous mode leaves only subtle traces.",
+   "r": "Slide 6: detection relies on subtle differences in how a promiscuous card reacts, and extra load can also come from normal work, so the conclusion is very hard, if not impossible, to detect.",
+   "slide": 6,
+   "pattern": "fact",
+   "lk": "medium"
+  },
+  {
+   "id": "L3-07",
+   "l": 3,
+   "topic": "Switches",
+   "q": "Do switches and routers stop sniffing?",
+   "o": [
+    "They reduce it, but dynamic ARP or routing can fool them",
+    "Yes, a switched network cannot be sniffed by anyone",
+    "No, they make sniffing easier than hubs do",
+    "Only routers help; switches have no effect"
+   ],
+   "c": 0,
+   "hint": "See the summary slide.",
+   "r": "Slide 8: switches and routers can reduce traffic exposure and sniffing possibilities, but some of them may be fooled by dynamic ARP or dynamic routing.",
+   "slide": 8,
+   "pattern": "true-statement",
+   "lk": "high"
+  },
+  {
+   "id": "L4-01",
+   "l": 4,
+   "topic": "DNS spoofing",
+   "q": "How can a server detect that a reverse DNS answer is spoofed?",
+   "o": [
+    "Look the name up forward and check the address matches",
+    "Ask the client to send its hostname in the first packet",
+    "Compare the reverse answer with the client's MAC address",
+    "Reject every client whose hostname is longer than 20 characters"
+   ],
+   "c": 0,
+   "hint": "Reverse maps belong to whoever owns the IP addresses.",
+   "r": "Slide 2: cross-check the result against the ordinary (forward) map; if the address used originally is not found after this second translation, somebody is playing with DNS spoofing.",
+   "slide": 2,
+   "pattern": "explain",
+   "lk": "high"
+  },
+  {
+   "id": "L4-02",
+   "l": 4,
+   "topic": "SMTP spoofing",
+   "q": "Why is SMTP easy to spoof?",
+   "o": [
+    "One protocol for clients and servers, with no distinction",
+    "Mail is always encrypted, so nobody checks the sender",
+    "SMTP servers accept connections only from known hosts",
+    "Every message is signed with the sender's private key"
+   ],
+   "c": 0,
+   "hint": "Submitting and relaying look the same.",
+   "r": "Slide 3: the same SMTP protocol is used by mail clients submitting mail and by servers transferring it, with no distinction between server and client; defences include IDENT and Received: headers.",
+   "slide": 3,
+   "pattern": "explain",
+   "lk": "high"
+  },
+  {
+   "id": "L4-03",
+   "l": 4,
+   "topic": "Spoofing types",
+   "q": "Phishing is described in the lecture as a combination of which two kinds of spoofing?",
+   "o": [
+    "E-mail and web server spoofing",
+    "ARP and DNS cache spoofing",
+    "NIS and NFS server spoofing",
+    "IDENT and SMTP header spoofing"
+   ],
+   "c": 0,
+   "hint": "A fake message leads to a fake site.",
+   "r": "Slide 4: phishing combines e-mail and web server spoofing; the list also includes authentication, DNS service, man-in-the-middle and ARP spoofing.",
+   "slide": 4,
+   "pattern": "fact",
+   "lk": "medium"
+  },
+  {
+   "id": "L4-04",
+   "l": 4,
+   "topic": "ARP",
+   "q": "How long are dynamically created ARP entries usually cached?",
+   "o": [
+    "About 15 minutes from their last use",
+    "Until the computer is restarted again",
+    "About 24 hours from their creation",
+    "Forever, until an administrator removes them"
+   ],
+   "c": 0,
+   "hint": "Manual entries are the permanent ones.",
+   "r": "Slide 6: ARP entries are created dynamically or set manually; dynamic ones are cached usually for 15 minutes counting from the last use, and describe only the local segment.",
+   "slide": 6,
+   "pattern": "numeric",
+   "lk": "high"
+  },
+  {
+   "id": "L4-05",
+   "l": 4,
+   "topic": "Addresses",
+   "q": "Which address does an Ethernet card use to send and receive packets?",
+   "o": [
+    "The 6-byte Ethernet (MAC) address of the network card",
+    "The 4-byte IP address assigned to the host card",
+    "The port number of the network service",
+    "The hostname registered in DNS"
+   ],
+   "c": 0,
+   "hint": "ARP exists to translate IP addresses into these.",
+   "r": "Slide 5: network cards use the device address, not the IP address; for Ethernet it is 6 bytes long.",
+   "slide": 5,
+   "pattern": "fact",
+   "lk": "medium"
+  },
+  {
+   "id": "L4-06",
+   "l": 4,
+   "topic": "inetd",
+   "q": "How does a daemon started by inetd communicate with the connected client?",
+   "o": [
+    "Through standard input and output",
+    "Through a shared memory segment set up by the kernel",
+    "By opening its own listening socket on the port",
+    "By reading the client's messages from a log file"
+   ],
+   "c": 0,
+   "hint": "File descriptors 0, 1 and 2.",
+   "r": "Slide 8: processes started through inetd need not set up the connection; they talk to the connected client through standard input and output (file descriptors 0, 1 and 2).",
+   "slide": 8,
+   "pattern": "fact",
+   "lk": "medium"
+  },
+  {
+   "id": "L4-07",
+   "l": 4,
+   "topic": "tcpd",
+   "q": "Which check is not among those tcpd performs before starting a server?",
+   "o": [
+    "Verifying the user's password",
+    "Checking the address-to-name translation",
+    "Asking the client's identd for information",
+    "Consulting hosts.allow and hosts.deny"
+   ],
+   "c": 0,
+   "hint": "Authentication is the server's own job.",
+   "r": "Slide 9: tcpd verifies the DNS address-to-name translation (IP spoofing), gathers identd information from the client, and consults hosts.allow and hosts.deny. Passwords are checked later by the server itself.",
+   "slide": 9,
+   "pattern": "not-statement",
+   "lk": "high"
+  },
+  {
+   "id": "L4-08",
+   "l": 4,
+   "topic": "tcp_wrappers",
+   "q": "Where are tcp_wrappers access rules configured?",
+   "o": [
+    "/etc/hosts.allow and /etc/hosts.deny",
+    "/etc/passwd and /etc/shadow",
+    "/etc/pam.d/login and /etc/pam.d/su",
+    "/var/log/syslog and /var/log/maillog"
+   ],
+   "c": 0,
+   "hint": "One file permits, the other forbids.",
+   "r": "Slide 10: tcp_wrappers, invoked through /etc/inetd.conf, is configured with /etc/hosts.allow and /etc/hosts.deny; its logs go through syslog to /var/log/maillog or /var/log/syslog (slide 11).",
+   "slide": 10,
+   "pattern": "fact",
+   "lk": "high"
+  },
+  {
+   "id": "L4-09",
+   "l": 4,
+   "topic": "IDENT",
+   "q": "What does an IDENT query identify a connection by?",
+   "o": [
+    "A 5-tuple: TCP, two addresses and two ports",
+    "The user's name and the time of connection",
+    "The MAC address of the client network card",
+    "The hostname returned by reverse DNS lookup"
+   ],
+   "c": 0,
+   "hint": "The server asks the client's IDENT daemon.",
+   "r": "Slide 12: the server connects back to the IDENT server on the client's computer and asks about a connection identified by the TCP protocol, two addresses and two port numbers.",
+   "slide": 12,
+   "pattern": "fact",
+   "lk": "medium"
+  },
+  {
+   "id": "L4-10",
+   "l": 4,
+   "topic": "IDENT",
+   "q": "Why should IDENT not be used for access control?",
+   "o": [
+    "Its answers come from the client and cannot be trusted",
+    "It is too slow to answer before the connection times out",
+    "It reveals the server's own users to the outside world",
+    "It works only for mail servers and not for other services"
+   ],
+   "c": 0,
+   "hint": "Who runs the IDENT server?",
+   "r": "Slide 13: IDENT is not an authorisation protocol; the IDENT server sits at the client's site, beyond our control, and can return anything. It is sensible only for identifying an attacker after an incident.",
+   "slide": 13,
+   "pattern": "explain",
+   "lk": "high"
+  }
+ ]
+}
