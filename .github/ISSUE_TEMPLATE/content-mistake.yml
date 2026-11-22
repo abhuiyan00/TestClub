@@ -1,0 +1,35 @@
+name: Mistake in the material
+description: A wrong answer, a typo, a missing or wrong slide reference, or anything else in the notes and questions.
+title: "[Content] "
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for helping other students. Point to the slide that supports the fix if you can.
+  - type: dropdown
+    id: course
+    attributes:
+      label: Course
+      options:
+        - ADB · Advanced Databases
+        - ISA · Information Systems Analysis
+        - MMCV · Multimedia and Computer Visualization
+        - NLP · Natural Language Processing
+        - SC · Softcomputing
+        - SSN · Secure Systems and Networks
+    validations:
+      required: true
+  - type: input
+    id: where
+    attributes:
+      label: Where
+      description: Lecture number and the fact or question, or a link to the page.
+      placeholder: Lecture 3, the question about PAL line frequency
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What is wrong, and what should it say?
+      placeholder: The answer says …, but slide … says ….
+    validations:
+      required: true

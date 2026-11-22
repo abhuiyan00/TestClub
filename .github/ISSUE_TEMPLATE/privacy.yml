@@ -1,0 +1,26 @@
+name: Privacy problem
+description: Personal data or too much of a lecture is visible somewhere on the site.
+title: "[Privacy] "
+body:
+  - type: markdown
+    attributes:
+      value: "**Do not copy the personal data into this issue.** Say only where it is; it will be taken offline first."
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What did you find?
+      options:
+        - A name
+        - An e-mail address
+        - A login, student number or internal hostname
+        - Too much of a lecture in a slide snapshot
+        - Something else
+    validations:
+      required: true
+  - type: input
+    id: where
+    attributes:
+      label: Where
+      description: Course, lecture and slide number, or a link to the page.
+    validations:
+      required: true

@@ -1,0 +1,24 @@
+name: Something does not work
+description: A page that breaks, looks wrong or behaves unexpectedly.
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: Page
+      description: A link to the page, or where you were (for example "MMCV, mock exam").
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened, and what did you expect?
+      description: Steps to reproduce help a lot. Screenshots are welcome.
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: Browser and device
+      placeholder: Firefox 140 on Windows, Safari on iPhone
