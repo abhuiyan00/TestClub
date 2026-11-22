@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Content, quality and privacy checks
+        run: npm run check:content
+        env:
+          # Optional hashed name list, kept out of the repository; without it only e-mail addresses are checked.
+          PRIVACY_DENYLIST: ${{ secrets.PRIVACY_DENYLIST }}
+      - name: Unit tests
+        run: npm run test:ci
+      - name: Production build
+        run: npm run build
