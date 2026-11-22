@@ -1,0 +1,239 @@
+<p class="sr-only" aria-live="assertive">{{ announce() }}</p>
+
+@if (ctx.bank.isLoading()) {
+  <p class="muted">Loading questions…</p>
+} @else if (!ctx.questions().length) {
+  <div class="empty">
+    <tc-icon name="hourglass" [size]="28" />
+    <b>No practice questions yet</b>
+    <p>Questions for this course are being written from the slides. The lecture list and dates are on the Course tab.</p>
+  </div>
+} @else if (!session()) {
+  <!-- ================= setup ================= -->
+  <section class="today card card-pad" aria-labelledby="today-h">
+    <div class="today-main">
+      <p class="eyebrow">Today's plan</p>
+      <h2 id="today-h">{{ ctx.plan().due }} due for review · {{ ctx.plan().newToday }} new</h2>
+      <p class="muted">
+        A question you answer right, and are sure of, comes back after 1, then 2, then 3 days@if (ctx.exam()) {<span>, timed to finish before the {{ ctx.exam()!.title.toLowerCase() }}</span>}. Misses come back the same day.
+      </p>
+      <div class="cta">
+        <button type="button" class="btn primary" (click)="review()" [disabled]="!ctx.plan().due">
+          <tc-icon name="reset" [size]="16" /> {{ ctx.plan().due ? 'Review ' + ctx.plan().due + ' due' : 'Nothing due yet' }}
+        </button>
+        <button type="button" class="btn" (click)="learnNew()" [disabled]="!ctx.plan().newToday">
+          <tc-icon name="play" [size]="16" /> Learn {{ ctx.plan().newToday }} new
+        </button>
+        @if (ctx.mistakes().length) {
+          <a class="btn ghost" routerLink="../mistakes"><tc-icon name="circle-x" [size]="16" /> {{ ctx.mistakes().length }} to fix</a>
+        }
+      </div>
+      @if (calib().sure + calib().unsure) {
+        <p class="calib">
+          When you were sure, you were right <b>{{ pct(calib().sureRight, calib().sure) }}%</b> of {{ calib().sure }} times;
+          when not sure, <b>{{ pct(calib().unsureRight, calib().unsure) }}%</b> of {{ calib().unsure }}.
+        </p>
+      }
+    </div>
+    @if (strip().length) {
+      <ol class="days" aria-label="Plan until the test">
+        @for (d of strip(); track $index) {
+          <li [class.now]="d.now" [class.exam]="d.exam"><b>{{ d.day }}</b><span>{{ d.what }}</span></li>
+        }
+      </ol>
+    }
+  </section>
+
+  <section class="builder card card-pad" aria-labelledby="build-h">
+    <div class="section-head first">
+      <div>
+        <p class="eyebrow">Testownik</p>
+        <h2 id="build-h">Build a drill</h2>
+      </div>
+    </div>
+
+    <fieldset>
+      <legend>{{ ctx.unit() }}s</legend>
+      <div class="chips">
+        <button type="button" class="chip" [attr.aria-pressed]="!ctx.settings().lectures.length" (click)="ctx.setSettings({ lectures: [] })">All</button>
+        @for (l of ctx.studyLectures(); track l.n) {
+          <button type="button" class="chip" [attr.aria-pressed]="ctx.settings().lectures.includes(l.n)" (click)="toggleLecture(l.n)">
+            {{ unitShort() }}{{ l.n }} {{ l.short }}
+          </button>
+        }
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Questions</legend>
+      <div class="seg wrap" role="group" aria-label="Question filter">
+        @for (f of filters; track f.key) {
+          <button type="button" [attr.aria-pressed]="ctx.settings().filter === f.key" (click)="ctx.setSettings({ filter: f.key })">
+            {{ f.label }} <span class="n">{{ counts()[f.key] }}</span>
+          </button>
+        }
+      </div>
+    </fieldset>
+
+    <div class="row2">
+      <fieldset>
+        <legend>Correct answers to clear a question</legend>
+        <div class="seg" role="group" aria-label="Repetitions">
+          @for (r of [1, 2, 3]; track r) {
+            <button type="button" [attr.aria-pressed]="ctx.settings().reps === r" (click)="ctx.setSettings({ reps: r })">{{ r }}</button>
+          }
+        </div>
+        <p class="help">The classic Testownik rule: each mistake adds one more, up to four. Guesses and hinted answers don't count.</p>
+      </fieldset>
+      @if (hasChoice()) {
+        <fieldset>
+          <legend>Recall first</legend>
+          <label class="switch">
+            <input type="checkbox" [checked]="ctx.settings().recall" (change)="ctx.setSettings({ recall: $any($event.target).checked })" />
+            <span class="track"><i></i></span>
+            Hide the options until you have an answer in mind
+          </label>
+          <p class="help">Recalling before seeing the options makes memories stronger.</p>
+        </fieldset>
+      }
+    </div>
+
+    <div class="start">
+      <button type="button" class="btn primary large" (click)="startBuilt()" [disabled]="!poolSize()">
+        <tc-icon name="play" [size]="18" /> Start drill · {{ poolSize() }} {{ poolSize() === 1 ? 'question' : 'questions' }}
+      </button>
+    </div>
+  </section>
+
+  <p class="keys"><tc-icon name="keyboard" [size]="16" /> Keys: <kbd>1</kbd>–<kbd>4</kbd> answer · <kbd>H</kbd> hint · <kbd>G</kbd> not sure · <kbd>Enter</kbd> next · <kbd>Space</kbd> reveal</p>
+} @else if (session()!.done) {
+  <!-- ================= done ================= -->
+  @let s = session()!;
+  <div class="done card card-pad fade-in">
+    <span class="medal"><tc-icon name="circle-check" [size]="34" /></span>
+    <h2>All {{ s.ids.length }} questions cleared</h2>
+    <p class="muted">{{ s.label }} · {{ s.right }} right, {{ s.wrong }} wrong · best streak {{ s.best }}</p>
+    <div class="cta center">
+      <button type="button" class="btn primary" (click)="ctx.endDrill()"><tc-icon name="target" [size]="16" /> Build another drill</button>
+      @if (ctx.mistakes().length) {
+        <a class="btn" routerLink="../mistakes">Review {{ ctx.mistakes().length }} mistakes</a>
+      }
+    </div>
+  </div>
+} @else {
+  <!-- ================= runner ================= -->
+  @let s = session()!;
+  <div class="runbar">
+    <div class="runinfo">
+      <b>{{ s.label }}</b>
+      <span class="muted"><span class="ok">{{ s.right }} right</span> · <span class="bad">{{ s.wrong }} wrong</span>@if (s.streak > 2) {<span> · streak {{ s.streak }}</span>}</span>
+    </div>
+    <div class="meter run" [style.--v]="progressPct()" role="progressbar" [attr.aria-valuenow]="(progressPct() * 100).toFixed(0)" aria-valuemin="0" aria-valuemax="100" aria-label="Drill progress"><i></i></div>
+    <button type="button" class="btn ghost small" (click)="ctx.endDrill()"><tc-icon name="x" [size]="15" /> End</button>
+  </div>
+
+  @if (q(); as cur) {
+    <article class="qcard card" [class.answered]="s.answered">
+      <div class="qmeta">
+        <span class="lec">{{ unitShort() }}{{ cur.l }} · {{ lectureOf(cur.l)?.short }}</span>
+        <span class="topic">{{ cur.topic }}</span>
+        <tc-slide-link [slug]="ctx.slug()" [lecture]="cur.l" [slide]="cur.slide" [unit]="unitShort()" />
+        @if (cur.lk === 'high') {
+          <span class="badge accent">likely on the test</span>
+        }
+        <span class="badge">{{ patternLabel[cur.pattern] }}</span>
+      </div>
+
+      <h2 class="stem">{{ cur.q }}</h2>
+
+      @if (choice(); as c) {
+        @if (ctx.settings().recall && !s.shown && !s.answered) {
+          <button type="button" class="reveal" (click)="ctx.flag('shown')">
+            <tc-icon name="eye" /> Answer in your head, then show the options <kbd>Space</kbd>
+          </button>
+        } @else {
+          <div class="opts" role="group" aria-label="Options">
+            @for (oi of s.order; track $index; let i = $index) {
+              <button type="button" class="opt" [class]="optState(i)" (click)="answer(i)" [disabled]="s.answered"
+                [attr.aria-label]="letters[i] + ': ' + c.o[oi]">
+                <span class="key">{{ letters[i] }}</span>
+                <span class="txt">{{ c.o[oi] }}</span>
+                @if (optState(i) === 'right' || optState(i) === 'reveal') {
+                  <tc-icon name="check" [size]="18" class="mark" />
+                } @else if (optState(i) === 'wrong') {
+                  <tc-icon name="x" [size]="18" class="mark" />
+                }
+              </button>
+            }
+          </div>
+        }
+        @if (!s.answered) {
+          <div class="assist">
+            <button type="button" class="btn ghost small" (click)="ctx.flag('hint')" [disabled]="s.hint"><tc-icon name="hint" [size]="15" /> Hint <kbd>H</kbd></button>
+            <button type="button" class="btn ghost small" [class.on]="s.unsure" (click)="ctx.flag('unsure')" [attr.aria-pressed]="s.unsure">
+              <tc-icon name="help" [size]="15" /> Not sure <kbd>G</kbd>
+            </button>
+          </div>
+          @if (s.hint) {
+            <p class="hintbox fade-in"><tc-icon name="hint" [size]="16" /> {{ c.hint }}</p>
+          }
+        }
+      }
+
+      @if (open(); as o) {
+        @if (!s.shown && !s.answered) {
+          <p class="muted openhelp">Answer out loud or on paper first. Then compare with the model answer and grade yourself honestly.</p>
+          <div class="assist">
+            <button type="button" class="btn primary" (click)="ctx.flag('shown')"><tc-icon name="eye" [size]="16" /> Show model answer <kbd>Space</kbd></button>
+            @if (o.hint) {
+              <button type="button" class="btn ghost small" (click)="ctx.flag('hint')" [disabled]="s.hint"><tc-icon name="hint" [size]="15" /> Hint <kbd>H</kbd></button>
+            }
+          </div>
+          @if (s.hint && o.hint) {
+            <p class="hintbox fade-in"><tc-icon name="hint" [size]="16" /> {{ o.hint }}</p>
+          }
+        } @else {
+          <div class="model fade-in">
+            <p class="eyebrow">Model answer</p>
+            <tc-answer-text [text]="o.a" />
+          </div>
+          @if (!s.answered) {
+            <div class="grades" role="group" aria-label="How well did you know it?">
+              <button type="button" class="btn danger" (click)="grade(Grade.Missed)"><tc-icon name="x" [size]="16" /> Missed <kbd>1</kbd></button>
+              <button type="button" class="btn" (click)="grade(Grade.Partly)"><tc-icon name="minus" [size]="16" /> Partly <kbd>2</kbd></button>
+              <button type="button" class="btn primary" (click)="grade(Grade.GotIt)"><tc-icon name="check" [size]="16" /> Got it <kbd>3</kbd></button>
+            </div>
+          }
+        }
+      }
+
+      @if (s.answered) {
+        <div class="feedback fade-in" [class.good]="isRight()">
+          <h3>
+            <tc-icon [name]="isRight() ? 'circle-check' : 'circle-x'" [size]="22" />
+            {{ isRight() ? (choice() && (s.unsure || s.hint) ? 'Correct, but it comes back' : 'Correct') : 'Not quite' }}
+          </h3>
+          @if (choice(); as c) {
+            @if (!isRight()) {
+              <p class="answer">Answer: <b>{{ c.o[c.c] }}</b></p>
+            }
+            <p class="why">{{ c.r }}</p>
+          }
+          <div class="fb-slide">
+            <tc-slide-thumb [slug]="ctx.slug()" [lecture]="cur.l" [slide]="cur.slide" [unit]="unitShort()" />
+          </div>
+          <div class="next">
+            <button type="button" class="btn primary" (click)="ctx.next()">Next <tc-icon name="arrow-right" [size]="16" /> <kbd>Enter</kbd></button>
+          </div>
+        </div>
+      }
+    </article>
+  }
+
+  <div class="cells" aria-label="Questions in this drill">
+    @for (c of cells(); track c.id) {
+      <i [class]="'l' + c.lv" [class.cur]="c.cur" [class.clear]="!c.left" [title]="c.left ? c.left + ' to go' : 'cleared'"></i>
+    }
+  </div>
+  <p class="legend"><i class="l0"></i> unseen <i class="l1"></i> wrong <i class="l2"></i> learning <i class="l3"></i> secure</p>
+}

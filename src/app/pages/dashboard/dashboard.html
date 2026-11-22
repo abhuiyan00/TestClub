@@ -1,0 +1,80 @@
+<div class="container page">
+  <h1>Dashboard</h1>
+
+  <div class="layout">
+    <div class="col">
+      <section class="card card-pad" aria-labelledby="tl-h">
+        <div class="head">
+          <h2 id="tl-h">Timeline</h2>
+          <label class="select">
+            <span class="sr-only">Show</span>
+            <select [value]="range()" (change)="range.set($any($event.target).value)">
+              <option value="7">Next 7 days</option>
+              <option value="30">Next 30 days</option>
+              <option value="all">All upcoming</option>
+              <option value="past">Past</option>
+            </select>
+          </label>
+        </div>
+        <tc-upcoming-list [events]="timeline()" />
+      </section>
+
+      <section class="card card-pad" aria-labelledby="gl-h">
+        <h2 id="gl-h">Your courses at a glance</h2>
+        <div class="table-wrap">
+          <table class="table">
+            <caption class="sr-only">Progress saved in this browser, per course</caption>
+            <thead>
+              <tr>
+                <th scope="col">Course</th>
+                <th scope="col" class="num">Done</th>
+                <th scope="col" class="num">Answers</th>
+                <th scope="col" class="num">To fix</th>
+                <th scope="col" class="hide-sm">Last studied</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (g of glance(); track g.c.slug) {
+                <tr class="hue" [style.--hue]="g.c.hue">
+                  <td><a [routerLink]="['/courses', g.c.slug]"><i class="dot"></i><b>{{ g.c.code }}</b> <span class="t">{{ g.c.title }}</span></a></td>
+                  <td class="num">{{ g.done }}/{{ g.avail }}</td>
+                  <td class="num">{{ g.answered }}</td>
+                  <td class="num" [class.bad]="g.toFix">{{ g.toFix }}</td>
+                  <td class="hide-sm muted">{{ g.last }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <aside class="col side">
+      <section class="card card-pad" aria-labelledby="cal-h">
+        <h2 id="cal-h">Calendar</h2>
+        <tc-calendar [events]="content.events()" />
+      </section>
+    </aside>
+  </div>
+
+  <section aria-labelledby="rec-h">
+    <div class="section-head">
+      <h2 id="rec-h">Recently accessed courses</h2>
+      <a routerLink="/courses" class="more">All courses <tc-icon name="arrow-right" [size]="14" /></a>
+    </div>
+    @if (recent().length) {
+      <div class="grid">
+        @for (c of recent(); track c.slug; let i = $index) {
+          <tc-course-card class="rise" [style.--i]="i" [course]="c!" />
+        }
+      </div>
+    } @else {
+      <div class="empty">
+        <tc-icon name="history" [size]="26" />
+        <b>Nothing opened yet</b>
+        <p>Courses you open appear here, most recent first.</p>
+        <a class="btn primary" routerLink="/courses">Browse courses</a>
+      </div>
+    }
+  </section>
+</div>

@@ -1,0 +1,49 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+main {
+  flex: 1;
+  padding-top: var(--nav-h);
+  &:focus {
+    outline: none;
+  }
+}
+
+.toast-region {
+  position: fixed;
+  left: 50%;
+  bottom: max(var(--sp-6), env(safe-area-inset-bottom));
+  z-index: 60;
+  transform: translateX(-50%);
+  width: min(calc(100% - 2 * var(--sp-4)), 520px);
+  pointer-events: none;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-2) var(--sp-2) var(--sp-2) var(--sp-4);
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: var(--ink-inverse);
+  box-shadow: var(--shadow-3);
+  font-size: var(--fs-sm);
+  pointer-events: auto;
+  animation: rise var(--dur-3) var(--ease-spring) both;
+  span {
+    flex: 1;
+  }
+  .btn {
+    --b-bg: transparent;
+    --b-ink: var(--ink-inverse);
+    --b-line: color-mix(in oklch, var(--ink-inverse) 35%, transparent);
+  }
+  .btn.ghost:hover {
+    background: color-mix(in oklch, var(--ink-inverse) 12%, transparent);
+    color: var(--ink-inverse);
+  }
+}

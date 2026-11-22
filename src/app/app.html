@@ -1,0 +1,21 @@
+<a class="skip-link" href="#main">Skip to content</a>
+<tc-navbar />
+<main id="main" tabindex="-1">
+  <router-outlet />
+</main>
+<tc-footer />
+<tc-slide-viewer />
+
+<div class="toast-region" aria-live="polite" aria-atomic="true">
+  @if (toast.current(); as t) {
+    <div class="toast" [attr.data-id]="t.id">
+      <span>{{ t.text }}</span>
+      @if (t.action; as a) {
+        <button class="btn small" type="button" (click)="a.run(); toast.dismiss()">{{ a.label }}</button>
+      }
+      <button class="btn ghost icon small" type="button" aria-label="Dismiss" (click)="toast.dismiss()">
+        <tc-icon name="x" [size]="16" />
+      </button>
+    </div>
+  }
+</div>

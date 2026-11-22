@@ -1,0 +1,150 @@
+@if (ctx.bank.isLoading()) {
+  <p class="muted">Loading questions…</p>
+} @else if (!ctx.mockPool().length) {
+  <div class="empty">
+    <tc-icon name="timer" [size]="28" />
+    <b>No mock exam yet</b>
+    <p>A mock exam needs practice questions in the format of the real test. They are on the way for this course.</p>
+  </div>
+} @else if (!m()) {
+  <!-- ================= setup ================= -->
+  <section class="card card-pad setup">
+    <p class="eyebrow">Mock exam</p>
+    <h2>Sit a practice test</h2>
+    @if (open()) {
+      <p class="muted lead">Open questions, like the real test. Write each answer first, then compare it with the model answer and grade yourself. Nothing you write leaves this browser.</p>
+    } @else {
+      <p class="muted lead">Questions are drawn in proportion to each {{ ctx.unit().toLowerCase() }}'s slide count, likely ones more often. No hints; the answers are revealed at the end.</p>
+    }
+    <fieldset>
+      <legend>Number of questions</legend>
+      <div class="seg" role="group" aria-label="Number of questions">
+        @for (s of sizes; track s) {
+          <button type="button" [attr.aria-pressed]="n() === s" (click)="n.set(s)" [disabled]="!sizeOk(s)">{{ s }}</button>
+        }
+      </div>
+      <p class="help">About {{ open() ? 4 : 1 }} minute{{ open() ? 's' : '' }} per question · {{ ctx.mockPool().length }} in the pool.</p>
+    </fieldset>
+    <button type="button" class="btn primary large" (click)="start()"><tc-icon name="timer" [size]="18" /> Start the mock exam</button>
+  </section>
+
+  @if (history().length) {
+    <section class="card card-pad">
+      <h2 class="h">Recent results</h2>
+      <ol class="hist">
+        @for (h of history(); track h.t) {
+          <li>
+            <span class="d">{{ fmt(h.t) }}</span>
+            <span class="bar"><i [style.width.%]="h.pct"></i></span>
+            <b class="tabular">{{ h.pct }}%</b>
+            <span class="muted">{{ h.n }} q</span>
+          </li>
+        }
+      </ol>
+    </section>
+  }
+} @else if (result(); as r) {
+  <!-- ================= result ================= -->
+  <section class="card card-pad score fade-in">
+    <div>
+      <p class="eyebrow">Mock exam result · {{ r.minutes }} min</p>
+      <h2>{{ r.score }} of {{ r.rows.length }} · {{ r.pct }}%</h2>
+      <p class="muted">Grade on typical thresholds (50/60/70/80/90 %): <b class="g">{{ r.grade }}</b>. The real cut-offs may differ.</p>
+    </div>
+    <div class="cta">
+      <button type="button" class="btn primary" (click)="ctx.endMock()"><tc-icon name="reset" [size]="16" /> New mock exam</button>
+    </div>
+  </section>
+
+  <ol class="review">
+    @for (row of r.rows; track row.q.id) {
+      <li class="card" [class.ok]="row.ok" [class.part]="row.partial">
+        <div class="rhead">
+          <span class="num">{{ row.i + 1 }}</span>
+          <tc-icon [name]="row.ok ? 'circle-check' : row.partial ? 'dot' : 'circle-x'" [size]="20" class="st" />
+          <tc-slide-link [slug]="ctx.slug()" [lecture]="row.q.l" [slide]="row.q.slide" [unit]="ctx.unit()[0]" />
+        </div>
+        <p class="stem">{{ row.q.q }}</p>
+        @if (row.q.type !== 'open') {
+          @let c = $any(row.q);
+          @if (!row.ok) {
+            <p class="mine">Your answer: <span>{{ row.picked ?? 'no answer' }}</span></p>
+          }
+          <p class="right">Correct: <b>{{ c.o[c.c] }}</b></p>
+          <p class="why">{{ c.r }}</p>
+        } @else {
+          @if (row.text) {
+            <div class="mine-text"><p class="eyebrow">Your answer</p><p>{{ row.text }}</p></div>
+          }
+          <div class="model"><p class="eyebrow">Model answer</p><tc-answer-text [text]="$any(row.q).a" /></div>
+        }
+      </li>
+    }
+  </ol>
+} @else {
+  <!-- ================= running ================= -->
+  @let ms = m()!;
+  <div class="runbar">
+    <b>{{ ms.reviewing ? 'Grade your answers' : 'Question ' + (ms.i + 1) + ' of ' + ms.ids.length }}</b>
+    <span class="clock tabular" [class.late]="left() < 120000" role="timer" [attr.aria-label]="'Time left ' + clock()"><tc-icon name="timer" [size]="16" /> {{ clock() }}</span>
+    <span class="sp"></span>
+    <button type="button" class="btn ghost small" (click)="ctx.endMock()"><tc-icon name="x" [size]="15" /> Abandon</button>
+  </div>
+
+  @if (q(); as cur) {
+    <article class="qcard card">
+      <p class="qmeta">{{ ms.reviewing ? 'Compare and grade · ' : '' }}{{ ctx.unit() }} {{ cur.l }}</p>
+      <h2 class="stem">{{ cur.q }}</h2>
+
+      @if (qc(); as c) {
+        <div class="opts" role="radiogroup" aria-label="Options">
+          @for (oi of ms.orders[ms.i]; track $index; let i = $index) {
+            <button type="button" role="radio" class="opt" [class.sel]="ms.picks[ms.i] === i" [attr.aria-checked]="ms.picks[ms.i] === i"
+              (click)="ctx.mockPick(ms.i, ms.picks[ms.i] === i ? null : i)">
+              <span class="key">{{ letters[i] }}</span><span>{{ c.o[oi] }}</span>
+            </button>
+          }
+        </div>
+      } @else if (!ms.reviewing) {
+        <label class="sr-only" [for]="'ans' + ms.i">Your answer</label>
+        <textarea class="input" [id]="'ans' + ms.i" rows="8" placeholder="Write your answer…" [value]="ms.texts[ms.i]"
+          (input)="ctx.mockText(ms.i, $any($event.target).value)"></textarea>
+      } @else {
+        <div class="two">
+          <div class="mine-text"><p class="eyebrow">Your answer</p><p>{{ ms.texts[ms.i] || 'Nothing written.' }}</p></div>
+          <div class="model"><p class="eyebrow">Model answer</p><tc-answer-text [text]="$any(cur).a" /></div>
+        </div>
+        <div class="grades" role="radiogroup" aria-label="How well did you answer?">
+          <button type="button" role="radio" class="btn" [class.sel-bad]="ms.picks[ms.i] === Grade.Missed" [attr.aria-checked]="ms.picks[ms.i] === Grade.Missed" (click)="ctx.mockPick(ms.i, Grade.Missed)">Missed <kbd>1</kbd></button>
+          <button type="button" role="radio" class="btn" [class.sel-mid]="ms.picks[ms.i] === Grade.Partly" [attr.aria-checked]="ms.picks[ms.i] === Grade.Partly" (click)="ctx.mockPick(ms.i, Grade.Partly)">Partly <kbd>2</kbd></button>
+          <button type="button" role="radio" class="btn" [class.sel-ok]="ms.picks[ms.i] === Grade.GotIt" [attr.aria-checked]="ms.picks[ms.i] === Grade.GotIt" (click)="ctx.mockPick(ms.i, Grade.GotIt)">Got it <kbd>3</kbd></button>
+        </div>
+      }
+
+      <div class="nav">
+        <button type="button" class="btn" (click)="ctx.mockGo(ms.i - 1)" [disabled]="ms.i === 0"><tc-icon name="arrow-left" [size]="16" /> Previous</button>
+        <span class="sp"></span>
+        @if (ms.i < ms.ids.length - 1) {
+          <button type="button" class="btn primary" (click)="ctx.mockGo(ms.i + 1)">Next <tc-icon name="arrow-right" [size]="16" /></button>
+        }
+      </div>
+    </article>
+  }
+
+  <div class="grid-nav" aria-label="Jump to question">
+    @for (id of ms.ids; track id; let i = $index) {
+      <button type="button" [class.cur]="i === ms.i" [class.done]="ms.picks[i] !== null || (!ms.reviewing && !!ms.texts[i].trim())" (click)="ctx.mockGo(i)"
+        [attr.aria-label]="'Question ' + (i + 1)" [attr.aria-current]="i === ms.i ? 'step' : null">{{ i + 1 }}</button>
+    }
+  </div>
+
+  <div class="submit">
+    @if (confirm()) {
+      <p class="warn" role="alert">{{ ms.ids.length - answered() }} questions are still {{ ms.reviewing ? 'ungraded' : 'unanswered' }}. Submit anyway?</p>
+    }
+    <button type="button" class="btn primary large" (click)="submit()">
+      <tc-icon name="flag" [size]="18" />
+      {{ open() && !ms.reviewing ? 'Finish writing (' + written() + '/' + ms.ids.length + ')' : confirm() ? 'Yes, submit' : 'Submit (' + answered() + '/' + ms.ids.length + ')' }}
+    </button>
+  </div>
+}

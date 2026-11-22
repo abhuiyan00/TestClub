@@ -1,0 +1,141 @@
+:host {
+  display: grid;
+  gap: var(--sp-4);
+}
+
+.summary {
+  display: grid;
+  gap: var(--sp-4);
+  @media (min-width: 760px) {
+    grid-template-columns: 300px 1fr;
+  }
+}
+
+.ringcard {
+  display: grid;
+  justify-items: center;
+  gap: var(--sp-3);
+  text-align: center;
+  span {
+    display: grid;
+  }
+  .big {
+    font-size: var(--fs-2xl);
+    font-weight: 750;
+  }
+  small {
+    color: var(--ink-3);
+    font-size: var(--fs-xs);
+  }
+  p {
+    font-size: var(--fs-xs);
+    max-width: 30ch;
+  }
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-4);
+  align-content: center;
+  div {
+    display: grid;
+    gap: 2px;
+  }
+  span {
+    color: var(--ink-3);
+    font-size: var(--fs-xs);
+  }
+  b {
+    font-size: var(--fs-2xl);
+    font-weight: 750;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.table {
+  a {
+    color: var(--ink);
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  .mono {
+    color: var(--accent-ink);
+    font-weight: 700;
+    margin-right: 4px;
+  }
+  tr:last-child td {
+    border-bottom: 0;
+  }
+  th:first-child {
+    border-top-left-radius: var(--radius-lg);
+  }
+  th:last-child {
+    border-top-right-radius: var(--radius-lg);
+  }
+}
+
+.meter-cell {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  min-width: 140px;
+  .meter {
+    flex: 1;
+  }
+  span {
+    min-width: 3.5ch;
+    text-align: right;
+    font-size: var(--fs-xs);
+    font-weight: 650;
+  }
+}
+
+.hide-sm {
+  @media (max-width: 560px) {
+    display: none;
+  }
+}
+
+.two {
+  display: grid;
+  gap: var(--sp-4);
+  @media (min-width: 860px) {
+    grid-template-columns: 1fr 1fr;
+  }
+  h3 {
+    margin-bottom: var(--sp-3);
+    font-size: var(--fs-md);
+  }
+}
+
+.calib {
+  font-size: var(--fs-sm);
+  margin-bottom: var(--sp-2);
+}
+.small {
+  font-size: var(--fs-xs);
+}
+
+.danger-zone {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  border-color: color-mix(in oklch, var(--bad) 30%, var(--border));
+  h3 {
+    font-size: var(--fs-md);
+    margin-bottom: 4px;
+  }
+  p {
+    font-size: var(--fs-sm);
+    max-width: 60ch;
+  }
+  .reset {
+    display: flex;
+    gap: var(--sp-2);
+  }
+}

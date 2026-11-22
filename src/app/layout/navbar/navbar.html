@@ -1,0 +1,93 @@
+<header class="nav" [class.scrolled]="scrolled()">
+  <div class="nav-in">
+    <a class="brand" routerLink="/" aria-label="TestClub, home">
+      <tc-brand-mark [size]="30" />
+      <span class="word">Test<b>Club</b></span>
+    </a>
+
+    <nav class="primary" aria-label="Main">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page">Home</a>
+      <a routerLink="/dashboard" routerLinkActive="active" ariaCurrentWhenActive="page">Dashboard</a>
+      <a routerLink="/courses" routerLinkActive="active" ariaCurrentWhenActive="page">My courses</a>
+      <a routerLink="/guide" routerLinkActive="active" ariaCurrentWhenActive="page">Guide</a>
+    </nav>
+
+    <div class="tools">
+      <div class="dd recent-dd">
+        <button class="tool text" type="button" (click)="toggle('recent')" [attr.aria-expanded]="open() === 'recent'" aria-controls="menu-recent">
+          Recent <tc-icon name="chevron-down" [size]="14" />
+        </button>
+        @if (open() === 'recent') {
+          <div class="menu" id="menu-recent">
+            <p class="menu-h">Recently opened</p>
+            @for (c of recent(); track c.slug) {
+              <a class="menu-item hue" [style.--hue]="c.hue" [routerLink]="['/courses', c.slug]">
+                <i class="dot"></i>
+                <span><b>{{ c.code }}</b> {{ c.title }}</span>
+              </a>
+            } @empty {
+              <p class="menu-empty">Courses you open appear here.</p>
+            }
+          </div>
+        }
+      </div>
+
+      <a class="tool" routerLink="/search" aria-label="Search (shortcut: /)" title="Search (/)">
+        <tc-icon name="search" [size]="19" />
+      </a>
+
+      <div class="dd">
+        <button class="tool" type="button" (click)="toggle('bell')" [attr.aria-expanded]="open() === 'bell'" aria-controls="menu-bell"
+          [attr.aria-label]="soon() ? soon() + ' tests in the next 7 days' : 'Upcoming tests'">
+          <tc-icon name="bell" [size]="19" />
+          @if (soon()) {
+            <span class="count" aria-hidden="true">{{ soon() }}</span>
+          }
+        </button>
+        @if (open() === 'bell') {
+          <div class="menu wide" id="menu-bell">
+            <p class="menu-h">Next 30 days</p>
+            @for (e of upcoming(); track e.course.slug + e.at) {
+              <a class="menu-item event hue" [style.--hue]="e.course.hue" [routerLink]="['/courses', e.course.slug]">
+                <i class="dot"></i>
+                <span>
+                  <b>{{ e.course.code }} · {{ e.title }}</b>
+                  <small>{{ when(e) }}</small>
+                </span>
+              </a>
+            } @empty {
+              <p class="menu-empty">No tests in the next 30 days.</p>
+            }
+            <a class="menu-foot" routerLink="/dashboard">Open the timeline <tc-icon name="arrow-right" [size]="14" /></a>
+          </div>
+        }
+      </div>
+
+      <span class="sep" aria-hidden="true"></span>
+
+      <button class="tool" type="button" (click)="prefs.toggleTheme()"
+        [attr.aria-label]="prefs.dark() ? 'Switch to light theme' : 'Switch to dark theme'" [title]="prefs.dark() ? 'Light theme' : 'Dark theme'">
+        <tc-icon [name]="prefs.dark() ? 'sun' : 'moon'" [size]="19" />
+      </button>
+
+      <button class="tool burger" type="button" (click)="toggle('menu')" [attr.aria-expanded]="open() === 'menu'" aria-controls="menu-main" aria-label="Menu">
+        <tc-icon [name]="open() === 'menu' ? 'x' : 'menu'" [size]="20" />
+      </button>
+    </div>
+  </div>
+
+  @if (open() === 'menu') {
+    <nav class="sheet" id="menu-main" aria-label="Main">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><tc-icon name="home" /> Home</a>
+      <a routerLink="/dashboard" routerLinkActive="active"><tc-icon name="dashboard" /> Dashboard</a>
+      <a routerLink="/courses" routerLinkActive="active"><tc-icon name="library" /> My courses</a>
+      <a routerLink="/guide" routerLinkActive="active"><tc-icon name="help" /> Guide</a>
+      @if (recent().length) {
+        <p class="menu-h">Recent</p>
+        @for (c of recent(); track c.slug) {
+          <a class="hue" [style.--hue]="c.hue" [routerLink]="['/courses', c.slug]"><i class="dot"></i> {{ c.title }}</a>
+        }
+      }
+    </nav>
+  }
+</header>

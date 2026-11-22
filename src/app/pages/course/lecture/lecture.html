@@ -1,0 +1,147 @@
+@if (ctx.course(); as c) {
+  @if (lecture(); as l) {
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <a [routerLink]="['/courses', c.slug]">{{ c.code }}</a>
+      <tc-icon name="chevron-right" [size]="14" />
+      <span aria-current="page">{{ ctx.unit() }} {{ l.n }}</span>
+    </nav>
+
+    <header class="head">
+      <p class="eyebrow">{{ ctx.unit() }} {{ l.n }}@if (date()) {<span> · {{ date() }}</span>}@if (l.slides) {<span> · {{ l.slides }} slides</span>}@if (l.pages) {<span> · pages {{ l.pages[0] }}–{{ l.pages[1] }} of the lecture PDF</span>}</p>
+      <h1>{{ l.title }}</h1>
+      @if (notes()?.summary) {
+        <p class="lede">{{ notes()!.summary }}</p>
+      }
+      <div class="actions">
+        @if (qCount()) {
+          <button type="button" class="btn primary" (click)="practise()"><tc-icon name="play" [size]="16" /> Practise {{ qCount() }} questions</button>
+        }
+        @if (notes()?.facts?.length) {
+          <div class="seg" role="group" aria-label="View">
+            <button type="button" [attr.aria-pressed]="!cards()" (click)="setMode(false)"><tc-icon name="notes" [size]="15" /> Notes</button>
+            <button type="button" [attr.aria-pressed]="cards()" (click)="setMode(true)"><tc-icon name="cards" [size]="15" /> Flashcards</button>
+          </div>
+        }
+        <button type="button" class="btn ghost" [class.on]="done()" (click)="ctx.toggleDone(l.n)" [attr.aria-pressed]="done()">
+          <tc-icon [name]="done() ? 'circle-check' : 'check'" [size]="16" /> {{ done() ? 'Done' : 'Mark as done' }}
+        </button>
+      </div>
+    </header>
+
+    @if (ctx.bank.isLoading()) {
+      <p class="muted">Loading notes…</p>
+    } @else if (!notes()) {
+      <div class="empty">
+        <tc-icon name="hourglass" [size]="28" />
+        <b>Notes on the way</b>
+        <p>This {{ ctx.unit().toLowerCase() }} has no study notes yet. Check back soon.</p>
+      </div>
+    } @else if (cards()) {
+      <!-- ---------- flashcards ---------- -->
+      @if (card(); as f) {
+        <p class="count" aria-live="polite">{{ deck()!.order.length }} cards left · {{ deck()!.known }} known</p>
+        <div class="flash" [class.flipped]="deck()!.flipped">
+          <button type="button" class="flash-face" (click)="flip()" [attr.aria-label]="deck()!.flipped ? 'Show the question side' : 'Show the answer side'">
+            <span class="inner">
+              <span class="side front">
+                <span class="eyebrow">{{ unitShort() }}{{ l.n }} · slide {{ f.slide }}@if (f.weight === 'high') {<span class="badge accent">likely</span>}</span>
+                <span class="ft">{{ f.t }}</span>
+                <span class="hint">Recall the detail, then tap or press <kbd>Space</kbd></span>
+              </span>
+              <span class="side back">
+                <span class="eyebrow">{{ f.t }}</span>
+                <span class="fd">{{ f.d }}</span>
+              </span>
+            </span>
+          </button>
+        </div>
+        <div class="flash-ctrl">
+          <button type="button" class="btn" (click)="again()"><tc-icon name="reset" [size]="16" /> Again <kbd>1</kbd></button>
+          <button type="button" class="btn primary" (click)="know()"><tc-icon name="check" [size]="16" /> Got it <kbd>2</kbd></button>
+        </div>
+        @if (deck()!.flipped) {
+          <div class="flash-slide fade-in">
+            <tc-slide-thumb [slug]="c.slug" [lecture]="l.n" [slide]="f.slide" [unit]="unitShort()" />
+          </div>
+        }
+      } @else {
+        <div class="empty">
+          <tc-icon name="circle-check" [size]="30" />
+          <b>Deck cleared</b>
+          <p>You marked all {{ notes()!.facts.length }} facts as known.</p>
+          <button type="button" class="btn primary" (click)="reshuffle()"><tc-icon name="shuffle" [size]="16" /> Shuffle again</button>
+        </div>
+      }
+    } @else {
+      <!-- ---------- notes ---------- -->
+      @let n = notes()!;
+      <section aria-labelledby="facts-h">
+        <div class="section-head"><h2 id="facts-h">Key facts</h2><span class="legend"><i></i> stressed on the slides</span></div>
+        <div class="facts">
+          @for (f of n.facts; track $index; let i = $index) {
+            <article class="fact card rise" [class.high]="f.weight === 'high'" [style.--i]="i % 8">
+              <div class="ftext">
+                <h3>{{ f.t }}</h3>
+                <p>{{ f.d }}</p>
+                <div class="fmeta">
+                  <tc-slide-link [slug]="c.slug" [lecture]="l.n" [slide]="f.slide" [unit]="unitShort()" />
+                  @if (f.weight === 'high') {
+                    <span class="badge accent">likely on the test</span>
+                  }
+                </div>
+              </div>
+              <div class="fthumb">
+                <tc-slide-thumb [slug]="c.slug" [lecture]="l.n" [slide]="f.slide" [unit]="unitShort()" />
+              </div>
+            </article>
+          }
+        </div>
+      </section>
+
+      @if (n.formulas.length) {
+        <section aria-labelledby="formulas-h">
+          <div class="section-head"><h2 id="formulas-h">Formulas</h2></div>
+          <div class="formulas card">
+            @for (x of n.formulas; track $index) {
+              <div class="formula">
+                <b>{{ x.name }}</b>
+                <code>{{ x.expr }}</code>
+                <tc-slide-link [slug]="c.slug" [lecture]="l.n" [slide]="x.slide" [unit]="unitShort()" />
+              </div>
+            }
+          </div>
+        </section>
+      }
+
+      @if (n.traps.length) {
+        <section aria-labelledby="traps-h">
+          <div class="section-head"><h2 id="traps-h">Don't mix these up</h2></div>
+          <ul class="traps">
+            @for (t of n.traps; track $index) {
+              <li><tc-icon name="alert" [size]="16" /><span>{{ t }}</span></li>
+            }
+          </ul>
+        </section>
+      }
+    }
+
+    <nav class="pager" aria-label="Lectures">
+      @if (neighbours().prev; as p) {
+        <a class="btn outline" [routerLink]="['/courses', c.slug, 'lectures', p.n]" [queryParams]="cards() ? { mode: 'cards' } : {}">
+          <tc-icon name="arrow-left" [size]="16" /> {{ ctx.unit() }} {{ p.n }} · {{ p.short }}
+        </a>
+      }
+      <span class="sp"></span>
+      @if (neighbours().next; as x) {
+        <a class="btn outline" [routerLink]="['/courses', c.slug, 'lectures', x.n]" [queryParams]="cards() ? { mode: 'cards' } : {}">
+          {{ ctx.unit() }} {{ x.n }} · {{ x.short }} <tc-icon name="arrow-right" [size]="16" />
+        </a>
+      }
+    </nav>
+  } @else if (ctx.course()) {
+    <div class="empty">
+      <b>No such {{ ctx.unit().toLowerCase() }}</b>
+      <a class="btn" [routerLink]="['/courses', c.slug]">Back to the course</a>
+    </div>
+  }
+}

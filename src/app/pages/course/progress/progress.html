@@ -1,0 +1,87 @@
+@if (!ctx.questions().length) {
+  <div class="empty">
+    <tc-icon name="chart" [size]="28" />
+    <b>No progress to show yet</b>
+    <p>Progress appears once this course has practice questions and you start answering them.</p>
+  </div>
+} @else {
+  <section class="summary">
+    <div class="card card-pad ringcard">
+      <tc-progress-ring [value]="ctx.readiness()" [size]="112" [stroke]="10">
+        <span><b class="big">{{ (ctx.readiness() * 100).toFixed(0) }}%</b><small>ready</small></span>
+      </tc-progress-ring>
+      <p class="muted">Secure questions count fully, learning ones half, recent misses a little.</p>
+    </div>
+    <div class="card card-pad stats">
+      <div><span>Secure</span><b>{{ ctx.totals().l3 }}</b></div>
+      <div><span>Learning</span><b>{{ ctx.totals().l2 }}</b></div>
+      <div><span>To fix</span><b>{{ ctx.totals().l1 }}</b></div>
+      <div><span>Unseen</span><b>{{ ctx.totals().l0 }}</b></div>
+      <div><span>Answers</span><b>{{ ctx.totals().answered }}</b></div>
+      <div><span>Accuracy</span><b>{{ accuracy() }}%</b></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <table class="table">
+      <caption class="sr-only">Progress per {{ ctx.unit().toLowerCase() }}</caption>
+      <thead>
+        <tr>
+          <th scope="col">{{ ctx.unit() }}</th>
+          <th scope="col" class="num">Questions</th>
+          <th scope="col" class="num hide-sm">Seen</th>
+          <th scope="col" class="num">Accuracy</th>
+          <th scope="col">Secure</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (r of rows(); track r.l.n) {
+          <tr>
+            <td><a [routerLink]="['../lectures', r.l.n]"><span class="mono">{{ ctx.unit()[0] }}{{ r.l.n }}</span> {{ r.l.short }}</a></td>
+            <td class="num">{{ r.t.n }}</td>
+            <td class="num hide-sm">{{ r.t.n - r.t.l0 }}</td>
+            <td class="num">{{ r.acc === null ? '–' : (r.acc * 100).toFixed(0) + '%' }}</td>
+            <td class="meter-cell">
+              <div class="meter" [style.--v]="r.secure"><i></i></div>
+              <span class="tabular">{{ (r.secure * 100).toFixed(0) }}%</span>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </section>
+
+  <div class="two">
+    <section class="card card-pad">
+      <h3>Mock exams</h3>
+      @if (history().length) {
+        <tc-bar-list [rows]="history()" label="Recent mock exam scores" />
+      } @else {
+        <p class="muted">No mock exams yet. <a routerLink="../mock">Sit one</a> when you have practised a little.</p>
+      }
+    </section>
+    <section class="card card-pad">
+      <h3>Confidence check</h3>
+      @if (calib().sure + calib().unsure) {
+        <p class="calib">When you were <b>sure</b>, you were right <b>{{ pct(calib().sureRight, calib().sure) }}%</b> of {{ calib().sure }} times.</p>
+        <p class="calib">When you were <b>not sure</b>, you were right <b>{{ pct(calib().unsureRight, calib().unsure) }}%</b> of {{ calib().unsure }} times.</p>
+        <p class="muted small">If the two are close, your sense of what you know is off: mark guesses as "not sure" so they come back.</p>
+      } @else {
+        <p class="muted">Answer a few questions and use "Not sure" when you guess; this compares how often each kind is right.</p>
+      }
+    </section>
+  </div>
+
+  <section class="danger-zone card card-pad">
+    <div>
+      <h3>Reset progress</h3>
+      <p class="muted">Clears answers, drills, mock results and done marks for this course in this browser. You can undo right after.</p>
+    </div>
+    <div class="reset">
+      @if (confirmReset()) {
+        <button type="button" class="btn ghost" (click)="confirmReset.set(false)">Cancel</button>
+      }
+      <button type="button" class="btn danger" (click)="reset()"><tc-icon name="trash" [size]="16" /> {{ confirmReset() ? 'Yes, reset' : 'Reset progress' }}</button>
+    </div>
+  </section>
+}

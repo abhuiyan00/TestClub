@@ -1,0 +1,81 @@
+<div class="container page">
+  <h1>Search</h1>
+  <label class="search-box big">
+    <tc-icon name="search" [size]="20" />
+    <span class="sr-only">Search notes and questions</span>
+    <input #box class="input" type="search" placeholder="Try “chroma”, “BCNF”, “Kohonen”, “ARP”…" [value]="term()" (input)="onInput($any($event.target).value)" autocomplete="off" />
+  </label>
+
+  <div class="chips" role="group" aria-label="Limit to a course">
+    <button type="button" class="chip" [attr.aria-pressed]="!only()" (click)="only.set(null)">All courses</button>
+    @for (c of content.courses(); track c.slug) {
+      <button type="button" class="chip hue" [style.--hue]="c.hue" [attr.aria-pressed]="only() === c.slug" (click)="only.set(only() === c.slug ? null : c.slug)">{{ c.code }}</button>
+    }
+  </div>
+
+  <div aria-live="polite">
+    @if (term().trim().length < 2) {
+      <p class="muted hint">Type at least two letters. Searches key facts, formulas, mix-ups, questions, answers and explanations in every course.</p>
+    } @else if (banks.isLoading()) {
+      <p class="muted hint">Loading course notes…</p>
+    } @else if (!hits().length) {
+      <div class="empty">
+        <tc-icon name="search" [size]="26" />
+        <b>Nothing found for “{{ term() }}”</b>
+        <p>Check the spelling or try a shorter word.</p>
+      </div>
+    } @else {
+      <p class="muted count">{{ hits().length }}{{ hits().length >= 80 ? '+' : '' }} results</p>
+      @for (g of grouped(); track g.course.slug) {
+        <section class="group hue" [style.--hue]="g.course.hue">
+          <h2><i></i>{{ g.course.code }} <span>{{ g.course.title }}</span></h2>
+          <ul>
+            @for (h of g.hits; track h.kind + h.id) {
+              <li class="hit card">
+                <div class="meta">
+                  <span class="badge accent">{{ kind[h.kind] }}</span>
+                  <a [routerLink]="['/courses', h.slug, 'lectures', h.l]" class="lec">{{ unit(h.slug) }}{{ h.l }}</a>
+                  @if (h.slide) {
+                    <tc-slide-link [slug]="h.slug" [lecture]="h.l" [slide]="h.slide" [unit]="unit(h.slug)" />
+                  }
+                </div>
+                <p class="title">
+                  @for (s of seg(h.title); track $index) {
+                    @if (s.hit) {
+                      <mark>{{ s.t }}</mark>
+                    } @else {
+                      <span>{{ s.t }}</span>
+                    }
+                  }
+                </p>
+                @if (h.answer) {
+                  <p class="ans">
+                    <b>Answer:</b>
+                    @for (s of seg(h.answer); track $index) {
+                      @if (s.hit) {
+                        <mark>{{ s.t }}</mark>
+                      } @else {
+                        <span>{{ s.t }}</span>
+                      }
+                    }
+                  </p>
+                }
+                @if (h.text) {
+                  <p class="text" [class.mono]="h.kind === 'formula'">
+                    @for (s of seg(h.text); track $index) {
+                      @if (s.hit) {
+                        <mark>{{ s.t }}</mark>
+                      } @else {
+                        <span>{{ s.t }}</span>
+                      }
+                    }
+                  </p>
+                }
+              </li>
+            }
+          </ul>
+        </section>
+      }
+    }
+  </div>
+</div>

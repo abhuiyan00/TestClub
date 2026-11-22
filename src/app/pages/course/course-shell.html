@@ -1,0 +1,138 @@
+@if (ctx.course(); as c) {
+  <div class="course hue" [style.--hue]="c.hue">
+    <button type="button" class="index-toggle" (click)="indexOpen.set(!indexOpen())" [attr.aria-expanded]="indexOpen()"
+      aria-controls="course-index" aria-label="Course index" title="Course index">
+      <tc-icon name="list" [size]="20" />
+    </button>
+
+    @if (indexOpen()) {
+      <div class="scrim" (click)="indexOpen.set(false)" aria-hidden="true"></div>
+      <aside class="index" id="course-index" aria-label="Course index">
+        <div class="index-head">
+          <b>{{ c.code }}</b>
+          <button type="button" class="btn ghost icon small" (click)="indexOpen.set(false)" aria-label="Close course index"><tc-icon name="x" /></button>
+        </div>
+        <nav>
+          <a [routerLink]="['/courses', c.slug]" fragment="general" (click)="indexOpen.set(false)">General</a>
+          @if (c.examGuide || hasBank()) {
+            <a [routerLink]="['/courses', c.slug, 'guide']" (click)="indexOpen.set(false)">Exam guide</a>
+          }
+          @for (l of c.lectures; track l.n) {
+            @if (l.status === 'available') {
+              <a [routerLink]="['/courses', c.slug, 'lectures', l.n]" (click)="indexOpen.set(false)" routerLinkActive="active">
+                <span class="tick" [class.done]="ctx.progress().done.includes(l.n)">
+                  @if (ctx.progress().done.includes(l.n)) { <tc-icon name="check" [size]="12" [stroke]="3" /> }
+                </span>
+                <span class="n">{{ l.n }}</span> {{ l.short }}
+              </a>
+            } @else {
+              <span class="na"><span class="tick"></span><span class="n">{{ l.n }}</span> {{ l.short }}</span>
+            }
+          }
+        </nav>
+      </aside>
+    }
+
+    <div class="layout" [class.blocks-open]="prefs.prefs().blocks">
+      <div class="main container">
+        <header class="hero" [class.compact]="compact()">
+          <tc-course-pattern class="bg" [motif]="c.motif" [hue]="c.hue" seed="hero" />
+          <div class="veil"></div>
+          @defer (on idle) {
+            <tc-scene class="art" [items]="sceneItems()" layout="single" />
+          }
+          <div class="hero-text">
+            <span class="sem">{{ content.site()?.semester }}</span>
+            <h1>
+              <span class="code">{{ c.code }} # {{ c.type }} #</span>
+              {{ c.title }}
+            </h1>
+            <p>{{ c.summary }}</p>
+          </div>
+          @if (ctx.exam(); as e) {
+            <a class="exam-chip" [routerLink]="['/courses', c.slug, 'guide']">
+              <tc-icon name="timer" [size]="16" />
+              <span><b>{{ e.title }}</b> in {{ examLabel() }}</span>
+              <small>{{ examDate() }}</small>
+            </a>
+          }
+        </header>
+
+        <div class="tabbar">
+          <nav class="tabs" aria-label="Course sections">
+            <a [routerLink]="['/courses', c.slug]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page">Course</a>
+            @if (c.examGuide || hasBank()) {
+              <a [routerLink]="['/courses', c.slug, 'guide']" routerLinkActive="active" ariaCurrentWhenActive="page">Exam guide</a>
+            }
+            <a [routerLink]="['/courses', c.slug, 'practice']" routerLinkActive="active" ariaCurrentWhenActive="page">Practice</a>
+            <a [routerLink]="['/courses', c.slug, 'mock']" routerLinkActive="active" ariaCurrentWhenActive="page">Mock exam</a>
+            <a [routerLink]="['/courses', c.slug, 'mistakes']" routerLinkActive="active" ariaCurrentWhenActive="page">
+              Mistakes
+              @if (ctx.mistakes().length) {
+                <span class="badge solid">{{ ctx.mistakes().length }}</span>
+              }
+            </a>
+            <a [routerLink]="['/courses', c.slug, 'progress']" routerLinkActive="active" ariaCurrentWhenActive="page">Progress</a>
+          </nav>
+          @if (!prefs.prefs().blocks) {
+            <button type="button" class="btn ghost icon small blocks-btn" (click)="prefs.setBlocks(true)" aria-label="Show calendar and progress panel" title="Calendar and progress">
+              <tc-icon name="panel-right" />
+            </button>
+          }
+        </div>
+
+        <div class="outlet">
+          <router-outlet />
+        </div>
+      </div>
+
+      @if (prefs.prefs().blocks) {
+        <aside class="blocks" aria-label="Calendar and progress">
+          <div class="blocks-head">
+            <button type="button" class="btn ghost icon small" (click)="prefs.setBlocks(false)" aria-label="Hide panel"><tc-icon name="x" /></button>
+          </div>
+          @if (hasBank()) {
+            <section class="block">
+              <h2>Your progress</h2>
+              <div class="prog">
+                <tc-progress-ring [value]="ctx.readiness()" [size]="76" [stroke]="7">
+                  <b class="pct">{{ (ctx.readiness() * 100).toFixed(0) }}%</b>
+                </tc-progress-ring>
+                <dl>
+                  <div><dt>Secure</dt><dd>{{ ctx.totals().l3 }}</dd></div>
+                  <div><dt>Learning</dt><dd>{{ ctx.totals().l2 }}</dd></div>
+                  <div><dt>To fix</dt><dd>{{ ctx.totals().l1 }}</dd></div>
+                  <div><dt>Unseen</dt><dd>{{ ctx.totals().l0 }}</dd></div>
+                </dl>
+              </div>
+              <a class="btn primary small full" [routerLink]="['/courses', c.slug, 'practice']"><tc-icon name="play" [size]="15" /> Continue practising</a>
+            </section>
+          }
+          <section class="block">
+            <h2>Calendar</h2>
+            <tc-calendar [events]="events()" />
+          </section>
+          <section class="block">
+            <h2>Upcoming</h2>
+            <tc-upcoming-list [events]="upcoming()" [compact]="true" />
+          </section>
+        </aside>
+      }
+    </div>
+  </div>
+} @else if (content.catalog.isLoading()) {
+  <div class="container loading" aria-busy="true">
+    <div class="sk hero-sk"></div>
+    <div class="sk line"></div>
+    <div class="sk block-sk"></div>
+  </div>
+} @else {
+  <div class="container missing">
+    <div class="empty">
+      <tc-icon name="book" [size]="28" />
+      <b>Course not found</b>
+      <p>The link may be outdated. All courses are listed under My courses.</p>
+      <a class="btn primary" routerLink="/courses">Open My courses</a>
+    </div>
+  </div>
+}

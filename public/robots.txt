@@ -1,0 +1,3 @@
+# Shared by link among students; kept out of search engines on purpose.
+User-agent: *
+Disallow: /

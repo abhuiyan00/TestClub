@@ -1,0 +1,100 @@
+<div class="container page">
+  <header class="head">
+    <p class="eyebrow">Guide</p>
+    <h1>How TestClub works</h1>
+    <p class="lede">A study companion for the {{ content.site()?.semester ?? '' }} lecture courses, written by students from the lecture slides. It is not an official university service.</p>
+  </header>
+
+  <nav class="toc card" aria-label="On this page">
+    <a href="#practice">Practice</a>
+    <a href="#mock">Mock exams</a>
+    <a href="#keys">Keyboard</a>
+    <a href="#privacy">Privacy</a>
+    <a href="#material">The material</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+
+  <section id="practice">
+    <h2><tc-icon name="target" [size]="22" /> Practice</h2>
+    <div class="cols">
+      <div>
+        <h3>The Testownik rule</h3>
+        <p>In a drill, a question leaves after you answer it correctly a set number of times (two by default). Each mistake adds one more repetition, up to four. Answers you mark as a guess, or give after opening the hint, do not count towards leaving.</p>
+      </div>
+      <div>
+        <h3>Spaced review</h3>
+        <p>A question you answer right, and are sure of, comes back after 1, then 2, then 3 and 5 days. Before a test the gaps shrink so that everything gets a last look the evening before. A miss brings it back the same day.</p>
+      </div>
+      <div>
+        <h3>Recall first</h3>
+        <p>Recall mode hides the options until you have an answer in mind. Pulling an answer from memory builds a stronger memory than recognising it among options.</p>
+      </div>
+      <div>
+        <h3>Open questions</h3>
+        <p>Some tests ask open questions. Answer out loud or on paper, reveal the model answer, then grade yourself: missed, partly or got it. Only “got it” moves the question forward.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="mock">
+    <h2><tc-icon name="timer" [size]="22" /> Mock exams</h2>
+    <p>Questions are drawn in proportion to each lecture's slide count, and those rated likely are drawn more often. The timer is a guide; you can finish after it runs out. The grade uses typical thresholds (50, 60, 70, 80 and 90 %); the real cut-offs may differ.</p>
+  </section>
+
+  <section id="keys">
+    <h2><tc-icon name="keyboard" [size]="22" /> Keyboard</h2>
+    <table class="table card">
+      <caption class="sr-only">Keyboard shortcuts</caption>
+      <tbody>
+        @for (k of keys; track k[0]) {
+          <tr><th scope="row"><kbd>{{ k[0] }}</kbd></th><td>{{ k[1] }}</td></tr>
+        }
+      </tbody>
+    </table>
+  </section>
+
+  <section id="privacy">
+    <h2><tc-icon name="shield" [size]="22" /> Your data and privacy</h2>
+    <ul class="ticks">
+      <li>No accounts, no sign-up and no cookies.</li>
+      <li>No analytics, trackers or advertising, and no requests to other websites; even the fonts are served from this site.</li>
+      <li>Your progress, starred courses and settings are saved in this browser's local storage. They never leave your device and are not shared between devices.</li>
+      <li>Answers you type in an open-question mock exam stay in this browser too.</li>
+      <li>Clearing this site's data in your browser removes everything. Each course also has a reset button on its Progress tab.</li>
+    </ul>
+  </section>
+
+  <section id="material">
+    <h2><tc-icon name="notes" [size]="22" /> About the material</h2>
+    <p>Notes and questions are written from the lecture slides published for each course. Small slide excerpts are shown next to the notes for reference; they remain the property of their authors. The lecture files themselves are not hosted here: get them from the official course pages.</p>
+    <p>Notes can contain mistakes. When a note and a slide disagree, the slide wins.@if (content.site()?.repoUrl; as r) { <span>Please <a [href]="r + '/issues'" target="_blank" rel="noopener noreferrer">report it</a> so it can be fixed.</span>}</p>
+  </section>
+
+  <section id="faq">
+    <h2><tc-icon name="help" [size]="22" /> FAQ</h2>
+    <details>
+      <summary>Is this the official course portal?</summary>
+      <p>No. TestClub is an independent study aid made by students. Official announcements, grades and materials are on the university's own course pages.</p>
+    </details>
+    <details>
+      <summary>Why does a course have notes but few questions, or none yet?</summary>
+      <p>It is the middle of the semester. Courses are filled in as lectures happen; upcoming lectures are listed as "Not available yet".</p>
+    </details>
+    <details>
+      <summary>What does "likely on the test" mean?</summary>
+      <p>A judgement from the slides: definitions, acronyms and numbers the slides stress, and question shapes seen in past tests where those are known. It is an estimate, not inside information.</p>
+    </details>
+    <details>
+      <summary>Will my progress follow me to my phone?</summary>
+      <p>No. Progress is stored only in the browser where you practise, which is what keeps the site free of accounts.</p>
+    </details>
+    <details>
+      <summary>Can I use it offline?</summary>
+      <p>Pages you have opened usually load from the browser cache, but a connection is needed to open a course for the first time.</p>
+    </details>
+  </section>
+
+  <div class="back">
+    <a class="btn primary" routerLink="/courses"><tc-icon name="library" [size]="16" /> Go to my courses</a>
+  </div>
+</div>

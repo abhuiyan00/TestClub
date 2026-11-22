@@ -1,0 +1,53 @@
+{
+  "name": "testclub",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "ng serve",
+    "build": "ng build && node tools/postbuild.mjs",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "test:ci": "ng test --watch=false",
+    "check:content": "node tools/check-content.mjs",
+    "check": "npm run check:content && npm run test:ci && npm run build",
+    "format": "prettier --write \"src/**/*.{ts,html,scss}\" \"tools/**/*.mjs\""
+  },
+  "private": true,
+  "packageManager": "npm@11.17.0",
+  "dependencies": {
+    "@angular/common": "^22.3.0",
+    "@angular/compiler": "^22.3.0",
+    "@angular/core": "^22.3.0",
+    "@angular/forms": "^22.3.0",
+    "@angular/platform-browser": "^22.3.0",
+    "@angular/router": "^22.3.0",
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource-variable/jetbrains-mono": "^5.3.0",
+    "lucide": "^1.77.0",
+    "rxjs": "~7.8.0",
+    "three": "^0.187.0",
+    "tslib": "^2.3.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^22.3.0",
+    "@angular/cli": "^22.3.0",
+    "@angular/compiler-cli": "^22.3.0",
+    "@types/three": "^0.187.0",
+    "jsdom": "^31.0.0",
+    "prettier": "^3.8.1",
+    "typescript": "~6.0.2",
+    "vitest": "^5.0.0"
+  },
+  "description": "Unofficial study companion for lecture courses: notes with slide references, spaced-review practice and mock exams.",
+  "homepage": "https://abhuiyan00.github.io/TestClub/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/abhuiyan00/TestClub.git"
+  },
+  "bugs": {
+    "url": "https://github.com/abhuiyan00/TestClub/issues"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  }
+}

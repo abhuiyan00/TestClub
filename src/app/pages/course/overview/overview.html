@@ -1,0 +1,165 @@
+@if (ctx.course(); as c) {
+  <div class="toolbar">
+    <button type="button" class="btn ghost small" (click)="toggleAll()">
+      {{ allCollapsed() ? 'Expand all' : 'Collapse all' }}
+      <tc-icon [name]="allCollapsed() ? 'chevron-down' : 'chevron-up'" [size]="16" />
+    </button>
+  </div>
+
+  <section class="sec card" id="general">
+    <button type="button" class="sec-head" (click)="toggle('general')" [attr.aria-expanded]="isOpen('general')">
+      <h2>General</h2>
+      <tc-icon class="chev" name="chevron-down" />
+    </button>
+    @if (isOpen('general')) {
+      <div class="sec-body">
+        <div class="act static">
+          <span class="ico info"><tc-icon name="info" [size]="20" /></span>
+          <div>
+            <h3>Course information</h3>
+            <ul class="facts">
+              @if (c.schedule) {
+                <li><b>Lecture:</b> {{ c.schedule }}</li>
+              }
+              @for (a of c.assessment; track $index) {
+                <li>{{ a }}</li>
+              }
+            </ul>
+          </div>
+        </div>
+
+        @if (c.objectives?.length) {
+          <div class="act static">
+            <span class="ico goal"><tc-icon name="target" [size]="20" /></span>
+            <div>
+              <h3>What the course teaches</h3>
+              <ul class="facts">
+                @for (o of c.objectives; track $index) {
+                  <li>{{ o }}</li>
+                }
+              </ul>
+            </div>
+          </div>
+        }
+
+        @if (c.examGuide || ctx.questions().length) {
+          <a class="act" [routerLink]="['/courses', c.slug, 'guide']">
+            <span class="ico guide"><tc-icon name="bookmark" [size]="20" /></span>
+            <div>
+              <h3>Exam guide</h3>
+              <p>{{ c.examGuide?.format ?? 'Where the questions come from and how to prepare.' }}</p>
+            </div>
+            <tc-icon class="go" name="chevron-right" />
+          </a>
+        }
+
+        @if (ctx.bank.isLoading()) {
+          <p class="muted pad">Loading study notes…</p>
+        } @else if (!ctx.questions().length) {
+          <div class="act static notice">
+            <span class="ico"><tc-icon name="hourglass" [size]="20" /></span>
+            <div>
+              <h3>Study notes in progress</h3>
+              <p>Notes and practice questions for this course are being written from the slides. The lecture list and dates below are already up to date.</p>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </section>
+
+  @for (g of groups(); track $index) {
+    @if (g.part) {
+      <h2 class="part">{{ g.part }}</h2>
+    }
+    @for (l of g.lectures; track l.n; let i = $index) {
+      @let key = 'l' + l.n;
+      @let n = notes()[l.n];
+      @let count = qCount().get(l.n) ?? 0;
+      @let done = ctx.progress().done.includes(l.n);
+      <section class="sec card rise" [id]="'l-' + l.n" [class.upcoming]="l.status === 'upcoming'" [style.--i]="i">
+        <div class="sec-row">
+          <button type="button" class="sec-head" (click)="toggle(key)" [attr.aria-expanded]="isOpen(key)" [disabled]="l.status === 'upcoming'">
+            <span class="num" aria-hidden="true">{{ l.n }}</span>
+            <span class="titles">
+              <h2>{{ l.title }}</h2>
+              <small>{{ ctx.unit() }} {{ l.n }}@if (l.date) {<span> · {{ longDate(l.date) }}</span>}</small>
+            </span>
+            @if (l.status !== 'upcoming') {
+              <tc-icon class="chev" name="chevron-down" />
+            }
+          </button>
+          @if (l.status === 'upcoming') {
+            <span class="badge">Not available yet</span>
+          } @else {
+            <button type="button" class="done-btn" [class.on]="done" (click)="ctx.toggleDone(l.n)" [attr.aria-pressed]="done"
+              [attr.aria-label]="(done ? 'Marked as done: ' : 'Mark as done: ') + l.title">
+              <tc-icon [name]="done ? 'circle-check' : 'check'" [size]="16" />
+              {{ done ? 'Done' : 'Mark as done' }}
+            </button>
+          }
+        </div>
+        @if (l.status === 'available' && isOpen(key)) {
+          <div class="sec-body">
+            @if (n?.summary) {
+              <p class="summary">{{ n!.summary }}</p>
+            }
+            <div class="acts">
+              @if (n) {
+                <a class="act" [routerLink]="['/courses', c.slug, 'lectures', l.n]">
+                  <span class="ico notes"><tc-icon name="notes" [size]="20" /></span>
+                  <div>
+                    <h3>Study notes</h3>
+                    <p>{{ n.facts.length }} key facts@if (n.formulas.length) {<span> · {{ n.formulas.length }} formulas</span>}@if (n.traps.length) {<span> · {{ n.traps.length }} common mix-ups</span>}, with slide references</p>
+                  </div>
+                  <tc-icon class="go" name="chevron-right" />
+                </a>
+              }
+              @if (count) {
+                <button type="button" class="act" (click)="practise(l)">
+                  <span class="ico quiz"><tc-icon name="target" [size]="20" /></span>
+                  <div>
+                    <h3>Practice {{ ctx.unit() }} {{ l.n }}</h3>
+                    <p>{{ count }} questions · {{ (secure(l.n) * 100).toFixed(0) }}% secure</p>
+                    <div class="meter" [style.--v]="secure(l.n)"><i></i></div>
+                  </div>
+                  <tc-icon class="go" name="play" [size]="16" />
+                </button>
+              }
+              @if (n?.facts?.length) {
+                <a class="act" [routerLink]="['/courses', c.slug, 'lectures', l.n]" [queryParams]="{ mode: 'cards' }">
+                  <span class="ico cards"><tc-icon name="cards" [size]="20" /></span>
+                  <div>
+                    <h3>Flashcards</h3>
+                    <p>Recall each key fact, then flip to check</p>
+                  </div>
+                  <tc-icon class="go" name="chevron-right" />
+                </a>
+              }
+              @if (!n && !count) {
+                <p class="muted pad">Notes for this {{ ctx.unit().toLowerCase() }} are on the way.</p>
+              }
+            </div>
+          </div>
+        }
+      </section>
+    }
+  }
+
+  @for (e of events(); track $index; let i = $index) {
+    <section class="sec card event" [class.past]="(e.end ?? e.at) < now">
+      <div class="sec-row">
+        <div class="sec-head static">
+          <span class="num ev" aria-hidden="true"><tc-icon [name]="e.kind === 'retake' ? 'reset' : 'flag'" [size]="16" /></span>
+          <span class="titles">
+            <h2>{{ e.title }}</h2>
+            <small>{{ eventWhen(e) }}@if (e.where) {<span> · {{ e.where }}</span>}</small>
+          </span>
+        </div>
+      </div>
+      @if (e.note) {
+        <div class="sec-body"><p class="summary">{{ e.note }}</p></div>
+      }
+    </section>
+  }
+}

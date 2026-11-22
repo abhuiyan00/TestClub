@@ -1,0 +1,103 @@
+@if (ctx.course(); as c) {
+  <section class="intro card card-pad">
+    <div>
+      <p class="eyebrow">Exam guide</p>
+      <h2>{{ guide()?.style === 'open' ? 'Written test with open questions' : 'How the test is likely to ask' }}</h2>
+      <p class="lede">{{ guide()?.format ?? 'The test format has not been announced yet. Practise with the notes and questions; this page fills in as details arrive.' }}</p>
+    </div>
+    @if (ctx.exam(); as e) {
+      <div class="next">
+        <p class="eyebrow">Next</p>
+        <b>{{ e.title }}</b>
+        <span>{{ when() }}</span>
+        @if (e.where) {
+          <span><tc-icon name="pin" [size]="14" /> {{ e.where }}</span>
+        }
+        @if (left(); as l) {
+          <span class="cd tabular"><b>{{ l.d }}</b> days <b>{{ l.h }}</b> hours left</span>
+        }
+      </div>
+    }
+  </section>
+
+  @if (guide()?.insights?.length) {
+    <section>
+      <div class="section-head"><h2>What that means for you</h2></div>
+      <ol class="ins">
+        @for (i of guide()!.insights; track $index; let k = $index) {
+          <li class="rise" [style.--i]="k">
+            <span class="n">{{ (k + 1).toString().padStart(2, '0') }}</span>
+            <span><b>{{ i.title }}</b> {{ i.text }}</span>
+          </li>
+        }
+      </ol>
+    </section>
+  }
+
+  @if (ctx.questions().length) {
+    <div class="two">
+      @if (share().length > 1) {
+        <section class="card card-pad">
+          <h3>Where the questions will come from</h3>
+          <tc-bar-list [rows]="share()" label="Expected questions per lecture out of 30" />
+          <p class="note">Expected questions out of 30 if the test follows each {{ ctx.unit().toLowerCase() }}'s slide count. That is an assumption; the test format has not been announced.</p>
+        </section>
+      }
+      @if (past().length) {
+        <section class="card card-pad">
+          <h3>Past test questions, by shape</h3>
+          <tc-bar-list [rows]="past()" label="Share of past test questions by shape" />
+          <p class="note">{{ guide()!.pastNote }}</p>
+        </section>
+      }
+      <section class="card card-pad">
+        <h3>This question bank, by shape</h3>
+        <tc-bar-list [rows]="shapes()" label="Questions in this bank by shape" />
+      </section>
+    </div>
+
+    <section>
+      <div class="section-head"><h2>Hot list by {{ ctx.unit().toLowerCase() }}</h2><span class="muted">Topics of the questions rated most likely.</span></div>
+      <div class="hot">
+        @for (h of hot(); track h.l.n) {
+          <div class="hotrow card">
+            <span class="num">{{ h.l.n }}</span>
+            <div class="hbody">
+              <b>{{ h.l.title }}</b>
+              @if (h.topics.length) {
+                <div class="tags">
+                  @for (t of h.topics; track t) {
+                    <span class="tag">{{ t }}</span>
+                  }
+                </div>
+              } @else {
+                <span class="muted">No questions rated as likely here.</span>
+              }
+            </div>
+            <button type="button" class="btn small" (click)="drill(h.ids, ctx.unit() + ' ' + h.l.n + ' · likely')" [disabled]="!h.ids.length">
+              <tc-icon name="play" [size]="14" /> Drill {{ h.ids.length }}
+            </button>
+          </div>
+        }
+      </div>
+    </section>
+
+    @if (traps().length) {
+      <section>
+        <div class="section-head"><h2>Easy-to-confuse pairs</h2></div>
+        <ul class="traps">
+          @for (t of traps(); track $index) {
+            <li><span class="mono">{{ ctx.unit()[0] }}{{ t.n }}</span> {{ t.t }}</li>
+          }
+        </ul>
+      </section>
+    }
+  } @else {
+    <div class="empty">
+      <tc-icon name="hourglass" [size]="28" />
+      <b>More soon</b>
+      <p>Question statistics appear here once practice questions are added for this course.</p>
+      <a class="btn" [routerLink]="['/courses', c.slug]">Back to the course</a>
+    </div>
+  }
+}

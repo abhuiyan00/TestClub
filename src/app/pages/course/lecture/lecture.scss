@@ -1,0 +1,259 @@
+:host {
+  display: block;
+}
+
+.crumbs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: var(--sp-4);
+  color: var(--ink-3);
+  font-size: var(--fs-sm);
+  a {
+    color: var(--accent-ink);
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.head {
+  margin-bottom: var(--sp-6);
+  h1 {
+    margin: var(--sp-2) 0 var(--sp-3);
+    font-size: var(--fs-2xl);
+  }
+  .lede {
+    max-width: 72ch;
+    color: var(--ink-2);
+    font-size: var(--fs-lg);
+  }
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-top: var(--sp-5);
+  .btn.on {
+    color: var(--ok);
+    background: var(--ok-soft);
+  }
+}
+
+.legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ink-3);
+  font-size: var(--fs-xs);
+  i {
+    width: 4px;
+    height: 14px;
+    border-radius: 2px;
+    background: var(--accent);
+  }
+}
+
+.facts {
+  display: grid;
+  gap: var(--sp-3);
+}
+
+.fact {
+  display: grid;
+  gap: var(--sp-4);
+  padding: var(--sp-4) var(--sp-5);
+  border-left: 4px solid transparent;
+  @media (min-width: 760px) {
+    grid-template-columns: minmax(0, 1fr) 220px;
+    align-items: start;
+  }
+  &.high {
+    border-left-color: var(--accent);
+  }
+  h3 {
+    font-size: var(--fs-md);
+    font-weight: 650;
+    margin-bottom: 6px;
+  }
+  p {
+    color: var(--ink-2);
+    font-size: var(--fs-sm);
+    line-height: 1.6;
+  }
+}
+
+.fmeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2);
+  margin-top: var(--sp-3);
+}
+
+.fthumb {
+  max-width: 320px;
+}
+
+.formulas {
+  padding: var(--sp-2) var(--sp-5);
+}
+
+.formula {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 6px var(--sp-3);
+  align-items: center;
+  padding: var(--sp-3) 0;
+  border-bottom: 1px solid var(--border);
+  &:last-child {
+    border-bottom: 0;
+  }
+  b {
+    grid-column: 1;
+    font-size: var(--fs-sm);
+  }
+  code {
+    grid-column: 1;
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    font-size: var(--fs-sm);
+    overflow-x: auto;
+    white-space: pre-wrap;
+  }
+  tc-slide-link {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+}
+
+.traps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--sp-2);
+  li {
+    display: flex;
+    gap: var(--sp-3);
+    align-items: flex-start;
+    padding: var(--sp-3) var(--sp-4);
+    border-radius: var(--radius);
+    background: var(--warn-soft);
+    color: var(--ink);
+    font-size: var(--fs-sm);
+    tc-icon {
+      margin-top: 2px;
+      color: var(--warn-ink);
+    }
+  }
+}
+
+// ---------- flashcards: a real card flip in 3D ----------
+.count {
+  margin-bottom: var(--sp-3);
+  color: var(--ink-3);
+  font-size: var(--fs-sm);
+  text-align: center;
+}
+
+.flash {
+  perspective: 1400px;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.flash-face {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  border-radius: var(--radius-xl);
+}
+
+.inner {
+  position: relative;
+  display: grid;
+  min-height: 300px;
+  transform-style: preserve-3d;
+  transition: transform 640ms var(--ease-spring);
+  .flipped & {
+    transform: rotateY(180deg);
+  }
+}
+
+.side {
+  grid-area: 1 / 1;
+  display: grid;
+  align-content: center;
+  gap: var(--sp-4);
+  padding: var(--sp-8);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--surface);
+  box-shadow: var(--shadow-3);
+  backface-visibility: hidden;
+  text-align: center;
+  .eyebrow {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+.front {
+  background:
+    radial-gradient(120% 80% at 0% 0%, var(--accent-soft-2), transparent 60%),
+    var(--surface);
+  .ft {
+    font-size: var(--fs-2xl);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+  .hint {
+    color: var(--ink-3);
+    font-size: var(--fs-sm);
+  }
+}
+
+.back {
+  transform: rotateY(180deg);
+  border-color: var(--accent-line);
+  .fd {
+    font-size: var(--fs-lg);
+    line-height: 1.55;
+    text-align: left;
+  }
+}
+
+.flash-ctrl {
+  display: flex;
+  justify-content: center;
+  gap: var(--sp-3);
+  margin: var(--sp-5) 0;
+}
+
+.flash-slide {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.pager {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  margin-top: var(--sp-10);
+  padding-top: var(--sp-6);
+  border-top: 1px solid var(--border);
+  .sp {
+    flex: 1;
+  }
+}

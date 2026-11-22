@@ -1,0 +1,398 @@
+// Shared UI primitives. Accent-aware pieces read --accent when inside a `.hue` scope and fall back to the shell blue.
+
+.btn {
+  --b-bg: var(--surface);
+  --b-ink: var(--ink);
+  --b-line: var(--border-strong);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  min-height: 40px;
+  padding: 0 var(--sp-4);
+  border: 1px solid var(--b-line);
+  border-radius: var(--radius-sm);
+  background: var(--b-bg);
+  color: var(--b-ink);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color var(--dur-2) var(--ease-out),
+    border-color var(--dur-2) var(--ease-out),
+    color var(--dur-2) var(--ease-out),
+    box-shadow var(--dur-2) var(--ease-out),
+    transform var(--dur-1) var(--ease-out);
+
+  &:hover:not(:disabled) {
+    background: var(--surface-3);
+    text-decoration: none;
+  }
+  &:active:not(:disabled) {
+    transform: translateY(1px) scale(0.99);
+  }
+  &:disabled {
+    opacity: 0.5;
+  }
+
+  &.primary {
+    --b-bg: var(--accent, var(--primary));
+    --b-ink: var(--on-accent, var(--on-primary));
+    --b-line: transparent;
+    box-shadow: var(--shadow-1);
+    &:hover:not(:disabled) {
+      background: var(--accent-hover, var(--primary-hover));
+    }
+  }
+  // The portal's "View course" look: outlined in the brand colour.
+  &.outline {
+    --b-ink: var(--accent-ink, var(--primary-ink));
+    --b-line: currentColor;
+    &:hover:not(:disabled) {
+      background: var(--accent-soft, var(--primary-soft));
+    }
+  }
+  &.ghost {
+    --b-bg: transparent;
+    --b-line: transparent;
+    --b-ink: var(--ink-2);
+    &:hover:not(:disabled) {
+      background: var(--surface-3);
+      color: var(--ink);
+    }
+  }
+  &.danger {
+    --b-ink: var(--bad);
+    --b-line: color-mix(in oklch, var(--bad) 45%, transparent);
+    &:hover:not(:disabled) {
+      background: var(--bad-soft);
+    }
+  }
+  &.small {
+    min-height: 32px;
+    padding: 0 var(--sp-3);
+    font-size: var(--fs-xs);
+  }
+  &.large {
+    min-height: 48px;
+    padding: 0 var(--sp-6);
+    font-size: var(--fs-md);
+  }
+  &.icon {
+    width: 40px;
+    padding: 0;
+    &.small {
+      width: 32px;
+    }
+  }
+  kbd {
+    margin-left: var(--sp-1);
+  }
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-1);
+}
+.card-pad {
+  padding: var(--sp-5);
+  @media (min-width: 640px) {
+    padding: var(--sp-6);
+  }
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 32px;
+  padding: 0 var(--sp-3);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink-2);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  transition: all var(--dur-2) var(--ease-out);
+  &:hover {
+    border-color: var(--accent, var(--primary));
+    color: var(--ink);
+  }
+  &[aria-pressed='true'] {
+    background: var(--accent-soft-2, var(--primary-soft));
+    border-color: var(--accent, var(--primary));
+    color: var(--accent-ink, var(--primary-ink));
+  }
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--surface-3);
+  color: var(--ink-2);
+  font-size: var(--fs-2xs);
+  font-weight: 650;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  &.accent {
+    background: var(--accent-soft-2, var(--primary-soft));
+    color: var(--accent-ink, var(--primary-ink));
+  }
+  &.ok {
+    background: var(--ok-soft);
+    color: var(--ok);
+  }
+  &.bad {
+    background: var(--bad-soft);
+    color: var(--bad);
+  }
+  &.warn {
+    background: var(--warn-soft);
+    color: var(--warn-ink);
+  }
+  &.solid {
+    background: var(--accent, var(--primary));
+    color: var(--on-accent, var(--on-primary));
+  }
+}
+// Segmented control.
+.seg {
+  display: inline-flex;
+  padding: 3px;
+  gap: 2px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  button {
+    min-height: 32px;
+    padding: 0 var(--sp-3);
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--ink-2);
+    font-size: var(--fs-xs);
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all var(--dur-2) var(--ease-out);
+    &[aria-pressed='true'] {
+      background: var(--surface);
+      color: var(--ink);
+      box-shadow: var(--shadow-1);
+    }
+    &:hover:not([aria-pressed='true']) {
+      color: var(--ink);
+    }
+  }
+}
+
+// Underlined tabs, as on the course pages of the portal.
+.tabs {
+  display: flex;
+  gap: var(--sp-6);
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  scrollbar-width: none;
+  a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: var(--sp-3) 0;
+    color: var(--ink-2);
+    font-size: var(--fs-sm);
+    font-weight: 550;
+    text-decoration: none;
+    white-space: nowrap;
+    &::after {
+      content: '';
+      position: absolute;
+      inset: auto 0 -1px;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--accent, var(--primary));
+      transform: scaleX(0);
+      transition: transform var(--dur-3) var(--ease-out);
+    }
+    &:hover {
+      color: var(--ink);
+    }
+    &.active {
+      color: var(--accent-ink, var(--primary-ink));
+      &::after {
+        transform: scaleX(1);
+      }
+    }
+  }
+}
+
+.input {
+  width: 100%;
+  min-height: 40px;
+  padding: 0 var(--sp-3);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--ink);
+  transition:
+    border-color var(--dur-2),
+    box-shadow var(--dur-2);
+  &::placeholder {
+    color: var(--ink-3);
+  }
+  &:focus {
+    outline: none;
+    border-color: var(--accent, var(--primary));
+    box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent, var(--primary)) 22%, transparent);
+  }
+}
+textarea.input {
+  min-height: 120px;
+  padding: var(--sp-3);
+  resize: vertical;
+  line-height: 1.55;
+}
+
+.search-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+  tc-icon {
+    position: absolute;
+    left: 12px;
+    color: var(--ink-3);
+    pointer-events: none;
+  }
+  .input {
+    padding-left: 38px;
+  }
+}
+
+// Thin progress meter.
+.meter {
+  --v: 0;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--surface-3);
+  overflow: hidden;
+  > i {
+    display: block;
+    height: 100%;
+    width: calc(var(--v) * 100%);
+    border-radius: inherit;
+    background: var(--accent, var(--primary));
+    transition: width var(--dur-4) var(--ease-out);
+  }
+}
+
+.empty {
+  display: grid;
+  justify-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-10) var(--sp-6);
+  text-align: center;
+  color: var(--ink-2);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-lg);
+  background: var(--surface-2);
+  > tc-icon {
+    color: var(--accent, var(--primary));
+  }
+  b {
+    color: var(--ink);
+    font-size: var(--fs-lg);
+  }
+  p {
+    max-width: 46ch;
+  }
+}
+
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  margin: var(--sp-8) 0 var(--sp-4);
+  h2 {
+    font-size: var(--fs-xl);
+  }
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--fs-sm);
+  th,
+  td {
+    padding: var(--sp-3);
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    vertical-align: middle;
+  }
+  th {
+    font-size: var(--fs-xs);
+    font-weight: 650;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: var(--surface-2);
+  }
+  td.num,
+  th.num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+// Entrance motion for lists of cards. Set --i on each item for a stagger.
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+.rise {
+  animation: rise var(--dur-4) var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 45ms);
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+.fade-in {
+  animation: fade var(--dur-3) var(--ease-out) both;
+}
+@keyframes shake {
+  10%,
+  90% {
+    transform: translateX(-1px);
+  }
+  20%,
+  80% {
+    transform: translateX(3px);
+  }
+  30%,
+  50%,
+  70% {
+    transform: translateX(-5px);
+  }
+  40%,
+  60% {
+    transform: translateX(5px);
+  }
+}
+@keyframes pop {
+  50% {
+    transform: scale(1.025);
+  }
+}

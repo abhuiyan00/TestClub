@@ -1,0 +1,169 @@
+// Design tokens. Components read only these custom properties, never raw colours.
+// Course colours come from one OKLCH hue per course (catalog.json "hue"), so every course
+// gets the same perceived lightness and contrast in both themes.
+
+:root {
+  color-scheme: light;
+
+  --font-sans: 'Inter Variable', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', 'JetBrains Mono', ui-monospace, 'Cascadia Code', Consolas, monospace;
+
+  --fs-2xs: 0.6875rem;
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.375rem;
+  --fs-2xl: 1.75rem;
+  --fs-3xl: clamp(2rem, 1.4rem + 2.4vw, 2.75rem);
+  --fs-display: clamp(2.5rem, 1.6rem + 4vw, 4.25rem);
+
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 22px;
+
+  --nav-h: 60px;
+  --drawer-w: 300px;
+  --page-max: 1180px;
+
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --dur-1: 120ms;
+  --dur-2: 200ms;
+  --dur-3: 320ms;
+  --dur-4: 520ms;
+
+  // Neutrals: cool grey with a hint of the shell blue, like the course portal.
+  --bg: oklch(0.975 0.006 262);
+  --bg-tint: oklch(0.955 0.012 262);
+  --surface: #ffffff;
+  --surface-2: oklch(0.985 0.004 262);
+  --surface-3: oklch(0.96 0.008 262);
+  --border: oklch(0.91 0.012 262);
+  --border-strong: oklch(0.84 0.016 262);
+  --ink: oklch(0.24 0.025 262);
+  --ink-2: oklch(0.42 0.025 262);
+  --ink-3: oklch(0.52 0.02 262);
+  --ink-inverse: #ffffff;
+
+  --primary: oklch(0.53 0.21 262);
+  --primary-hover: oklch(0.47 0.2 262);
+  --primary-ink: oklch(0.48 0.2 262);
+  --primary-soft: oklch(0.95 0.03 262);
+  --on-primary: #ffffff;
+
+  --ok: oklch(0.52 0.13 152);
+  --ok-soft: oklch(0.95 0.04 152);
+  --bad: oklch(0.53 0.19 25);
+  --bad-soft: oklch(0.95 0.035 25);
+  --warn: oklch(0.6 0.13 70);
+  --warn-ink: oklch(0.47 0.11 65);
+  --warn-soft: oklch(0.96 0.045 85);
+
+  --focus: oklch(0.6 0.2 262);
+  --scrim: oklch(0.2 0.02 262 / 0.45);
+
+  --shadow-1: 0 1px 2px oklch(0.25 0.03 262 / 0.06), 0 1px 3px oklch(0.25 0.03 262 / 0.08);
+  --shadow-2: 0 2px 4px -2px oklch(0.25 0.03 262 / 0.08), 0 6px 16px -4px oklch(0.25 0.03 262 / 0.1);
+  --shadow-3: 0 18px 40px -12px oklch(0.25 0.05 262 / 0.22), 0 4px 10px -4px oklch(0.25 0.03 262 / 0.1);
+  --shadow-nav: 0 2px 10px oklch(0.25 0.03 262 / 0.08);
+
+  --footer-bg: oklch(0.19 0.03 262);
+  --footer-ink: oklch(0.86 0.015 262);
+}
+
+@mixin dark-tokens {
+  color-scheme: dark;
+
+  --bg: oklch(0.17 0.012 262);
+  --bg-tint: oklch(0.2 0.016 262);
+  --surface: oklch(0.215 0.014 262);
+  --surface-2: oklch(0.235 0.015 262);
+  --surface-3: oklch(0.26 0.016 262);
+  --border: oklch(0.31 0.016 262);
+  --border-strong: oklch(0.39 0.018 262);
+  --ink: oklch(0.94 0.008 262);
+  --ink-2: oklch(0.8 0.015 262);
+  --ink-3: oklch(0.7 0.015 262);
+  --ink-inverse: oklch(0.18 0.02 262);
+
+  --primary: oklch(0.7 0.15 262);
+  --primary-hover: oklch(0.76 0.13 262);
+  --primary-ink: oklch(0.78 0.12 262);
+  --primary-soft: oklch(0.28 0.05 262);
+  --on-primary: oklch(0.17 0.03 262);
+
+  --ok: oklch(0.76 0.14 152);
+  --ok-soft: oklch(0.29 0.05 152);
+  --bad: oklch(0.73 0.15 25);
+  --bad-soft: oklch(0.3 0.06 25);
+  --warn: oklch(0.8 0.13 80);
+  --warn-ink: oklch(0.86 0.11 82);
+  --warn-soft: oklch(0.31 0.05 80);
+
+  --focus: oklch(0.78 0.14 262);
+  --scrim: oklch(0.08 0.01 262 / 0.6);
+
+  --shadow-1: 0 1px 2px oklch(0 0 0 / 0.3);
+  --shadow-2: 0 6px 18px -6px oklch(0 0 0 / 0.5);
+  --shadow-3: 0 20px 44px -14px oklch(0 0 0 / 0.65);
+  --shadow-nav: 0 1px 0 oklch(0.3 0.016 262), 0 4px 14px oklch(0 0 0 / 0.25);
+
+  --footer-bg: oklch(0.14 0.012 262);
+  --footer-ink: oklch(0.8 0.015 262);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    @include dark-tokens;
+  }
+}
+:root[data-theme='dark'] {
+  @include dark-tokens;
+}
+
+// Course scope: any element carrying --hue gets its accent family.
+.hue {
+  --accent: oklch(0.56 0.19 var(--hue));
+  --accent-hover: oklch(0.5 0.18 var(--hue));
+  --accent-ink: oklch(0.46 0.17 var(--hue));
+  --accent-soft: oklch(0.965 0.025 var(--hue));
+  --accent-soft-2: oklch(0.925 0.05 var(--hue));
+  --accent-line: oklch(0.85 0.08 var(--hue));
+  --on-accent: #ffffff;
+  --accent-deep: oklch(0.3 0.09 var(--hue));
+}
+
+@mixin dark-accent {
+  --accent: oklch(0.74 0.15 var(--hue));
+  --accent-hover: oklch(0.8 0.13 var(--hue));
+  --accent-ink: oklch(0.82 0.12 var(--hue));
+  --accent-soft: oklch(0.265 0.04 var(--hue));
+  --accent-soft-2: oklch(0.32 0.065 var(--hue));
+  --accent-line: oklch(0.44 0.09 var(--hue));
+  --on-accent: oklch(0.18 0.035 var(--hue));
+  --accent-deep: oklch(0.22 0.06 var(--hue));
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .hue {
+    @include dark-accent;
+  }
+}
+:root[data-theme='dark'] .hue {
+  @include dark-accent;
+}

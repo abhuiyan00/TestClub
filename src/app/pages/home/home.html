@@ -1,0 +1,102 @@
+<section class="hero">
+  <div class="container hero-in">
+    <div class="copy">
+      <p class="eyebrow">{{ content.site()?.semester ?? '' }} · lecture courses</p>
+      <h1>Revise every lecture course in one place.</h1>
+      <p class="lede">
+        Study notes with slide references, Testownik-style practice with spaced review, and mock exams for the six lecture courses.
+        Free and unofficial. Your progress stays in your browser.
+      </p>
+      <div class="cta">
+        <a class="btn primary large" routerLink="/courses"><tc-icon name="library" [size]="18" /> Browse courses</a>
+        <a class="btn ghost large" routerLink="/guide">How it works</a>
+      </div>
+    </div>
+
+    <div class="stage" aria-hidden="true">
+      <div class="halo"></div>
+      @defer (on idle) {
+        <tc-scene class="ring" [items]="items()" layout="ring" (hovered)="hovered.set($event)" (picked)="open($event)" />
+      } @placeholder {
+        <div class="ring-ph"></div>
+      }
+      <div class="label" [class.on]="!!hoverCourse()">
+        @if (hoverCourse(); as c) {
+          <span class="hue" [style.--hue]="c.hue"><i></i><b>{{ c.code }}</b> {{ c.title }}</span>
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+@if (next(); as n) {
+  <section class="container">
+    <a class="next card hue" [style.--hue]="n.e.course.hue" [routerLink]="['/courses', n.e.course.slug, 'practice']">
+      <span class="ico"><tc-icon name="timer" [size]="22" /></span>
+      <span class="what">
+        <small>Next test</small>
+        <b>{{ n.e.course.code }} · {{ n.e.title }}</b>
+        <span>{{ n.when }}@if (n.e.where) {<span> · {{ n.e.where }}</span>}</span>
+      </span>
+      <span class="cd tabular" [attr.aria-label]="n.left.d + ' days ' + n.left.h + ' hours left'">
+        <span><b>{{ n.left.d }}</b><small>days</small></span>
+        <span><b>{{ n.left.h.toString().padStart(2, '0') }}</b><small>hours</small></span>
+      </span>
+      <span class="go">Practise now <tc-icon name="arrow-right" [size]="16" /></span>
+    </a>
+  </section>
+}
+
+<section class="container block" aria-labelledby="courses-h">
+  <div class="section-head">
+    <h2 id="courses-h">The courses</h2>
+    <a routerLink="/courses" class="more">My courses <tc-icon name="arrow-right" [size]="14" /></a>
+  </div>
+  <div class="tiles">
+    @for (x of nextPer(); track x.c.slug; let i = $index) {
+      <a class="tile hue rise" [style.--hue]="x.c.hue" [style.--i]="i" [routerLink]="['/courses', x.c.slug]" tcTilt>
+        <tc-course-pattern class="pat" [motif]="x.c.motif" [hue]="x.c.hue" seed="tile" />
+        <span class="tbody">
+          <span class="code">{{ x.c.code }}</span>
+          <b>{{ x.c.title }}</b>
+          <small>{{ x.lectures }} {{ (x.c.unit ?? 'lecture').toLowerCase() }}s · {{ x.e }}</small>
+        </span>
+      </a>
+    }
+  </div>
+</section>
+
+<section class="container block" aria-labelledby="how-h">
+  <div class="section-head"><h2 id="how-h">How it works</h2></div>
+  <ol class="steps">
+    <li class="card card-pad">
+      <span class="n">01</span>
+      <tc-icon name="notes" [size]="22" />
+      <h3>Read the notes</h3>
+      <p>Each lecture is cut down to its key facts, formulas and common mix-ups, each one next to the slide it comes from.</p>
+    </li>
+    <li class="card card-pad">
+      <span class="n">02</span>
+      <tc-icon name="target" [size]="22" />
+      <h3>Practise until it sticks</h3>
+      <p>Wrong answers come back until you get them right. Spaced review then brings every question back on later days, timed to the test.</p>
+    </li>
+    <li class="card card-pad">
+      <span class="n">03</span>
+      <tc-icon name="timer" [size]="22" />
+      <h3>Sit a mock exam</h3>
+      <p>A timed test drawn in proportion to the lectures, in the format of the real one, with every answer explained at the end.</p>
+    </li>
+  </ol>
+</section>
+
+<section class="container block">
+  <div class="privacy card">
+    <tc-icon name="shield" [size]="26" />
+    <div>
+      <h2>No accounts. No tracking.</h2>
+      <p>No sign-up, no cookies, no analytics, no requests to other sites. Progress is saved in this browser only; clearing site data removes it.</p>
+    </div>
+    <a class="btn outline" routerLink="/guide" fragment="privacy">Read more</a>
+  </div>
+</section>

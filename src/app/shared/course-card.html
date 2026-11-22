@@ -1,0 +1,33 @@
+@let c = course();
+<article class="cc" tcTilt>
+  <a class="art" [routerLink]="['/courses', c.slug]" tabindex="-1" aria-hidden="true">
+    <tc-course-pattern [motif]="c.motif" [hue]="c.hue" />
+    <span class="sem">{{ content.site()?.semester ?? '' }}</span>
+    <span class="glare"></span>
+  </a>
+  <button type="button" class="star" [class.on]="starred()" (click)="prefs.toggleStar(c.slug)" [attr.aria-pressed]="starred()"
+    [attr.aria-label]="(starred() ? 'Unstar ' : 'Star ') + c.title" [title]="starred() ? 'Starred' : 'Star this course'">
+    <tc-icon name="star" [size]="16" />
+  </button>
+  <div class="body">
+    <p class="code">{{ c.code }} # {{ c.type }} #</p>
+    <h3><a [routerLink]="['/courses', c.slug]">{{ c.title }}</a></h3>
+    @if (view() === 'list') {
+      <p class="sum">{{ c.summary }}</p>
+    }
+    <div class="meta">
+      @if (next(); as n) {
+        <span class="next"><tc-icon name="flag" [size]="13" /> <span>{{ n.title }} · {{ n.when }} <em>({{ n.rel }})</em></span></span>
+      } @else {
+        <span class="next muted"><tc-icon name="calendar" [size]="13" /> Test date not announced</span>
+      }
+    </div>
+    <div class="done">
+      <div class="meter" [style.--v]="complete()"><i></i></div>
+      <span>{{ (complete() * 100).toFixed(0) }}% complete · {{ available().length }} of {{ c.lectures.length }} {{ (c.unit ?? 'lecture').toLowerCase() }}s published</span>
+    </div>
+  </div>
+  <div class="foot">
+    <a class="btn outline small" [routerLink]="['/courses', c.slug]">View course</a>
+  </div>
+</article>
