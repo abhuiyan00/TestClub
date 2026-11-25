@@ -81,6 +81,8 @@ export interface Catalog {
 
 export interface Fact {
   t: string;
+  /** The idea in one plain sentence, shown in the essentials; without it, the first sentence of `d`. */
+  gist?: string;
   d: string;
   slide: number;
   weight: Weight;

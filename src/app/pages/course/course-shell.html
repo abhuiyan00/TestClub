@@ -61,6 +61,9 @@
         <div class="tabbar">
           <nav class="tabs" aria-label="Course sections">
             <a [routerLink]="['/courses', c.slug]" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page">Course</a>
+            @if (hasBank()) {
+              <a [routerLink]="['/courses', c.slug, 'essentials']" routerLinkActive="active" ariaCurrentWhenActive="page">Essentials</a>
+            }
             @if (c.examGuide || hasBank()) {
               <a [routerLink]="['/courses', c.slug, 'guide']" routerLinkActive="active" ariaCurrentWhenActive="page">Exam guide</a>
             }

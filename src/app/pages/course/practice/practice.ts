@@ -54,7 +54,13 @@ export class Practice {
   });
   protected readonly progressPct = computed(() => {
     const s = this.session();
-    return s ? drillProgress(s, this.ctx.settings().reps) : 0;
+    return s ? drillProgress(s) : 0;
+  });
+  /** After a drill on one lecture: the next lecture to learn. */
+  protected readonly nextLecture = computed(() => {
+    const ls = new Set(this.session()?.ids.map((id) => this.ctx.byId().get(id)?.l));
+    const list = this.ctx.studyLectures();
+    return ls.size === 1 ? list[list.findIndex((l) => ls.has(l.n)) + 1] : undefined;
   });
   protected readonly cells = computed(() => {
     const s = this.session();

@@ -47,7 +47,7 @@
   <section class="builder card card-pad" aria-labelledby="build-h">
     <div class="section-head first">
       <div>
-        <p class="eyebrow">Testownik</p>
+        <p class="eyebrow">Your own selection</p>
         <h2 id="build-h">Build a drill</h2>
       </div>
     </div>
@@ -80,10 +80,10 @@
         <legend>Correct answers to clear a question</legend>
         <div class="seg" role="group" aria-label="Repetitions">
           @for (r of [1, 2, 3]; track r) {
-            <button type="button" [attr.aria-pressed]="ctx.settings().reps === r" (click)="ctx.setSettings({ reps: r })">{{ r }}</button>
+            <button type="button" [attr.aria-pressed]="ctx.settings().need === r" (click)="ctx.setSettings({ need: r })">{{ r }}</button>
           }
         </div>
-        <p class="help">The classic Testownik rule: each mistake adds one more, up to four. Guesses and hinted answers don't count.</p>
+        <p class="help">With 1, every question comes once, in slide order; then only the ones you missed, guessed or needed a hint for.</p>
       </fieldset>
       @if (hasChoice()) {
         <fieldset>
@@ -114,7 +114,10 @@
     <h2>All {{ s.ids.length }} questions cleared</h2>
     <p class="muted">{{ s.label }} · {{ s.right }} right, {{ s.wrong }} wrong · best streak {{ s.best }}</p>
     <div class="cta center">
-      <button type="button" class="btn primary" (click)="ctx.endDrill()"><tc-icon name="target" [size]="16" /> Build another drill</button>
+      @if (nextLecture(); as l) {
+        <a class="btn primary" [routerLink]="['../lectures', l.n]">Next: {{ unitShort() }}{{ l.n }} {{ l.short }} <tc-icon name="arrow-right" [size]="16" /></a>
+      }
+      <button type="button" class="btn" [class.primary]="!nextLecture()" (click)="ctx.endDrill()"><tc-icon name="target" [size]="16" /> Build another drill</button>
       @if (ctx.mistakes().length) {
         <a class="btn" routerLink="../mistakes">Review {{ ctx.mistakes().length }} mistakes</a>
       }

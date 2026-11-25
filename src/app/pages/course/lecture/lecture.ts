@@ -1,8 +1,11 @@
 import { ChangeDetectionStrategy, Component, computed, effect, inject, input, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { Question } from '../../../core/models';
 import { formatWhen, parseWhen } from '../../../core/time';
 import { shuffle } from '../../../core/drill';
+import { essentials, readMinutes } from '../../../core/essentials';
+import { EssentialsList } from '../../../shared/essentials-list';
 import { Icon } from '../../../shared/icon';
 import { SlideLink, SlideThumb } from '../../../shared/slides';
 import { CourseContext } from '../course-context';
@@ -17,7 +20,7 @@ interface Deck {
 @Component({
   selector: 'tc-lecture',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [RouterLink, Icon, SlideThumb, SlideLink],
+  imports: [RouterLink, Icon, SlideThumb, SlideLink, EssentialsList],
   templateUrl: './lecture.html',
   styleUrl: './lecture.scss',
   host: { '(document:keydown)': 'onKey($event)' },
@@ -31,8 +34,12 @@ export class LecturePage {
   protected readonly num = computed(() => Number(this.n()));
   protected readonly lecture = computed(() => this.ctx.course()?.lectures.find((l) => l.n === this.num()));
   protected readonly notes = computed(() => (this.ctx.bank.hasValue() ? this.ctx.bank.value().lectures[this.num()] : undefined));
-  protected readonly qCount = computed(() => this.ctx.questions().filter((q) => q.l === this.num()).length);
+  protected readonly essentials = computed(() => (this.notes() ? essentials(this.notes()!) : []));
+  protected readonly minutes = computed(() => readMinutes(this.essentials()));
+  protected readonly own = computed(() => this.ctx.questions().filter((q) => q.l === this.num()));
+  protected readonly likely = computed(() => this.own().filter((q) => q.lk === 'high'));
   protected readonly cards = computed(() => this.mode() === 'cards');
+  protected readonly full = computed(() => this.mode() === 'full');
   protected readonly done = computed(() => this.ctx.progress().done.includes(this.num()));
   protected readonly unitShort = computed(() => this.ctx.unit()[0]);
 
@@ -70,8 +77,8 @@ export class LecturePage {
     });
   }
 
-  protected setMode(cards: boolean) {
-    this.router.navigate([], { queryParams: { mode: cards ? 'cards' : null }, replaceUrl: true });
+  protected setMode(mode: 'full' | 'cards' | null) {
+    this.router.navigate([], { queryParams: { mode }, replaceUrl: true });
   }
 
   protected flip() {
@@ -91,10 +98,9 @@ export class LecturePage {
     if (n) this.deck.set({ key: this.ctx.slug() + this.num(), order: shuffle(n.facts.map((_, i) => i)), flipped: false, known: 0 });
   }
 
-  protected practise() {
+  protected practise(list: Question[], kind = '') {
     const l = this.lecture();
-    const ids = this.ctx.questions().filter((q) => q.l === this.num()).map((q) => q.id);
-    if (l && this.ctx.start(ids, `${this.ctx.unit()} ${l.n} · ${l.short}`)) this.router.navigate(['/courses', this.ctx.slug(), 'practice']);
+    if (l && this.ctx.start(list.map((q) => q.id), `${this.ctx.unit()} ${l.n} · ${l.short}${kind}`)) this.router.navigate(['/courses', this.ctx.slug(), 'practice']);
   }
 
   protected onKey(e: KeyboardEvent) {

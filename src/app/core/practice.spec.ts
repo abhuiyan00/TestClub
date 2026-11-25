@@ -1,9 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { answerDrill, nextQuestion, startDrill } from './drill';
+import { DrillSession, answerDrill, drillProgress, nextQuestion, startDrill } from './drill';
+import { essentials, readMinutes } from './essentials';
 import { grade, sampleMock } from './mock';
 import { oklchToHex } from './color';
 import { search } from './search';
-import { ChoiceQuestion, CourseBank, LectureMeta } from './models';
+import { ChoiceQuestion, CourseBank, Fact, LectureMeta, LectureNotes } from './models';
 
 /** Deterministic generator so shuffles are reproducible. */
 function seeded(seed = 7) {
@@ -16,39 +17,74 @@ const mc = (id: string, l: number, lk: ChoiceQuestion['lk'] = 'medium'): ChoiceQ
 });
 
 describe('drill', () => {
-  it('needs `reps` sure correct answers per question before it leaves', () => {
-    const s = startDrill(['a'], 'x', 2, seeded());
-    expect(s.cur).toBe('a');
-    answerDrill(s, true, true);
-    expect(s.reps['a']).toBe(1);
-    nextQuestion(s, seeded());
-    answerDrill(s, true, true);
-    nextQuestion(s, seeded());
+  /** Answers every question of one round and returns the order they were asked in. */
+  const round = (s: DrillSession, size: number, ok: (id: string) => boolean = () => true) =>
+    Array.from({ length: size }, () => {
+      const id = s.cur!;
+      answerDrill(s, ok(id), true);
+      nextQuestion(s, seeded());
+      return id;
+    });
+
+  it('asks every question once, in the given order, before any question returns', () => {
+    const ids = ['a', 'b', 'c', 'd', 'e'];
+    const s = startDrill(ids, 'x', 2, seeded());
+    expect(round(s, 5)).toEqual(ids);
+    expect(round(s, 5)).toEqual(ids);
     expect(s.done).toBe(true);
   });
 
-  it('adds one repetition per mistake, up to four, and ignores unsure answers', () => {
-    const s = startDrill(['a'], 'x', 2, seeded());
-    for (let i = 0; i < 5; i++) answerDrill(Object.assign(s, { answered: false }), false, true);
-    expect(s.reps['a']).toBe(4);
-    answerDrill(Object.assign(s, { answered: false }), true, false);
-    expect(s.reps['a']).toBe(4);
-    expect(s.wrong).toBe(5);
-    expect(s.right).toBe(1);
+  it('repeats only the missed questions after the first round', () => {
+    const s = startDrill(['a', 'b', 'c', 'd'], 'x', 1, seeded());
+    round(s, 4, (id) => id !== 'b' && id !== 'd');
+    expect(round(s, 2)).toEqual(['b', 'd']);
+    expect(s.done).toBe(true);
   });
 
   it('never asks the same question twice in a row while others remain', () => {
-    const rng = seeded(3);
-    const s = startDrill(['a', 'b', 'c'], 'x', 3, rng);
-    for (let i = 0; i < 20; i++) {
-      const prev = s.cur;
-      answerDrill(s, true, true);
-      const open = s.ids.filter((id) => s.reps[id] > 0).length;
-      nextQuestion(s, rng);
-      if (s.done) break;
-      if (open > 1) expect(s.cur).not.toBe(prev);
-    }
-    expect(s.done).toBe(true);
+    const s = startDrill(['a', 'b', 'c'], 'x', 1, seeded());
+    round(s, 3, (id) => id === 'b');
+    expect(s.cur).toBe('a');
+    round(s, 1, () => false);
+    expect(s.cur).toBe('c');
+    round(s, 1);
+    expect(s.cur).toBe('a');
+  });
+
+  it('a miss costs one more correct answer, never more than the target; guesses do not count', () => {
+    const s = startDrill(['a'], 'x', 2, seeded());
+    answerDrill(s, true, true);
+    for (let i = 0; i < 3; i++) answerDrill(Object.assign(s, { answered: false }), false, true);
+    expect(s.reps['a']).toBe(2);
+    answerDrill(Object.assign(s, { answered: false }), true, false);
+    expect(s.reps['a']).toBe(2);
+    expect(s).toMatchObject({ right: 2, wrong: 3 });
+  });
+
+  it('reports progress against the target the drill started with', () => {
+    const s = startDrill(['a', 'b'], 'x', 1, seeded());
+    expect(drillProgress(s)).toBe(0);
+    round(s, 1);
+    expect(drillProgress(s)).toBe(0.5);
+  });
+});
+
+describe('essentials', () => {
+  const fact = (t: string, weight: Fact['weight'], d: string, gist?: string): Fact => ({ t, d, slide: 1, weight, gist });
+  const notes = (facts: Fact[]): LectureNotes => ({ summary: '', facts, formulas: [], traps: [] });
+
+  it('keeps the high-weight facts and prefers the one-line gist over the detail', () => {
+    const n = notes([fact('A', 'high', 'Long. Detail.', 'Short.'), fact('B', 'low', 'x'), fact('C', 'high', '1. This opening sentence is long enough, e.g. 1.5 V. Second.')]);
+    expect(essentials(n).map((e) => [e.t, e.gist])).toEqual([['A', 'Short.'], ['C', '1. This opening sentence is long enough, e.g. 1.5 V.']]);
+  });
+
+  it('falls back to every fact when none is rated high', () => {
+    expect(essentials(notes([fact('A', 'medium', 'One.'), fact('B', 'low', 'Two')])).map((e) => e.gist)).toEqual(['One.', 'Two']);
+  });
+
+  it('estimates at least one minute of reading', () => {
+    expect(readMinutes([])).toBe(1);
+    expect(readMinutes([{ t: 'A', gist: Array(400).fill('w').join(' ') }])).toBe(3);
   });
 });
 

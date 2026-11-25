@@ -1,14 +1,18 @@
 /*
- * Testownik drill rules: a question leaves the drill after `need` sure correct answers.
- * Each mistake adds one more repetition, up to four. Answers marked "not sure" or helped by
- * a hint do not count towards leaving.
+ * A drill runs in rounds, so nothing repeats while other questions are still waiting. The first
+ * round asks every question once, in the order given; each later round asks only what is left.
+ * A question leaves after `need` sure correct answers. A miss takes one of them back; answers
+ * marked "not sure" or helped by a hint do not count.
  */
-export const MAX_REPS = 4;
-
 export interface DrillSession {
   label: string;
   ids: string[];
+  /** Sure correct answers a question needs to leave. */
+  need: number;
+  /** Sure correct answers still missing, per question. */
   reps: Record<string, number>;
+  /** Questions still to come in this round. */
+  queue: string[];
   cur: string | null;
   /** Display order of the options of the current question (indices into `o`). */
   order: number[];
@@ -23,7 +27,6 @@ export interface DrillSession {
   wrong: number;
   streak: number;
   best: number;
-  last: string | null;
   done: boolean;
   started: number;
 }
@@ -39,22 +42,21 @@ export function shuffle<T>(items: readonly T[], rng: () => number = Math.random)
 
 export function startDrill(ids: string[], label: string, need: number, rng: () => number = Math.random): DrillSession {
   const s: DrillSession = {
-    label, ids: [...ids], reps: Object.fromEntries(ids.map((id) => [id, need])),
+    label, ids: [...ids], need, queue: [], reps: Object.fromEntries(ids.map((id) => [id, need])),
     cur: null, order: [], answered: false, picked: null, hint: false, unsure: false, shown: false,
-    right: 0, wrong: 0, streak: 0, best: 0, last: null, done: false, started: Date.now(),
+    right: 0, wrong: 0, streak: 0, best: 0, done: false, started: Date.now(),
   };
   nextQuestion(s, rng);
   return s;
 }
 
 export function nextQuestion(s: DrillSession, rng: () => number = Math.random): void {
-  const open = s.ids.filter((id) => s.reps[id] > 0);
-  if (!open.length) {
-    Object.assign(s, { done: true, cur: null });
+  if (!s.queue.length) s.queue = s.ids.filter((id) => s.reps[id] > 0);
+  s.cur = s.queue.shift() ?? null;
+  if (!s.cur) {
+    s.done = true;
     return;
   }
-  const pool = open.length > 1 ? open.filter((id) => id !== s.last) : open;
-  s.cur = pool[Math.floor(rng() * pool.length)];
   Object.assign(s, { order: shuffle([0, 1, 2, 3], rng), answered: false, picked: null, hint: false, unsure: false, shown: false });
 }
 
@@ -69,16 +71,15 @@ export function answerDrill(s: DrillSession, ok: boolean, sure: boolean): void {
     s.streak++;
     s.best = Math.max(s.best, s.streak);
   } else {
-    s.reps[id] = Math.min(s.reps[id] + 1, MAX_REPS);
+    s.reps[id] = Math.min(s.reps[id] + 1, s.need);
     s.wrong++;
     s.streak = 0;
   }
-  s.last = id;
 }
 
 /** Share of the drill's required correct answers already given, 0..1. */
-export function drillProgress(s: DrillSession, need: number): number {
-  const total = s.ids.length * need;
-  const left = s.ids.reduce((a, id) => a + Math.min(s.reps[id], need), 0);
+export function drillProgress(s: DrillSession): number {
+  const total = s.ids.length * s.need;
+  const left = s.ids.reduce((a, id) => a + s.reps[id], 0);
   return total ? 1 - left / total : 1;
 }

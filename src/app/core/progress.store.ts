@@ -8,8 +8,8 @@ import { MockResult, MockSession } from './mock';
 export type DrillFilter = 'all' | 'hot' | 'new' | 'weak' | 'due';
 
 export interface Settings {
-  /** Correct answers needed before a question leaves a drill. */
-  reps: number;
+  /** Correct answers needed before a question leaves a drill. Not called `reps`: that key holds the old default of 2 in saved settings. */
+  need: number;
   /** Lectures included in drills; empty means all. */
   lectures: number[];
   filter: DrillFilter;
@@ -34,7 +34,7 @@ export interface CourseProgress {
 
 export const blankProgress = (): CourseProgress => ({
   v: 1, gen: 0, updatedAt: 0, q: {}, session: null, mock: null, history: [], done: [],
-  settings: { reps: 2, lectures: [], filter: 'all', mockN: 30, recall: false },
+  settings: { need: 1, lectures: [], filter: 'all', mockN: 30, recall: false },
 });
 
 const keyOf = (slug: string) => `${KEY_PREFIX}progress.${slug}`;
@@ -60,7 +60,7 @@ export class ProgressStore {
     const saved = readJson<Partial<CourseProgress>>(keyOf(slug));
     if (saved?.v !== 1 || typeof saved.q !== 'object' || !saved.q) return blankProgress();
     const b = blankProgress();
-    return { ...b, ...saved, settings: { ...b.settings, ...saved.settings }, history: saved.history ?? [], done: saved.done ?? [] } as CourseProgress;
+    return { ...b, ...saved, settings: { ...b.settings, ...saved.settings }, session: saved.session?.queue ? saved.session : null, history: saved.history ?? [], done: saved.done ?? [] } as CourseProgress;
   }
 
   private sig(slug: string): WritableSignal<CourseProgress> {

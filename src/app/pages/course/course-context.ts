@@ -30,7 +30,10 @@ export class CourseContext {
     loader: ({ params }) => this.content.bank(params),
   });
 
-  readonly questions = computed<Question[]>(() => (this.bank.hasValue() ? this.bank.value().questions : []));
+  /** In the order the slides teach them, so a drill builds up each topic. */
+  readonly questions = computed<Question[]>(() =>
+    this.bank.hasValue() ? [...this.bank.value().questions].sort((a, b) => a.l - b.l || a.slide - b.slide) : [],
+  );
   readonly byId = computed(() => new Map(this.questions().map((q) => [q.id, q])));
   readonly progress = computed<CourseProgress>(() => this.store.state(this.slug())());
   readonly settings = computed(() => this.progress().settings);
@@ -103,16 +106,17 @@ export class CourseContext {
     });
   }
 
-  /** Unseen questions, likely ones first, lectures mixed. */
+  /** Unseen questions, likely ones first, each group in course order. */
   newIds(n: number): string[] {
     const map = this.progress().q;
-    return shuffle(this.questions().filter((q) => !map[q.id]))
+    return this.questions()
+      .filter((q) => !map[q.id])
       .sort((a, b) => Number(b.lk === 'high') - Number(a.lk === 'high'))
       .slice(0, n)
       .map((q) => q.id);
   }
 
-  start(ids: string[], label: string, need = this.settings().reps): boolean {
+  start(ids: string[], label: string, need = this.settings().need): boolean {
     if (!ids.length) {
       this.toast.show('No questions match. Choose more lectures or another filter.');
       return false;

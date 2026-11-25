@@ -113,6 +113,7 @@ for (const c of catalog.courses ?? []) {
     if (!text(notes.summary)) fail(at, `lecture ${n}: summary missing`);
     (notes.facts ?? []).forEach((f, i) => {
       if (!text(f.t) || !text(f.d) || !WEIGHTS.has(f.weight)) fail(at, `lecture ${n} fact ${i}: t, d and weight are required`);
+      if ('gist' in f && !text(f.gist)) fail(at, `lecture ${n} fact ${i}: gist must be text`);
       slideOk(l, f.slide, `fact "${f.t}"`);
     });
     (notes.formulas ?? []).forEach((f) => {

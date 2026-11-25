@@ -154,6 +154,24 @@
   }
 }
 
+.check {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  margin-top: var(--sp-8);
+  h2 {
+    font-size: var(--fs-lg);
+    margin-bottom: var(--sp-1);
+  }
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+  }
+}
+
 // ---------- flashcards: a real card flip in 3D ----------
 .count {
   margin-bottom: var(--sp-3);

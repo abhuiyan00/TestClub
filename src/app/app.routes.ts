@@ -9,6 +9,7 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/course/course-shell').then((m) => m.CourseShell),
     children: [
       { path: '', loadComponent: () => import('./pages/course/overview/overview').then((m) => m.Overview) },
+      { path: 'essentials', loadComponent: () => import('./pages/course/essentials/essentials').then((m) => m.EssentialsPage) },
       { path: 'guide', loadComponent: () => import('./pages/course/exam-guide/exam-guide').then((m) => m.ExamGuidePage) },
       { path: 'lectures/:n', loadComponent: () => import('./pages/course/lecture/lecture').then((m) => m.LecturePage) },
       { path: 'practice', loadComponent: () => import('./pages/course/practice/practice').then((m) => m.Practice) },

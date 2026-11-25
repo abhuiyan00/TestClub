@@ -109,8 +109,8 @@
                 <a class="act" [routerLink]="['/courses', c.slug, 'lectures', l.n]">
                   <span class="ico notes"><tc-icon name="notes" [size]="20" /></span>
                   <div>
-                    <h3>Study notes</h3>
-                    <p>{{ n.facts.length }} key facts@if (n.formulas.length) {<span> · {{ n.formulas.length }} formulas</span>}@if (n.traps.length) {<span> · {{ n.traps.length }} common mix-ups</span>}, with slide references</p>
+                    <h3>Essentials and notes</h3>
+                    <p>{{ ess(n).length }} ideas in about {{ minutes(n) }} min@if (n.traps.length) {<span> · {{ n.traps.length }} common mix-ups</span>} · {{ n.facts.length }} facts in the full notes</p>
                   </div>
                   <tc-icon class="go" name="chevron-right" />
                 </a>

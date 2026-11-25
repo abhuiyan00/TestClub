@@ -41,12 +41,15 @@ Add the lecture to `public/content/<course>/course.json`:
 "lectures": {
   "6": {
     "summary": "One or two sentences on what the lecture covers.",
-    "facts": [{ "t": "Short title", "d": "The fact in one or two sentences.", "slide": 4, "weight": "high" }],
+    "facts": [{ "t": "Short title", "gist": "The idea in one plain line.", "d": "The details.", "slide": 4, "weight": "high" }],
     "formulas": [{ "name": "Little's law", "expr": "N = X · R", "slide": 9 }],
     "traps": ["Two things that are easy to confuse, and how they differ."]
   }
 }
 ```
+
+Facts with `"weight": "high"` form the lecture's **Essentials**, one line each: the `gist`, or the start of
+`d` without one. Keep a lecture to about 20 essentials, so it reads in a few minutes.
 
 Questions are either multiple choice:
 
@@ -71,6 +74,9 @@ Options are shuffled when shown, so the position of the right answer does not ma
 ### 3. Writing rules
 
 - Write from the slides. When a slide is wrong or ambiguous, say so in a trap or explanation.
+- Ask about the subject only: no course rules, grading or dates of tests.
+- Match the test. Where past tests ask for ideas, ask what something is, does or is for; keep a
+  calculation only when the lecturer sets it as a review question.
 - One idea per question. Distractors should be plausible siblings from the same lecture.
 - Keep options of similar length: the content check fails when the right answer can be guessed
   from option length alone (more than 28 % for any length-based strategy).

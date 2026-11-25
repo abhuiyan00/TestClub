@@ -34,8 +34,8 @@ the ones still to come are listed as "Not available yet".
 | --- | --- | --- | ---: |
 | ADB | Advanced Databases | Lectures 1–5 | 47 (30 open) |
 | ISA | Information Systems Analysis | Topics 1–11 | 66 |
-| MMCV | Multimedia and Computer Visualization | Lectures 1–7 | 250 |
-| NLP | Natural Language Processing | Lectures 1–3 | 37 |
+| MMCV | Multimedia and Computer Visualization | Lectures 1–7 | 252 |
+| NLP | Natural Language Processing | Lectures 1–3 | 36 |
 | SSN | Secure Systems and Networks | Lectures 0–4 | 48 |
 | SC | Softcomputing | Lectures 1–6 | 79 |
 
@@ -51,9 +51,12 @@ to keep them together under *Starred*.
   <img src="docs/screenshots/courses-light.webp" alt="My courses: one card per course in its own colour, with the next test date and completion">
 </picture>
 
-### 2. Read the notes beside the slides
+### 2. Read the essentials, then the notes
 
-Every lecture has key facts, formulas and easy-to-confuse pairs. Each note shows the slide it comes
+Every lecture opens on its **Essentials**: one line per idea, a few minutes in all, followed by the likely
+questions to check yourself. The **Essentials** tab puts the whole course on one page for a last look.
+
+**Full notes** add the details, formulas and easy-to-confuse pairs. Each note shows the slide it comes
 from; click the thumbnail to open the slide. Points the slides stress are marked *likely on the test*.
 Switch to **Flashcards** for a quick self-test of the same lecture.
 
@@ -66,9 +69,9 @@ Switch to **Flashcards** for a quick self-test of the same lecture.
 
 **Today's plan** mixes the questions due for review with enough new ones to cover the course before
 the test. A question you answer right, and are sure of, comes back after 1, then 2, then 3 days;
-a miss comes back the same day. In a custom drill, the classic Testownik rule applies: a question
-stays until you answer it right twice, and every miss adds one more round. Answers helped by a hint
-or marked *not sure* never count as known.
+a miss comes back the same day. Within a drill nothing repeats early: every question comes once, in slide
+order, and only the ones you missed come back in the next round. Answers helped by a hint or marked
+*not sure* never count as known.
 
 After each answer you see the right option, why it is right, and the slide it comes from.
 Open questions are graded by you against a model answer: *Missed*, *Partly* or *Got it*.

@@ -13,13 +13,11 @@
         <p class="lede">{{ notes()!.summary }}</p>
       }
       <div class="actions">
-        @if (qCount()) {
-          <button type="button" class="btn primary" (click)="practise()"><tc-icon name="play" [size]="16" /> Practise {{ qCount() }} questions</button>
-        }
         @if (notes()?.facts?.length) {
           <div class="seg" role="group" aria-label="View">
-            <button type="button" [attr.aria-pressed]="!cards()" (click)="setMode(false)"><tc-icon name="notes" [size]="15" /> Notes</button>
-            <button type="button" [attr.aria-pressed]="cards()" (click)="setMode(true)"><tc-icon name="cards" [size]="15" /> Flashcards</button>
+            <button type="button" [attr.aria-pressed]="!cards() && !full()" (click)="setMode(null)"><tc-icon name="timer" [size]="15" /> Essentials</button>
+            <button type="button" [attr.aria-pressed]="full()" (click)="setMode('full')"><tc-icon name="notes" [size]="15" /> Full notes</button>
+            <button type="button" [attr.aria-pressed]="cards()" (click)="setMode('cards')"><tc-icon name="cards" [size]="15" /> Flashcards</button>
           </div>
         }
         <button type="button" class="btn ghost" [class.on]="done()" (click)="ctx.toggleDone(l.n)" [attr.aria-pressed]="done()">
@@ -75,6 +73,12 @@
     } @else {
       <!-- ---------- notes ---------- -->
       @let n = notes()!;
+      @if (!full()) {
+        <section aria-labelledby="ess-h">
+          <div class="section-head"><h2 id="ess-h">Essentials</h2><span class="muted">{{ essentials().length }} ideas · about {{ minutes() }} min</span></div>
+          <tc-essentials-list [items]="essentials()" [slug]="c.slug" [lecture]="l.n" [unit]="unitShort()" />
+        </section>
+      } @else {
       <section aria-labelledby="facts-h">
         <div class="section-head"><h2 id="facts-h">Key facts</h2><span class="legend"><i></i> stressed on the slides</span></div>
         <div class="facts">
@@ -112,6 +116,7 @@
           </div>
         </section>
       }
+      }
 
       @if (n.traps.length) {
         <section aria-labelledby="traps-h">
@@ -125,15 +130,30 @@
       }
     }
 
+    @if (own().length) {
+      <section class="check card card-pad" aria-labelledby="check-h">
+        <div>
+          <h2 id="check-h">Check yourself</h2>
+          <p class="muted">Each question comes once, in slide order; only the ones you miss come back.</p>
+        </div>
+        <div class="cta">
+          @if (likely().length) {
+            <button type="button" class="btn primary" (click)="practise(likely(), ' · likely')"><tc-icon name="play" [size]="16" /> {{ likely().length }} likely</button>
+          }
+          <button type="button" class="btn" [class.primary]="!likely().length" (click)="practise(own())"><tc-icon name="target" [size]="16" /> All {{ own().length }}</button>
+        </div>
+      </section>
+    }
+
     <nav class="pager" aria-label="Lectures">
       @if (neighbours().prev; as p) {
-        <a class="btn outline" [routerLink]="['/courses', c.slug, 'lectures', p.n]" [queryParams]="cards() ? { mode: 'cards' } : {}">
+        <a class="btn outline" [routerLink]="['/courses', c.slug, 'lectures', p.n]" [queryParams]="mode() ? { mode: mode() } : {}">
           <tc-icon name="arrow-left" [size]="16" /> {{ ctx.unit() }} {{ p.n }} · {{ p.short }}
         </a>
       }
       <span class="sp"></span>
       @if (neighbours().next; as x) {
-        <a class="btn outline" [routerLink]="['/courses', c.slug, 'lectures', x.n]" [queryParams]="cards() ? { mode: 'cards' } : {}">
+        <a class="btn outline" [routerLink]="['/courses', c.slug, 'lectures', x.n]" [queryParams]="mode() ? { mode: mode() } : {}">
           {{ ctx.unit() }} {{ x.n }} · {{ x.short }} <tc-icon name="arrow-right" [size]="16" />
         </a>
       }

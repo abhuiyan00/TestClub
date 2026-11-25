@@ -18,11 +18,19 @@ describe('ProgressStore', () => {
   });
 
   it('keeps answers but fills in settings added later', () => {
-    localStorage.setItem('testclub.progress.adb', JSON.stringify({ v: 1, gen: 0, updatedAt: 1, q: { 'L1-01': { n: 1 } }, settings: { reps: 3 } }));
+    localStorage.setItem('testclub.progress.adb', JSON.stringify({ v: 1, gen: 0, updatedAt: 1, q: { 'L1-01': { n: 1 } }, settings: { mockN: 20 } }));
     const s = TestBed.inject(ProgressStore).state('adb')();
     expect(s.q['L1-01']).toEqual({ n: 1 });
-    expect(s.settings).toMatchObject({ reps: 3, filter: 'all', mockN: 30 });
+    expect(s.settings).toMatchObject({ need: 1, filter: 'all', mockN: 20 });
     expect(s.done).toEqual([]);
+  });
+
+  it('drops a drill saved before rounds existed, and the old default of two correct answers', () => {
+    localStorage.setItem('testclub.progress.adb', JSON.stringify({ v: 1, q: { 'L1-01': { n: 1 } }, settings: { reps: 2 }, session: { ids: ['L1-01'], reps: { 'L1-01': 2 } } }));
+    const s = TestBed.inject(ProgressStore).state('adb')();
+    expect(s.session).toBeNull();
+    expect(s.settings.need).toBe(1);
+    expect(s.q['L1-01']).toEqual({ n: 1 });
   });
 
   it('saves updates and offers an undo for a reset', () => {

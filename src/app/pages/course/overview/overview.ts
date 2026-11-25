@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { ContentService } from '../../../core/content.service';
-import { LectureMeta } from '../../../core/models';
+import { essentials, readMinutes } from '../../../core/essentials';
+import { LectureMeta, LectureNotes } from '../../../core/models';
 import { formatWhen, parseWhen } from '../../../core/time';
 import { Icon } from '../../../shared/icon';
 import { CourseContext } from '../course-context';
@@ -25,6 +26,9 @@ export class Overview {
   protected readonly now = Date.now();
   /** Collapsed section keys; everything starts expanded, as on the portal. */
   protected readonly collapsed = signal(new Set<string>());
+
+  protected ess = essentials;
+  protected minutes = (n: LectureNotes) => readMinutes(essentials(n));
 
   protected readonly groups = computed<Group[]>(() => {
     const out: Group[] = [];
