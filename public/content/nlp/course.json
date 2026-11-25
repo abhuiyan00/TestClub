@@ -1,10 +1,9 @@
 {
-  "built": "2026-11-22",
+  "built": "2026-11-25",
   "lectures": {
     "1": {
-      "summary": "How the course is assessed and what it covers, why natural language is hard for machines (ambiguity at every level from morphology to pragmatics), what NLP systems do, how text becomes an evaluated result, and how the field moved from rules to large language models.",
+      "summary": "What the course covers, why natural language is hard for machines (ambiguity at every level from morphology to pragmatics), what NLP systems do, how text becomes an evaluated result, and how the field moved from rules to large language models.",
       "facts": [
-        { "t": "Assessment", "d": "F1 is the project (oral responses, application demo, written documentation); F2 is the final test on the lecture outcomes, in the final lecture slot. Final grade P = 0.8 F1 + 0.2 F2.", "slide": 5, "weight": "high" },
         { "t": "Course scope", "d": "Foundations: classical NLP and text classification, word and text embeddings, LSTMs and the Transformer, large language models. Systems: retrieval-augmented generation, deploying LLMs, visualising text similarity, explainable AI and speech analysis.", "slide": 7, "weight": "medium" },
         { "t": "One sentence, several readings", "d": "\"I saw the man with the telescope\": who has the telescope? \"Zamek był zamknięty\": a lock or a castle? The input holds characters and words; the intended meaning stays implicit.", "slide": 15, "weight": "high" },
         { "t": "What NLP systems do", "d": "Analyse language (classify texts, find entities, relations and events, retrieve information, recognise speech) and produce it (translate, answer questions, summarise, generate text and speech).", "slide": 16, "weight": "medium" },
@@ -19,9 +18,7 @@
         { "t": "Four stages of NLP", "d": "1. Rules and formal grammars. 2. Statistical NLP with probabilistic models from annotated corpora. 3. Neural representations replacing manual features. 4. Transformers and LLMs adapted by prompting or extra training. New methods do not remove ambiguity, data problems or the need to evaluate.", "slide": 25, "weight": "high" },
         { "t": "PLLuM as the case study", "d": "Building the Polish Large Language Model touches every topic of the course: representative corpora, tokenisation and learned representations, the Transformer and training, evaluation and explainability, deployment and retrieval of external knowledge.", "slide": 26, "weight": "low" }
       ],
-      "formulas": [
-        { "name": "Final grade", "expr": "P = 0.8 · F1 (project) + 0.2 · F2 (final test)", "slide": 5 }
-      ],
+      "formulas": [],
       "traps": [
         "Semantics asks what an expression means; pragmatics asks what the speaker intends by saying it.",
         "A token, a word form, a lemma and a morpheme are different units; one Polish word form can carry several grammatical meanings.",
@@ -107,7 +104,6 @@
     }
   },
   "questions": [
-    { "id": "L1-01", "l": 1, "topic": "Assessment", "q": "How is the final grade P computed in this course?", "o": ["P = 0.8 F1 + 0.2 F2", "P = 0.5 F1 + 0.5 F2", "P = 0.2 F1 + 0.8 F2", "P = 0.6 F1 + 0.4 F2"], "c": 0, "hint": "F1 is the project; the test weighs less.", "r": "Slide 5: F1 is the project assessment, F2 the final test; P = 0.8 F1 + 0.2 F2.", "slide": 5, "pattern": "numeric", "lk": "medium" },
     { "id": "L1-02", "l": 1, "topic": "Levels of context", "q": "\"I have to work tonight\" given as an answer to an invitation is a matter of which level?", "o": ["Pragmatics", "Morphology", "Syntax", "Semantics"], "c": 0, "hint": "What does the speaker intend by saying it?", "r": "Slide 17: pragmatics asks what the speaker intends; semantics asks what an expression means. The indirect answer means the speaker will not come.", "slide": 17, "pattern": "classify", "lk": "high" },
     { "id": "L1-03", "l": 1, "topic": "Levels of context", "q": "Which level asks how words are formed, as in work, works, worked?", "o": ["Morphology", "Discourse", "Pragmatics", "Syntax"], "c": 0, "hint": "Word structure, not sentence structure.", "r": "Slide 17: morphology studies word formation; syntax how words combine; discourse how sentences connect; pragmatics the speaker's intention.", "slide": 17, "pattern": "classify", "lk": "high" },
     { "id": "L1-04", "l": 1, "topic": "Ambiguity", "q": "\"The police officer observed the man with binoculars\" is an example of:", "o": ["attachment ambiguity in syntax", "a spelling error in morphology", "an implicature in pragmatics", "a coreference chain in discourse"], "c": 0, "hint": "Who holds the binoculars?", "r": "Slide 20: the phrase \"with binoculars\" can attach to the officer's action or to the man; grammar constrains but does not resolve it.", "slide": 20, "pattern": "classify", "lk": "high" },

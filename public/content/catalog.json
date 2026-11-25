@@ -2,7 +2,7 @@
   "site": {
     "name": "TestClub",
     "semester": "Winter 2026/27",
-    "updated": "2026-11-22",
+    "updated": "2026-11-25",
     "repoUrl": "https://github.com/abhuiyan00/TestClub"
   },
   "courses": [
@@ -440,8 +440,8 @@
             "text": "change one property per option. Find the single wrong attribute and eliminate."
           },
           {
-            "title": "Numbers come from tables and boxed formulas:",
-            "text": "line counts, frame rates, sampling ratios, block sizes, bit depths, coefficients."
+            "title": "Ideas, not calculations.",
+            "text": "Only 1 of 97 past questions asked for a number, so the bank asks what things are and why. The exception: Lecture 7's review slide for this test asks for a raw data rate, a GOP's average compression and a search count. Those three are in the bank."
           },
           {
             "title": "Attribution trivia",

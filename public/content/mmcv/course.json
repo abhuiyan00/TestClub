@@ -1,23 +1,19 @@
 {
- "built": "2026-11-22",
+ "built": "2026-11-25",
  "lectures": {
   "1": {
    "summary": "How we see colour (light, matter and the eye's rods and cones) and how colour is described: the Munsell system, CIE 1931 XYZ and xyY, CIELAB, HSV and HSL, RGB and CMY(K).",
    "facts": [
     {
-     "t": "Course structure and grading",
-     "d": "Lecture 15 h, project 30 h. Final grade = project (must have a passing grade) + knowledge test (slide: 26 Nov 2026; moved to Fri 27 Nov, 15:00-17:00, C-3, 21); Final Grade = (0.6*Knowledge test + 0.4*Project)/2 as printed. Materials on e-portal.",
-     "slide": 2,
-     "weight": "medium"
-    },
-    {
      "t": "Optical triad",
+     "gist": "To see colour you need three things: light, an object and the human visual system.",
      "d": "To see color you need light, an object (matter) and the human visual system.",
      "slide": 5,
      "weight": "high"
     },
     {
      "t": "Visible light range",
+     "gist": "Light with a wavelength of about 380–780 nm; below it is ultraviolet, above it infrared.",
      "d": "Visible light is electromagnetic radiation with wavelength 380–780 nm (approx. 400–700 nm); UV below, IR above.",
      "slide": 6,
      "weight": "high"
@@ -30,6 +26,7 @@
     },
     {
      "t": "Transmission and refractive index",
+     "gist": "Matter transmits, reflects or absorbs light. The refractive index says how much slower light is in a material than in a vacuum.",
      "d": "Matter interacts with light by transmission, reflection and absorption. Transmission is characterized by the refractive index = speed of light in vacuum / speed in material (water RI = 1.333).",
      "slide": 11,
      "weight": "high"
@@ -42,30 +39,35 @@
     },
     {
      "t": "Retinal receptors and peak sensitivities",
+     "gist": "A few million cones see colour in good light; over 100 million rods see gray in weak light. Three cone types: blue (S), green (M), red (L).",
      "d": "Cones 6–9 million (avg. 4.5 million as printed): color vision in relatively bright light. Rods 100–120 million (avg. 90 million as printed): grayscale vision at low light. Peaks: S/blue cones 420 nm, rods 498 nm, M/green cones 534 nm, L/red cones 564 nm.",
      "slide": 16,
      "weight": "high"
     },
     {
      "t": "Rods vs cones table",
+     "gist": "Rods: very sensitive, slow, low acuity, one type, night. Cones: less sensitive, fast, high acuity, three types, day.",
      "d": "Rods: low acuity, very high sensitivity (diffuse light), slow reaction, shapes and movement, 1 type, scotopic (night) vision, impairment causes twilight/night blindness. Cones: high acuity, low sensitivity (direct light), fast reaction, color perception, 3 types, photopic vision, impairment causes loss of color perception / sharpness.",
      "slide": 18,
      "weight": "high"
     },
     {
      "t": "Photopic, mesopic, scotopic vision",
+     "gist": "Photopic = day, only cones. Mesopic = transition, colours fade. Scotopic = night, shades of gray.",
      "d": "Photopic (daytime): sufficient light, ONLY the cones are involved. Mesopic: transitional phase as light decreases, partial or gradual loss of color perception. Scotopic: minimal light intensity, world seen in shades of gray.",
      "slide": 19,
      "weight": "high"
     },
     {
      "t": "Purkinje phenomenon",
+     "gist": "As it gets dark, reds look darker than the other colours.",
      "d": "Disturbance in perception of color brightness in low light: reds appear darker than other colors as light decreases. Relative sensitivity peaks: scotopic 507 nm, photopic 555 nm.",
      "slide": 20,
      "weight": "high"
     },
     {
      "t": "Nyctalopia vs hemeralopia",
+     "gist": "Nyctalopia: cannot see in dim light (night blindness). Hemeralopia: cannot see in bright light.",
      "d": "Night blindness (nyctalopia) impairs or prevents vision in relatively dim light and is a symptom of an eye disorder. Hemeralopia is the opposite: inability to see in bright light.",
      "slide": 22,
      "weight": "high"
@@ -78,18 +80,21 @@
     },
     {
      "t": "Munsell system basics",
+     "gist": "A colour is three numbers: hue, value (lightness) and chroma (saturation).",
      "d": "Albert Henry Munsell, 'A Color Notation', 1905 (idea originated with Newton). A color is given by three numbers: VALUE = lightness, CHROMA = saturation, HUE = measured hue.",
      "slide": 25,
      "weight": "high"
     },
     {
      "t": "Munsell hues",
+     "gist": "Five primary hues (R, Y, G, B, P) and five intermediate ones on a dial.",
      "d": "5 primary hues: red (R), yellow (Y), green (G), blue (B), magenta/purple (P). 5 intermediate: YR, GY, BG, PB, RP. Arranged on a compass-like dial with labels.",
      "slide": 26,
      "weight": "high"
     },
     {
      "t": "Munsell value and chroma",
+     "gist": "Value runs from black (0) to white (10). Chroma is the distance from gray, and its maximum differs between hues.",
      "d": "VALUE: 9 discrete gray levels 1N–9N (2N dark gray, 5N medium gray), 0N = black, 10N = white. CHROMA: difference between pure color and gray, discrete scale whose range depends on hue and value; different areas have different maximal chroma (!).",
      "slide": 27,
      "weight": "high"
@@ -102,18 +107,21 @@
     },
     {
      "t": "CIE 1931 experiment",
+     "gist": "CIE, the International Commission on Illumination, matched colours with red, green and blue lights; three real lights cannot reproduce every colour.",
      "d": "CIE = Commission Internationale de l'Éclairage. 1931 color matching with a visual colorimeter (tintometer) using adjustable primaries R 700 nm, G 546.1 nm, B 435.8 nm. Not all spectral colors can be balanced; three pure spectral colors cannot reproduce all shades.",
      "slide": 30,
      "weight": "high"
     },
     {
      "t": "CIE-RGB to XYZ",
+     "gist": "CIE-RGB needs negative weights, so fictitious primaries X, Y, Z were defined; Y is luminance and nothing is negative.",
      "d": "CIE-RGB matching functions need negative weights (or additional colors), so CIE-RGB is inconvenient. New fictitious XYZ primaries were defined: Y = luminance (cone sensitivity); X and Z chosen so all visible colors have non-negative components. Computing XYZ for all spectra forms a solid containing all visible colors.",
      "slide": 34,
      "weight": "high"
     },
     {
      "t": "CIE xyY and chromaticity diagram",
+     "gist": "The horseshoe chart shows chromaticity without brightness: pure spectral colours on the edge, white near the middle.",
      "d": "xyY reduces 3-D XYZ to 2-D: x, y = chromaticity, Y = luminance. Cross-section by plane X+Y+Z=1 projected onto the X-Y plane = CIE-XYZ chromaticity diagram. It has NO brightness information; spectral colors on the envelope, other colors inside; white point C at (0.333, 0.333).",
      "slide": 37,
      "weight": "high"
@@ -126,12 +134,14 @@
     },
     {
      "t": "CIELAB",
+     "gist": "L = lightness, a = green to red, b = blue to yellow. Device-independent, close to human perception, used to measure colour difference (ΔE).",
      "d": "L = lightness (0 black, 100 reference white); a = green(-)/red(+); b = blue(-)/yellow(+). Device-independent nonlinear transformation of CIE XYZ relative to a reference white; approximately perceptually uniform. Uses: color matching/QC (ΔE), segmentation, k-means palette extraction, color management, editing L separately from a*, b*.",
      "slide": 41,
      "weight": "high"
     },
     {
      "t": "HSV model and HSV vs CIELAB",
+     "gist": "HSV (hue, saturation, value) makes it easy to describe a colour; CIELAB is precise and device-independent.",
      "d": "color = [H, S, V], H ∈ [0–360°], S, V ∈ [0, 1]; cone axis = gray axis; algorithms convert HSV to RGB and CMY. Advantage: easy, interactive description of an imagined color. HSV = intuitive for programmers/designers (saturation slider); CIE-LAB = precise, device-independent (print must match screen).",
      "slide": 44,
      "weight": "high"
@@ -144,41 +154,41 @@
     },
     {
      "t": "RGB additive vs CMY subtractive",
+     "gist": "RGB adds light (monitor, starts from black); CMY subtracts light with ink (print, starts from white).",
      "d": "RGB: [R,G,B] in [0,1], additive, diagonal [0,0,0]-[1,1,1] = grayscale black to white, e.g. monitor display. CMY: [C,M,Y] in [0,1], subtractive, diagonal = gray scale white to black, e.g. printing on white paper. Both: advantage = easy reproduction of a described color; disadvantage = difficult to describe an imagined color. Example: 442 nm monochromatic light = 0.77B + 0.11G + 0R.",
      "slide": 47,
      "weight": "high"
     },
     {
      "t": "YUV (PAL) and YIQ (NTSC)",
+     "gist": "Y = brightness, the other two = colour. YUV belongs to PAL, YIQ to NTSC. The eye cares more about Y, so colour can be compressed.",
      "d": "Luminance Y = brightness (grayscale image); chrominance (UV, IQ) = color. YUV is the PAL system: the eye is more sensitive to luminance than chrominance, so brightness and color are separated for compression; Y errors matter more than U, V errors. YIQ is the NTSC system: I and Q are used because U, V colors do not match human perception; downward compatible with B&W TV that uses only Y.",
      "slide": 51,
      "weight": "high"
     },
     {
      "t": "YCbCr",
+     "gist": "The digital cousin of YUV, scaled and shifted, used in JPEG and MPEG.",
      "d": "Often confused with YUV; used with JPEG/MPEG; chrominance always in [0, 1]; a scaled and shifted YUV; YUV is 'analog', YCbCr is 'digital'.",
      "slide": 53,
      "weight": "high"
     },
     {
      "t": "YCoCg",
+     "gist": "Y + orange + green chrominance: simple, reversible without loss, used in H.264, HEVC and JPEG XR.",
      "d": "Directly related to RGB; Y + chrominance green (Cg) + chrominance orange (Co); lossless RGB conversion using fewer bits; used in H.264/MPEG-4 AVC, HEVC, JPEG XR. Advantages over YCbCr: simpler and faster calculations, better color-plane correlation (better compression), lossless reversibility.",
      "slide": 54,
      "weight": "high"
     },
     {
      "t": "Color temperature",
+     "gist": "The temperature of a black body with the same colour. Low K looks warm (orange), high K cold (blue); D65 = 6,500 K.",
      "d": "Measure of the color rendering of a light source, in K, based on blackbody radiation of a perfect black body (which does not exist): heated, it goes dark red, yellow, white, light blue. Paradox: low K perceived as warm, high K as cold. 1,800–2,000 K candle/sunrise; 2,700–3,000 K tungsten bulb; 4,000–4,500 K office/moonlight (neutral white); 5,000–5,500 K noon sun/flash; 6,500 K slightly cloudy sky = D65 (computer graphics); 8,000–10,000 K clear blue sky in deep shadow.",
      "slide": 57,
      "weight": "high"
     }
    ],
    "formulas": [
-    {
-     "name": "Final grade",
-     "expr": "Final Grade = (0.6*Knowledge test + 0.4*Project) / 2 (as printed)",
-     "slide": 2
-    },
     {
      "name": "Equal-energy white",
      "expr": "E - P(λ) = const",
@@ -269,13 +279,12 @@
     "Cone vs rod counts swapped: cones 6-9 million (avg 4.5 M), rods 100-120 million (avg 90 M); the printed averages lie below the ranges.",
     "RGB diagonal runs black to white ([0,0,0] = black); CMY diagonal runs white to black ([0,0,0] = white).",
     "YUV belongs to PAL, YIQ to NTSC; YUV is 'analog', YCbCr is 'digital' (JPEG/MPEG).",
-    "U = B - Y and V = R - Y (not the other way round); Cb divides by 2, Cr divides by 1.6, both + 0.5.",
     "Nyctalopia = cannot see in dim light (night blindness); hemeralopia = cannot see in bright light.",
     "Munsell CHROMA = saturation, VALUE = lightness; value levels 1N-9N with 0N black and 10N white; max chroma differs by region.",
     "Color temperature paradox: low K looks warm (yellow/orange), high K looks cold (blue); D65 = 6,500 K.",
     "CIE chromaticity diagram has no brightness information, but in XYZ/xyY the Y component IS luminance.",
     "Purkinje: reds (not blues) get darker in dim light; scotopic peak 507 nm vs photopic 555 nm.",
-    "Slide typos: slide 56 prints Y = 0.229R (0.299 elsewhere); slide 31 prints X = Y*X/y (meaning x/y); HSV is a single cone, HSL a double cone."
+    "HSV is a single cone, HSL a double cone."
    ]
   },
   "2": {
@@ -283,18 +292,21 @@
    "facts": [
     {
      "t": "Digital image definition",
+     "gist": "A two-dimensional array of pixel values: gray levels, colours or colour indexes.",
      "d": "A digital image is a 2D array f = f(x, y), x = 0..N-1, y = 0..M-1, where N and M are image width and height. Pixel values can be a gray level in {0..S}, a colour [r g b] with r, g, b in {0..S}, or a colour index in {0..S}.",
      "slide": 3,
-     "weight": "medium"
+     "weight": "high"
     },
     {
      "t": "Camera pipeline and image quality",
+     "gist": "Lens → sensor with filter → ADC → processor → storage. Quality depends on lens, sensor and processing together.",
      "d": "Pipeline: Lens → Sensor (CFA) → ADC → DSP → Storage. Image quality is jointly determined by lens, sensor and image processing engine (optics, sensor and processing).",
      "slide": 4,
      "weight": "high"
     },
     {
      "t": "Camera controls",
+     "gist": "Focal length: angle of view. Aperture: light and depth of field. Shutter: motion blur. ISO: gain.",
      "d": "Focal length: angle of view for a given sensor size. Aperture: light reaching the sensor and depth of field. Shutter speed: exposure duration and motion blur (1 s blurs flowing water, 1/1000 s freezes it). ISO: signal gain and rendered brightness. Other features: autofocus, stabilization, viewfinder.",
      "slide": 5,
      "weight": "high"
@@ -307,36 +319,42 @@
     },
     {
      "t": "Aperture and depth of field",
+     "gist": "Small f-number = wide aperture = shallow depth of field; f/16 = large depth of field.",
      "d": "A smaller f-number means a wider aperture (scale f/2.8, f/4, f/5.6, f/8, f/11, f/16). f/2.8 gives shallow depth of field; f/16 gives large depth of field.",
      "slide": 8,
      "weight": "high"
     },
     {
      "t": "ISO",
+     "gist": "Amplifies the signal; it does not collect more light and it makes noise visible.",
      "d": "ISO changes signal gain; it does not increase the light collected. Higher ISO (ISO 3200 vs ISO 200) gives more visible noise and less fine detail.",
      "slide": 11,
      "weight": "high"
     },
     {
      "t": "CCD principle",
+     "gist": "Charge-coupled device: light creates charge, which is shifted row by row to one output amplifier.",
      "d": "CCD = charge-coupled device. Light generates charge in photosensitive pixels; charge is transferred to an output amplifier by clocked parallel shifting of rows into a serial shift register that outputs the data.",
      "slide": 13,
      "weight": "high"
     },
     {
      "t": "Sensor milestones",
+     "gist": "1969 first CCD (Boyle and Smith, Bell Labs), 1974 first CCD used for images (Fairchild).",
      "d": "1969: W. Boyle and G. Smith (Bell Labs) designed the first CCD (data storage). 1974: Fairchild Electronics, first CCD used for image acquisition (100 × 100 px). 2015: Canon demonstrated a 250 MP CMOS sensor. 2020: SLAC captured 3,200 MP images with a CCD array.",
      "slide": 13,
      "weight": "high"
     },
     {
      "t": "CCD vs CMOS (APS)",
+     "gist": "CCD moves charge and gives an analog output; CMOS converts in each pixel and often gives a digital output.",
      "d": "Readout: CCD charge transfer vs CMOS pixel-level conversion. Output: CCD analog voltage vs CMOS often digital. Integration: CCD more external circuitry vs CMOS often integrated. Speed: CCD architecture-dependent vs CMOS parallel readout options. Fill factor, noise, dynamic range, power/cost are design-, device- or application-dependent for both. Choose by measured performance and application requirements.",
      "slide": 15,
      "weight": "high"
     },
     {
      "t": "Colour filter arrays",
+     "gist": "Filters over the pixels. Bayer: two green, one red, one blue. RGBE adds emerald; CMYY and CYGM use magenta.",
      "d": "A CFA places colour filters over sensor pixels. Bayer uses two green, one red and one blue filter (G-R-G-B, most popular mosaic). Other CFAs: RGBE (red, green, blue, emerald), CMYY (cyan, magenta, yellow, yellow), CYGM (cyan, yellow, green, magenta).",
      "slide": 16,
      "weight": "high"
@@ -367,12 +385,14 @@
     },
     {
      "t": "Analog-to-digital conversion",
+     "gist": "Turns the analog signal into codes; more bits mean more levels (8 bits = 256).",
      "d": "An ADC quantizes an analog signal into a digital code. An n-bit ADC provides 2^n codes: 8-bit 256, 10-bit 1,024, 12-bit 4,096 levels.",
      "slide": 22,
      "weight": "high"
     },
     {
      "t": "Digital signal processing",
+     "gist": "The camera processor does demosaicing, enhancement and compression. RAW = data without conversion.",
      "d": "The in-camera DSP performs colour interpolation (demosaicing), image enhancement and colour correction, image compression and computational photography. Processing engine steps shown: RGB image production, brightness, white balance, sharpness, contrast. RAW data is recorded without conversion; TIFF has no compression; JPEG is compressed by a special LSI.",
      "slide": 23,
      "weight": "high"
@@ -381,7 +401,7 @@
      "t": "Memory cards",
      "d": "SD up to 2 GB; SDHC more than 2 GB up to 32 GB; SDXC more than 32 GB up to 2 TB; SDUC more than 2 TB up to 128 TB. Sony Memory Stick: relatively slow (< 50 MB/s), 128 MB (Original), 32 GB (PRO), 2 TB (XC). CompactFlash: Type I 43 × 36 × 3.3 mm, Type II 43 × 36 × 5 mm, 2 MB to 512 GB (CF5.0 up to 128 PB). XQD: 38.5 × 29.8 × 3.8 mm, 2 TB+, PCI Express interface, about 500 MB/s R/W.",
      "slide": 24,
-     "weight": "high"
+     "weight": "medium"
     },
     {
      "t": "Canon EOS R5 Mark II vs Nikon Z8",
@@ -391,30 +411,35 @@
     },
     {
      "t": "Stacked CMOS",
+     "gist": "Pixel and logic chips bonded vertically: faster readout, less rolling-shutter distortion, but not a global shutter.",
      "d": "Pixel layer (back-illuminated photodiodes) and logic layer (high-speed readout) are bonded vertically; some designs add memory. Advantages: faster readout reduces rolling-shutter distortion, rapid bursts and more frequent AF updates, high-resolution video at high frame rates. Trade-offs: more complex fabrication and bonding; dynamic range depends on design, not the label; stacked does not imply global shutter.",
      "slide": 27,
      "weight": "high"
     },
     {
      "t": "Image histogram",
+     "gist": "Counts how many pixels have each brightness level.",
      "d": "A histogram counts pixels at each intensity level, H(i) = card{(x, y): image(x, y) = i}. Example 256 × 256 image = 65,536 pixels. Horizontal axis = brightness (dark left to bright right, shadows/midtones/highlights), vertical axis = number of pixels.",
      "slide": 29,
      "weight": "high"
     },
     {
      "t": "Reading histograms",
+     "gist": "Pixels piled up at 255 = overexposed; piled up near 0 = underexposed.",
      "d": "Highlight clipping: many pixels at level 255 indicates overexposure. Dark image: many pixels near levels 6-7 indicates underexposure.",
      "slide": 30,
      "weight": "high"
     },
     {
      "t": "Histogram equalization",
+     "gist": "Spreads the levels with the cumulative histogram; improves contrast when the levels are bunched together.",
      "d": "Redistributes pixel intensities using the cumulative histogram. It can improve global contrast when intensities occupy a narrow range; the result depends on the image, so inspect detail and noise afterwards.",
      "slide": 32,
      "weight": "high"
     },
     {
      "t": "Transforms comparison",
+     "gist": "FFT: global frequencies, periodic noise. DCT: blocks, JPEG. DWT: location and scale, denoising. The FFT is just a fast DFT.",
      "d": "Transforms express pixels as coefficients easier to filter, compress or analyze. FFT: global spatial frequencies with magnitude and phase; frequency filtering, periodic-noise removal; limited spatial localization. DCT: cosine patterns within blocks; JPEG compression, energy compaction; block artifacts with strong quantization. DWT: local detail at multiple scales; denoising, multiscale analysis, compression; captures location and scale. FFT is a fast algorithm for computing the DFT, not a different transform.",
      "slide": 33,
      "weight": "high"
@@ -423,7 +448,7 @@
      "t": "DFT properties and examples",
      "d": "f(x, y) (spatial image) → F(u, v) (frequency-domain coefficients). F(u, v) contains magnitude and phase; an N × N image has N × N complex DFT coefficients; the inverse transform reconstructs the image. A constant 8 × 8 image has a single non-zero (DC) coefficient; a rectangular pulse and a photo patch show a large DC term plus smaller coefficients.",
      "slide": 35,
-     "weight": "high"
+     "weight": "medium"
     },
     {
      "t": "Image processing operations",
@@ -433,12 +458,14 @@
     },
     {
      "t": "Gaussian vs median filtering",
+     "gist": "Gaussian: weighted average, blurs detail. Median: middle value, removes isolated spots.",
      "d": "Gaussian: each pixel replaced by a weighted average of its neighbourhood, mask normalized to sum to 1 (example mask 2 4 2 / 4 8 4 / 2 4 2, sum 32); blurs fine detail. Median: the pixel and its 8 neighbours are sorted non-decreasingly and the 5th element is the output; removes isolated dark spots.",
      "slide": 40,
      "weight": "high"
     },
     {
      "t": "High dynamic range imaging",
+     "gist": "Combines bracketed exposures to keep shadows and highlights; one stop more = twice the light.",
      "d": "HDR represents a wider range of scene brightness. Bracketed exposures (example -4, -2, +2, +4 stops) capture shadow and highlight detail. One stop more exposure doubles the light collected.",
      "slide": 44,
      "weight": "high"
@@ -514,24 +541,28 @@
    "facts": [
     {
      "t": "Etymology of television",
+     "gist": "Greek tele (far) + Latin visio (the image seen). Phi phenomenon: Max Wertheimer, 1912.",
      "d": "Television = Greek 'tele' (far) + Latin 'visio' (the image seen). The 'phi phenomenon' was described by Max Wertheimer in 1912.",
      "slide": 3,
-     "weight": "medium"
+     "weight": "high"
     },
     {
      "t": "Line-by-line transmission",
+     "gist": "The picture is sent line by line; the signal value is the brightness of the current point.",
      "d": "Analog TV transmits the image line by line; the signal value at a given moment equals the brightness of the point at the same time. TV bandwidth 6.5 / 5.5 MHz gives about 800 points per line.",
      "slide": 3,
      "weight": "high"
     },
     {
      "t": "Early history",
+     "gist": "1877 Ochorowicz: principles. 1897 Braun: the lamp. 1923 Zworykin: the kinescope. 1928: first regular programme (USA).",
      "d": "1877 Julian Ochorowicz (philosopher, psychologist) defined the general principles of TV; 1897 Ferdinand Braun presented Braun's lamp enabling the kinescope; 1923 Vladimir Zworykin constructed the kinescope; 1928 TV signal sent over the Atlantic and the first US station began regular programmes.",
      "slide": 4,
      "weight": "high"
     },
     {
      "t": "TV in Poland",
+     "gist": "1934 first experimental broadcast from the Prudential hotel; 1952 first half-hour programme from Warsaw.",
      "d": "1934: first experimental broadcast in Poland, 'Prudential' hotel, Warsaw. 25 October 1952: first half-hour programme from the Institute of Telecommunications in Warsaw, received on 24(!) receivers.",
      "slide": 5,
      "weight": "high"
@@ -544,6 +575,7 @@
     },
     {
      "t": "Colour standards and later milestones",
+     "gist": "NTSC 1953 (USA), SECAM 1957 (France), PAL 1961 (Germany, Walter Bruch), Telstar 1962, first digital systems 1987.",
      "d": "1953 NTSC (USA), first colour TV standard; 1957 SECAM (France); 1961 PAL by Walter Bruch (Germany); 1962 USA-Europe broadcast via Telstar, the first commercial satellite; 1986 stereo sound; 1987 first digital TV systems (USA / Japan).",
      "slide": 6,
      "weight": "high"
@@ -562,12 +594,14 @@
     },
     {
      "t": "TV signal components",
+     "gist": "Brightness, colour, synchronization (start of a line and an image) and sound.",
      "d": "The TV signal comprises brightness (luminance), colour (chrominance), synchronizing signals (mark the beginning of a new line and a new image) and sound.",
      "slide": 9,
      "weight": "high"
     },
     {
      "t": "Analog standards",
+     "gist": "NTSC: 525 lines, 30 FPS. PAL and SECAM: 625 lines, 25 FPS.",
      "d": "NTSC (National Television System Committee) 30 FPS, 525 lines; PAL (Phase Alternating Line) 25 FPS, 625 lines; SECAM (Séquentiel couleur à mémoire) 25 FPS, 625 lines.",
      "slide": 9,
      "weight": "high"
@@ -580,12 +614,14 @@
     },
     {
      "t": "Three stages of analog TV",
+     "gist": "Analysis (2-D image to 1-D signal) → transmission → reconstruction on the screen.",
      "d": "Image analysis: 2D image to 1D signal in the time domain. Signal transmission: transmitter to receiver, usually via radio waves. Image reconstruction: signal back to a 2D image displayed on the screen.",
      "slide": 11,
      "weight": "high"
     },
     {
      "t": "Interlaced scanning",
+     "gist": "A frame is split into two half-images, odd and even lines, which reduces flicker.",
      "d": "The image is scanned with horizontal lines and divided into two half-images (odd lines and even/parity lines); slide 3 links interlacing to reducing flicker. 625 (effective 576) lines, 25 FPS: Europe (PAL/SECAM); 525 (effective 496) lines, 30 FPS: USA (NTSC).",
      "slide": 12,
      "weight": "high"
@@ -598,9 +634,10 @@
     },
     {
      "t": "Colour difference signals",
+     "gist": "Colour is sent as R−Y and B−Y; the receiver adds Y to get the colours back.",
      "d": "Colour is carried as colour-difference signals R-Y and B-Y; the receiver recovers colours as Y + (R-Y) = R and Y + (B-Y) = B.",
      "slide": 16,
-     "weight": "medium"
+     "weight": "high"
     },
     {
      "t": "Positive vs negative signal",
@@ -616,12 +653,14 @@
     },
     {
      "t": "CRT construction",
+     "gist": "Grids take the video signal, deflection coils take the scan signals and steer the beam; problems: edge geometry and gamma.",
      "d": "Colour CRT: three electron beams pass through a shadow mask onto an RGB phosphor grid. Components: cathode, grids (video signal u(t)), deflection coils (scan signals u_h(t), u_v(t)), anode, electron beam, fluorescent screen. Problems: image geometry near the edges and gamma correction.",
      "slide": 25,
      "weight": "high"
     },
     {
      "t": "Gamma correction",
+     "gist": "Compensates the nonlinear voltage-to-brightness curve of the CRT; also suits the eye, which is more sensitive to dark tones.",
      "d": "Introduced to compensate the CRT input (voltage) / output (brightness) characteristic; a nonlinear operation encoding/decoding luminance, V_out = A·V_in^γ, usually A = 1 with values 0-1. Human sight is more sensitive to relative differences between darker tones; CRT TVs usually had a maximum luminance of 100 cd/m².",
      "slide": 26,
      "weight": "high"
@@ -636,7 +675,7 @@
      "t": "European scan rates",
      "d": "Europe: 625 lines per frame, 50 half-images per second; horizontal scan rate f_h = 15625 Hz, vertical scan rate f_v = 50 Hz.",
      "slide": 30,
-     "weight": "high"
+     "weight": "medium"
     },
     {
      "t": "Composite video signal",
@@ -646,6 +685,7 @@
     },
     {
      "t": "VHF/UHF and channel modulation",
+     "gist": "Picture is AM, sound is FM at a fixed offset. VHF 30–300 MHz, UHF 300–3000 MHz.",
      "d": "VHF 30-300 MHz (10 m-1 m), UHF 300-3000 MHz (1 m-10 cm), country dependent. Picture uses amplitude modulation on one frequency; sound uses frequency modulation at a fixed offset, typically 4.5 to 6 MHz.",
      "slide": 33,
      "weight": "high"
@@ -658,6 +698,7 @@
     },
     {
      "t": "European channel structure",
+     "gist": "Channels lie 8 MHz apart; the video takes 6 MHz and the audio carrier sits 6.5 MHz above the video carrier.",
      "d": "Channel separation 8 MHz, video signal bandwidth 6 MHz; video carrier f_w at 0 MHz and audio carrier f_f at +6.5 MHz.",
      "slide": 37,
      "weight": "high"
@@ -666,16 +707,18 @@
      "t": "Channel frequency table",
      "d": "R1 49.75/56.25, R2 59.25/65.75, R3 77.25/83.75, R4 85.25/91.75, R5 93.25/99.75, K06 175.25/181.75 ... K12 223.25/229.75 MHz (video/audio). Current TV sets receive 110-862 MHz, covering 94 channels.",
      "slide": 38,
-     "weight": "high"
+     "weight": "medium"
     },
     {
      "t": "Colour TV problems and RGB-YUV",
+     "gist": "Colour had to work on black-and-white sets and in limited bandwidth, so RGB is sent as Y plus chrominance.",
      "d": "Problems: compatibility (colour signal visible on B&W sets) and limited bandwidth; solution: a specific colour coding. RGB is converted to Y (grayscale image) plus chrominance U, V (or I, Q), transmitted, and converted back to RGB.",
      "slide": 40,
      "weight": "high"
     },
     {
      "t": "Chrominance bandwidth",
+     "gist": "People do not see fine detail in colour, so chrominance gets less bandwidth than luminance.",
      "d": "Humans do not see image details as coloured objects, so chrominance bandwidth can be limited: RGB 6+6+6 = 18 MHz; NTSC Y 4.5 + I 2.0 + Q 1.0 = 7.5 MHz; PAL Y 6 + U 1.2 + V 1.2 = 8.4 MHz.",
      "slide": 43,
      "weight": "high"
@@ -772,8 +815,8 @@
     "Braun presented the lamp (1897); Zworykin constructed the kinescope (1923); Ochorowicz defined the principles (1877).",
     "SECAM (1957) came before PAL (1961); NTSC (1953) was the first colour standard; CCIR (1953) is an organisation, not a standard.",
     "NTSC needs less total bandwidth (7.5 MHz) than PAL (8.4 MHz) because its luminance band is only 4.5 MHz.",
-    "U uses B - Y (x 0.493) and V uses R - Y (x 0.877); NTSC uses I and Q instead.",
-    "Slides 41-42 print Y = 0.229 R, a typo for 0.299 (Lecture 1 uses 0.299); if an exam option shows 0.229 with 0.587 and 0.114, it means the same formula; the eye is more sensitive to darker tones, and gamma fixes CRT brightness, not edge geometry.",
+    "PAL uses U and V; NTSC uses I and Q.",
+    "Gamma correction fixes the brightness curve of the CRT, not the geometry near the edges; the eye is more sensitive to differences between dark tones.",
     "Horizontal rate 15625 Hz versus vertical rate 50 Hz; 50 half-images per second versus 25 frames per second."
    ]
   },
@@ -782,12 +825,14 @@
    "facts": [
     {
      "t": "Nyquist theorem",
+     "gist": "Sample at least twice per cycle of the highest frequency and nothing is lost.",
      "d": "A sinusoid can be regenerated with no loss of information if it is sampled at least twice per cycle (f_s >= 2 f_max).",
      "slide": 8,
      "weight": "high"
     },
     {
      "t": "SDTV vs HDTV sample rate",
+     "gist": "SDTV is sampled at 13.5 MHz, HDTV at 74.25 MHz because it has more pixels.",
      "d": "SDTV (about 6 MHz video bandwidth) is sampled at 13.5 MHz; HDTV, with many more pixels, at 74.25 MHz.",
      "slide": 8,
      "weight": "high"
@@ -808,28 +853,32 @@
      "t": "SDTV bit rate",
      "d": "Luminance: 8 bit x 576 lines x 720 px x 25 fps = 82.944 Mbps. Chrominance (2 x 360 px per line) adds the same, so the total is 165.888 Mbps.",
      "slide": 13,
-     "weight": "high"
+     "weight": "medium"
     },
     {
      "t": "DTV capacity",
+     "gist": "Compression lets digital TV carry 4 to 10 times more programmes than analog in the same channel.",
      "d": "Thanks to MPEG-2/MPEG-4 compression, digital TV carries 4 to 10 times more programmes than analog TV in a channel of similar width (up to 10 per channel vs 1).",
      "slide": 14,
      "weight": "high"
     },
     {
      "t": "ITU-R 601",
+     "gist": "The digital sampling standard: luminance 13.5 MHz, chrominance 6.75 MHz, for both 625 and 525 lines.",
      "d": "Luminance sampled at 13.5 MHz and chrominance at 6.75 MHz. The Shannon minima for 6 MHz and 2.75 MHz bandwidths are 12 MHz and 5.5 MHz; the real rates sit above them for 625/525 compatibility.",
      "slide": 15,
      "weight": "high"
     },
     {
      "t": "Required compression",
+     "gist": "SDTV must shrink about 50:1 to fit an 8 MHz channel.",
      "d": "To reuse the existing EU UHF transmitters (about 8 MHz), SDTV needs a compression ratio of about 50:1, and HDTV significantly more.",
      "slide": 16,
      "weight": "high"
     },
     {
      "t": "Lossless vs lossy",
+     "gist": "Lossless restores everything; lossy drops some information for good. Digital TV is lossy (MPEG).",
      "d": "Lossless compression restores all data; lossy compression permanently removes some. DTV uses lossy compression. MPEG is the umbrella term for the bit-rate reduction standards.",
      "slide": 17,
      "weight": "high"
@@ -842,12 +891,14 @@
     },
     {
      "t": "Fundamental problem of DTV",
+     "gist": "An effective compression.",
      "d": "An effective compression: uncompressed SDTV (about 166 Mbps) cannot fit an 8 MHz channel without it.",
      "slide": 19,
-     "weight": "medium"
+     "weight": "high"
     },
     {
      "t": "Analog vs digital standards",
+     "gist": "Analog: NTSC, PAL, SECAM. Digital: DVB (Europe), ATSC (North America), ISDB (Japan, South America).",
      "d": "Analog: NTSC, PAL, SECAM. Digital: DVB (Europe), ATSC (North America), ISDB (Japan, South America).",
      "slide": 20,
      "weight": "high"
@@ -860,18 +911,21 @@
     },
     {
      "t": "Single Frequency Network",
+     "gist": "All transmitters use one frequency; supported by DVB-T and ISDB-T, not by ATSC.",
      "d": "SFN is supported by DVB-T and ISDB-T but not by ATSC. DVB-T allows SDTV, not HDTV, mobile reception.",
      "slide": 22,
-     "weight": "medium"
+     "weight": "high"
     },
     {
      "t": "UHD resolutions",
+     "gist": "Full HD 1920×1080, 4K UHD 3840×2160, 8K UHD 7680×4320; each step has four times the pixels.",
      "d": "Full HD 1920x1080 (2.07 MPx), 4K UHD 3840x2160 (8.29 MPx), 8K UHD 7680x4320 (33.18 MPx): 8K has 16x the pixels of Full HD.",
      "slide": 25,
      "weight": "high"
     },
     {
      "t": "Super Hi-Vision (UHD-2)",
+     "gist": "8K at 120 Hz progressive with 22.2 surround sound.",
      "d": "7680x4320, 16:9, 120 Hz progressive, 12 bits per colour RGB with HDR, 22.2 surround (24 channels), about 50 Mbps with HEVC, 144 Gbit/s uncompressed.",
      "slide": 26,
      "weight": "high"
@@ -884,56 +938,64 @@
     },
     {
      "t": "HDR standards",
+     "gist": "HDR10: static metadata. HDR10+ and Dolby Vision: dynamic. HLG: no metadata.",
      "d": "HDR10: 10-bit PQ, static metadata. HDR10+ and Dolby Vision: dynamic (scene/frame) metadata. HLG: Hybrid Log-Gamma, no metadata. SL-HDR1: SDR base plus reconstruction data.",
      "slide": 32,
      "weight": "high"
     },
     {
      "t": "DVB family",
+     "gist": "DVB-S satellite, -C cable, -T terrestrial, -CA conditional access (pay TV), -SI service information, -RC return channels.",
      "d": "DVB-S satellite, DVB-C cable, DVB-T terrestrial, DVB-CA common interface for conditional access, DVB-SI service information, DVB-RC return channels.",
-     "slide": 36,
-     "weight": "medium"
+     "slide": 35,
+     "weight": "high"
     },
     {
      "t": "DVB-S transmitter chain",
+     "gist": "Scrambling → outer coding → interleaving → inner coding → baseband shaping → QPSK.",
      "d": "Scrambling -> outer coding (Reed-Solomon) -> interleaving -> inner coding (convolutional) -> baseband shaping -> QPSK modulation (ETS 300 421).",
-     "slide": 39,
+     "slide": 38,
      "weight": "high"
     },
     {
      "t": "Scrambling (energy dispersal)",
+     "gist": "Mixes data with a pseudo-random sequence to spread the energy; it is not encryption.",
      "d": "Packets are randomized (modulo-2 with a pseudo-random sequence, 1503 bytes) to disperse energy and avoid an apparently unmodulated carrier. It is not encryption.",
-     "slide": 40,
+     "slide": 39,
      "weight": "high"
     },
     {
      "t": "Reed-Solomon outer code",
+     "gist": "RS(204, 188, 8): adds 16 bytes per packet and corrects up to 8 errors.",
      "d": "RS(204, 188, 8): a 188-byte packet becomes 204 bytes (16 parity bytes) and up to 8 byte errors can be corrected.",
-     "slide": 41,
+     "slide": 40,
      "weight": "high"
     },
     {
      "t": "Interleaving",
+     "gist": "Spreads burst errors apart so that they become single, correctable errors.",
      "d": "A convolutional interleaver spreads burst errors missed by the inner decoder so that after deinterleaving they become isolated, correctable errors.",
-     "slide": 43,
+     "slide": 42,
      "weight": "high"
     },
     {
      "t": "Inner (convolutional) code",
+     "gist": "A convolutional code; puncturing leaves bits out to raise the code rate.",
      "d": "Basic code rate 1/2 with constraint length K = 7; puncturing raises it to 2/3, 3/4, 5/6 or 7/8.",
-     "slide": 47,
-     "weight": "medium"
+     "slide": 46,
+     "weight": "high"
     },
     {
      "t": "Gray code in pulse shaping",
      "d": "Neighbouring Gray code words differ in only one bit; pulse edges are then filtered (shaped) before modulation.",
-     "slide": 47,
+     "slide": 46,
      "weight": "medium"
     },
     {
      "t": "QPSK",
+     "gist": "Quadrature Phase Shift Keying: four carrier phases, two bits each.",
      "d": "Each carrier phase (pi/4, 3pi/4, 5pi/4, 7pi/4) carries a pair of bits: 4 states = 2 bits per symbol.",
-     "slide": 50,
+     "slide": 49,
      "weight": "high"
     }
    ],
@@ -966,38 +1028,37 @@
     {
      "name": "Reed-Solomon redundancy",
      "expr": "204 - 188 = 16 parity bytes; corrects t = 8 byte errors",
-     "slide": 41
+     "slide": 40
     },
     {
      "name": "RS worked example",
      "expr": "error value = S1 - check1 (28 - 26 = 2); position = (S2 - check2) / value ((67 - 63) / 2 = 2)",
-     "slide": 42
+     "slide": 41
     },
     {
      "name": "AM",
      "expr": "f(t) = [A + s(t)] * sin(2*pi*f*t + phi)",
-     "slide": 48
+     "slide": 47
     },
     {
      "name": "FM",
      "expr": "f(t) = A * sin(2*pi*[f + s(t)]*t + phi)",
-     "slide": 48
+     "slide": 47
     },
     {
      "name": "PM",
      "expr": "f(t) = A * sin(2*pi*f*t + phi[s(t)])",
-     "slide": 48
+     "slide": 47
     },
     {
      "name": "QPSK bits per symbol",
      "expr": "log2(4 phases) = 2 bits",
-     "slide": 50
+     "slide": 49
     }
    ],
    "traps": [
     "13.5 MHz is the SDTV (ITU-R 601) luminance rate; 74.25 MHz is HDTV; 6.75 MHz is each chroma channel; 27 MHz is the multiplexed total.",
     "12 / 5.5 MHz are only the Shannon minima; the real ITU-R 601 rates are 13.5 / 6.75 MHz.",
-    "82.944 Mbps is luminance only; the total SDTV rate is 165.888 Mbps.",
     "Scrambling disperses energy (not encryption); conditional access (DVB-CA) handles pay-TV encryption.",
     "Interleaving spreads burst errors; scrambling spreads energy. Do not swap them.",
     "RS(204,188,8): 16 bytes are added but only 8 errors are corrected.",
@@ -1018,42 +1079,49 @@
     },
     {
      "t": "Lossy vs lossless",
+     "gist": "Lossy approximates the original; lossless restores it exactly.",
      "d": "Lossy compression removes 'excess' data and decompresses by approximating the original (approximate reconstruction). Lossless decompression restores the original data; nothing is permanently modified or lost (exact reconstruction).",
      "slide": 3,
      "weight": "high"
     },
     {
      "t": "JPEG algorithm and insights",
+     "gist": "Images change slowly, low frequencies matter most, and the eye hardly notices lost high frequencies.",
      "d": "JPEG exploits limitations of human eyesight for high compression ratios, lets the user choose quality/compression level, and has optional interlacing and progressive modes. Insights: content changes slowly; within an 8x8 block intensity does not change significantly; lower spatial frequencies carry more information; the eye does not quickly notice loss of high frequencies.",
      "slide": 5,
      "weight": "high"
     },
     {
      "t": "Six JPEG phases",
+     "gist": "Colour conversion → blocks → DCT → quantization → zig-zag → entropy coding.",
      "d": "1 conversion to luminance-chrominance model (colour images only), 2 division into blocks, 3 DCT f(x,y) -> F(u,v), 4 quantization of DCT coefficients (constant or table), 5 zig-zag array-to-vector conversion, 6 entropy coding (DPCM for DC, RLC for AC, Huffman tables).",
      "slide": 7,
      "weight": "high"
     },
     {
      "t": "Colour conversion",
+     "gist": "RGB becomes luminance Y and chrominance U, V.",
      "d": "RGB is converted to Y, U, V tables according to BT.601: Y = 0.299R + 0.587G + 0.114B; U = -0.147R - 0.289G + 0.436B; V = 0.615R - 0.515G - 0.100B. Y is luminance, U and V are chrominance.",
      "slide": 8,
      "weight": "high"
     },
     {
      "t": "Division into blocks",
+     "gist": "Each plane is cut into blocks of 8 × 8 pixels.",
      "d": "Y, U, V arrays are scaled to integers and divided into macroblocks of 8 x 8, f(x,y) with x, y = 0..7.",
      "slide": 9,
      "weight": "high"
     },
     {
      "t": "DCT domain and 2D transform",
+     "gist": "The DCT turns pixels into frequencies; rows first, then columns.",
      "d": "DCT converts an 8x8 block from the spatial domain to the frequency domain. A 2D transform is done as two series of 1D transforms: rows, then columns. Sorting example (2,3,1,2,2,0,1,1,0,1,0,0) -> occurrences (4,4,3,1): spatial information lost, frequency information gained.",
      "slide": 13,
      "weight": "high"
     },
     {
      "t": "DC and AC components",
+     "gist": "DC is the first coefficient, F(0,0); the other 63 are AC.",
      "d": "F(0,0) is the DC component; all remaining F(i,j) are AC components (63 per block).",
      "slide": 13,
      "weight": "high"
@@ -1066,18 +1134,21 @@
     },
     {
      "t": "Quantization = bit reduction",
+     "gist": "Fewer bits per coefficient. This is the main loss in JPEG.",
      "d": "Quantization reduces the number of bits per sample; 101101 = 45 -> 4 bits 101100 = 44 -> 3 bits 101000 = 40. The more bits truncated, the more precision lost. Quantization error is the main source of lossy compression.",
      "slide": 19,
      "weight": "high"
     },
     {
      "t": "Eye sensitivity and quantization types",
+     "gist": "The eye sees low frequencies best. Uniform: one constant. Non-uniform: a table.",
      "d": "Eye is most sensitive to low frequencies (upper-left of the frequency matrix) and less to high frequencies (lower-right). Uniform quantization: Q(u,v) constant; non-uniform: quantization tables.",
      "slide": 20,
      "weight": "high"
     },
     {
      "t": "Quantization tables",
+     "gist": "Two default tables, luminance and chrominance; custom ones can go into the file header.",
      "d": "The standard defines two default tables, luminance and chrominance; custom tables can be included in the image header. Luminance table starts 16, 11, 10, 16, ... and ends 99 (max 121); chrominance table starts 17, 18, 24, 47 and is mostly 99 (slide labels chrominance as 'I and Q').",
      "slide": 21,
      "weight": "high"
@@ -1090,18 +1161,21 @@
     },
     {
      "t": "Zig-zag scan",
+     "gist": "Reads the 8 × 8 matrix into a vector, low frequencies first, so the zeros gather at the end (Tescher, 1978).",
      "d": "Zig-zag algorithm (A. G. Tescher 1978) maps the 8x8 matrix to a 1x64 vector [DC, AC1, ..., AC63], low frequencies first, high at the end. Example vector: [75, 12, 18, -1, 15, -2, -2, 2, 10, 1, -2, 0, 1, 1, 0, 0, 0, -2, -3, -3, 1, 0, ..., 0].",
      "slide": 26,
      "weight": "high"
     },
     {
      "t": "Entropy coding",
+     "gist": "Replaces fixed-length symbols by variable-length codes: frequent = short.",
      "d": "DC is coded for the array of blocks; AC1..AC63 for each block. Entropy coder replaces each fixed-length input symbol by a variable-length prefix codeword whose length is proportional to the negative logarithm of its probability.",
      "slide": 27,
-     "weight": "medium"
+     "weight": "high"
     },
     {
      "t": "DPCM for DC",
+     "gist": "Differential Pulse Code Modulation: codes the difference from the previous block, which is usually small.",
      "d": "Differential Pulse Code Modulation codes the difference between the DC of the current and previous 8x8 block (DC is large but close to the previous one; smaller number -> fewer bits). Δ0 = DC^0, Δi = DC^i - DC^(i-1). Example 45, 54, 48 -> 45, 9, -6; 32, 36 -> 4. Δ vector is Huffman-coded with Table 1.",
      "slide": 29,
      "weight": "high"
@@ -1114,12 +1188,14 @@
     },
     {
      "t": "Run-length encoding",
+     "gist": "AC coefficients become pairs (number of zeros, next value); (0,0) ends the block.",
      "d": "RLE example: scan line of 67 characters becomes 12W1B12W3B24W1B14W (18 characters). AC vectors have many zeros, especially at the end; RLE codes them as (skip, value): skip = number of zeros, value = next non-zero component; (0,0) = end of block. Example 0,0,0,0,0,1 -> (5,1).",
      "slide": 36,
      "weight": "high"
     },
     {
      "t": "AC symbols",
+     "gist": "Each AC value is coded as (run length, size) plus its amplitude, with a Huffman code.",
      "d": "Each AC_i is coded as Symbol-1 = (Runlength, Size) and Symbol-2 = (Amplitude). Runlength = zeros between AC_i and previous non-zero AC; Size = range of AC_i; Amplitude = value of AC_i. Huffman code is used, like for DC.",
      "slide": 38,
      "weight": "high"
@@ -1150,33 +1226,38 @@
     },
     {
      "t": "JPEG XR",
+     "gist": "Microsoft (first Windows Media Photo, 2006); lapped transform, lossy and lossless.",
      "d": "Introduced 2006 as Windows Media Photo, JPEG XR standard 2009; Microsoft technology standardized as ISO/IEC 29199 and ITU-T T.832. Integer-based lapped transform, lossy and lossless, progressive decoding; 8/16/32-bit incl. HDR; TIFF-based file structure; HD Photo precursor.",
      "slide": 48,
-     "weight": "medium"
+     "weight": "high"
     },
     {
      "t": "WebP",
+     "gist": "Google, 2010; lossy mode uses VP8 intra prediction, in a RIFF container.",
      "d": "Google, introduced 30 September 2010 as developer preview; RIFF container, .webp. Lossy = VP8 intra-frame prediction; lossless = transforms + LZ77 + entropy coding. 8-bit, lossy colour YUV 4:2:0; alpha and animation; lossless and transparency arrived after the initial lossy release.",
      "slide": 49,
-     "weight": "medium"
+     "weight": "high"
     },
     {
      "t": "BPG",
+     "gist": "Better Portable Graphics, Fabrice Bellard, 2014; based on HEVC.",
      "d": "Better Portable Graphics, December 2014, Fabrice Bellard; .bpg format based on a subset of HEVC (H.265). 8-14 bits per channel; grayscale, RGB, YCgCo, CMYK, YCbCr 4:2:0/4:2:2/4:4:4. Web use needs a software/JavaScript decoder; HEVC patent licensing can affect deployment.",
      "slide": 50,
-     "weight": "medium"
+     "weight": "high"
     },
     {
      "t": "HEIF and FLIF",
+     "gist": "HEIF: MPEG container used by Apple, often with HEVC. FLIF: lossless format with MANIAC coding.",
      "d": "HEIF (High Efficiency Image File Format): spec June 2015, Apple adoption 2017 (iOS 11, macOS High Sierra); MPEG container ISO/IEC 23008-12 on ISOBMFF; codec decides compression (HEIC commonly HEVC); separates storage from coding. FLIF (Free Lossless Image Format): Sept 2015, FLIF16 Sept 2016; Jon Sneyers and Pieter Wuille; MANIAC adaptive arithmetic coding with context trees; 1-16 bits per channel; ideas continued via FUIF into JPEG XL.",
      "slide": 51,
-     "weight": "medium"
+     "weight": "high"
     },
     {
      "t": "JPEG XL and comparison",
+     "gist": "2021; can recompress existing JPEG files and restore them byte for byte.",
      "d": "JPEG XL: 2021, ISO/IEC 18181, reference library libjxl; lossy VarDCT and modular (lossless) coding; HDR, alpha, animation, layers, progressive; existing JPEG files can be recompressed losslessly and restored byte-for-byte. Comparison table: ISOBMFF base container for HEIF and JPEG XL, TIFF for JPEG/Exif and JPEG-XR/TIFF, RIFF for WebP; PNG and GIF have no lossy compression.",
      "slide": 53,
-     "weight": "medium"
+     "weight": "high"
     }
    ],
    "formulas": [
@@ -1259,8 +1340,6 @@
     "EOB = zeros to the end of the block (code 1010, pair (0,0)); ZRL = run of 16 zeros (15 zeros and AC = 0, code 11111111001).",
     "Uniform quantization = one constant Q; non-uniform = quantization tables.",
     "Two default quantization tables (luminance and chrominance), not three RGB tables; luminance starts at 16, chrominance at 17.",
-    "'Integer Round' in the Size formula behaves like truncation: Table 1 puts 3 in Size 2, not 3.",
-    "Slide errors: slide 19 writes 101 (binary) = 8 (it is 5); slide 34 gives additional bits 011 for Δ = 4, while Table 1 ranges would give 100.",
     "Sibling formats: WebP = Google, VP8, RIFF; JPEG XR = Microsoft, TIFF, lapped transform; BPG = Bellard, HEVC; HEIF = MPEG container on ISOBMFF; FLIF = MANIAC; JPEG XL = ISO/IEC 18181, lossless JPEG recompression."
    ]
   },
@@ -1275,18 +1354,21 @@
     },
     {
      "t": "DCT output",
+     "gist": "64 pixels give 64 coefficients: 1 DC (the block average) and 63 AC.",
      "d": "One 8x8 block of 64 pixels gives 64 coefficients: 1 DC (F(0,0), the block average) and 63 AC.",
      "slide": 5,
      "weight": "high"
     },
     {
      "t": "Where JPEG loses data",
+     "gist": "Only in chroma subsampling and quantization. The DCT and entropy coding lose nothing.",
      "d": "Only chroma subsampling and quantization are lossy, quantization being the main one. The DCT is invertible and entropy coding is lossless.",
      "slide": 6,
      "weight": "high"
     },
     {
      "t": "Chroma subsampling",
+     "gist": "4:4:4 full colour; 4:2:2 half horizontally; 4:2:0 half both ways (image 50 % smaller, usual in JPEG).",
      "d": "For a 4x2 area: 4:4:4 = 24 samples, 4:2:2 = 16 (-33 %), 4:2:0 = 12 (-50 % of the whole image, -75 % of chroma data). 4:2:0 is the usual JPEG choice.",
      "slide": 7,
      "weight": "high"
@@ -1299,30 +1381,35 @@
     },
     {
      "t": "JPEG in practice",
+     "gist": "Almost every JPEG is sequential, Huffman-coded and 8-bit.",
      "d": "Almost all real JPEG files are sequential + Huffman + 8-bit; arithmetic coding and 12-bit samples exist but are rarely supported.",
      "slide": 10,
      "weight": "high"
     },
     {
      "t": "Four JPEG modes",
+     "gist": "Sequential (baseline), progressive, lossless, hierarchical.",
      "d": "Sequential (baseline), progressive, lossless and hierarchical. Wavelets belong to JPEG 2000, not to these modes.",
      "slide": 11,
      "weight": "high"
     },
     {
      "t": "Sequential (baseline) mode",
+     "gist": "One pass, left to right and top to bottom; every decoder must support it.",
      "d": "Single pass, left to right, top to bottom. Baseline must be implemented by every JPEG decoder.",
      "slide": 12,
-     "weight": "medium"
+     "weight": "high"
     },
     {
      "t": "Progressive mode",
+     "gist": "Several scans. Spectral selection: low frequencies first. Successive approximation: the top bits first.",
      "d": "Several scans add detail: spectral selection sends low-frequency bands first; successive approximation sends all coefficients a few bits at a time from the MSB. Both can be combined.",
      "slide": 14,
      "weight": "high"
     },
     {
      "t": "Lossless JPEG",
+     "gist": "Predicts each pixel from its neighbours and stores only the error; no DCT, about 2:1.",
      "d": "Predictive coding: no DCT and no quantization; only the prediction error X - P is entropy-coded. Typical ratio about 2:1 for colour images.",
      "slide": 18,
      "weight": "high"
@@ -1331,22 +1418,25 @@
      "t": "Lossless predictors",
      "d": "With A = left, B = above, C = upper-left: P1 = A, P2 = B, P3 = C, P4 = A + B - C, P5 = A + (B - C)/2, P6 = B + (A - C)/2, P7 = (A + B)/2.",
      "slide": 21,
-     "weight": "high"
+     "weight": "medium"
     },
     {
      "t": "Hierarchical mode",
+     "gist": "A pyramid of resolutions: the small image first, then refinements.",
      "d": "A 'super-progressive' pyramid of resolutions: the lowest is coded first and each up-sampled result predicts the next level.",
      "slide": 23,
      "weight": "high"
     },
     {
      "t": "Entropy bound",
+     "gist": "Entropy is the lowest possible average code length; Huffman stays within one bit of it.",
      "d": "For a Huffman code the average length L satisfies H <= L < H + 1, where H is the source entropy.",
      "slide": 24,
-     "weight": "medium"
+     "weight": "high"
     },
     {
      "t": "Huffman coding",
+     "gist": "Merge the two rarest symbols again and again; frequent symbols get short, prefix-free codes.",
      "d": "Repeatedly merge the two lowest-frequency nodes under a new node; frequent symbols get short codes. The code is prefix-free, so it decodes unambiguously.",
      "slide": 26,
      "weight": "high"
@@ -1365,6 +1455,7 @@
     },
     {
      "t": "Arithmetic vs Huffman",
+     "gist": "Huffman: whole bits, one code per symbol. Arithmetic: one number for the whole message, fractions of a bit.",
      "d": "Huffman spends a whole number of bits (at least 1) per symbol; arithmetic coding maps the whole message to one number in [0, 1) and can use fractional bits.",
      "slide": 45,
      "weight": "high"
@@ -1383,30 +1474,35 @@
     },
     {
      "t": "LZW and DEFLATE",
+     "gist": "LZW (GIF, TIFF): dictionary built on the fly. DEFLATE (PNG, ZIP): LZ77 + Huffman.",
      "d": "LZW (GIF, TIFF) builds its dictionary on the fly without sending it. DEFLATE = LZ77 back-references + Huffman (PNG, ZIP, gzip); PNG applies row filters (Sub, Up, Average, Paeth) first.",
      "slide": 55,
      "weight": "high"
     },
     {
      "t": "GIF",
+     "gist": "256 colours, LZW, simple animation; from UNISYS and CompuServe.",
      "d": "Graphics Interchange Format by UNISYS and CompuServe for modem transfer; LZW, 8-bit only (256 colours); GIF89a adds simple animation.",
      "slide": 56,
      "weight": "high"
     },
     {
      "t": "TIFF",
+     "gist": "Tagged Image File Format from Aldus; lossless unless the JPEG tag is used.",
      "d": "Tagged Image File Format by Aldus Corp. (1980s), later Microsoft; stores many image types and is lossless unless the JPEG tag is used.",
      "slide": 57,
-     "weight": "medium"
+     "weight": "high"
     },
     {
      "t": "PNG",
+     "gist": "Replaces GIF: transparency, gamma, better compression, full colour, but no animation.",
      "d": "Designed to replace GIF: alpha channel, gamma correction, 2-D interlacing, 5-25 % better compression. No animation (only via APNG).",
      "slide": 58,
      "weight": "high"
     },
     {
      "t": "WebP and AVIF",
+     "gist": "WebP: Google, VP8-based, 25–35 % smaller than JPEG. AVIF: AV1-based, HDR, slower to encode.",
      "d": "WebP (Google, 2010): VP8-based lossy plus lossless, alpha, animation, about 25-35 % smaller than JPEG. AVIF: AV1 intra coding, HDR and wide gamut, slower to encode.",
      "slide": 59,
      "weight": "high"
@@ -1419,12 +1515,14 @@
     },
     {
      "t": "JPEG successors",
+     "gist": "JPEG-LS: prediction. JPEG 2000: wavelets. JPEG XL: recompresses JPEGs. JPEG AI: learned coding.",
      "d": "JPEG XL recompresses existing JPEGs losslessly (about 20 % smaller); JPEG-LS is prediction-based (LOCO-I); JPEG 2000 uses wavelets; JPEG AI uses learned coding.",
      "slide": 54,
-     "weight": "medium"
+     "weight": "high"
     },
     {
      "t": "Which format when",
+     "gist": "Photos: JPEG, WebP, AVIF. Graphics and screenshots: PNG. Simple animation: GIF, WebP.",
      "d": "Photos -> JPEG/WebP/AVIF; graphics and screenshots -> PNG; simple animations -> GIF/WebP.",
      "slide": 61,
      "weight": "high"
@@ -1476,7 +1574,6 @@
     "The DCT is invertible; the loss comes from rounding after division by Q (quantization).",
     "Spectral selection = frequency bands first; successive approximation = bits from the MSB first.",
     "Progressive = several scans at one resolution; hierarchical = a pyramid of resolutions.",
-    "P4 = A + B - C (plane); P7 = (A + B)/2 (average); P5 and P6 halve the gradient term.",
     "Huffman merges the two LOWEST frequencies, never the highest.",
     "Huffman needs at least 1 bit per symbol; arithmetic coding can spend fractions of a bit.",
     "LZW belongs to GIF and TIFF; DEFLATE (LZ77 + Huffman) belongs to PNG and ZIP.",
@@ -1490,87 +1587,101 @@
    "facts": [
     {
      "t": "Standards bodies",
+     "gist": "VCEG and MPEG write HEVC (JCT-VC) and VVC (JVET); the royalty-free line is VP8, VP9, AV1, AV2.",
      "d": "ITU-T VCEG and ISO/IEC MPEG build main-line codecs in joint teams: JCT-VC (HEVC) and JVET, the Joint Video Experts Team (VVC). The open line is VP8, VP9, AV1, AV2.",
      "slide": 2,
-     "weight": "medium"
+     "weight": "high"
     },
     {
      "t": "Raw video rate",
+     "gist": "Rate = width × height × bits per pixel × frames per second. Raw UHD is about 12 Gbit/s, so video must be compressed.",
      "d": "UHD 3840x2160, 24 bit per pixel, 60 fps needs about 11.9 Gbit/s, roughly 12 times a 1 Gbit/s Ethernet link.",
      "slide": 5,
      "weight": "high"
     },
     {
      "t": "Four redundancies",
+     "gist": "Spatial: DCT, intra prediction. Temporal: motion compensation, the biggest gain. Perceptual: subsampling, quantization. Statistical: entropy coding.",
      "d": "Spatial (DCT, intra prediction), temporal (motion-compensated prediction), perceptual (chroma subsampling, quantization), statistical (VLC/Huffman, CABAC). Temporal is new in video and gives the largest gain.",
      "slide": 6,
      "weight": "high"
     },
     {
      "t": "Lossy vs lossless steps",
+     "gist": "Chroma subsampling and quantization lose data; entropy coding does not.",
      "d": "Chroma subsampling and quantization are lossy; entropy coding (VLC, Huffman, CABAC) is lossless.",
      "slide": 9,
      "weight": "high"
     },
     {
      "t": "4:2:0",
+     "gist": "Colour at half resolution both ways: 1.5 samples per pixel, half the data.",
      "d": "4:2:0 keeps 1.5 samples per pixel: the whole image shrinks by 50 % (chroma data by 75 %); 4:2:2 shrinks it by 33 %.",
      "slide": 13,
      "weight": "high"
     },
     {
      "t": "Quality metrics",
+     "gist": "PSNR in dB, SSIM 0–1 (structure), VMAF 0–100 (Netflix, learned), MOS 1–5 (viewers).",
      "d": "PSNR = 10 log10(MAX^2/MSE), about 30-45 dB for lossy video; SSIM 0-1 (structure, contrast, luminance); VMAF 0-100 (Netflix 2016, learned fusion); MOS 1-5 (viewer tests).",
      "slide": 14,
      "weight": "high"
     },
     {
      "t": "BD-rate",
+     "gist": "Bit-rate difference at equal quality; −40 % means 40 % fewer bits.",
      "d": "Bit-rate difference at equal quality: (R_test - R_ref) / R_ref. 6 vs 10 Mbit/s gives -40 %, i.e. 40 % saving.",
      "slide": 15,
-     "weight": "medium"
+     "weight": "high"
     },
     {
      "t": "What the encoder transmits",
+     "gist": "Quantized residual, motion vectors and modes, headers. Never the reference frames themselves.",
      "d": "Quantized residual DCT coefficients, motion vectors and modes, and headers. The decoder rebuilds the reference frames itself.",
      "slide": 18,
-     "weight": "medium"
+     "weight": "high"
     },
     {
      "t": "MPEG-2 hierarchy",
+     "gist": "Sequence → GOP → picture → slice → macroblock (16×16, motion) → block (8×8, DCT).",
      "d": "Sequence -> GOP (random access) -> Picture -> Slice (resync) -> Macroblock (16x16 luma, unit of motion) -> Block (8x8, unit of the DCT). A 4:2:0 macroblock has 6 blocks (4 Y + Cb + Cr).",
      "slide": 19,
      "weight": "high"
     },
     {
      "t": "I, P, B frames",
+     "gist": "I: own pixels only, random access. P: from the previous anchor. B: from both sides, compresses most, never a reference in MPEG-2.",
      "d": "I = intra only, about 10:1; P = predicted from the previous anchor, about 20:1; B = from previous and next anchors, about 50:1. In MPEG-2 B-frames are never references.",
      "slide": 21,
      "weight": "high"
     },
     {
      "t": "GOP average compression",
+     "gist": "Number of frames divided by the sum of 1/ratio for every frame. It is not the plain average of the ratios.",
      "d": "Average = N / sum(1/ratio_i). IBBPBBPBBPBB with 10:20:50 gives about 29:1, not the 39:1 of a plain average.",
      "slide": 22,
      "weight": "high"
     },
     {
      "t": "What MPEG standardizes",
+     "gist": "Only the bitstream and the decoder; how the encoder searches is free.",
      "d": "Only the bitstream and the decoder. The motion-search method, matching criterion (usually SAD) and search window are left to the encoder.",
      "slide": 26,
      "weight": "high"
     },
     {
      "t": "Asymmetric codec",
+     "gist": "The encoder does the costly motion search; the decoder only copies blocks.",
      "d": "Only the encoder pays for motion search; the decoder just copies the block the vector points to. Cheap decoders, expensive encoders.",
      "slide": 28,
      "weight": "high"
     },
     {
      "t": "Three-step search",
+     "gist": "25 tests instead of 225 for ±7 pixels, at the risk of missing the best match.",
      "d": "For a +/-7 window TSS needs 9 + 8 + 8 = 25 SAD evaluations vs 15 x 15 = 225 for full search, at the risk of a local minimum.",
      "slide": 29,
-     "weight": "medium"
+     "weight": "high"
     },
     {
      "t": "Motion-vector precision",
@@ -1580,33 +1691,38 @@
     },
     {
      "t": "Closed prediction loop",
+     "gist": "The encoder predicts from the decoded frame, because that is all the decoder has; otherwise they drift apart.",
      "d": "The encoder predicts from decoded (not original) frames; otherwise encoder and decoder drift apart until the next I-frame.",
      "slide": 31,
      "weight": "high"
     },
     {
      "t": "Why B-frames help",
+     "gist": "They see background that appears later, average out noise and can be quantized harder.",
      "d": "They see uncovered background in the future frame, averaging two predictions cancels noise, and as non-references they can be quantized harder.",
      "slide": 32,
-     "weight": "medium"
+     "weight": "high"
     },
     {
      "t": "Decode vs display order",
+     "gist": "B-frames need the next anchor first, so it is sent earlier. DTS = when to decode, PTS = when to show.",
      "d": "Display I1 B2 B3 P4 ... is sent as I1 P4 B2 B3 P7 B5 B6: each anchor goes before the B-frames that need it. DTS says when to decode, PTS when to show.",
      "slide": 35,
      "weight": "high"
     },
     {
      "t": "Open vs closed GOP",
+     "gist": "Closed: no prediction across the border, clean cuts. Open: slightly more efficient. Long GOP: better compression, slower seeking.",
      "d": "A closed GOP has no prediction across its border (clean cuts, ad splicing, ABR segments); an open GOP lets leading B-frames use the previous GOP. An IDR empties the reference buffer.",
      "slide": 36,
      "weight": "high"
     },
     {
      "t": "Rate control",
+     "gist": "CBR: broadcast. Two-pass VBR: disc and VOD. CRF: constant quality, size unknown. Capped CRF: streaming.",
      "d": "CBR -> broadcast multiplex (DVB); 2-pass VBR -> disc and VOD; CRF/CQ -> archives (size unknown); capped CRF -> streaming ladders.",
      "slide": 38,
-     "weight": "medium"
+     "weight": "high"
     },
     {
      "t": "Intra prediction modes",
@@ -1616,6 +1732,7 @@
     },
     {
      "t": "Codec generations",
+     "gist": "MPEG-2 → AVC → HEVC → VVC: each needs roughly half the bits, with a more complex encoder.",
      "d": "AVC vs MPEG-2: about 50 % less at about 4x complexity. HEVC vs AVC: 40-50 % less, encoder up to 10x. VVC vs HEVC: 30-50 % less at several times the complexity.",
      "slide": 45,
      "weight": "high"
@@ -1624,22 +1741,25 @@
      "t": "Equal-quality bit rates",
      "d": "Relative to MPEG-2 = 100: AVC 50, HEVC 28, AV1 20, VVC 16. Each generation saves about 30-50 %.",
      "slide": 48,
-     "weight": "high"
+     "weight": "medium"
     },
     {
      "t": "Codec vs container",
+     "gist": "The codec compresses; the container (MP4, MKV, TS) packs and time-stamps tracks. The extension names no codec.",
      "d": "A container (MP4/ISO BMFF, MKV, TS) multiplexes and time-stamps tracks; the codec compresses. The .mp4 extension says nothing about the codec; check with ffprobe.",
      "slide": 51,
      "weight": "high"
     },
     {
      "t": "Adaptive streaming",
+     "gist": "HLS and DASH: 2–6 s segments, each starting with an IDR; the player picks the quality.",
      "d": "HLS and MPEG-DASH cut video into 2-6 s segments, each starting with an IDR, with aligned closed GOPs across renditions.",
      "slide": 52,
      "weight": "high"
     },
     {
      "t": "HDR transfer functions",
+     "gist": "PQ: absolute brightness, HDR10. HLG: backward compatible, broadcast.",
      "d": "PQ (SMPTE ST 2084) up to 10 000 cd/m2; HLG is backward compatible and meant for broadcast. HDR10 metadata is static (per film), HDR10+ and Dolby Vision dynamic (per scene).",
      "slide": 53,
      "weight": "high"
@@ -1709,25 +1829,6 @@
   }
  },
  "questions": [
-  {
-   "id": "L1-01",
-   "l": 1,
-   "topic": "Course rules",
-   "q": "According to the course rules, how are the knowledge test and the project weighted in the final grade formula?",
-   "o": [
-    "Knowledge test 0.4, project 0.6",
-    "Knowledge test 0.6, project 0.4",
-    "Knowledge test 0.5, project 0.5",
-    "Knowledge test 0.7, project 0.3"
-   ],
-   "c": 1,
-   "hint": "The test you are studying for carries the bigger share.",
-   "r": "Slide 2: Final Grade = (0.6*Knowledge test + 0.4*Project)/2, and the project must have a passing grade. The knowledge test has the larger weight. The slide dates it 26 November 2026; the course event moved it to Friday 27 November, 15:00-17:00, room C-3, 21. The division by 2 is printed on the slide as shown.",
-   "slide": 2,
-   "pattern": "numeric",
-   "lk": "low",
-   "why": "admin slide; formula box, but admin facts are rarely tested"
-  },
   {
    "id": "L1-02",
    "l": 1,
@@ -1979,19 +2080,19 @@
    "id": "L1-15",
    "l": 1,
    "topic": "HSV model",
-   "q": "In the HSV model, the ranges of the components are:",
+   "q": "In the HSV model, hue (H) is expressed as:",
    "o": [
-    "H ∈ [0°, 360°]; S, V ∈ [0, 1]",
-    "H, S and V all in [0, 1]",
-    "H ∈ [0, 100]; S, V ∈ [0°, 360°]",
-    "H ∈ [0°, 180°]; S, V ∈ [0, 255]"
+    "an angle from 0° to 360°",
+    "a distance from the gray axis",
+    "a height along the cone axis",
+    "a value between black and white"
    ],
    "c": 0,
-   "hint": "Hue is an angle around the cone.",
-   "r": "Slide 44: color = [H, S, V], H ∈ [0–360°], S, V ∈ [0, 1]; the cone axis is the gray axis. Hue is an angle, not a 0–1 fraction.",
+   "hint": "Think of a colour wheel.",
+   "r": "Slide 44: H is an angle around the cone (0–360°). Saturation is the distance from the gray axis and Value the position along it; S and V run from 0 to 1.",
    "slide": 44,
-   "pattern": "numeric",
-   "lk": "high",
+   "pattern": "definition",
+   "lk": "medium",
    "why": "ranges in the first bullet"
   },
   {
@@ -2031,25 +2132,6 @@
    "pattern": "true-statement",
    "lk": "high",
    "why": "title 'additive model' plus advantage/disadvantage lines"
-  },
-  {
-   "id": "L1-18",
-   "l": 1,
-   "topic": "YUV luminance",
-   "q": "In the YUV (PAL) model, luminance is computed as:",
-   "o": [
-    "Y = 0.587R + 0.299G + 0.114B",
-    "Y = 0.299R + 0.587G + 0.114B",
-    "Y = 0.114R + 0.587G + 0.299B",
-    "Y = 0.333R + 0.333G + 0.333B"
-   ],
-   "c": 1,
-   "hint": "The eye is most sensitive to green and least to blue; the weights sum to 1.",
-   "r": "Slide 51: Y = 0.299R + 0.587G + 0.114B; green has the largest weight and blue the smallest. Slide 56 prints 0.229 for R, but 0.299 is the value used in the YUV and YIQ matrices (slides 51-52).",
-   "slide": 51,
-   "pattern": "numeric",
-   "lk": "high",
-   "why": "formula repeated on slides 51, 52 and 56 (highlighted box)"
   },
   {
    "id": "L1-19",
@@ -2107,25 +2189,6 @@
    "pattern": "classify",
    "lk": "medium",
    "why": "comparison table; easy to turn into classify or NOT questions"
-  },
-  {
-   "id": "L1-22",
-   "l": 1,
-   "topic": "Munsell chroma",
-   "q": "Which statement about Munsell CHROMA is FALSE?",
-   "o": [
-    "It expresses the difference between a pure color and gray",
-    "It is graded on a discrete scale",
-    "Every hue reaches the same maximal chroma value",
-    "The range of its scale depends on hue and value"
-   ],
-   "c": 2,
-   "hint": "Look at the Munsell solid on slide 27: it is irregular, not a neat cylinder.",
-   "r": "Slide 27 stresses with '(!)' that different areas of the color space have different maximal chroma coordinates, so equal maximal chroma for every hue is false. The other three statements come directly from the slide.",
-   "slide": 27,
-   "pattern": "not-statement",
-   "lk": "medium",
-   "why": "'(!)' mark on the slide; NOT-form predicted variant"
   },
   {
    "id": "L1-23",
@@ -2261,99 +2324,184 @@
    "why": "table of values with D65 named explicitly"
   },
   {
-   "id": "L1-30",
-   "l": 1,
-   "topic": "CIELAB color difference",
-   "q": "Two colors in CIELAB are (L, a, b) = (60, 10, 10) and (60, 16, 18). Their color difference ΔE76 is:",
-   "o": [
-    "14",
-    "10",
-    "100",
-    "7"
-   ],
-   "c": 1,
-   "hint": "Euclidean distance; think of a 6-8-10 right triangle.",
-   "r": "Slide 43: ΔE76 = sqrt(ΔL² + Δa² + Δb²) = sqrt(0² + 6² + 8²) = sqrt(100) = 10. 14 is the plain sum of the differences and 100 forgets the square root. A smaller ΔE means a closer color match.",
-   "slide": 43,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "worked example on the slide ((50,20,30) vs (50,23,34) gives 5)"
-  },
-  {
-   "id": "L1-31",
+   "id": "L1-35",
    "l": 1,
    "topic": "YUV luminance",
-   "q": "Using Y = 0.299R + 0.587G + 0.114B with RGB in [0, 1], the luminance of pure yellow (R = 1, G = 1, B = 0) is:",
+   "q": "In the YUV model, the Y component carries:",
    "o": [
-    "0.886",
-    "0.701",
-    "0.413",
-    "1.000"
+    "the brightness, i.e. a grayscale image",
+    "the difference between the blue and red parts",
+    "the saturation of each colour",
+    "the amount of yellow in the image"
    ],
    "c": 0,
-   "hint": "Only the components that are switched on contribute their weights.",
-   "r": "Y = 0.299·1 + 0.587·1 + 0.114·0 = 0.886 (slide 51). 1.000 would be white (all three components), and 0.701 is 1 - 0.299 (R - Y for pure red), not a luminance.",
+   "hint": "Black-and-white sets used only this one.",
+   "r": "Slide 51: Y is luminance, the brightness that forms the grayscale image. U and V carry the colour (chrominance). Y does not stand for yellow.",
    "slide": 51,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "formula box; easy numeric application"
+   "pattern": "definition",
+   "lk": "high"
   },
   {
-   "id": "L1-32",
+   "id": "L1-36",
    "l": 1,
-   "topic": "YUV chrominance",
-   "q": "Using U = B - Y and V = R - Y (with Y = 0.299R + 0.587G + 0.114B), pure red (R = 1, G = 0, B = 0) gives:",
+   "topic": "Luminance and chrominance",
+   "q": "Why do television colour models separate luminance from chrominance?",
    "o": [
-    "U = 0.701, V = -0.299",
-    "U = -0.299, V = 0.701",
-    "U = 0.299, V = 0.701",
-    "U = -0.299, V = -0.299"
+    "The eye is more sensitive to brightness than to colour",
+    "The eye is more sensitive to colour than to brightness",
+    "Screens can show brightness and colour only in turn",
+    "Cameras record brightness and colour on two sensors"
    ],
-   "c": 1,
-   "hint": "Find Y for red first, then subtract it from B and from R.",
-   "r": "Y = 0.299, so U = B - Y = 0 - 0.299 = -0.299 and V = R - Y = 1 - 0.299 = 0.701 (slide 51). Swapping U and V is the trap. The slide's matrix rows (U: -0.147..., V: 0.615...) are scaled versions of these differences.",
+   "c": 0,
+   "hint": "Which errors do you notice first?",
+   "r": "Slide 51: people notice errors in luminance more than in chrominance, so the colour part can be compressed more.",
    "slide": 51,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "U/V definitions printed on slide 51"
+   "pattern": "fact",
+   "lk": "high"
   },
   {
-   "id": "L1-33",
+   "id": "L1-37",
    "l": 1,
-   "topic": "YCbCr model",
-   "q": "Using Cb = (B - Y)/2 + 0.5 and Y = 0.299R + 0.587G + 0.114B, pure blue (R = 0, G = 0, B = 1) has Cb of about:",
+   "topic": "CIELAB color difference",
+   "q": "In CIELAB, the value ΔE expresses:",
    "o": [
-    "0.443",
-    "0.557",
-    "1.386",
-    "0.943"
+    "how different two colours look",
+    "how bright a colour is on paper",
+    "how pure a single colour is",
+    "how warm a light source is"
    ],
-   "c": 3,
-   "hint": "Compute Y first, and do not forget the shift at the end.",
-   "r": "Y = 0.114, so Cb = (1 - 0.114)/2 + 0.5 = 0.443 + 0.5 = 0.943 (slide 53). 0.443 forgets the +0.5 shift; the result stays inside YCbCr's [0, 1] chrominance range.",
-   "slide": 53,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "Cb/Cr formulas printed on slide 53"
+   "c": 0,
+   "hint": "It is a distance between two points.",
+   "r": "Slide 43: ΔE is the distance between two colours in L, a, b. A smaller ΔE means a closer colour match.",
+   "slide": 43,
+   "pattern": "definition",
+   "lk": "high"
   },
   {
-   "id": "L1-34",
+   "id": "L1-38",
    "l": 1,
-   "topic": "YCoCg model",
-   "q": "Using the YCoCg inverse transform (Tmp = Y - Cg, R = Tmp + Co, G = Y + Cg, B = Tmp - Co), which RGB results from Y = 0.5, Co = 0.1, Cg = 0.2?",
+   "topic": "CIELAB",
+   "q": "What is the main strength of CIELAB compared with RGB or HSV?",
    "o": [
-    "R = 0.2, G = 0.7, B = 0.4",
-    "R = 0.8, G = 0.3, B = 0.6",
-    "R = 0.4, G = 0.7, B = 0.2",
-    "R = 0.4, G = 0.3, B = 0.2"
+    "It is device-independent and close to human perception",
+    "It is the easiest way to describe an imagined colour",
+    "It directly drives the subpixels of a computer display",
+    "It needs only two numbers for any visible colour"
    ],
-   "c": 2,
-   "hint": "Compute Tmp first; G uses only Y and Cg.",
-   "r": "Tmp = 0.5 - 0.2 = 0.3; R = 0.3 + 0.1 = 0.4; G = 0.5 + 0.2 = 0.7; B = 0.3 - 0.1 = 0.2 (slide 55). Only additions and subtractions are needed, which is why YCoCg is simpler and faster than YCbCr.",
-   "slide": 55,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "inverse formulas printed on slide 55"
+   "c": 0,
+   "hint": "Print has to match the screen.",
+   "r": "Slide 41: CIELAB is a device-independent transformation of CIE XYZ and is approximately perceptually uniform. Easy description is the advantage of HSV; RGB drives displays.",
+   "slide": 41,
+   "pattern": "compare",
+   "lk": "high"
+  },
+  {
+   "id": "L1-39",
+   "l": 1,
+   "topic": "CMY model",
+   "q": "CMY is called subtractive because its colours arise when inks:",
+   "o": [
+    "absorb parts of white light",
+    "emit red, green and blue light",
+    "reflect all parts of light equally",
+    "change the wavelength of light"
+   ],
+   "c": 0,
+   "hint": "Think of printing on white paper.",
+   "r": "Slide 49: CMY models colour subtraction, as in printing: each ink removes (absorbs) part of the white light. Emitting light is the additive RGB case.",
+   "slide": 49,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L1-40",
+   "l": 1,
+   "topic": "Reflection",
+   "q": "A rough, matte surface shows mainly:",
+   "o": [
+    "diffuse reflection",
+    "specular reflection",
+    "complete transmission",
+    "complete absorption"
+   ],
+   "c": 0,
+   "hint": "A mirror is the opposite case.",
+   "r": "Slide 12: a rough surface scatters light in many directions (diffuse). A perfect mirror is specular; a mix of both is most common in practice.",
+   "slide": 12,
+   "pattern": "definition",
+   "lk": "medium"
+  },
+  {
+   "id": "L1-41",
+   "l": 1,
+   "topic": "CIE chromaticity diagram",
+   "q": "On the CIE chart, the line from white point C through colour A to the edge gives:",
+   "o": [
+    "the dominant wavelength of A",
+    "the complementary colour of A",
+    "the brightness of colour A",
+    "the color temperature of A"
+   ],
+   "c": 0,
+   "hint": "It continues on the side of A.",
+   "r": "Slide 38: from C through A to the envelope gives the dominant wavelength. Going from A through C to the opposite edge gives the complementary colour. The chart has no brightness.",
+   "slide": 38,
+   "pattern": "definition",
+   "lk": "medium"
+  },
+  {
+   "id": "L1-42",
+   "l": 1,
+   "topic": "Color temperature",
+   "q": "The color temperature of a light source is defined by comparison with:",
+   "o": [
+    "a heated black body",
+    "the noon sun on a clear day",
+    "a perfectly white reflector",
+    "a standard candle flame"
+   ],
+   "c": 0,
+   "hint": "The object does not really exist.",
+   "r": "Slide 57: it is the temperature (in K) to which a perfect black body must be heated to give light of the same colour. Such a body does not exist.",
+   "slide": 57,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L1-43",
+   "l": 1,
+   "topic": "Scotopic vision",
+   "q": "In scotopic (night) vision, the world is seen:",
+   "o": [
+    "in shades of gray",
+    "in full but dim colour",
+    "mostly in blue and green",
+    "mostly in red and orange"
+   ],
+   "c": 0,
+   "hint": "Which receptors work at night?",
+   "r": "Slide 19: under minimal light only the rods work, so the world is perceived in shades of gray.",
+   "slide": 19,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L1-44",
+   "l": 1,
+   "topic": "Cones",
+   "q": "The three types of cones differ in:",
+   "o": [
+    "the wavelengths they respond to",
+    "the brightness they can stand",
+    "the direction of light they accept",
+    "the shapes they recognise"
+   ],
+   "c": 0,
+   "hint": "They are called S, M and L.",
+   "r": "Slide 16: S, M and L cones have their peak sensitivity at short (blue), medium (green) and long (red) wavelengths.",
+   "slide": 16,
+   "pattern": "definition",
+   "lk": "high"
   },
   {
    "id": "L2-01",
@@ -2470,25 +2618,6 @@
    "why": "bold dated milestone list; matches the 'was created by' question style"
   },
   {
-   "id": "L2-07",
-   "l": 2,
-   "topic": "Sensor history",
-   "q": "The first application of a CCD to image acquisition (Fairchild Electronics, 1974) produced images of:",
-   "o": [
-    "640 × 480 pixels",
-    "256 × 256 pixels",
-    "100 × 100 pixels",
-    "1000 × 1000 pixels"
-   ],
-   "c": 2,
-   "hint": "The very first imaging CCD: think tiny, a round number with three digits per side.",
-   "r": "The slide lists 1974, Fairchild Electronics, first CCD application to image acquisition (100 × 100 px). 640 × 480 is VGA, which appears only as the Kodak compact's video resolution.",
-   "slide": 13,
-   "pattern": "numeric",
-   "lk": "medium",
-   "why": "dated milestone with a specific number"
-  },
-  {
    "id": "L2-08",
    "l": 2,
    "topic": "CCD vs CMOS",
@@ -2525,25 +2654,6 @@
    "pattern": "definition",
    "lk": "high",
    "why": "bold CFA sentence plus 'most popular mosaic scheme (G-R-G-B)'"
-  },
-  {
-   "id": "L2-10",
-   "l": 2,
-   "topic": "Bayer filter",
-   "q": "A 12-megapixel sensor uses a standard Bayer filter. Approximately how many of its photosites are covered by green filters?",
-   "o": [
-    "4 million",
-    "6 million",
-    "3 million",
-    "8 million"
-   ],
-   "c": 1,
-   "hint": "Count the green squares in one 2 × 2 tile, then scale up.",
-   "r": "Half of the Bayer filters are green (2 of every 4), so 12 MP × 1/2 = 6 million green photosites, with 3 million each for red and blue. 4 million would wrongly assume equal thirds.",
-   "slide": 16,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "applies the 2G:1R:1B ratio stated on the slide"
   },
   {
    "id": "L2-11",
@@ -2601,25 +2711,6 @@
    "pattern": "definition",
    "lk": "medium",
    "why": "dedicated Bayer vs Foveon slide with absorption-depth diagram"
-  },
-  {
-   "id": "L2-14",
-   "l": 2,
-   "topic": "ADC",
-   "q": "An n-bit ADC provides 2^n possible codes. How many distinct levels does a 14-bit ADC provide?",
-   "o": [
-    "4,096",
-    "14,000",
-    "16,384",
-    "65,536"
-   ],
-   "c": 2,
-   "hint": "Each extra bit doubles the count. Start from 12 bits = 4,096 and keep doubling.",
-   "r": "2^14 = 16,384. 4,096 is the 12-bit value shown on the slide, and 65,536 is 16-bit.",
-   "slide": 22,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "formula 2^n with worked levels (8, 10, 12 bit)"
   },
   {
    "id": "L2-15",
@@ -2701,16 +2792,16 @@
    "id": "L2-19",
    "l": 2,
    "topic": "Histogram",
-   "q": "The histogram H(i) = card{(x, y): image(x, y) = i} gives:",
+   "q": "An image histogram shows:",
    "o": [
-    "the intensity of the pixel located at index i",
-    "the number of pixels whose intensity equals i",
-    "the number of pixels with intensity up to i",
-    "the magnitude of the frequency coefficient i"
+    "the brightness of the pixels along one row",
+    "how many pixels have each intensity level",
+    "how many pixels are darker than the average",
+    "the strength of each spatial frequency"
    ],
    "c": 1,
    "hint": "'card' means cardinality: you are counting the members of a set.",
-   "r": "A histogram counts the pixels at each intensity level. Counting pixels with intensity up to i describes the cumulative histogram, which is used for equalization.",
+   "r": "Slide 29: a histogram counts the pixels at each intensity level. It says nothing about where the pixels are; spatial frequencies belong to the Fourier spectrum.",
    "slide": 29,
    "pattern": "definition",
    "lk": "high",
@@ -2755,25 +2846,6 @@
    "why": "defining sentence at the top of the slide"
   },
   {
-   "id": "L2-22",
-   "l": 2,
-   "topic": "Histogram equalization",
-   "q": "Histogram equalization is most likely to improve global contrast for an image whose:",
-   "o": [
-    "intensities occupy a narrow range of levels",
-    "intensities already span 0-255 evenly",
-    "histogram is dominated by impulse noise",
-    "spectrum has only a single DC coefficient"
-   ],
-   "c": 0,
-   "hint": "Look at the 'before' histogram on the slide: one narrow spike around level 150.",
-   "r": "The slide says equalization can improve global contrast when intensities occupy a narrow range; the narrow 'before' peak is spread across 0-255 'after'. An already evenly spread histogram gains little, and the slide warns to inspect detail and noise afterwards.",
-   "slide": 32,
-   "pattern": "true-statement",
-   "lk": "medium",
-   "why": "bullet on when equalization helps; predicted variant of the definition"
-  },
-  {
    "id": "L2-23",
    "l": 2,
    "topic": "Transforms",
@@ -2812,25 +2884,6 @@
    "why": "three-column comparison table of FFT, DCT and DWT"
   },
   {
-   "id": "L2-25",
-   "l": 2,
-   "topic": "DFT examples",
-   "q": "An 8 × 8 input image gives a DFT magnitude spectrum with only one non-zero coefficient, at (u, v) = (0, 0). The input image is:",
-   "o": [
-    "a black square on a white background",
-    "a photographic patch with an edge",
-    "a random noise pattern",
-    "a constant (uniform) image"
-   ],
-   "c": 3,
-   "hint": "If nothing changes across the image, there is no frequency other than zero.",
-   "r": "A constant image has only the DC (zero-frequency) term, drawn as a single bar on slide 36 (index 1 in the MATLAB plot = frequency 0). The rectangular pulse (slide 37) and photo patch (slide 38) also have many smaller non-zero coefficients.",
-   "slide": 36,
-   "pattern": "compare",
-   "lk": "medium",
-   "why": "three DFT example slides; reversed predicted variant"
-  },
-  {
    "id": "L2-26",
    "l": 2,
    "topic": "Gaussian filter",
@@ -2850,61 +2903,23 @@
    "why": "defining sentence plus formula box; roadmap goal 'compare Gaussian and median'"
   },
   {
-   "id": "L2-27",
-   "l": 2,
-   "topic": "Gaussian filter",
-   "q": "Using the lecture's mask [2 4 2; 4 8 4; 2 4 2], a pixel of value 132 is surrounded by eight pixels of value 100. What is the filtered output g(x, y)?",
-   "o": [
-    "100",
-    "132",
-    "108",
-    "116"
-   ],
-   "c": 2,
-   "hint": "First add up all the mask weights to get the divisor. The centre weight is a quarter of that sum.",
-   "r": "The weights sum to 32 (centre 8, neighbours 24). g = (24 × 100 + 8 × 132) / 32 = (2400 + 1056) / 32 = 108. 116 is the plain average of 100 and 132, which ignores the weights.",
-   "slide": 40,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "formula box with an example mask invites a worked calculation"
-  },
-  {
    "id": "L2-28",
    "l": 2,
    "topic": "Median filter",
-   "q": "In the lecture's median filter, the output brightness g(x, y) is taken as:",
+   "q": "The median filter replaces each pixel with:",
    "o": [
-    "the mean of the pixel and its 8 neighbours",
-    "the 5th element of the 9 values sorted non-decreasingly",
-    "the 9th (brightest) element of the sorted sequence",
-    "the weighted sum of the 9 values divided by 32"
+    "the average of its 3 × 3 neighbourhood",
+    "the middle value of its sorted 3 × 3 neighbourhood",
+    "the brightest value of its 3 × 3 neighbourhood",
+    "a weighted sum of all nine values of its 3 × 3 neighbourhood"
    ],
    "c": 1,
    "hint": "Nine values in a row, sorted: pick the one exactly in the middle.",
-   "r": "The pixel and its 8 neighbours are ordered by non-decreasing brightness and the fifth element (the median) becomes the output. A weighted sum divided by the mask total describes the Gaussian filter.",
+   "r": "Slide 42: the pixel and its 8 neighbours are sorted and the middle (fifth) value is taken. An average or weighted sum is what a Gaussian-type filter does.",
    "slide": 42,
    "pattern": "definition",
    "lk": "high",
    "why": "two-step algorithm in a box"
-  },
-  {
-   "id": "L2-29",
-   "l": 2,
-   "topic": "Median filter",
-   "q": "A 3 × 3 window contains the values 10, 200, 12, 15, 11, 14, 13, 255, 12. What does the median filter output for the centre pixel?",
-   "o": [
-    "12",
-    "60",
-    "14",
-    "13"
-   ],
-   "c": 3,
-   "hint": "Sort the nine numbers and take the fifth; the two outliers should not matter.",
-   "r": "Sorted: 10, 11, 12, 12, 13, 14, 15, 200, 255, so the 5th value is 13. The mean (about 60) is pulled up by the outliers 200 and 255, which is why the median resists impulse noise.",
-   "slide": 42,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "algorithm box makes a worked example very likely"
   },
   {
    "id": "L2-30",
@@ -2945,23 +2960,184 @@
    "why": "three short bullet facts; roadmap goal 'explain HDR'"
   },
   {
-   "id": "L2-32",
+   "id": "L2-33",
+   "l": 2,
+   "topic": "Digital image",
+   "q": "A digital image is:",
+   "o": [
+    "a two-dimensional array of pixel values",
+    "a list of the frequencies in a scene",
+    "a continuous function of light intensity",
+    "a set of equations that describe shapes"
+   ],
+   "c": 0,
+   "hint": "It has a width N and a height M.",
+   "r": "Slide 3: a digital image is a 2-D array f(x, y); each value is a gray level, a colour or a colour index.",
+   "slide": 3,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L2-34",
+   "l": 2,
+   "topic": "Analog-to-digital conversion",
+   "q": "In a camera, the analog-to-digital converter (ADC):",
+   "o": [
+    "quantizes the analog signal into a digital code",
+    "fills in the two missing colours of every pixel",
+    "moves the charge from pixels to the amplifier",
+    "limits the light that reaches the sensor"
+   ],
+   "c": 0,
+   "hint": "Look at its name.",
+   "r": "Slide 22: the ADC quantizes an analog signal into a digital code; more bits give more levels. Filling in colours (demosaicing) is done later by the DSP.",
+   "slide": 22,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L2-35",
+   "l": 2,
+   "topic": "Demosaicing",
+   "q": "Demosaicing is needed because, behind a colour filter array, each pixel:",
+   "o": [
+    "records only one colour",
+    "records three colours in turn",
+    "records only brightness changes",
+    "records the colours of its neighbours"
+   ],
+   "c": 0,
+   "hint": "Two of the three values are missing.",
+   "r": "Slides 16 and 23: every pixel lies under one colour filter, so the DSP interpolates the missing colours (colour interpolation, demosaicing).",
+   "slide": 23,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L2-36",
+   "l": 2,
+   "topic": "Colour filter arrays",
+   "q": "A colour filter array (CFA) is:",
+   "o": [
+    "a mosaic of colour filters over the sensor pixels",
+    "a stack of three sensor layers, one for each colour",
+    "a set of lenses that separate colours by angle",
+    "a table that maps pixel values to screen colours"
+   ],
+   "c": 0,
+   "hint": "Bayer is the best-known example.",
+   "r": "Slide 16: a CFA places colour filters over the sensor pixels. Stacked layers are the Foveon X3 idea.",
+   "slide": 16,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L2-37",
+   "l": 2,
+   "topic": "RAW data",
+   "q": "RAW data from a camera is:",
+   "o": [
+    "sensor data recorded without conversion",
+    "an image compressed with the DCT in blocks",
+    "an image after white balance",
+    "a reduced preview of the photo"
+   ],
+   "c": 0,
+   "hint": "Nothing has been done to it yet.",
+   "r": "Slide 23: RAW is recorded without conversion by the processing engine; JPEG is compressed and TIFF is processed but uncompressed.",
+   "slide": 23,
+   "pattern": "definition",
+   "lk": "medium"
+  },
+  {
+   "id": "L2-38",
+   "l": 2,
+   "topic": "Focal length",
+   "q": "For the same sensor, a shorter focal length gives:",
+   "o": [
+    "a wider angle of view",
+    "a narrower angle of view",
+    "a higher signal amplification",
+    "a longer exposure time"
+   ],
+   "c": 0,
+   "hint": "Compare a 20 mm and a 500 mm lens.",
+   "r": "Slides 5 and 7: focal length sets the angle of view, and shorter lenses see wider. Gain is ISO and exposure time is the shutter speed.",
+   "slide": 7,
+   "pattern": "fact",
+   "lk": "medium"
+  },
+  {
+   "id": "L2-39",
+   "l": 2,
+   "topic": "Shutter speed",
+   "q": "Shutter speed controls:",
+   "o": [
+    "exposure duration and motion blur",
+    "angle of view and image magnification",
+    "signal gain and visible noise",
+    "bit depth and number of levels"
+   ],
+   "c": 0,
+   "hint": "Think of flowing water.",
+   "r": "Slide 5: shutter speed changes exposure duration and motion blur; focal length the angle of view; ISO the signal gain.",
+   "slide": 5,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L2-40",
+   "l": 2,
+   "topic": "Gaussian filter",
+   "q": "A side effect of Gaussian filtering is that it:",
+   "o": [
+    "blurs detail",
+    "adds bright spots",
+    "clips the highlights",
+    "shifts the colours"
+   ],
+   "c": 0,
+   "hint": "Averaging has a price.",
+   "r": "Slide 40: each pixel becomes a weighted average of its neighbourhood, which smooths noise but also fine detail.",
+   "slide": 40,
+   "pattern": "fact",
+   "lk": "high"
+  },
+  {
+   "id": "L2-41",
    "l": 2,
    "topic": "HDR",
-   "q": "One stop more exposure doubles the light collected. How much more light does the +4 stop frame collect than the -4 stop frame in the slide's bracket?",
+   "q": "One stop more exposure means that the light collected:",
    "o": [
-    "8 times",
-    "16 times",
-    "128 times",
-    "256 times"
+    "doubles",
+    "triples",
+    "is halved",
+    "stays equal"
    ],
-   "c": 3,
-   "hint": "Count the stops between the two frames, then double that many times.",
-   "r": "From -4 to +4 is 8 stops, so the light ratio is 2^8 = 256. 16 times is only the 4-stop gap from 0 to +4, and 8 times treats stops as a linear factor.",
+   "c": 0,
+   "hint": "It is the photographic step.",
+   "r": "Slide 44: one stop more exposure doubles the light collected.",
    "slide": 44,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "'one stop doubles the light' plus labelled bracket values"
+   "pattern": "fact",
+   "lk": "high"
+  },
+  {
+   "id": "L2-42",
+   "l": 2,
+   "topic": "Transforms",
+   "q": "What does the wavelet transform (DWT) offer that the Fourier transform does not?",
+   "o": [
+    "both the location and the scale of detail",
+    "the magnitude and the phase of frequencies",
+    "cosine patterns inside blocks of 8 × 8",
+    "a faster way to compute the same DFT"
+   ],
+   "c": 0,
+   "hint": "Multiscale analysis is its main use.",
+   "r": "Slide 33: the DWT captures location and scale. The Fourier spectrum is global, with limited spatial localization; cosine blocks are the DCT.",
+   "slide": 33,
+   "pattern": "compare",
+   "lk": "high"
   },
   {
    "id": "L3-01",
@@ -3000,25 +3176,6 @@
    "pattern": "true-statement",
    "lk": "medium",
    "why": "two dated inventor entries on one slide, classic swap target"
-  },
-  {
-   "id": "L3-03",
-   "l": 3,
-   "topic": "History of television in Poland",
-   "q": "The first half-hour television programme broadcast from the Institute of Telecommunications in Warsaw on 25 October 1952 could be received on about:",
-   "o": [
-    "2,400 receivers",
-    "240 receivers",
-    "24,000 receivers",
-    "24 receivers"
-   ],
-   "c": 3,
-   "hint": "The slide puts an exclamation mark in brackets next to the number because it is surprisingly small.",
-   "r": "Slide 5 says the programme 'could be received on 24(!) receivers in the country'. The larger numbers are invented; the exclamation mark stresses how tiny the audience was.",
-   "slide": 5,
-   "pattern": "fact",
-   "lk": "medium",
-   "why": "specific number marked with (!) on the slide"
   },
   {
    "id": "L3-04",
@@ -3076,25 +3233,6 @@
    "pattern": "order",
    "lk": "medium",
    "why": "dated timeline, easy to turn into an ordering item"
-  },
-  {
-   "id": "L3-07",
-   "l": 3,
-   "topic": "Polish TV sets",
-   "q": "Which statement correctly compares the Polish 'Wisła' (1957) and 'Belvedere' (1958) television sets?",
-   "o": [
-    "Both displayed 625 lines; Wisła cost 4000 PLN and Belvedere 7000 PLN",
-    "Both displayed 525 lines; Wisła cost 4000 PLN and Belvedere 7000 PLN",
-    "Both displayed 625 lines; Wisła cost 7000 PLN and Belvedere 4000 PLN",
-    "Wisła displayed 525 lines and Belvedere 625; both cost 4000 PLN"
-   ],
-   "c": 0,
-   "hint": "Poland followed the European, not the American, line count, and the newer set with the bigger screen was the dearer one.",
-   "r": "Slides 7-8: Wisła - 625 lines, 180x240 mm screen, 4000 PLN; Belvedere - 625 lines, 220x290 mm screen, 12000 V, 23 kg, 7000 PLN. 525 lines is the American NTSC count.",
-   "slide": 7,
-   "pattern": "compare",
-   "lk": "low",
-   "why": "spec tables of two historic sets"
   },
   {
    "id": "L3-08",
@@ -3230,63 +3368,6 @@
    "why": "slide title + diagram of odd/even half-images"
   },
   {
-   "id": "L3-15",
-   "l": 3,
-   "topic": "Scan rates (PAL)",
-   "q": "A European system has 625 lines per frame and 25 frames per second. The horizontal (line) scan rate f_h is:",
-   "o": [
-    "50 Hz",
-    "15750 Hz",
-    "31250 Hz",
-    "15625 Hz"
-   ],
-   "c": 3,
-   "hint": "Lines per second = lines per frame × frames per second. Do not confuse it with the vertical (field) rate.",
-   "r": "625 × 25 = 15625 Hz, exactly the f_h on slide 30 (vertical rate f_v = 50 Hz, i.e. 50 half-images per second). 15750 Hz is the NTSC value (525 × 30) and 31250 Hz double-counts the half-images.",
-   "slide": 30,
-   "pattern": "calculation",
-   "lk": "high",
-   "why": "f_h and f_v printed in bold on slide 30"
-  },
-  {
-   "id": "L3-16",
-   "l": 3,
-   "topic": "Scan rates (NTSC)",
-   "q": "Using the lecture values for NTSC (525 lines, 30 FPS), the horizontal line frequency is:",
-   "o": [
-    "15625 Hz",
-    "15750 Hz",
-    "60 Hz",
-    "31500 Hz"
-   ],
-   "c": 1,
-   "hint": "Use the same method that gives 15625 Hz for Europe, but with the American numbers.",
-   "r": "525 × 30 = 15750 lines per second = 15750 Hz. 15625 Hz is the European value (625 × 25). Real colour NTSC uses 29.97 FPS (about 15734 Hz), but the slides use 30 FPS.",
-   "slide": 9,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "slide 9 numbers applied by analogy with slide 30"
-  },
-  {
-   "id": "L3-17",
-   "l": 3,
-   "topic": "Interlaced scanning",
-   "q": "Europe uses 25 FPS and 50 'half images' per second. By the same interlacing rule, NTSC at 30 FPS displays:",
-   "o": [
-    "30 half images per second",
-    "50 half images per second",
-    "60 half images per second",
-    "120 half images per second"
-   ],
-   "c": 2,
-   "hint": "How many half-images make up one complete frame?",
-   "r": "Interlacing splits each frame into two half-images (odd and even lines), so 30 × 2 = 60 half-images per second, just as 25 × 2 = 50 for Europe (slide 30, f_v = 50 Hz).",
-   "slide": 30,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "half-image rate stated for Europe; NTSC variant predicted"
-  },
-  {
    "id": "L3-18",
    "l": 3,
    "topic": "Sync pulses",
@@ -3306,25 +3387,6 @@
    "why": "voltage-level diagram with labelled sync pulses"
   },
   {
-   "id": "L3-19",
-   "l": 3,
-   "topic": "CRT image reconstruction",
-   "q": "In the CRT image reconstruction diagram, the video signal u(t) and the scan signals u_h(t), u_v(t) are applied respectively to:",
-   "o": [
-    "the anode and the fluorescent screen",
-    "the deflection coils and the grids",
-    "the cathode and the anode",
-    "the grids and the deflection coils"
-   ],
-   "c": 3,
-   "hint": "One signal controls how strong the electron beam is; the other two steer where it goes.",
-   "r": "Slide 25: the video signal u(t) goes to the grids, which control beam intensity (brightness); the horizontal and vertical scan signals drive the deflection coils that move the beam over the fluorescent screen. The second option swaps these roles.",
-   "slide": 25,
-   "pattern": "fact",
-   "lk": "medium",
-   "why": "labelled CRT diagram"
-  },
-  {
    "id": "L3-20",
    "l": 3,
    "topic": "Gamma correction",
@@ -3342,44 +3404,6 @@
    "pattern": "definition",
    "lk": "high",
    "why": "dedicated section of four slides"
-  },
-  {
-   "id": "L3-21",
-   "l": 3,
-   "topic": "Gamma correction",
-   "q": "The gamma correction relationship given in the lecture is:",
-   "o": [
-    "V_out = A · γ · V_in",
-    "V_out = A · V_in + γ",
-    "V_out = A · V_in^γ",
-    "V_out = A · log_γ(V_in)"
-   ],
-   "c": 2,
-   "hint": "It is nonlinear, and with A = 1 an input of 1 must still give an output of 1 for any gamma.",
-   "r": "Slide 26: V_out = A·V_in^γ, a nonlinear operation used to encode and decode luminance; usually A = 1 with inputs and outputs in the range 0-1. The linear forms contradict the 'nonlinear' definition.",
-   "slide": 26,
-   "pattern": "fact",
-   "lk": "medium",
-   "why": "formula box on slide"
-  },
-  {
-   "id": "L3-22",
-   "l": 3,
-   "topic": "Gamma correction",
-   "q": "With the gamma formula V_out = A·V_in^γ, A = 1, γ = 2 and V_in = 0.5, the output is:",
-   "o": [
-    "0.25",
-    "1.00",
-    "0.71",
-    "0.50"
-   ],
-   "c": 0,
-   "hint": "Raise to the power; do not multiply.",
-   "r": "0.5² = 0.25. 1.00 comes from multiplying by γ instead of raising to the power; 0.71 is 0.5^(1/2), the inverse direction.",
-   "slide": 26,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "formula with A = 1 and range 0-1 invites a numeric check"
   },
   {
    "id": "L3-23",
@@ -3439,25 +3463,6 @@
    "why": "table on slide"
   },
   {
-   "id": "L3-26",
-   "l": 3,
-   "topic": "VHF / UHF bands",
-   "q": "Which set contains only frequencies in the VHF band (as defined in the lecture)?",
-   "o": [
-    "49.75 MHz, 223.25 MHz, 470 MHz",
-    "25 MHz, 93.25 MHz, 175.25 MHz",
-    "49.75 MHz, 175.25 MHz, 223.25 MHz",
-    "93.25 MHz, 300.5 MHz, 862 MHz"
-   ],
-   "c": 2,
-   "hint": "Every element must fit; one out-of-band value disqualifies the whole set. Recall where the classic R and K channel carriers lie.",
-   "r": "Slide 33: VHF = 30-300 MHz. 49.75 MHz (R1), 175.25 MHz (K06) and 223.25 MHz (K12) from slide 38 are all VHF; 25 MHz is below 30 MHz, while 300.5, 470 and 862 MHz are UHF.",
-   "slide": 33,
-   "pattern": "classify",
-   "lk": "medium",
-   "why": "band table combined with channel table"
-  },
-  {
    "id": "L3-27",
    "l": 3,
    "topic": "TV channel structure",
@@ -3477,29 +3482,10 @@
    "why": "two key numbers stated under the diagram"
   },
   {
-   "id": "L3-28",
-   "l": 3,
-   "topic": "TV channel frequencies",
-   "q": "In the European channel table, channel K10 has its video carrier at 207.25 MHz. Its audio carrier is at:",
-   "o": [
-    "215.25 MHz",
-    "213.75 MHz",
-    "211.75 MHz",
-    "209.25 MHz"
-   ],
-   "c": 1,
-   "hint": "In every row of the table, audio minus video is the same constant. Do not add the channel spacing.",
-   "r": "Every row of slide 38 has audio - video = 6.5 MHz (e.g. 49.75 and 56.25), so 207.25 + 6.5 = 213.75 MHz. 215.25 MHz is the video carrier of the next channel (K11), 8 MHz higher.",
-   "slide": 38,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "table of channel values"
-  },
-  {
    "id": "L3-29",
    "l": 3,
    "topic": "Luminance and B&W compatibility",
-   "q": "In analog colour TV, the luminance signal Y = 0.299R + 0.587G + 0.114B is transmitted so that:",
+   "q": "In analog colour TV, the luminance signal Y is transmitted so that:",
    "o": [
     "monochrome sets still show a correct grayscale picture",
     "colour receivers can skip demodulating the chrominance",
@@ -3518,7 +3504,7 @@
    "id": "L3-30",
    "l": 3,
    "topic": "Eye sensitivity and luminance",
-   "q": "Why does the green component have the largest coefficient in the luminance formula Y?",
+   "q": "Why does green contribute most to the luminance signal Y?",
    "o": [
     "The human eye is most sensitive to wavelengths in the green part of the spectrum",
     "The green phosphor of a CRT needs the highest voltage to glow at full brightness",
@@ -3534,42 +3520,202 @@
    "why": "sensitivity curve explains formula weights"
   },
   {
-   "id": "L3-31",
+   "id": "L3-33",
    "l": 3,
-   "topic": "PAL chrominance (YUV)",
-   "q": "In PAL, the chrominance signals U and V are calculated as:",
+   "topic": "Television",
+   "q": "The word \"television\" combines:",
    "o": [
-    "U = (R − Y)·0.493 and V = (B − Y)·0.877",
-    "U = (B − Y)·0.877 and V = (R − Y)·0.493",
-    "U = (G − Y)·0.493 and V = (R − Y)·0.877",
-    "U = (B − Y)·0.493 and V = (R − Y)·0.877"
+    "Greek \"far\" and Latin \"the image seen\"",
+    "Greek \"light\" and Latin \"the screen used\"",
+    "Greek \"fast\" and Latin \"a moving picture\"",
+    "Greek \"many\" and Latin \"people watching\""
    ],
-   "c": 3,
-   "hint": "Both are scaled colour-difference signals (green is never used directly), and V has the larger factor.",
-   "r": "Slide 42: U = (B − Y)·0.493 and V = (R − Y)·0.877. The swapped versions are the trap; NTSC uses I and Q instead of U and V.",
-   "slide": 42,
+   "c": 0,
+   "hint": "Telephone starts the same way.",
+   "r": "Slide 3: Greek tele = far, Latin visio = the image seen.",
+   "slide": 3,
    "pattern": "fact",
-   "lk": "medium",
-   "why": "formula box for PAL"
+   "lk": "medium"
   },
   {
-   "id": "L3-32",
+   "id": "L3-34",
+   "l": 3,
+   "topic": "Phi phenomenon",
+   "q": "The \"phi phenomenon\" was described in 1912 by:",
+   "o": [
+    "Max Wertheimer",
+    "Ferdinand Braun",
+    "Vladimir Zworykin",
+    "Julian Ochorowicz"
+   ],
+   "c": 0,
+   "hint": "The other three built or planned television itself.",
+   "r": "Slide 3: phi phenomenon – Max Wertheimer, 1912. Braun presented the lamp, Zworykin built the kinescope and Ochorowicz defined the principles of television.",
+   "slide": 3,
+   "pattern": "fact",
+   "lk": "medium"
+  },
+  {
+   "id": "L3-35",
+   "l": 3,
+   "topic": "Line-by-line transmission",
+   "q": "In analog TV, the signal value at a given moment equals:",
+   "o": [
+    "the brightness of the point being scanned",
+    "the average brightness of the whole scan line",
+    "the number of the line being transmitted",
+    "the colour of the previous image point"
+   ],
+   "c": 0,
+   "hint": "One value, one point.",
+   "r": "Slide 3: the image is sent line by line, and the signal value at a moment equals the brightness of the point at that time.",
+   "slide": 3,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L3-36",
+   "l": 3,
+   "topic": "Interlaced scanning",
+   "q": "Sending the even lines first and then the odd lines serves mainly to reduce:",
+   "o": [
+    "flicker",
+    "image noise",
+    "colour errors",
+    "sound delay"
+   ],
+   "c": 0,
+   "hint": "More half-images per second look steadier.",
+   "r": "Slide 3 lists even and odd lines broadcast one after the other under flicker. Half-images double the refresh rate without sending more lines.",
+   "slide": 3,
+   "pattern": "fact",
+   "lk": "high"
+  },
+  {
+   "id": "L3-37",
+   "l": 3,
+   "topic": "Synchronizing signals",
+   "q": "Synchronizing signals in a TV signal mark:",
+   "o": [
+    "the beginning of a new line and a new image",
+    "the brightest and the darkest image point",
+    "the change from the picture signal to the sound",
+    "the border between two TV channels"
+   ],
+   "c": 0,
+   "hint": "The receiver must know where to start.",
+   "r": "Slide 9: synchronizing signals mark the beginning of a new line and a new image.",
+   "slide": 9,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L3-38",
+   "l": 3,
+   "topic": "NTSC standard",
+   "q": "NTSC stands for:",
+   "o": [
+    "National Television System Committee",
+    "North American Television Signal Code",
+    "National Transmission Standard Council",
+    "New Television Synchronization Concept"
+   ],
+   "c": 0,
+   "hint": "It names a group of people.",
+   "r": "Slide 9: NTSC = National Television System Committee (30 FPS, 525 lines).",
+   "slide": 9,
+   "pattern": "acronym",
+   "lk": "high"
+  },
+  {
+   "id": "L3-39",
+   "l": 3,
+   "topic": "Standards by region",
+   "q": "SECAM was the analog standard of:",
+   "o": [
+    "France and the former USSR",
+    "the United States and Japan",
+    "Germany and Australia",
+    "Brazil and Argentina"
+   ],
+   "c": 0,
+   "hint": "It is a French abbreviation.",
+   "r": "Slide 10: SECAM in France, Russia / the former USSR and parts of Africa; NTSC in North America and Japan; PAL in most other countries.",
+   "slide": 10,
+   "pattern": "classify",
+   "lk": "medium"
+  },
+  {
+   "id": "L3-40",
+   "l": 3,
+   "topic": "Colour difference signals",
+   "q": "Analog colour TV carries colour as:",
+   "o": [
+    "colour-difference signals such as R−Y and B−Y",
+    "three separate full-bandwidth signals R, G and B",
+    "hue and saturation values of every image point",
+    "cyan, magenta and yellow on separate carriers"
+   ],
+   "c": 0,
+   "hint": "The receiver adds Y back.",
+   "r": "Slide 16: colour is carried as R−Y and B−Y; the receiver recovers R and B by adding Y.",
+   "slide": 16,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L3-41",
+   "l": 3,
+   "topic": "CRT",
+   "q": "In a CRT, the deflection coils:",
+   "o": [
+    "steer the electron beam over the screen",
+    "set the brightness of the beam",
+    "emit the electrons that form the beam",
+    "glow when electrons hit them"
+   ],
+   "c": 0,
+   "hint": "They receive the scan signals.",
+   "r": "Slide 25: the horizontal and vertical scan signals drive the deflection coils. The grids receive the video signal, the cathode emits electrons and the fluorescent screen glows.",
+   "slide": 25,
+   "pattern": "definition",
+   "lk": "medium"
+  },
+  {
+   "id": "L3-42",
    "l": 3,
    "topic": "Chrominance bandwidth",
-   "q": "According to the lecture, the total bandwidth needed for RGB, NTSC (YIQ) and PAL (YUV) is respectively:",
+   "q": "Why can chrominance be sent with less bandwidth than luminance?",
    "o": [
-    "18 MHz, 8.4 MHz and 7.5 MHz",
-    "18 MHz, 7.5 MHz and 8.4 MHz",
-    "12 MHz, 7.5 MHz and 8.4 MHz",
-    "18 MHz, 6.0 MHz and 7.2 MHz"
+    "People do not see fine image detail in colour",
+    "Colour signals travel faster than brightness",
+    "Colour is needed only in every second TV frame",
+    "Chrominance contains no information on edges"
    ],
-   "c": 1,
-   "hint": "RGB sends three full 6 MHz signals. Then recall which system has the narrower luminance band: the American or the European one.",
-   "r": "Slide 43: RGB 6+6+6 = 18 MHz; NTSC Y 4.5 + I 2.0 + Q 1.0 = 7.5 MHz; PAL Y 6 + U 1.2 + V 1.2 = 8.4 MHz. Swapping NTSC and PAL is the trap. Chrominance bandwidth can be limited because humans do not see fine image details in colour.",
+   "c": 0,
+   "hint": "It is about the eye, not the signal.",
+   "r": "Slide 43: people do not see image details as coloured objects, so the chrominance bandwidth can be limited.",
    "slide": 43,
-   "pattern": "numeric",
-   "lk": "high",
-   "why": "summed values printed under each diagram"
+   "pattern": "fact",
+   "lk": "high"
+  },
+  {
+   "id": "L3-43",
+   "l": 3,
+   "topic": "Telstar",
+   "q": "In 1962, television was broadcast from the USA to Europe using:",
+   "o": [
+    "the Telstar satellite",
+    "an undersea coaxial cable",
+    "a chain of radio towers",
+    "the first digital system"
+   ],
+   "c": 0,
+   "hint": "It was the first commercial one of its kind.",
+   "r": "Slide 6: 1962 – broadcast from the USA to Europe via Telstar, the first commercial satellite. Digital systems came in 1987.",
+   "slide": 6,
+   "pattern": "fact",
+   "lk": "medium"
   },
   {
    "id": "L4-01",
@@ -3591,114 +3737,38 @@
    "why": "bold term on slide; basis of all later sampling numbers"
   },
   {
-   "id": "L4-02",
-   "l": 4,
-   "topic": "SDTV vs HDTV sample rate",
-   "q": "In the lecture, a sample rate of 74.25 MHz is given for:",
-   "o": [
-    "SDTV luminance according to ITU-R 601",
-    "SDTV chrominance (CR and CB)",
-    "HDTV, with its larger number of pixels",
-    "the multiplexed ITU-R 601 output stream"
-   ],
-   "c": 2,
-   "hint": "More pixels per picture means more samples per second. Which of these formats has the most pixels?",
-   "r": "Slide 8: SDTV (6 MHz video bandwidth) uses 13.5 MHz, while HDTV, with its larger number of pixels, uses 74.25 MHz. SDTV chrominance is 6.75 MHz and the multiplexed stream is 27 MHz.",
-   "slide": 8,
-   "pattern": "fact",
-   "lk": "medium",
-   "why": "bold number on slide; reversed variant of the SDTV/HDTV rate fact"
-  },
-  {
-   "id": "L4-03",
-   "l": 4,
-   "topic": "Bit depth per pixel",
-   "q": "How many bits per pixel are needed to represent 256 distinct brightness levels?",
-   "o": [
-    "8 bits",
-    "6 bits",
-    "16 bits",
-    "256 bits"
-   ],
-   "c": 0,
-   "hint": "Find n such that 2 to the power n equals 256.",
-   "r": "Slide 10: 8-bit depth per pixel gives 2^8 = 256 levels. 6 bits gives only 64 levels and 16 bits gives 65 536 levels.",
-   "slide": 10,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "formula 2^8 = 256 shown on two slides (10 and 12)"
-  },
-  {
-   "id": "L4-04",
-   "l": 4,
-   "topic": "Video sampling multiplexer",
-   "q": "In the video sampling diagram, Y is sampled at 13.5 MHz and CR and CB at 6.75 MHz each. The multiplexer output rate is:",
-   "o": [
-    "27 MHz",
-    "20.25 MHz",
-    "13.5 MHz",
-    "40.5 MHz"
-   ],
-   "c": 0,
-   "hint": "Add up the three sample streams that enter the multiplexer.",
-   "r": "13.5 + 6.75 + 6.75 = 27 MHz, as shown at the multiplexer output on slide 11. 20.25 MHz counts only one chrominance channel.",
-   "slide": 11,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "block diagram with explicit numbers"
-  },
-  {
-   "id": "L4-05",
-   "l": 4,
-   "topic": "SDTV luminance bit rate",
-   "q": "An SDTV picture has 576 visible lines with 720 pixels per line, 25 pictures per second and 8 bits per sample. The luminance bit rate is about:",
-   "o": [
-    "10.361 Mbps",
-    "41.472 Mbps",
-    "165.888 Mbps",
-    "82.944 Mbps"
-   ],
-   "c": 3,
-   "hint": "Samples per picture x pictures per second x bits per sample.",
-   "r": "576 x 720 = 414 720 samples per picture; x 25 = 10 360 800 samples/s; x 8 bits = 82.944 Mbps (slide 13). 165.888 Mbps is the total with chrominance; 10.361 forgets the 8 bits per sample.",
-   "slide": 13,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "worked numeric example on slide"
-  },
-  {
    "id": "L4-06",
    "l": 4,
    "topic": "SDTV total bit rate",
-   "q": "The total uncompressed SDTV video bit rate (luminance + chrominance, 8 bits per sample, 576 visible lines) calculated in the lecture is:",
+   "q": "Uncompressed SDTV video needs a bit rate of roughly:",
    "o": [
-    "216 Mbps",
-    "82.944 Mbps",
+    "17 Mbps",
     "50 Mbps",
-    "165.888 Mbps"
+    "166 Mbps",
+    "1,660 Mbps"
    ],
-   "c": 3,
-   "hint": "Luminance and chrominance contribute equal amounts. Double the luminance figure.",
-   "r": "Slide 13: luminance 82.944 Mbps + chrominance 82.944 Mbps = 165.888 Mbps. 82.944 Mbps is only one component. 216 Mbps (27 MHz x 8 bits) would include blanking intervals, which the lecture's example does not count.",
+   "c": 2,
+   "hint": "Far more than one 8 MHz channel can carry.",
+   "r": "Slide 13: luminance and chrominance need about 83 Mbps each, together about 166 Mbps. That is why digital TV depends on compression.",
    "slide": 13,
    "pattern": "numeric",
-   "lk": "high",
+   "lk": "medium",
    "why": "final result of worked example"
   },
   {
    "id": "L4-07",
    "l": 4,
    "topic": "Chrominance bit rate",
-   "q": "In the SDTV bit-rate example, why is the chrominance bit rate equal to the luminance bit rate (82.944 Mbps)?",
+   "q": "In digital SDTV, each chrominance signal has, per line:",
    "o": [
-    "Chrominance is sampled at 13.5 MHz, the same as luminance",
-    "There are two chrominance signals, each with 360 samples per line",
-    "Chrominance uses 16 bits per sample instead of 8 bits",
-    "Chrominance is sent at 50 pictures per second instead of 25"
+    "as many samples as luminance",
+    "half as many samples as luminance",
+    "twice as many samples as luminance",
+    "no samples, only a reference level"
    ],
    "c": 1,
-   "hint": "Look at the term (360 * 2) in the chrominance formula.",
-   "r": "Slide 13: 8 x 576 x (360 x 2) x 25. CR and CB each have 360 samples per line (half of 720), so together they equal the luminance sample count. Chrominance is sampled at 6.75 MHz, not 13.5 MHz.",
+   "hint": "The eye needs less colour detail.",
+   "r": "Slide 13: 720 luminance samples per line, but 360 for each of the two chrominance signals. Two halves together equal the luminance data.",
    "slide": 13,
    "pattern": "compare",
    "lk": "medium",
@@ -3741,25 +3811,6 @@
    "pattern": "fact",
    "lk": "high",
    "why": "named standard with key numbers; repeated on slides 8, 11, 15"
-  },
-  {
-   "id": "L4-10",
-   "l": 4,
-   "topic": "ITU-R 601 Shannon minimum",
-   "q": "ITU-R 601 assumes a luminance bandwidth of 6 MHz and a chrominance bandwidth of 2.75 MHz. The minimum sampling frequencies required by the Shannon theorem are:",
-   "o": [
-    "above 12 MHz and above 5.5 MHz",
-    "above 6 MHz and above 2.75 MHz",
-    "above 13.5 MHz and above 6.75 MHz",
-    "above 24 MHz and above 11 MHz"
-   ],
-   "c": 0,
-   "hint": "Apply the 'twice per cycle' rule to each bandwidth.",
-   "r": "Slide 15: f_samp > 2 x 6 = 12 MHz and f_samp > 2 x 2.75 = 5.5 MHz. The actual rates 13.5/6.75 MHz are set above these minima for 625/525 compatibility. The slide writes 'Shannon Thorem' and uses 6 MHz luminance bandwidth (textbooks often quote 5.75 MHz); follow the slide.",
-   "slide": 15,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "arrow chain bandwidth -> theorem -> f_samp on slide"
   },
   {
    "id": "L4-11",
@@ -3914,25 +3965,6 @@
    "why": "YES/NO row in comparison table"
   },
   {
-   "id": "L4-19",
-   "l": 4,
-   "topic": "DVB-T service aspects",
-   "q": "Which statement about DVB-T in the service-aspect table is TRUE?",
-   "o": [
-    "HDTV mobile reception is rated as good",
-    "Single Frequency Network operation is not supported",
-    "Only SDTV, not HDTV, mobile reception is possible",
-    "Data broadcasting is a popular commercial service"
-   ],
-   "c": 2,
-   "hint": "Read footnote (2) next to 'Impossible' in the DVB-T column.",
-   "r": "Slide 22: DVB-T HDTV mobile reception is 'Impossible (2)', and footnote (2) says SDTV mobile reception is possible. DVB-T supports SFN, and footnote (1) says data broadcasting is not popular commercially.",
-   "slide": 22,
-   "pattern": "true-statement",
-   "lk": "medium",
-   "why": "table footnotes are a typical source of TRUE/FALSE traps"
-  },
-  {
    "id": "L4-20",
    "l": 4,
    "topic": "4K UHD resolution",
@@ -3950,25 +3982,6 @@
    "pattern": "fact",
    "lk": "high",
    "why": "resolution chart with exact numbers"
-  },
-  {
-   "id": "L4-21",
-   "l": 4,
-   "topic": "8K vs Full HD pixels",
-   "q": "How many times more pixels does 8K UHD (7680 x 4320) have than Full HD (1920 x 1080)?",
-   "o": [
-    "4 times",
-    "8 times",
-    "16 times",
-    "32 times"
-   ],
-   "c": 2,
-   "hint": "Compare width and height separately. Each is multiplied by the same factor.",
-   "r": "7680/1920 = 4 and 4320/1080 = 4, so 4 x 4 = 16 (33.18 MPx / 2.07 MPx is about 16), slide 25. 4 times is the 4K UHD to Full HD ratio.",
-   "slide": 25,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "chart gives all values needed for a ratio"
   },
   {
    "id": "L4-22",
@@ -4078,8 +4091,8 @@
    ],
    "c": 0,
    "hint": "Think of the slot in a set-top box where a pay-TV smart card module goes.",
-   "r": "Slide 36: DVB-CA = common interface for conditional access. Cable transmission is DVB-C, service information is DVB-SI, and return channels are DVB-RC.",
-   "slide": 36,
+   "r": "Slide 35: DVB-CA = common interface for conditional access. Cable transmission is DVB-C, service information is DVB-SI, and return channels are DVB-RC.",
+   "slide": 35,
    "pattern": "acronym",
    "lk": "medium",
    "why": "acronym list; acronym questions appear in past exams"
@@ -4097,8 +4110,8 @@
    ],
    "c": 1,
    "hint": "Randomize first, then the outer code, shuffle, the inner code, shape the pulses, and modulate last.",
-   "r": "Slide 39 and Blocks 1-6: scrambling, outer coding (Reed-Solomon), interleaving, inner coding (convolutional), baseband shaping, QPSK modulation. The outer code comes before the inner code, and modulation is always last.",
-   "slide": 39,
+   "r": "Slide 38 and Blocks 1-6: scrambling, outer coding (Reed-Solomon), interleaving, inner coding (convolutional), baseband shaping, QPSK modulation. The outer code comes before the inner code, and modulation is always last.",
+   "slide": 38,
    "pattern": "order",
    "lk": "high",
    "why": "block diagram that structures the whole last part of the lecture (Blocks 1-6)"
@@ -4116,8 +4129,8 @@
    ],
    "c": 2,
    "hint": "Long runs of identical bits make the signal look like a plain carrier. What does randomizing the bits do to the energy?",
-   "r": "Slide 40: packets are randomized to disperse the signal energy and prevent the emission of an apparently unmodulated carrier (modulo-2 addition of a 1503-byte pseudo-random sequence). It is not encryption (that is conditional access); spreading burst errors is interleaving.",
-   "slide": 40,
+   "r": "Slide 39: packets are randomized to disperse the signal energy and prevent the emission of an apparently unmodulated carrier (modulo-2 addition of a 1503-byte pseudo-random sequence). It is not encryption (that is conditional access); spreading burst errors is interleaving.",
+   "slide": 39,
    "pattern": "definition",
    "lk": "high",
    "why": "Block 1 definition; 'scrambling vs encryption' is a classic trap"
@@ -4135,49 +4148,11 @@
    ],
    "c": 3,
    "hint": "The first number is the packet length after coding; the second is the MPEG-2 packet length.",
-   "r": "Slide 41: RS(204, 188, 8) turns a 188-byte packet into a 204-byte packet and corrects up to 8 errors. RS(188, 204, 8) swaps the lengths; 16 is the number of added bytes, not the number of correctable errors.",
-   "slide": 41,
+   "r": "Slide 40: RS(204, 188, 8) turns a 188-byte packet into a 204-byte packet and corrects up to 8 errors. RS(188, 204, 8) swaps the lengths; 16 is the number of added bytes, not the number of correctable errors.",
+   "slide": 40,
    "pattern": "fact",
    "lk": "high",
    "why": "Block 2 code name with exact numbers"
-  },
-  {
-   "id": "L4-31",
-   "l": 4,
-   "topic": "Reed-Solomon redundancy",
-   "q": "With RS(204, 188, 8), how many redundant bytes are added per packet, and how many errors can be corrected?",
-   "o": [
-    "8 bytes added; up to 16 errors corrected",
-    "16 bytes added; up to 8 errors corrected",
-    "16 bytes added; up to 16 errors corrected",
-    "204 bytes added; up to 8 errors corrected"
-   ],
-   "c": 1,
-   "hint": "Subtract the two packet lengths. The last number in the code name is the correction capability.",
-   "r": "204 - 188 = 16 added bytes; slide 41 says the code corrects up to 8 errors in a 188-byte packet. Swapping 8 and 16 is the typical trap.",
-   "slide": 41,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "predicted numeric variant of the RS code fact"
-  },
-  {
-   "id": "L4-32",
-   "l": 4,
-   "topic": "Reed-Solomon error correction example",
-   "q": "In the lecture's Reed-Solomon example, 02 11 13 is sent with check bytes 26 and 63, and 02 13 13 is received. The receiver computes S1 = 28 and S2 = 67. The error position and error value are:",
-   "o": [
-    "position 2, value +2",
-    "position 4, value +2",
-    "position 2, value +4",
-    "position 3, value +2"
-   ],
-   "c": 0,
-   "hint": "Value = new S1 minus old S1. Position = change in S2 divided by the error value.",
-   "r": "Slide 42: error value = 28 - 26 = +2; error position = (67 - 63)/2 = 2. Subtract 2 from the 2nd byte (13 becomes 11) to get 02 11 13. The 4 is the change in S2 before dividing.",
-   "slide": 42,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "worked example with coloured formulas"
   },
   {
    "id": "L4-33",
@@ -4192,8 +4167,8 @@
    ],
    "c": 3,
    "hint": "Recall the 'TRANSMITTED-DATA' example: one long block of errors became a few isolated errors.",
-   "r": "Slide 43: a convolutional interleaver improves the ability to correct a large number of burst errors missed by the inner decoding; after deinterleaving, a burst becomes scattered single errors. Energy dispersal is scrambling; pulse shaping is Block 5.",
-   "slide": 43,
+   "r": "Slide 42: a convolutional interleaver improves the ability to correct a large number of burst errors missed by the inner decoding; after deinterleaving, a burst becomes scattered single errors. Energy dispersal is scrambling; pulse shaping is Block 5.",
+   "slide": 42,
    "pattern": "definition",
    "lk": "high",
    "why": "Block 3 definition plus three example slides (44-46)"
@@ -4202,18 +4177,18 @@
    "id": "L4-34",
    "l": 4,
    "topic": "Inner coding",
-   "q": "The basic inner (convolutional) code of DVB-S has:",
+   "q": "The inner code in the DVB-S chain is:",
    "o": [
-    "code rate 7/8 with constraint length K = 2",
-    "code rate 188/204 with constraint length K = 8",
-    "code rate 1/2 with constraint length K = 7",
-    "code rate 3/4 with constraint length K = 16"
+    "a Reed–Solomon block code",
+    "a convolutional code",
+    "a Huffman code",
+    "a run-length code"
    ],
-   "c": 2,
-   "hint": "The basic rate doubles the number of bits; puncturing later raises it to 2/3, 3/4, 5/6 or 7/8.",
-   "r": "Slide 47: the basic code rate is 1/2 with K = 7, and puncturing increases it to 2/3, 3/4, 5/6, 7/8 and others. 188/204 is the rate of the outer Reed-Solomon code.",
-   "slide": 47,
-   "pattern": "fact",
+   "c": 1,
+   "hint": "The outer code is the Reed–Solomon one.",
+   "r": "Slide 46: the inner code is convolutional (basic rate 1/2) and can be punctured to higher rates. Reed–Solomon is the outer code; Huffman and run-length coding compress data rather than protect it.",
+   "slide": 46,
+   "pattern": "definition",
    "lk": "medium",
    "why": "Block 4 with exact parameters"
   },
@@ -4230,30 +4205,11 @@
    ],
    "c": 0,
    "hint": "Neighbouring states should differ as little as possible, so a small error changes few bits.",
-   "r": "Slide 47: Gray code means individual code words differ only in one place; the signal is then filtered so that the pulse edges are shaped before modulation. Parity bytes come from the RS outer code.",
-   "slide": 47,
+   "r": "Slide 46: Gray code means individual code words differ only in one place; the signal is then filtered so that the pulse edges are shaped before modulation. Parity bytes come from the RS outer code.",
+   "slide": 46,
    "pattern": "definition",
    "lk": "medium",
    "why": "definition given in parentheses on slide"
-  },
-  {
-   "id": "L4-36",
-   "l": 4,
-   "topic": "Analog modulation formulas",
-   "q": "Which formula describes frequency modulation (FM) of a carrier by the signal s(t)?",
-   "o": [
-    "f(t) = [A + s(t)] sin(2πf·t + φ)",
-    "f(t) = A sin(2πf·t + φ[s(t)])",
-    "f(t) = A sin(2π[f + s(t)]·t + φ)",
-    "f(t) = A·s(t)·cos(2πf·t)"
-   ],
-   "c": 2,
-   "hint": "Find where s(t) is added: to the amplitude, to the frequency, or to the phase.",
-   "r": "Slide 48: FM adds s(t) to the frequency, A sin(2π[f + s(t)]t + φ). Adding s(t) to the amplitude is AM; putting s(t) in the phase term is PM.",
-   "slide": 48,
-   "pattern": "definition",
-   "lk": "medium",
-   "why": "three formulas in red highlight boxes"
   },
   {
    "id": "L4-37",
@@ -4268,30 +4224,191 @@
    ],
    "c": 1,
    "hint": "'Quadrature' means four states. How many bits are needed to label four states?",
-   "r": "Slide 50: carrier modulation occurs for individual pairs of bits (x1, x2). Four phases (π/4, 3π/4, 5π/4, 7π/4) give 2 bits per symbol, because 2^2 = 4.",
-   "slide": 50,
+   "r": "Slide 49: carrier modulation occurs for individual pairs of bits (x1, x2). Four phases (π/4, 3π/4, 5π/4, 7π/4) give 2 bits per symbol, because 2^2 = 4.",
+   "slide": 49,
    "pattern": "numeric",
    "lk": "high",
-   "why": "Block 6 core idea; appears on slides 50-53"
+   "why": "Block 6 core idea; appears on slides 49-52"
   },
   {
-   "id": "L4-38",
+   "id": "L4-39",
    "l": 4,
-   "topic": "QPSK phase mapping",
-   "q": "According to the lecture's QPSK relationship, the bit pair (x1, x2) = (0,0) is transmitted as:",
+   "topic": "ITU-R 601",
+   "q": "The ITU-R 601 Recommendation defines:",
    "o": [
-    "U0 cos(Ωt + π/4)",
-    "U0 cos(Ωt + 3π/4)",
-    "U0 cos(Ωt + 5π/4)",
-    "U0 cos(Ωt + 7π/4)"
+    "how television signals are sampled digitally",
+    "how digital video is compressed for broadcast TV",
+    "how satellite television is modulated",
+    "which colours UHD screens can show"
    ],
-   "c": 1,
-   "hint": "On the phasor diagram, (0,0) sits in the upper-left quadrant.",
-   "r": "Slide 50: (1,0) gives π/4, (0,0) gives 3π/4, (0,1) gives 5π/4 and (1,1) gives 7π/4. The lecture's mapping is not in plain binary order: (1,0) comes first.",
-   "slide": 50,
-   "pattern": "fact",
-   "lk": "low",
-   "why": "formula box; detailed mapping is less likely to be asked"
+   "c": 0,
+   "hint": "It gives two sampling rates.",
+   "r": "Slide 15: ITU-R 601 sets the sampling of luminance and chrominance so that 625- and 525-line systems are compatible. Compression is MPEG, modulation is DVB, gamut is Rec. 2020.",
+   "slide": 15,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L4-40",
+   "l": 4,
+   "topic": "Single Frequency Network",
+   "q": "A Single Frequency Network (SFN) is one in which:",
+   "o": [
+    "all transmitters use one frequency",
+    "each transmitter sends the same signal on its own frequency",
+    "one satellite transponder serves a whole country",
+    "each frequency carries exactly one programme"
+   ],
+   "c": 0,
+   "hint": "Read the name word by word.",
+   "r": "Slide 22 compares SFN support: DVB-T and ISDB-T yes, ATSC no. In an SFN every transmitter uses the same frequency for the same signal.",
+   "slide": 22,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L4-41",
+   "l": 4,
+   "topic": "DVB project",
+   "q": "The DVB project is:",
+   "o": [
+    "an industry-led consortium that designs open TV standards",
+    "a European government agency that assigns TV frequencies",
+    "a video compression method used for satellite TV",
+    "a satellite operator that broadcasts digital TV"
+   ],
+   "c": 0,
+   "hint": "About 250 members work together.",
+   "r": "Slide 34: DVB (Digital Video Broadcasting) is an industry-led consortium that designs open technical standards for digital television and data services.",
+   "slide": 34,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L4-42",
+   "l": 4,
+   "topic": "DVB standards family",
+   "q": "DVB-T is the DVB standard for:",
+   "o": [
+    "terrestrial transmission",
+    "transmission by satellite",
+    "cable transmission",
+    "return channels"
+   ],
+   "c": 0,
+   "hint": "T for what is on the ground.",
+   "r": "Slide 35: DVB-S satellite, DVB-C cable, DVB-T terrestrial, DVB-RC return channels.",
+   "slide": 35,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L4-43",
+   "l": 4,
+   "topic": "Digital TV receiver",
+   "q": "In a digital TV receiver, the demultiplexer:",
+   "o": [
+    "splits video, audio and data",
+    "selects the wanted channel from the antenna",
+    "converts the digital picture to analog",
+    "expands the compressed picture again"
+   ],
+   "c": 0,
+   "hint": "One stream goes in, several come out.",
+   "r": "Slide 36: tuner, demodulator, demultiplexer, then decompression and D/A conversion. The demultiplexer splits the stream into video, audio and service data.",
+   "slide": 36,
+   "pattern": "definition",
+   "lk": "medium"
+  },
+  {
+   "id": "L4-44",
+   "l": 4,
+   "topic": "Reed-Solomon outer code",
+   "q": "The Reed–Solomon outer code protects the data by:",
+   "o": [
+    "adding parity bytes that allow error correction",
+    "sending every data packet a second time",
+    "spreading neighbouring bytes further apart in time",
+    "mixing the data with a random sequence"
+   ],
+   "c": 0,
+   "hint": "The packet gets longer.",
+   "r": "Slide 40: 188 bytes become 204; the added bytes allow up to 8 errors to be corrected. Spreading bytes is interleaving, mixing with a random sequence is scrambling.",
+   "slide": 40,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L4-45",
+   "l": 4,
+   "topic": "Puncturing",
+   "q": "Puncturing a convolutional code:",
+   "o": [
+    "raises the code rate by leaving out coded bits",
+    "lowers the code rate by adding parity bits",
+    "spreads long burst errors over several packets",
+    "maps pairs of bits to carrier phases"
+   ],
+   "c": 0,
+   "hint": "Something is removed.",
+   "r": "Slide 46: the basic rate 1/2 can be increased by puncturing to 2/3, 3/4, 5/6 or 7/8, at the price of weaker protection.",
+   "slide": 46,
+   "pattern": "definition",
+   "lk": "medium"
+  },
+  {
+   "id": "L4-46",
+   "l": 4,
+   "topic": "Modulation",
+   "q": "Modulation is:",
+   "o": [
+    "applying the transmitted signal to a carrier wave",
+    "removing the carrier wave from the received signal",
+    "adding parity bytes to the transmitted signal",
+    "selecting one channel with a bandpass filter"
+   ],
+   "c": 0,
+   "hint": "It happens in the transmitter.",
+   "r": "Slide 47: modulation applies the transmitted signal s(t) to the carrier wave. Recovering s(t) is demodulation.",
+   "slide": 47,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L4-47",
+   "l": 4,
+   "topic": "Frequency modulation",
+   "q": "In frequency modulation (FM), the transmitted signal changes:",
+   "o": [
+    "the carrier's frequency",
+    "the carrier's amplitude",
+    "the carrier's phase",
+    "the carrier's bandwidth"
+   ],
+   "c": 0,
+   "hint": "Look at the name.",
+   "r": "Slide 47: AM changes the amplitude, FM the frequency and PM the phase of the carrier.",
+   "slide": 47,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L4-48",
+   "l": 4,
+   "topic": "QPSK",
+   "q": "QPSK stands for:",
+   "o": [
+    "Quadrature Phase Shift Keying",
+    "Quantized Pulse Shape Keying",
+    "Quick Parallel Signal Keying",
+    "Quaternary Power Shift Keying"
+   ],
+   "c": 0,
+   "hint": "It shifts the phase of the carrier.",
+   "r": "Slide 49: QPSK = Quadrature Phase Shift Keying; each of the four phases carries a pair of bits.",
+   "slide": 49,
+   "pattern": "acronym",
+   "lk": "high"
   },
   {
    "id": "L5-01",
@@ -4311,25 +4428,6 @@
    "pattern": "acronym",
    "lk": "high",
    "why": "bold heading on the Part 4 title slide; acronym questions are common"
-  },
-  {
-   "id": "L5-02",
-   "l": 5,
-   "topic": "JPEG origin",
-   "q": "According to the lecture, the JPEG group was formed and the ISO standard was published in:",
-   "o": [
-    "1978 and 1986",
-    "1982 and 1990",
-    "1986 and 1991",
-    "1991 and 1996"
-   ],
-   "c": 2,
-   "hint": "The group started in the mid-1980s; the standard came about five years later.",
-   "r": "Slide 2: Joint Photographic Expert Group - 1986; ISO standard - 1991. 1978 is the year of Tescher's zig-zag algorithm. Many textbooks date ISO 10918-1 to 1992, but follow the slide.",
-   "slide": 2,
-   "pattern": "fact",
-   "lk": "medium",
-   "why": "two bold dates on slide 2"
   },
   {
    "id": "L5-03",
@@ -4503,61 +4601,23 @@
    "why": "headline definition on slide 19; siblings make good distractors"
   },
   {
-   "id": "L5-13",
-   "l": 5,
-   "topic": "Quantization example",
-   "q": "Following the lecture example, the 6-bit number 101101 (binary) = 45 is reduced to 4 significant bits by zeroing the two lowest bits. The resulting value is:",
-   "o": [
-    "40",
-    "44",
-    "45",
-    "11"
-   ],
-   "c": 1,
-   "hint": "Keep 1011 and append 00.",
-   "r": "Slide 19: 1011 followed by 00 gives 101100 = 44; reducing to 3 bits gives 101000 = 40. 11 is the value of 1011 alone. (The slide writes 101 = 8, a typo: 101 binary is 5, but 101000 = 40 is correct.)",
-   "slide": 19,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "worked numeric example on slide 19"
-  },
-  {
    "id": "L5-14",
    "l": 5,
    "topic": "Quantization formula",
-   "q": "The quantized DCT coefficient is calculated as:",
+   "q": "In JPEG quantization, each DCT coefficient is:",
    "o": [
-    "F^Q(u,v) = Integer round(F(u,v) * Q(u,v))",
-    "F^Q(u,v) = Integer round(F(u,v) - Q(u,v))",
-    "F^Q(u,v) = Integer round(F(u,v) / Q(u,v))",
-    "F^Q(u,v) = Integer round(Q(u,v) / F(u,v))"
+    "multiplied by its table value and rounded",
+    "reduced by its table value and rounded",
+    "divided by its table value and rounded",
+    "replaced by its table value and sorted"
    ],
    "c": 2,
    "hint": "A larger table value should make the stored number smaller.",
-   "r": "Slide 20: F^Q(u,v) = Integer round(F(u,v) / Q(u,v)). Multiplying by Q(u,v) is the decoding (dequantization) step on slide 23, not encoding.",
+   "r": "Slide 20: the coefficient is divided by the quantization-table value and rounded to an integer. Multiplying by the table value is the decoding step.",
    "slide": 20,
-   "pattern": "fact",
+   "pattern": "definition",
    "lk": "high",
    "why": "formula box on slide 20"
-  },
-  {
-   "id": "L5-15",
-   "l": 5,
-   "topic": "Quantization calculation",
-   "q": "In the slide example the DC coefficient is F(0,0) = 1204.7 and the luminance table gives Q(0,0) = 16. The quantized value F^Q(0,0) is:",
-   "o": [
-    "75",
-    "76",
-    "1189",
-    "19275"
-   ],
-   "c": 0,
-   "hint": "Divide, then round to the nearest integer.",
-   "r": "1204.7 / 16 = 75.29, which rounds to 75, matching F^Q(0,0) = 75 on slide 22. 1189 comes from subtraction and 19275 from multiplication.",
-   "slide": 22,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "table on slide 21 plus worked matrices on slide 22"
   },
   {
    "id": "L5-16",
@@ -4601,18 +4661,18 @@
    "id": "L5-18",
    "l": 5,
    "topic": "Quantization tables",
-   "q": "In the default luminance table, Q(0,0) = 16 and the values grow above 100 toward the lower-right corner. The correct conclusion is:",
+   "q": "Why do the values of a JPEG quantization table grow toward the high frequencies?",
    "o": [
-    "High-frequency coefficients are quantized more coarsely, because the eye is less sensitive to them",
-    "Low-frequency coefficients are quantized more coarsely, because they mostly carry image noise",
-    "Lower-right coefficients are stored with more bits, because they hold the most useful detail",
-    "Upper-left coefficients are discarded, because the DC value is always transmitted separately"
+    "High frequencies are quantized more coarsely, because the eye is less sensitive to them",
+    "Low frequencies are quantized more coarsely, because they mostly carry image noise",
+    "High frequencies are stored with more bits, because they hold the most useful detail",
+    "High frequencies are never sent, because the decoder can compute them from the DC value"
    ],
    "c": 0,
    "hint": "Larger divisor means a smaller quantized number and less precision. Where does the eye care least?",
-   "r": "Slide 20: the eye is most sensitive to low frequencies (upper-left) and less sensitive to high frequencies (lower-right), so the larger Q values there remove more high-frequency precision. Low frequencies carry the most information, not noise (slide 5).",
+   "r": "Slides 20–21: the eye is most sensitive to low frequencies (upper left) and less to high ones (lower right), so the table values grow toward the lower right and remove detail there first.",
    "slide": 21,
-   "pattern": "numeric",
+   "pattern": "fact",
    "lk": "medium",
    "why": "combines slides 20 and 21; numeric-interpretation style"
   },
@@ -4655,25 +4715,6 @@
    "why": "named person and year on the slide; 'was created by' questions are common"
   },
   {
-   "id": "L5-21",
-   "l": 5,
-   "topic": "Zig-zag scan",
-   "q": "The upper-left part of a quantized block is: row 0 = [75, 12, -2, -2], row 1 = [18, 15, 2, 1], row 2 = [-1, 10, 1, -2]. The first five elements of the zig-zag vector are:",
-   "o": [
-    "75, 12, 18, -1, 15",
-    "75, 12, -2, -2, 18",
-    "75, 18, -1, 12, 15",
-    "75, 18, 12, 15, -1"
-   ],
-   "c": 0,
-   "hint": "Start at DC, step right, go diagonally down-left, step down, then go diagonally up-right.",
-   "r": "Slide 26: [DC, AC1, ...] = [75, 12, 18, -1, 15, -2, -2, 2, 10, ...]. Reading row by row (75, 12, -2, -2, ...) is not a zig-zag scan.",
-   "slide": 26,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "worked vector with arrows on slide 26"
-  },
-  {
    "id": "L5-22",
    "l": 5,
    "topic": "DC coding (DPCM)",
@@ -4712,44 +4753,6 @@
    "why": "DPCM/RLC boxes in the slide 7 diagram plus section titles 6.1 (DC) and (AC)"
   },
   {
-   "id": "L5-24",
-   "l": 5,
-   "topic": "DPCM calculation",
-   "q": "DC values of three consecutive blocks are 45, 54 and 48. After DPCM, the coded vector is:",
-   "o": [
-    "45, 54, 48",
-    "0, 9, -6",
-    "45, -9, 6",
-    "45, 9, -6"
-   ],
-   "c": 3,
-   "hint": "The first value is kept as is; each next one is 'current minus previous'.",
-   "r": "Slide 30: Δ0 = DC^0 and Δi = DC^i - DC^(i-1), so 45, 54 - 45 = 9, 48 - 54 = -6 (the slide 29 example). '45, -9, 6' computes previous minus current.",
-   "slide": 29,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "worked example on slide 29 and formula on slide 30"
-  },
-  {
-   "id": "L5-25",
-   "l": 5,
-   "topic": "DC coding (Size)",
-   "q": "The DC of the previous block was 71 and the current DC is 75. Using Size = Integer Round[log2(|Δ|) + 1], the values of Δ and Size are:",
-   "o": [
-    "Δ = 4, Size = 2",
-    "Δ = 4, Size = 3",
-    "Δ = -4, Size = 3",
-    "Δ = 146, Size = 8"
-   ],
-   "c": 1,
-   "hint": "log2(4) is a whole number; then add one.",
-   "r": "Slide 33: Δ = 75 - 71 = 4 and Size = log2(4) + 1 = 3. Table 1 gives Huffman code 100 for Size 3, and slide 34 writes the final code as 100 011 (by Table 1's ranges, 4 would normally get additional bits 100; the slide shows 011).",
-   "slide": 33,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "worked example on slides 33-34"
-  },
-  {
    "id": "L5-26",
    "l": 5,
    "topic": "AC coding (RLE)",
@@ -4767,63 +4770,6 @@
    "pattern": "definition",
    "lk": "high",
    "why": "bold italic definitions plus diagram on slide 36"
-  },
-  {
-   "id": "L5-27",
-   "l": 5,
-   "topic": "AC Huffman table",
-   "q": "In the AC Huffman table (Table 2), the symbol ZRL denotes:",
-   "o": [
-    "zeros up to the end of the block",
-    "a run of exactly 15 zeros followed by a non-zero value",
-    "a string of 16 zeros (15 zeros and AC = 0)",
-    "a reset of the DC prediction back to zero"
-   ],
-   "c": 2,
-   "hint": "Its sibling EOB already covers 'everything to the end'.",
-   "r": "Slide 40: ZRL = string of 16 zeros (15 zeros and AC_i = 0), Huffman code 11111111001. 'Zeros to the end of the block' is EOB, code 1010.",
-   "slide": 40,
-   "pattern": "definition",
-   "lk": "medium",
-   "why": "side definitions next to Table 2 on slide 40"
-  },
-  {
-   "id": "L5-28",
-   "l": 5,
-   "topic": "AC coding example",
-   "q": "Encode the AC fragment 0, 0, -2. Table 2 gives code 11111001 for (Runlength, Size) = (2, 2), and Table 3 gives amplitude code 01 for -2 with Size 2. The resulting bits are:",
-   "o": [
-    "11011 01",
-    "01 11111001",
-    "11111001 10",
-    "11111001 01"
-   ],
-   "c": 3,
-   "hint": "Symbol-1 (Runlength, Size) is written first, then Symbol-2 (Amplitude).",
-   "r": "Slide 42: Runlength = 2 and Size = 2 give 11111001, then amplitude -2 gives 01, so the code is 11111001 01. 10 is the amplitude code for +2, and 11011 is the code for (1,2).",
-   "slide": 42,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "highlighted worked example on slide 42"
-  },
-  {
-   "id": "L5-29",
-   "l": 5,
-   "topic": "JPEG results",
-   "q": "The test image takes 66,616 B as BMP, and JPEG high compression gives 24,295 B. The approximate compression ratio is:",
-   "o": [
-    "about 1.2 : 1",
-    "about 2.7 : 1",
-    "about 2.1 : 1",
-    "about 4.5 : 1"
-   ],
-   "c": 1,
-   "hint": "Divide the original size by the compressed size.",
-   "r": "66,616 / 24,295 ≈ 2.74 (slides 45-46). About 2.1 : 1 is the middle compression (31,526 B) and about 1.2 : 1 is the low compression (56,956 B).",
-   "slide": 46,
-   "pattern": "numeric",
-   "lk": "low",
-   "why": "file sizes printed under the result images on slides 45-46"
   },
   {
    "id": "L5-30",
@@ -4940,23 +4886,148 @@
    "why": "'Distinctive' row; sibling formats' distinctive rows as distractors"
   },
   {
-   "id": "L5-36",
+   "id": "L5-37",
    "l": 5,
-   "topic": "Format comparison",
-   "q": "According to the comparison table, which set contains only formats whose base container is ISOBMFF?",
+   "topic": "Quantization",
+   "q": "The more bits quantization cuts from each coefficient:",
    "o": [
-    "WebP and BPG",
-    "JPEG/Exif and JPEG-XR/TIFF",
-    "PNG and GIF (89a)",
-    "HEIF and JPEG XL"
+    "the more precision is lost",
+    "the larger the file gets",
+    "the sharper the edges look",
+    "the more colours are kept"
    ],
-   "c": 3,
-   "hint": "Two of the newest formats share the container family also used by MP4 files.",
-   "r": "Slide 54: HEIF uses ISOBMFF and JPEG XL uses an optional ISOBMFF container. WebP uses RIFF, JPEG/Exif and JPEG-XR/TIFF use TIFF, and PNG, GIF and BPG have no listed base container.",
-   "slide": 54,
-   "pattern": "classify",
-   "lk": "low",
-   "why": "large comparison table on slide 54; classify-style question"
+   "c": 0,
+   "hint": "Less data, less detail.",
+   "r": "Slide 19: the more bits we truncate, the more precision we lose. Quantization error is the main source of loss.",
+   "slide": 19,
+   "pattern": "fact",
+   "lk": "high"
+  },
+  {
+   "id": "L5-38",
+   "l": 5,
+   "topic": "Decoding",
+   "q": "During JPEG decoding, dequantization:",
+   "o": [
+    "multiplies by the table values, but the rounding loss remains",
+    "divides by the table values, which restores the exact original",
+    "removes the block borders that appeared during encoding",
+    "adds back the rounding errors stored in the file header"
+   ],
+   "c": 0,
+   "hint": "Rounding cannot be undone.",
+   "r": "Slide 23: the decoder multiplies each coefficient by its table value and applies the inverse DCT; the result is close to the original, not exact.",
+   "slide": 23,
+   "pattern": "definition",
+   "lk": "medium"
+  },
+  {
+   "id": "L5-39",
+   "l": 5,
+   "topic": "2D DCT",
+   "q": "A two-dimensional DCT of a block is computed as:",
+   "o": [
+    "1-D transforms of the rows, then of the columns",
+    "one long 1-D transform of the whole zig-zag vector",
+    "a 3-D transform of the Y, U and V planes",
+    "the average of all row and column sums"
+   ],
+   "c": 0,
+   "hint": "Two passes over the same block.",
+   "r": "Slide 13: two series of one-dimensional transforms, first the rows and then the columns.",
+   "slide": 13,
+   "pattern": "fact",
+   "lk": "medium"
+  },
+  {
+   "id": "L5-40",
+   "l": 5,
+   "topic": "DCT of test blocks",
+   "q": "Why is a chessboard pattern hard for JPEG?",
+   "o": [
+    "It has strong high-frequency coefficients",
+    "It has only one DC coefficient",
+    "It has no luminance information",
+    "It does not fit into blocks of 8 × 8 pixels"
+   ],
+   "c": 0,
+   "hint": "JPEG removes high frequencies first.",
+   "r": "Slide 16: the DCT of the chessboard has large coefficients in the high-frequency corner, exactly where JPEG quantizes most coarsely.",
+   "slide": 16,
+   "pattern": "fact",
+   "lk": "medium"
+  },
+  {
+   "id": "L5-41",
+   "l": 5,
+   "topic": "Zig-zag scan",
+   "q": "Why does the zig-zag order help run-length coding?",
+   "o": [
+    "It groups the many zeros at the end of the vector",
+    "It removes all of the zeros before they are coded",
+    "It sorts the coefficients from large to small",
+    "It makes every coefficient an even number"
+   ],
+   "c": 0,
+   "hint": "Where do the high frequencies end up?",
+   "r": "Slides 25 and 36: low frequencies come first, so the vectors have many zeros, especially at the end.",
+   "slide": 36,
+   "pattern": "fact",
+   "lk": "high"
+  },
+  {
+   "id": "L5-42",
+   "l": 5,
+   "topic": "DC coding (DPCM)",
+   "q": "Why does DPCM suit the DC coefficients?",
+   "o": [
+    "Neighbouring blocks have similar values",
+    "Most of the DC values in an image are zero",
+    "DC values are always the smallest values",
+    "DC values change sign from block to block"
+   ],
+   "c": 0,
+   "hint": "Differences should be small.",
+   "r": "Slide 29: the DC value is large but often close to that of the previous block, so the difference is small and needs fewer bits.",
+   "slide": 29,
+   "pattern": "fact",
+   "lk": "high"
+  },
+  {
+   "id": "L5-43",
+   "l": 5,
+   "topic": "Entropy coding",
+   "q": "Entropy coding compresses data by replacing:",
+   "o": [
+    "fixed-length symbols with variable-length codewords",
+    "variable-length symbols with fixed-length codewords",
+    "large coefficients with small rounded ones",
+    "several similar blocks with one average block"
+   ],
+   "c": 0,
+   "hint": "Frequent symbols become short.",
+   "r": "Slide 27: the entropy coder replaces each fixed-length input symbol by a variable-length prefix codeword. Rounding is quantization and is lossy.",
+   "slide": 27,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L5-44",
+   "l": 5,
+   "topic": "EOB",
+   "q": "In JPEG, the EOB code means that:",
+   "o": [
+    "only zeros remain in the block",
+    "the whole image has ended",
+    "a run of exactly 16 zeros follows",
+    "the next block is empty"
+   ],
+   "c": 0,
+   "hint": "B stands for block.",
+   "r": "Slide 40: EOB (end of block) = zeros to the end of the block. A run of 16 zeros has its own code, ZRL.",
+   "slide": 40,
+   "pattern": "definition",
+   "lk": "high"
   },
   {
    "id": "L6-01",
@@ -4997,25 +5068,6 @@
    "why": "explicit bullet + review question 'which JPEG step introduces the loss'"
   },
   {
-   "id": "L6-03",
-   "l": 6,
-   "topic": "DCT",
-   "q": "The 2D DCT of one 8×8 JPEG block produces:",
-   "o": [
-    "64 coefficients: 8 DC and 56 AC",
-    "63 coefficients: 1 DC and 62 AC",
-    "64 coefficients: 1 DC and 63 AC",
-    "64 coefficients: 63 DC and 1 AC"
-   ],
-   "c": 2,
-   "hint": "Only the (0,0) coefficient is the block average; count everything else.",
-   "r": "Slide 5: 64 pixels -> 64 coefficients = 1 DC + 63 AC frequencies. F(0,0) is the DC coefficient (block average) and all the rest are AC (slide 8).",
-   "slide": 5,
-   "pattern": "numeric",
-   "lk": "medium",
-   "why": "pipeline box + DCT formula slide"
-  },
-  {
    "id": "L6-04",
    "l": 6,
    "topic": "Quantization",
@@ -5038,19 +5090,19 @@
    "id": "L6-05",
    "l": 6,
    "topic": "Chroma subsampling",
-   "q": "With 4:2:0 chroma subsampling, how many samples (Y + Cb + Cr) describe a 4×2 pixel area, and how much smaller is the whole image than with 4:4:4?",
+   "q": "4:2:0 chroma subsampling means that colour is stored at:",
    "o": [
-    "12 samples; about 50% smaller",
-    "16 samples; about 33% smaller",
-    "12 samples; about 75% smaller",
-    "8 samples; about 66% smaller"
+    "half resolution horizontally and vertically",
+    "half resolution horizontally only",
+    "a quarter of the resolution horizontally only",
+    "full resolution, but with fewer bits"
    ],
    "c": 0,
-   "hint": "Y keeps all 8 samples; Cb and Cr are each halved in both directions. 4:4:4 needs 24 samples.",
-   "r": "Y = 8, Cb = 2, Cr = 2 -> 12 of 24 samples, so the whole image is -50% (the -75% figure is for chroma data only). 16 samples / -33% is 4:2:2 (slide 7).",
+   "hint": "Both directions are affected.",
+   "r": "Slide 7: 4:2:0 halves the colour resolution in both directions, which makes the whole image about 50 % smaller. 4:2:2 halves it horizontally only; 4:1:1 quarters it horizontally.",
    "slide": 7,
-   "pattern": "numeric",
-   "lk": "medium",
+   "pattern": "definition",
+   "lk": "high",
    "why": "table of values; 4:2:0 named the most common choice in JPEG"
   },
   {
@@ -5187,80 +5239,23 @@
    "why": "'No DCT, no quantization' box + slide 11 note"
   },
   {
-   "id": "L6-14",
-   "l": 6,
-   "topic": "Lossless JPEG",
-   "q": "The typical compression ratio of lossless JPEG for colour images, given in the lecture, is about:",
-   "o": [
-    "10:1",
-    "60:1",
-    "20:1",
-    "2:1"
-   ],
-   "c": 3,
-   "hint": "Exact copies are expensive; it is far below the 10-20:1 of lossy JPEG.",
-   "r": "Slides 18-19: about 2:1 is typical (Wallace 1991), while lossy JPEG gives roughly 10-20:1. 60:1 was JPEG quality 10 in the quality test (slide 9).",
-   "slide": 19,
-   "pattern": "numeric",
-   "lk": "medium",
-   "why": "big '2 : 1' tile on two slides"
-  },
-  {
    "id": "L6-15",
    "l": 6,
    "topic": "Lossless JPEG predictors",
-   "q": "In lossless JPEG (A = left, B = above, C = upper-left neighbour), predictor P4 is:",
+   "q": "Lossless JPEG predicts each pixel from:",
    "o": [
-    "A + B - C",
-    "(A + B) / 2",
-    "A + (B - C) / 2",
-    "B + (A - C) / 2"
+    "its left, upper and upper-left neighbours",
+    "the average value of its whole 8 × 8 block",
+    "the same pixel of the previous image",
+    "the low-frequency DCT coefficients"
    ],
    "c": 0,
-   "hint": "P4 is the 'plane / gradient' predictor: extend the slope seen from the corner C to A and B.",
-   "r": "Slide 21: P4 = A + B - C (2-D plane/gradient). (A + B)/2 is P7, A + (B - C)/2 is P5 and B + (A - C)/2 is P6.",
+   "hint": "Only pixels that are already decoded can be used.",
+   "r": "Slide 21: the predictors combine A (left), B (above) and C (upper-left). Lossless JPEG has no DCT, and there is no previous image.",
    "slide": 21,
    "pattern": "definition",
    "lk": "high",
    "why": "predictor table + worked example + solution slide"
-  },
-  {
-   "id": "L6-16",
-   "l": 6,
-   "topic": "Lossless JPEG predictors",
-   "q": "Lossless JPEG: A = 120 (left), B = 110 (above), C = 100 (upper-left). What value does predictor P6 = B + (A - C)/2 predict?",
-   "o": [
-    "115",
-    "120",
-    "125",
-    "130"
-   ],
-   "c": 1,
-   "hint": "Start from the pixel above and add half of the left-minus-corner difference.",
-   "r": "P6 = 110 + (120 - 100)/2 = 110 + 10 = 120. 125 is P5 = A + (B - C)/2, 115 is P7 = (A + B)/2, 130 is P4 = A + B - C.",
-   "slide": 21,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "predictor table; same exercise style as slide 22"
-  },
-  {
-   "id": "L6-17",
-   "l": 6,
-   "topic": "Lossless JPEG predictors",
-   "q": "Lossless JPEG with predictor P4: A = 50 (left), B = 60 (above), C = 45 (upper-left), actual pixel X = 63. Which difference is encoded?",
-   "o": [
-    "+3",
-    "+8",
-    "+13",
-    "-2"
-   ],
-   "c": 3,
-   "hint": "Compute the plane prediction first, then subtract it from X (Diff = X - P).",
-   "r": "P4 = 50 + 60 - 45 = 65, so Diff = 63 - 65 = -2. +3 would come from P2 (X - B), +8 from P7 (X - 55) and +13 from P1 (X - A).",
-   "slide": 22,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "worked example (slide 21) and solution slide (slide 22)"
   },
   {
    "id": "L6-18",
@@ -5304,77 +5299,39 @@
    "id": "L6-20",
    "l": 6,
    "topic": "Entropy bound",
-   "q": "A source has entropy H = 2.2 bit/symbol. Which average Huffman code length L is possible?",
+   "q": "The entropy of a source is:",
    "o": [
-    "1.9 bit/symbol",
-    "2.1 bit/symbol",
-    "2.5 bit/symbol",
-    "3.4 bit/symbol"
+    "the length of its longest codeword",
+    "the lower bound on its average code length",
+    "the total number of different symbols it uses",
+    "the size of its fixed-length code"
    ],
-   "c": 2,
-   "hint": "Use the rule from the 'within 0.08 bit' slide: L can never go below H and stays less than one bit above it.",
-   "r": "H <= L < H + 1 gives 2.2 <= L < 3.2, so only 2.5 fits. 1.9 and 2.1 would beat the entropy limit; 3.4 exceeds H + 1 (slide 24 example: 2.61 <= 2.68 < 3.61).",
+   "c": 1,
+   "hint": "No symbol-by-symbol code can beat it.",
+   "r": "Slide 24: entropy H is the lower bound on the average code length in bits per symbol. A Huffman code always stays within one bit of it.",
    "slide": 24,
-   "pattern": "numeric",
-   "lk": "medium",
-   "why": "rule box with formula; predicted numeric variant"
-  },
-  {
-   "id": "L6-21",
-   "l": 6,
-   "topic": "Huffman coding",
-   "q": "Symbols with counts A = 8, B = 4, C = 2, D = 2 (16 symbols in total) are Huffman-coded. What is the average code length?",
-   "o": [
-    "1.50 bit/symbol",
-    "2.00 bit/symbol",
-    "2.25 bit/symbol",
-    "1.75 bit/symbol"
-   ],
-   "c": 3,
-   "hint": "Merge C + D first, then the two 4s, then the two 8s; a leaf's depth is its code length.",
-   "r": "Merges: C+D = 4, B+CD = 8, A+8 = 16, so lengths A = 1, B = 2, C = 3, D = 3. Bits = 8×1 + 4×2 + 2×3 + 2×3 = 28; 28/16 = 1.75 bit/symbol (a fixed code needs 2 bits).",
-   "slide": 26,
-   "pattern": "calculation",
+   "pattern": "definition",
    "lk": "high",
-   "why": "learning outcome: build a Huffman tree and compute by hand"
+   "why": "rule box with formula; predicted numeric variant"
   },
   {
    "id": "L6-22",
    "l": 6,
    "topic": "Compression factor",
-   "q": "In the lecture's 44-symbol Huffman example, 132 bits (fixed 3-bit code) became 118 bits. The compression factor Cr = Vnc / Vc is about:",
+   "q": "The compression factor compares:",
    "o": [
-    "1.12",
-    "0.89",
-    "10.6",
-    "1.43"
+    "the data size before and after compression",
+    "the image quality before and after compression",
+    "the encoding time with the decoding time",
+    "the number of symbols with the number of codes"
    ],
    "c": 0,
-   "hint": "Divide uncompressed by compressed; a factor above 1 means the data got smaller.",
-   "r": "Cr = 132 / 118 = 1.12; the saving is 14 b, about 10.6% of 132 b. 0.89 is the inverted ratio, 10.6 is the percentage saving and 1.43 is the ABRACADABRA ratio 33/23.",
+   "hint": "It is a ratio of two sizes.",
+   "r": "Slide 42: compression factor = size before / size after. It says nothing about quality or speed.",
    "slide": 42,
-   "pattern": "calculation",
+   "pattern": "definition",
    "lk": "medium",
    "why": "formula box + learning outcome 'compute the compression factor by hand'"
-  },
-  {
-   "id": "L6-23",
-   "l": 6,
-   "topic": "Huffman coding",
-   "q": "Huffman coding of ABRACADABRA (A = 5, B = 2, R = 2, C = 1, D = 1) needs how many bits, compared with 33 bits for a fixed 3-bit code?",
-   "o": [
-    "22 bits",
-    "23 bits",
-    "25 bits",
-    "28 bits"
-   ],
-   "c": 1,
-   "hint": "A gets a 1-bit code; the other four symbols get 3-bit codes.",
-   "r": "A: 5×1 = 5; B, R: 2×3 = 6 each; C, D: 1×3 = 3 each -> 5+6+6+3+3 = 23 bits (30% smaller, ratio 1.43). 22.4 b is only the entropy bound, which a symbol code cannot reach here.",
-   "slide": 43,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "exercise with solution slide; answer in the slide title"
   },
   {
    "id": "L6-24",
@@ -5413,82 +5370,6 @@
    "pattern": "fact",
    "lk": "medium",
    "why": "author with photo on slide; 'created by' questions are common"
-  },
-  {
-   "id": "L6-26",
-   "l": 6,
-   "topic": "Arithmetic coding",
-   "q": "With P(a) = 0.2, P(b) = 0.5, P(c) = 0.3 (ranges a [0; 0.2), b [0.2; 0.7), c [0.7; 1)), the message 'bac' is encoded into the interval:",
-   "o": [
-    "[0.2; 0.3)",
-    "[0.21; 0.27)",
-    "[0.2; 0.7)",
-    "[0.27; 0.3)"
-   ],
-   "c": 3,
-   "hint": "Zoom three times: into b's range, then into a's share of it, then into c's share of that.",
-   "r": "b -> [0.2; 0.7); a -> [0.2; 0.3); c -> [0.27; 0.3). Width = 0.5 × 0.2 × 0.3 = 0.03, about 5.06 bits; e.g. 0.28125 = 0.01001 (binary) identifies it. [0.2; 0.3) is the state after 'ba' only.",
-   "slide": 49,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "worked example across slides 47-50"
-  },
-  {
-   "id": "L6-27",
-   "l": 6,
-   "topic": "Arithmetic coding",
-   "q": "Same alphabet: a [0; 0.2), b [0.2; 0.7), c [0.7; 1). Using low' = low + range × cumLow(s) and range' = range × p(s), the message 'cb' ends in the interval:",
-   "o": [
-    "[0.70; 0.76)",
-    "[0.91; 1.00)",
-    "[0.76; 0.91)",
-    "[0.20; 0.70)"
-   ],
-   "c": 2,
-   "hint": "After c: low = 0.7 and range = 0.3. b starts 0.2 of the way into the range and is half of it wide.",
-   "r": "low' = 0.7 + 0.3 × 0.2 = 0.76; range' = 0.3 × 0.5 = 0.15 -> [0.76; 0.91). [0.70; 0.76) would be 'ca' and [0.91; 1.00) would be 'cc'.",
-   "slide": 50,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "interval-update formula on slide 50; learning outcome 'encode a short message'"
-  },
-  {
-   "id": "L6-28",
-   "l": 6,
-   "topic": "Arithmetic decoding",
-   "q": "Arithmetic decoding of the value 0.5 (a [0; 0.2), b [0.2; 0.7), c [0.7; 1)) with message length 3 gives:",
-   "o": [
-    "bbc",
-    "bac",
-    "bcb",
-    "bba"
-   ],
-   "c": 0,
-   "hint": "Find the sub-range that contains 0.5, zoom into it, split it in the same proportions, and repeat three times.",
-   "r": "0.5 is in [0.2; 0.7) -> b; new split a [0.2; 0.3), b [0.3; 0.55) -> b; next split a [0.3; 0.35), b [0.35; 0.475), c [0.475; 0.55) -> c. Result: bbc (slide 51).",
-   "slide": 51,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "decoding example slide + learning outcome 'decode a short message'"
-  },
-  {
-   "id": "L6-29",
-   "l": 6,
-   "topic": "Arithmetic coding",
-   "q": "Which of the following is NOT a practical limitation of arithmetic coding listed in the lecture?",
-   "o": [
-    "Register overflow is possible during encoding",
-    "Each symbol must cost a whole number of bits",
-    "Long strings need growing precision",
-    "The code word is known only after encoding ends"
-   ],
-   "c": 1,
-   "hint": "One option is really the weakness of Huffman coding that arithmetic coding removes.",
-   "r": "Slide 52 lists register overflow, growing precision, binary conversion and delayed output. A whole number of bits per symbol is the Huffman limitation (slide 45) that arithmetic coding avoids.",
-   "slide": 52,
-   "pattern": "not-statement",
-   "lk": "medium",
-   "why": "4-tile limitations slide; NOT-form"
   },
   {
    "id": "L6-30",
@@ -5543,7 +5424,7 @@
    "hint": "2 raised to the number of bits per pixel.",
    "r": "2^8 = 256 colours (slide 60: 'lossless (LZW), 256 colours'). 65 536 = 2^16 and 16.7 million = 2^24 (TrueColor).",
    "slide": 60,
-   "pattern": "calculation",
+   "pattern": "numeric",
    "lk": "high",
    "why": "comparison table + 'supports 8-bit images only' on slide 56"
   },
@@ -5662,25 +5543,6 @@
    "why": "'NEW' badge + successors slide + slide 59"
   },
   {
-   "id": "L6-39",
-   "l": 6,
-   "topic": "Raw image size",
-   "q": "What is the raw (uncompressed) size of a 1000 × 800 pixel image in 24-bit RGB?",
-   "o": [
-    "0.8 MB",
-    "1.6 MB",
-    "2.4 MB",
-    "19.2 MB"
-   ],
-   "c": 2,
-   "hint": "Raw size = width × height × bytes per pixel. How many bytes are 24 bits?",
-   "r": "1000 × 800 × 3 B = 2 400 000 B = 2.4 MB (1 MB = 10^6 B, as assumed on slide 4). 0.8 MB assumes 1 byte per pixel; 19.2 is the size in megabits.",
-   "slide": 4,
-   "pattern": "calculation",
-   "lk": "medium",
-   "why": "bold formula on slide 4"
-  },
-  {
    "id": "L6-40",
    "l": 6,
    "topic": "Format choice",
@@ -5698,6 +5560,168 @@
    "pattern": "compare",
    "lk": "medium",
    "why": "summary slide 'three things to remember'"
+  },
+  {
+   "id": "L6-41",
+   "l": 6,
+   "topic": "Lossless JPEG",
+   "q": "What does lossless JPEG store for each pixel?",
+   "o": [
+    "the prediction error",
+    "the quantized DCT value",
+    "the block average",
+    "the original value"
+   ],
+   "c": 0,
+   "hint": "Actual minus predicted.",
+   "r": "Slide 19: only the difference between the pixel and its prediction is entropy-coded. There is no DCT and no quantization.",
+   "slide": 19,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L6-42",
+   "l": 6,
+   "topic": "Huffman coding",
+   "q": "In a Huffman code, the most frequent symbols get:",
+   "o": [
+    "short codewords",
+    "the longest codewords",
+    "codewords of equal length",
+    "two codewords each"
+   ],
+   "c": 0,
+   "hint": "Save bits where it counts.",
+   "r": "Slides 25–26: frequent symbols lie near the root of the tree and get short codes; rare symbols get long ones.",
+   "slide": 26,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L6-43",
+   "l": 6,
+   "topic": "Arithmetic coding",
+   "q": "In arithmetic coding, a more probable message gets:",
+   "o": [
+    "a wider interval and fewer bits",
+    "a wider interval and more bits",
+    "a narrower interval and fewer bits",
+    "a narrower interval and more bits"
+   ],
+   "c": 0,
+   "hint": "A wide interval is easy to point at.",
+   "r": "Slide 45: the more probable the message, the wider its interval and the fewer bits are needed to name a number inside it.",
+   "slide": 45,
+   "pattern": "compare",
+   "lk": "high"
+  },
+  {
+   "id": "L6-44",
+   "l": 6,
+   "topic": "Arithmetic decoding",
+   "q": "How does an arithmetic decoder know where the message ends?",
+   "o": [
+    "from a stop character or the symbol count",
+    "from the first codeword that repeats",
+    "from the width of the first interval",
+    "from a marker inside the quantization table"
+   ],
+   "c": 0,
+   "hint": "Two solutions are on the slide.",
+   "r": "Slide 52: the encoder adds a stop character (preferred) or sends the number of coded symbols.",
+   "slide": 52,
+   "pattern": "fact",
+   "lk": "medium"
+  },
+  {
+   "id": "L6-45",
+   "l": 6,
+   "topic": "JPEG 2000",
+   "q": "JPEG 2000 differs from baseline JPEG mainly by using:",
+   "o": [
+    "wavelets instead of the DCT",
+    "prediction instead of the DCT",
+    "a palette instead of full colour",
+    "larger blocks instead of 8 × 8"
+   ],
+   "c": 0,
+   "hint": "It has no blocking artifacts.",
+   "r": "Slide 54: JPEG 2000 uses wavelets, so there is no 8 × 8 blocking. JPEG-LS is the prediction-based one.",
+   "slide": 54,
+   "pattern": "compare",
+   "lk": "high"
+  },
+  {
+   "id": "L6-46",
+   "l": 6,
+   "topic": "JPEG AI",
+   "q": "JPEG AI is notable as the first JPEG standard that is:",
+   "o": [
+    "built on end-to-end learned coding",
+    "able to restore JPEG files exactly",
+    "based on wavelets without blocks",
+    "limited to lossless compression"
+   ],
+   "c": 0,
+   "hint": "The name says it.",
+   "r": "Slide 54: JPEG AI is the first standard built on end-to-end learned coding. Exact JPEG recompression is JPEG XL; wavelets are JPEG 2000.",
+   "slide": 54,
+   "pattern": "definition",
+   "lk": "medium"
+  },
+  {
+   "id": "L6-47",
+   "l": 6,
+   "topic": "LZW",
+   "q": "LZW compresses data by:",
+   "o": [
+    "building a dictionary of sequences as it reads",
+    "sending a full dictionary before the data",
+    "merging the two rarest symbols repeatedly",
+    "mapping the whole message to a single real number"
+   ],
+   "c": 0,
+   "hint": "The dictionary is not transmitted.",
+   "r": "Slide 55: LZW builds a dictionary of already seen sequences on the fly and emits short codes for them. Merging is Huffman; one number is arithmetic coding.",
+   "slide": 55,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L6-48",
+   "l": 6,
+   "topic": "PNG",
+   "q": "Before DEFLATE, PNG applies to each row:",
+   "o": [
+    "a prediction filter such as Sub, Up or Paeth",
+    "a cosine transform of eight neighbouring pixels",
+    "a subsampling step for the colour channels",
+    "a reduction to a palette of 256 colours"
+   ],
+   "c": 0,
+   "hint": "The same idea as lossless JPEG.",
+   "r": "Slide 55: PNG = prediction (row filters Sub, Up, Average, Paeth) + LZ77 + Huffman. It uses no DCT and no chroma subsampling.",
+   "slide": 55,
+   "pattern": "definition",
+   "lk": "medium"
+  },
+  {
+   "id": "L6-49",
+   "l": 6,
+   "topic": "PNG",
+   "q": "PNG stands for:",
+   "o": [
+    "Portable Network Graphics",
+    "Progressive Network Graphics",
+    "Portable Network Gradients",
+    "Published Network Graphics"
+   ],
+   "c": 0,
+   "hint": "Made for the web.",
+   "r": "Slide 58: PNG = Portable Network Graphics, designed to replace GIF.",
+   "slide": 58,
+   "pattern": "acronym",
+   "lk": "high"
   },
   {
    "id": "L7-01",
@@ -5760,18 +5784,18 @@
    "id": "L7-04",
    "l": 7,
    "topic": "Raw data rate",
-   "q": "What is the raw data rate of UHD video (3840 × 2160, 8-bit RGB = 24 bit per pixel, 60 fps)?",
+   "q": "Why is uncompressed UHD video impractical to send over a network?",
    "o": [
-    "≈ 1.49 Gbit/s",
-    "≈ 5.97 Gbit/s",
-    "≈ 23.9 Gbit/s",
-    "≈ 11.9 Gbit/s"
+    "Its raw data rate is far above a typical link",
+    "Its frames cannot be divided into small packets",
+    "Its colours need a special type of cable",
+    "Its frame rate is too low for streaming"
    ],
-   "c": 3,
-   "hint": "R = width × height × bits per pixel × frame rate. Watch out for bits vs bytes.",
-   "r": "3840 × 2160 × 24 bit × 60/s ≈ 11.94 Gbit/s (slide 5), about 12× a 1 Gbit/s Ethernet link. 1.49 is the same rate in GB/s (bytes), not Gbit/s.",
+   "c": 0,
+   "hint": "Width × height × bits × frames adds up.",
+   "r": "Slide 5: raw UHD at 60 fps needs about 11.9 Gbit/s, roughly 12 times a 1 Gbit/s Ethernet link. Packets, cables and frame rate are not the obstacle.",
    "slide": 5,
-   "pattern": "calculation",
+   "pattern": "fact",
    "lk": "medium",
    "why": "formula on slide 4 + big number box '11.9 Gbit/s'"
   },
@@ -5791,42 +5815,23 @@
    "r": "4:2:0 keeps 1 + 1/4 + 1/4 = 1.5 samples per pixel, so 15 bit/pixel: 1920 × 1080 × 15 × 50 ≈ 1.56 Gbit/s. 3.11 Gbit/s would be 4:4:4 (30 bit/pixel) and 2.07 Gbit/s is 4:2:2 (20 bit/pixel).",
    "slide": 56,
    "pattern": "calculation",
-   "lk": "medium",
-   "why": "review question Q1 for the quiz, uses formula of slide 4 and 4:2:0 table of slide 13"
-  },
-  {
-   "id": "L7-06",
-   "l": 7,
-   "topic": "Chroma subsampling",
-   "q": "Compared with 4:4:4, by how much does 4:2:0 reduce the data of the WHOLE image?",
-   "o": [
-    "About 25 %",
-    "About 50 %",
-    "About 33 %",
-    "About 75 %"
-   ],
-   "c": 1,
-   "hint": "Count samples in a 4×2 pixel block: the 8 luma samples always stay, only chroma shrinks.",
-   "r": "Slide 13: 4:4:4 = 24 samples per 4×2 px, 4:2:0 = 12, so the whole image shrinks by 50 %. The 75 % figure is the reduction of chroma data only; about 33 % is 4:2:2.",
-   "slide": 13,
-   "pattern": "numeric",
-   "lk": "medium",
-   "why": "table with percentages for chroma and whole image"
+   "lk": "high",
+   "why": "question 1 of the review slide \"quiz on 27 November\""
   },
   {
    "id": "L7-07",
    "l": 7,
    "topic": "PSNR",
-   "q": "PSNR (peak signal-to-noise ratio) is computed as:",
+   "q": "PSNR measures quality by comparing:",
    "o": [
-    "PSNR = 10 · log10(MSE / MAX²)",
-    "PSNR = 20 · log10(MSE / MAX)",
-    "PSNR = 10 · log10(MAX² / MSE)",
-    "PSNR = 10 · log10(MAX / MSE²)"
+    "the peak signal with the mean squared error, in dB",
+    "structure, contrast and luminance in local windows",
+    "the opinions of viewers on a scale from 1 to 5",
+    "several features combined by machine learning"
    ],
-   "c": 2,
+   "c": 0,
    "hint": "Less error must give a HIGHER score. Where must MSE sit in the fraction?",
-   "r": "Slide 14: PSNR = 10·log10(MAX²/MSE), with MAX = 255 for an 8-bit image. With MSE in the numerator the score would fall as quality rises.",
+   "r": "Slide 14: PSNR is the peak signal against the mean squared error, in decibels (about 30–45 dB for lossy video). The others describe SSIM, MOS and VMAF.",
    "slide": 14,
    "pattern": "definition",
    "lk": "high",
@@ -5874,18 +5879,18 @@
    "id": "L7-10",
    "l": 7,
    "topic": "BD-rate",
-   "q": "At equal quality, AVC (reference) needs 10 Mbit/s and HEVC (tested) needs 6 Mbit/s. What is the BD-rate of HEVC vs. AVC?",
+   "q": "A BD-rate of −40 % means that the tested codec needs:",
    "o": [
-    "+40 %",
-    "−60 %",
-    "−40 %",
-    "+67 %"
+    "40 % less bit rate at the same quality",
+    "40 % more bit rate at the same quality",
+    "40 % less quality at the same bit rate",
+    "40 % less time for the same quality"
    ],
-   "c": 2,
-   "hint": "BD-rate = (tested − reference) / reference. A negative value means a saving.",
-   "r": "(6 − 10) / 10 = −40 %, so HEVC saves 40 % of the bits (slide 15). −60 % confuses the tested rate with the saving; a positive value would mean HEVC needs more bits.",
+   "c": 0,
+   "hint": "BD-rate compares bit rates.",
+   "r": "Slide 15: BD-rate is the bit-rate difference at equal quality; a negative value is a saving.",
    "slide": 15,
-   "pattern": "calculation",
+   "pattern": "definition",
    "lk": "medium",
    "why": "worked numeric example in the BD-rate box"
   },
@@ -6000,25 +6005,25 @@
    "r": "Slide 19: 4 Y blocks + 1 Cb + 1 Cr = 6 blocks. With 4:2:2 the chroma doubles, giving 8 blocks.",
    "slide": 19,
    "pattern": "numeric",
-   "lk": "high",
+   "lk": "medium",
    "why": "bold '4:2:0 macroblock = 6 blocks of 8 × 8'"
   },
   {
    "id": "L7-17",
    "l": 7,
    "topic": "I/P/B frames",
-   "q": "Typical MPEG-2 compression ratios at broadcast quality for I-, P- and B-frames are approximately:",
+   "q": "Which MPEG-2 frame type is usually compressed the most?",
    "o": [
-    "I ≈ 50:1, P ≈ 20:1, B ≈ 10:1",
-    "I ≈ 20:1, P ≈ 10:1, B ≈ 50:1",
-    "I ≈ 10:1, P ≈ 20:1, B ≈ 50:1",
-    "I ≈ 10:1, P ≈ 50:1, B ≈ 20:1"
+    "I-frames",
+    "P-frames",
+    "B-frames",
+    "I- and P-frames equally"
    ],
    "c": 2,
-   "hint": "The more a frame borrows from other frames, the less it has to send itself.",
-   "r": "Slide 21: I ≈ 10:1 (intra only), P ≈ 20:1, B ≈ 50:1 (most compression, most work). The reversed order is the typical trap.",
+   "hint": "It can look in two directions.",
+   "r": "Slide 21: B-frames use a previous and a next frame (about 50:1). P-frames use only a previous one (about 20:1) and I-frames none (about 10:1).",
    "slide": 21,
-   "pattern": "numeric",
+   "pattern": "compare",
    "lk": "high",
    "why": "three big numbers on slide 21, reused on slides 22, 37 and 56"
   },
@@ -6042,25 +6047,6 @@
    "why": "stated on slides 21, 32 and 36"
   },
   {
-   "id": "L7-19",
-   "l": 7,
-   "topic": "GOP average compression",
-   "q": "A GOP I B B P B B P B B P B B has I : P : B compression = 10 : 20 : 50. What is the average compression of the GOP?",
-   "o": [
-    "≈ 27 : 1",
-    "≈ 39 : 1",
-    "≈ 50 : 1",
-    "≈ 29 : 1"
-   ],
-   "c": 3,
-   "hint": "Average the frame SIZES (1/ratio), not the ratios: number of frames divided by the sum of their sizes.",
-   "r": "Average = 12 / (1/10 + 3/20 + 8/50) = 12 / 0.41 ≈ 29:1 (slide 22). Averaging the ratios directly, (10 + 3·20 + 8·50)/12 ≈ 39, is the classic mistake.",
-   "slide": 22,
-   "pattern": "calculation",
-   "lk": "high",
-   "why": "worked formula on slide 22 + quick check slide 37 + review Q3"
-  },
-  {
    "id": "L7-20",
    "l": 7,
    "topic": "GOP average compression",
@@ -6076,8 +6062,8 @@
    "r": "1 I, 3 P and 4 B: 8 / (1/10 + 3/20 + 4/50) = 8 / 0.33 ≈ 24:1 (method of slide 22). ≈ 34:1 comes from averaging the ratios; ≈ 29:1 is the 12-frame IBBP GOP of slide 22.",
    "slide": 56,
    "pattern": "calculation",
-   "lk": "medium",
-   "why": "review question Q3 for the quiz"
+   "lk": "high",
+   "why": "question 3 of the review slide \"quiz on 27 November\""
   },
   {
    "id": "L7-21",
@@ -6171,8 +6157,8 @@
    "r": "Slide 29: TSS = 9 + 8 + 8 = 25 evaluations; full search over ±7 = 15 × 15 = 225 positions. The price is the risk of a local minimum instead of the best match.",
    "slide": 29,
    "pattern": "numeric",
-   "lk": "medium",
-   "why": "two big number boxes '25' and '225'"
+   "lk": "high",
+   "why": "question 5 of the review slide \"quiz on 27 November\""
   },
   {
    "id": "L7-26",
@@ -6194,25 +6180,6 @@
    "why": "'Only the encoder pays' box + slide 34 note + M-JPEG table on slide 12"
   },
   {
-   "id": "L7-27",
-   "l": 7,
-   "topic": "Sub-pixel motion",
-   "q": "Which codec – motion-vector precision pairing is CORRECT according to the lecture?",
-   "o": [
-    "MPEG-2 – ¼ pel",
-    "HEVC – 1/16 pel",
-    "AV1 – ⅛ pel",
-    "VVC – ⅛ pel"
-   ],
-   "c": 2,
-   "hint": "Precision gets finer with each generation; the open codec sits between HEVC and VVC.",
-   "r": "Slide 30: MPEG-2 ½ pel, AVC ¼, HEVC ¼, AV1 ⅛, VVC 1/16 pel. Finer positions give a closer match and a smaller residual.",
-   "slide": 30,
-   "pattern": "compare",
-   "lk": "medium",
-   "why": "table on slide 30, repeated in tool table on slide 40"
-  },
-  {
    "id": "L7-28",
    "l": 7,
    "topic": "Closed prediction loop",
@@ -6230,25 +6197,6 @@
    "pattern": "true-statement",
    "lk": "medium",
    "why": "red box on slide 31 + review question Q2"
-  },
-  {
-   "id": "L7-29",
-   "l": 7,
-   "topic": "B-frames",
-   "q": "Which of the following is NOT a reason why B-frames improve compression?",
-   "o": [
-    "They act as random-access points",
-    "Uncovered background is visible only in the future frame",
-    "Averaging two predictions cancels noise",
-    "As non-references (MPEG-2) they can be quantized harder"
-   ],
-   "c": 0,
-   "hint": "Where can decoding start? Only one picture type allows it.",
-   "r": "Slide 32 lists uncovered background, noise averaging and harder quantization (not a reference). Random access is possible only at an I-frame (slide 36).",
-   "slide": 32,
-   "pattern": "not-statement",
-   "lk": "medium",
-   "why": "'Why B-frames help' list of three reasons"
   },
   {
    "id": "L7-30",
@@ -6289,40 +6237,21 @@
    "why": "rate-control box + FFmpeg commands and lab task on slide 54"
   },
   {
-   "id": "L7-32",
-   "l": 7,
-   "topic": "FFmpeg GOP options",
-   "q": "In “ffmpeg -i in.mp4 -c:v libx264 -crf 23 -g 12 -bf 2 out.mp4”, what do “-g 12 -bf 2” set?",
-   "o": [
-    "A GOP of 12 seconds and 2-pass encoding",
-    "12 reference frames and 2 bits of extra depth",
-    "GOP length 12 and 2 B-frames between anchors",
-    "A 12 Mbit/s target rate and a 2 s buffer"
-   ],
-   "c": 2,
-   "hint": "The comment above this command on the slide is 'encode with a chosen GOP'.",
-   "r": "Slide 54: '# 2 encode with a chosen GOP: N = 12, two B-frames', so -g 12 = GOP length of 12 frames and -bf 2 = two B-frames (M = 3). No bit rate is set here because -crf 23 selects constant quality.",
-   "slide": 54,
-   "pattern": "definition",
-   "lk": "medium",
-   "why": "hands-on command list on slide 54"
-  },
-  {
    "id": "L7-33",
    "l": 7,
    "topic": "Intra prediction modes",
-   "q": "How many intra prediction modes do AVC, HEVC and VVC offer (in this order)?",
+   "q": "From AVC to HEVC to VVC, the number of intra prediction modes:",
    "o": [
-    "8 / 33 / 65",
-    "9 / 35 / 67",
-    "4 / 35 / 64",
-    "9 / 33 / 67"
+    "grows with each generation",
+    "stays the same throughout",
+    "shrinks with each generation",
+    "is left to the encoder maker"
    ],
-   "c": 1,
-   "hint": "AVC: a single digit; HEVC: mid-thirties; VVC: almost double HEVC. All three are odd numbers.",
-   "r": "Slides 23 and 40: AVC 9 directions, HEVC 35 modes, VVC 67 modes (+ MIP, CCLM). MPEG-2 has no intra prediction; only the DC coefficient is predicted.",
+   "c": 0,
+   "hint": "Newer codecs have more tools, not fewer.",
+   "r": "Slide 40: 9 directions in AVC, 35 modes in HEVC and 67 in VVC.",
    "slide": 40,
-   "pattern": "numeric",
+   "pattern": "compare",
    "lk": "medium",
    "why": "numbers on slide 23 and in the tool table on slide 40"
   },
@@ -6349,19 +6278,19 @@
    "id": "L7-35",
    "l": 7,
    "topic": "Codec generations",
-   "q": "A film needs 20 Mbit/s in MPEG-2. Using the lecture's equal-quality chart (MPEG-2 = 100), about how much does AV1 need?",
+   "q": "Each new main-line video codec generation roughly:",
    "o": [
-    "4.0 Mbit/s",
-    "5.6 Mbit/s",
-    "3.2 Mbit/s",
-    "10 Mbit/s"
+    "halves the bit rate at equal quality, with a more complex encoder",
+    "doubles the bit rate at equal quality, with a simpler encoder",
+    "keeps the bit rate and quality, with a much faster encoder",
+    "halves the bit rate and also halves the complexity of the encoder"
    ],
    "c": 0,
-   "hint": "Recall the AV1 bar of the chart and scale linearly: rate = 20 Mbit/s × index / 100.",
-   "r": "Slide 48: MPEG-2 100, AVC 50, HEVC 28, AV1 20, VVC 16. AV1: 20 × 20/100 = 4 Mbit/s. 5.6 Mbit/s would be HEVC, 3.2 Mbit/s VVC and 10 Mbit/s AVC.",
+   "hint": "Better compression has a price.",
+   "r": "Slide 48: the bit rate for equal quality roughly halves about every ten years, while the encoder becomes 2 to 10 times more complex.",
    "slide": 48,
-   "pattern": "calculation",
-   "lk": "medium",
+   "pattern": "true-statement",
+   "lk": "high",
    "why": "bar chart 'codec generations at a glance' + summary 'each generation saves 30–50 %'"
   },
   {
@@ -6441,23 +6370,184 @@
    "why": "metadata box contrasting static and dynamic"
   },
   {
-   "id": "L7-40",
+   "id": "L7-41",
    "l": 7,
-   "topic": "MPEG standards and parts",
-   "q": "Which MPEG standard – part pairing is CORRECT?",
+   "topic": "Redundancy types",
+   "q": "Spatial redundancy means that:",
    "o": [
-    "MPEG-4 Part 14 = AVC",
-    "MPEG-H Part 12 = HEVC",
-    "MPEG-4 Part 10 = AVC",
-    "MPEG-2 Part 3 = MP3"
+    "neighbouring pixels are similar",
+    "consecutive frames are similar",
+    "some symbols are more frequent than others",
+    "the eye misses fine detail"
    ],
-   "c": 2,
-   "hint": "The 1999 standard holds both AVC and the MP4 file format as separate parts; MP3 comes from the oldest MPEG.",
-   "r": "Slide 62: MPEG-4 Part 10 = AVC and Part 14 = MP4; MPEG-H Part 2 = HEVC and Part 12 = HEIF; MP3 is MPEG-1 Audio Layer III.",
-   "slide": 62,
+   "c": 0,
+   "hint": "Space, not time.",
+   "r": "Slide 6: spatial = neighbouring pixels, temporal = consecutive frames, statistical = symbol frequencies, perceptual = what the eye misses.",
+   "slide": 6,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L7-42",
+   "l": 7,
+   "topic": "GOP",
+   "q": "A GOP (group of pictures) is:",
+   "o": [
+    "an I-frame and the frames depending on it",
+    "a group of macroblocks with one motion vector",
+    "all the B-frames that lie between two P-frames",
+    "a set of tracks stored in the same container"
+   ],
+   "c": 0,
+   "hint": "It is the unit of random access.",
+   "r": "Slide 19: GOP = I-frame + its dependants; decoding can start at its I-frame.",
+   "slide": 19,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L7-43",
+   "l": 7,
+   "topic": "I-frames",
+   "q": "An I-frame is:",
+   "o": [
+    "coded using only its own pixels",
+    "predicted from the previous anchor",
+    "predicted from two other frames",
+    "copied from the previous frame"
+   ],
+   "c": 0,
+   "hint": "I stands for intra.",
+   "r": "Slide 21: an I-frame uses only its own pixels (JPEG-like), is a random-access point and stops error propagation.",
+   "slide": 21,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L7-44",
+   "l": 7,
+   "topic": "P-frames",
+   "q": "In MPEG-2, a P-frame is predicted from:",
+   "o": [
+    "the last I- or P-frame",
+    "the next I- or P-frame",
+    "the previous two B-frames",
+    "the previous and next frame"
+   ],
+   "c": 0,
+   "hint": "It looks in one direction only.",
+   "r": "Slide 21: P = predicted from the previous I or P frame. B-frames use the previous and the next anchor and are never references in MPEG-2.",
+   "slide": 21,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L7-45",
+   "l": 7,
+   "topic": "SAD",
+   "q": "In motion search, SAD stands for:",
+   "o": [
+    "Sum of Absolute Differences",
+    "Search Area Distance",
+    "Sample Adaptive Distortion Value",
+    "Sum of Averaged Deltas"
+   ],
+   "c": 0,
+   "hint": "It measures how similar two blocks are.",
+   "r": "Slide 26: the usual matching criterion is the Sum of Absolute Differences. The standard leaves the choice to the encoder.",
+   "slide": 26,
+   "pattern": "acronym",
+   "lk": "high"
+  },
+  {
+   "id": "L7-46",
+   "l": 7,
+   "topic": "Motion vector",
+   "q": "A motion vector tells the decoder:",
+   "o": [
+    "which block of the reference frame to copy",
+    "how fast the camera was moving during the shot",
+    "which frames to skip on a slow network",
+    "how many bits the next macroblock may use"
+   ],
+   "c": 0,
+   "hint": "The decoder does not search.",
+   "r": "Slide 28: the decoder just copies the block the vector points to; only the encoder searches.",
+   "slide": 28,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L7-47",
+   "l": 7,
+   "topic": "Residual",
+   "q": "In a P-frame, the residual is:",
+   "o": [
+    "the difference between a block and its prediction",
+    "the distance between a block and its nearest match",
+    "the part of a frame outside the search window",
+    "the space left in the encoder output buffer"
+   ],
+   "c": 0,
+   "hint": "What prediction did not get right.",
+   "r": "Slide 31: after motion compensation the encoder codes the residual (block minus prediction) with DCT, quantization and VLC. The distance to the match is the motion vector.",
+   "slide": 31,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L7-48",
+   "l": 7,
+   "topic": "GOP length",
+   "q": "Compared with a short GOP, a long GOP gives:",
+   "o": [
+    "better compression, slower seeking",
+    "worse compression, but faster seeking",
+    "better compression and faster seeking",
+    "equal compression but more I-frames"
+   ],
+   "c": 0,
+   "hint": "Fewer I-frames.",
+   "r": "Slide 36: long GOP = fewer I-frames, better compression; short GOP = faster channel change, seeking and error recovery.",
+   "slide": 36,
    "pattern": "compare",
-   "lk": "low",
-   "why": "appendix reference table"
+   "lk": "high"
+  },
+  {
+   "id": "L7-49",
+   "l": 7,
+   "topic": "Adaptive streaming",
+   "q": "In adaptive bit-rate streaming, the player:",
+   "o": [
+    "picks the next segment to match its throughput",
+    "asks the server to encode the video again",
+    "drops all the B-frames when the network is slow",
+    "downloads all versions and shows the best"
+   ],
+   "c": 0,
+   "hint": "It changes rung on the ladder.",
+   "r": "Slide 52: the client measures throughput and buffer and picks the next segment from the ladder of renditions.",
+   "slide": 52,
+   "pattern": "definition",
+   "lk": "high"
+  },
+  {
+   "id": "L7-50",
+   "l": 7,
+   "topic": "Codec choice",
+   "q": "Why is AVC the safe choice for live streaming to any device?",
+   "o": [
+    "Nearly every device decodes it",
+    "It needs the lowest bit rate of all",
+    "It is completely free of licence fees",
+    "It was designed for UHD and HDR video"
+   ],
+   "c": 0,
+   "hint": "Support matters as much as efficiency.",
+   "r": "Question 6 of the review slide (56). AVC is decoded almost everywhere and is cheap to encode live. For a large VOD library HEVC or AV1 pay off: each title is encoded once and streamed many times, so the saved bit rate outweighs the encoding cost (AV1 is royalty-free). Slide 48: adoption depends on licensing and hardware support as much as on efficiency.",
+   "slide": 56,
+   "pattern": "compare",
+   "lk": "high"
   }
  ]
 }
